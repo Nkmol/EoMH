@@ -1,0 +1,1 @@
+for /r %%a in (*.java) do ( javac -cp .;chatter-bot-api.jar;. "%%a" )

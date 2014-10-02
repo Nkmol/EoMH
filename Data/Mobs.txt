@@ -1,0 +1,2620 @@
+11   ,Black Ox         ,Valley Village               ,1     ,40
+12   ,Red Eye Black Ox ,0                            ,1     ,40
+21   ,Fox pup          ,Valley Village               ,2     ,45
+22   ,Fox              ,Valley Village               ,2     ,50
+31   ,Wolf Cub         ,Valley Village               ,3     ,55
+32   ,Wolf             ,Valley Village               ,3     ,55
+41   ,Red Wolf         ,Valley Village               ,4     ,65
+42   ,Angry Red Wolf   ,Valley Village               ,4     ,65
+51   ,White Wolf Cub   ,Valley Village               ,5     ,65
+52   ,White Wolf       ,Valley Village               ,6     ,80
+61   ,Nine-tailed fox  ,Valley Village               ,8     ,120
+62   ,Angry fox        ,Valley Village               ,9     ,125
+71   ,Giant Blue Wolf  ,Valley Village               ,6     ,90
+72   ,Old Blue Wolf    ,Valley Village               ,7     ,110
+81   ,Bear             ,Valley Village               ,18    ,250
+82   ,Angry Bear       ,Valley Village               ,18    ,260
+91   ,BF Leg Fighter   ,Valley Village               ,10    ,120
+92   ,Chief BF Leg F   ,Valley Village               ,10    ,120
+101  ,BF Swordsman     ,Valley Village               ,12    ,190
+102  ,Chief BF Sw-man  ,Valley Village               ,12    ,200
+103  ,Master BF Sw-man ,Valley Village               ,13    ,210
+111  ,BF Scyther       ,Valley Village               ,11    ,130
+112  ,Chief BF Scyther ,Valley Village               ,11    ,130
+121  ,Sea Warrior Tr   ,Valley Village               ,13    ,200
+122  ,Sea Warrior      ,Valley Village               ,14    ,250
+123  ,Sea Warrior Lead ,Valley Village               ,14    ,250
+131  ,Sea Warrior C    ,Valley Village               ,15    ,200
+132  ,Sea Warrior Mr   ,Valley Village               ,16    ,205
+133  ,Sea Warrior Lord ,Valley Village               ,16    ,211
+141  ,Tiger            ,Valley Village               ,17    ,215
+142  ,Angry Tiger      ,Valley Village               ,17    ,200
+151  ,Alpine Warrior   ,Valley Village               ,19    ,246
+152  ,Chief Alpine W   ,Valley Village               ,20    ,252
+161  ,Alpine Hunter    ,Valley Village               ,20    ,258
+162  ,Chief Alpine H   ,Valley Village               ,21    ,265
+171  ,White Tiger      ,Valley Village               ,21    ,265
+172  ,Angry Tiger      ,Valley Village               ,22    ,285
+173  ,Raging Tiger     ,Valley Village               ,22    ,570
+181  ,Brown Bear       ,Valley Village               ,23    ,280
+182  ,Angry Bear       ,Valley Village               ,23    ,280
+183  ,Raging Bear      ,Valley Village               ,23    ,560
+191  ,Yin-Yang         ,Valley Village               ,24    ,310
+192  ,Yin-Yang Guard   ,Valley Village               ,24    ,313
+193  ,Yin-Yang Master  ,Valley Village               ,24    ,626
+194  ,Yin-Yang Hao     ,0                            ,24    ,310
+201  ,Fencer           ,Valley Village               ,25    ,320
+202  ,Fencer Guardian  ,Valley Village               ,25    ,310
+203  ,Fencer Leader G  ,Valley Village               ,26    ,350
+204  ,Fencer Leader    ,Valley Village               ,25    ,620
+205  ,Fencer Master    ,Valley Village               ,26    ,700
+211  ,Scorpion         ,Valley Village               ,11    ,130
+221  ,Young Mad Cow    ,Valley Village               ,26    ,344
+222  ,Mad Cow          ,Valley Village               ,27    ,360
+223  ,Raging Mad Cow   ,Valley Village               ,27    ,720
+231  ,Fire Ox Calf     ,Valley Village               ,30    ,380
+232  ,Fire Ox          ,Valley Village               ,31    ,390
+233  ,Raging Fire Ox   ,Valley Village               ,31    ,780
+241  ,Miner            ,Valley Village               ,28    ,400
+242  ,Chief Miner      ,Valley Village               ,28    ,385
+251  ,Miner Leader     ,Valley Village               ,29    ,385
+252  ,Miner Master     ,Valley Village               ,29    ,393
+253  ,Miner Lord       ,Valley Village               ,29    ,786
+261  ,Mad Warrior      ,Valley Village               ,30    ,380
+262  ,Mad Warrior Head ,Valley Village               ,30    ,380
+271  ,ZH Follwer Ja    ,Valley Village               ,31    ,380
+272  ,ZH Follwer Ja C  ,Valley Village               ,32    ,380
+273  ,ZH Follwer Ja L  ,Valley Village               ,32    ,760
+281  ,ZH F- W          ,Valley Village               ,31    ,380
+282  ,ZH F-W Chief     ,Valley Village               ,32    ,380
+283  ,ZH F-W  Leader   ,Valley Village               ,32    ,760
+285  ,ZH Bloody Hand   ,SungHwa Dungeon              ,44    ,633
+287  ,ZH Bloody Ghost  ,SungHwa Dungeon              ,45    ,644
+288  ,ZH FollowerChief ,SungHwa Dungeon              ,46    ,655
+289  ,Insain ZH B.Gh   ,SungHwa Dungeon              ,45    ,644
+291  ,ZH Guardian      ,Valley Village               ,33    ,430
+292  ,ZH Guardian Head ,Valley Village               ,34    ,450
+301  ,ZH Archer        ,Valley Village               ,34    ,450
+302  ,ZH Archer Chief  ,Valley Village               ,34    ,450
+311  ,Boss Hwangbang   ,0                            ,18    ,1000
+321  ,Ilsin Found HJY  ,0                            ,28    ,3000
+322  ,Woon Fire Master ,0                            ,28    ,10000
+331  ,ZH Founder Ox K  ,0                            ,36    ,5000
+332  ,ZH Founder Ox K  ,0                            ,45    ,20000
+341  ,Ox Warrior       ,0                            ,40    ,7000
+342  ,ZH Ox Warrior    ,0                            ,67    ,29000
+351  ,ZH lv. 2 F-Ja    ,Valley Village               ,35    ,450
+352  ,ZH lv.2 Ja Head  ,Valley Village               ,35    ,450
+353  ,ZH lv.2 Ja G     ,Valley Village               ,35    ,900
+361  ,ZH lv. 2 F-W     ,Valley Village               ,35    ,450
+362  ,ZH lv. 2 W-H     ,Valley Village               ,35    ,450
+363  ,ZH lv. 2 Woong G ,Valley Village               ,35    ,900
+371  ,ZH lv.3 Follw-Ja ,Valley Village               ,36    ,520
+372  ,ZH lv. 3 Ja M    ,Valley Village               ,36    ,520
+373  ,ZH lv. 3 Ja H-L  ,Valley Village               ,36    ,1040
+381  ,ZH lv. 3 F- W    ,Valley Village               ,36    ,526
+382  ,ZH lv. 3 W-L     ,Valley Village               ,36    ,526
+383  ,ZH lv. 3 W-H-L   ,Valley Village               ,36    ,1052
+391  ,ZH lv. 6 Guardia ,Valley Village               ,37    ,540
+392  ,ZH lv.6  G-H     ,Valley Village               ,37    ,540
+393  ,ZH lv.6  G-M     ,Valley Village               ,37    ,1080
+401  ,ZH lv.6  Archer  ,Valley Village               ,37    ,547
+402  ,ZH lv.6  Ar-M    ,Valley Village               ,37    ,547
+403  ,ZH Ar-MZH  Ar-L  ,Valley Village               ,37    ,1094
+411  ,South Scorpion   ,Valley Village               ,27    ,360
+421  ,Venom Scorpion   ,Valley Village               ,35    ,450
+441  ,Fire Ox Warrior  ,0                            ,40    ,8000
+442  ,SungHwa F.Ox.W   ,0                            ,68    ,29000
+443  ,Summoned F.Ox W  ,Cash Portal                  ,40    ,8000
+444  ,Woon Fire Ox J   ,0                            ,40    ,15000
+451  ,Black Ox Warrior ,0                            ,60    ,20000
+452  ,Black Ox Warrior ,0                            ,60    ,20000
+453  ,SungHwa B.Ox W   ,0                            ,70    ,29000
+454  ,SungHwa Ox W     ,0                            ,72    ,29000
+455  ,Woon Black Ox W  ,0                            ,60    ,25000
+456  ,Summoned B.Ox W  ,Cash Portal                  ,60    ,20000
+461  ,Black  Boar      ,Kingdom County               ,38    ,568
+462  ,Angry Black Boar ,Kingdom County               ,38    ,568
+471  ,Mosan Black Boar ,Kingdom County               ,39    ,579
+472  ,Angry M-B Boar   ,Kingdom County               ,39    ,579
+473  ,Mad M.B Boar     ,Kingdom County               ,39    ,1158
+481  ,GG Black Boar    ,Kingdom County               ,42    ,612
+482  ,Angry GG Boar    ,Kingdom County               ,42    ,612
+483  ,Mad GG Boar      ,Kingdom County               ,42    ,1224
+491  ,YS Python        ,Kingdom County               ,40    ,590
+492  ,Angry YS Python  ,Kingdom County               ,40    ,590
+501  ,WC Python        ,Kingdom County               ,41    ,601
+502  ,Angry WC Python  ,Kingdom County               ,41    ,601
+511  ,MB Python        ,Kingdom County               ,43    ,622
+512  ,Angry MB Python  ,Kingdom County               ,43    ,622
+513  ,Mad MB Python    ,Kingdom County               ,43    ,1244
+521  ,GT Python        ,Kingdom County               ,44    ,633
+522  ,Angry GT Python  ,Kingdom County               ,44    ,633
+523  ,Mad GT Python    ,Kingdom County               ,44    ,1266
+524  ,Monster Python   ,SungHwa Dungeon              ,44    ,633
+531  ,CC Dog Monster   ,Kingdom County               ,60    ,1100
+532  ,MG Dog Monster   ,Kingdom County               ,60    ,1133
+533  ,Dog Monster Head ,Kingdom County               ,60    ,2600
+541  ,Gubo Dog Monster ,Kingdom County               ,63    ,1500
+542  ,Dog Monster      ,Kingdom County               ,63    ,1500
+543  ,GT Dog Monster   ,Kingdom County               ,63    ,3200
+551  ,MJ Deadly Ghost  ,Kingdom County               ,51    ,794
+552  ,Deadly Ghost     ,Kingdom County               ,51    ,791
+561  ,MJ GB Ghost      ,Kingdom County               ,52    ,820
+562  ,GB Ghost         ,Kingdom County               ,52    ,805
+563  ,Mad GB Ghost     ,Kingdom County               ,52    ,1610
+564  ,Grave Ghost      ,SungHwa Dungeon              ,52    ,820
+571  ,MJ  YS Ghost     ,Kingdom County               ,53    ,881
+572  ,YS Ghost         ,Kingdom County               ,53    ,889
+573  ,YS Ghost Chief   ,Kingdom County               ,53    ,1778
+581  ,Sea Monster 1    ,Kingdom County               ,58    ,980
+582  ,Sea Monster 2    ,Kingdom County               ,58    ,987
+591  ,DS Sea Monster   ,Kingdom County               ,59    ,1009
+592  ,Sea Monster      ,Kingdom County               ,59    ,1017
+593  ,Sea Monster Head ,Kingdom County               ,59    ,2034
+601  ,Belle Assassin   ,Kingdom County               ,69    ,2400
+602  ,WS BelleAssassin ,Kingdom County               ,70    ,2500
+611  ,CY Zombie        ,Kingdom County               ,54    ,896
+612  ,GB Zombie        ,Kingdom County               ,54    ,904
+613  ,GB Zombie Chief  ,Kingdom County               ,54    ,1808
+621  ,YS Zombie        ,Kingdom County               ,55    ,912
+622  ,Zombie           ,Kingdom County               ,55    ,919
+631  ,DM Zombie        ,Kingdom County               ,56    ,930
+633  ,Insain DM Zombie ,Kingdom County               ,56    ,1860
+641  ,She-ghost        ,Kingdom County               ,57    ,952
+642  ,GB She-ghost     ,Kingdom County               ,57    ,959
+643  ,Chief She-ghost  ,Kingdom County               ,57    ,1918
+644  ,She-ghost        ,Ancient Tomb lv.1            ,57    ,1400
+651  ,Deadly Zombie    ,Ancient Tomb lv.1            ,59    ,1009
+652  ,GB Deadly Zombie ,Ancient Tomb lv.1            ,60    ,1100
+653  ,MJ Deadly Zombie ,Ancient Tomb lv.1            ,62    ,1400
+654  ,PH Deadly Zombie ,Ancient Tomb lv.1            ,62    ,1400
+661  ,Deadly Ghost     ,Ancient Tomb lv.1            ,63    ,1500
+662  ,GB Deadly Ghost  ,Ancient Tomb lv.1            ,64    ,1600
+663  ,CY Deadly Ghost  ,Ancient Tomb lv.1            ,66    ,1900
+664  ,Deadly Ghost JH  ,Ancient Tomb lv.1            ,64    ,1600
+671  ,Axe Warrior      ,Kingdom County               ,61    ,1166
+672  ,Axe WarriorChief ,Kingdom County               ,61    ,1300
+673  ,Axe W.Master     ,Kingdom County               ,61    ,3000
+681  ,Stone Warrior    ,Kingdom County               ,62    ,1400
+682  ,Stone W.Chief    ,Kingdom County               ,62    ,1500
+683  ,Stone W.Master   ,Kingdom County               ,62    ,3000
+691  ,Pig Monster      ,Kingdom County               ,64    ,1600
+692  ,Pig MonsterChief ,Kingdom County               ,64    ,1600
+693  ,Pig Mon-Master   ,Kingdom County               ,64    ,3600
+701  ,Blade Warrior    ,Kingdom County               ,65    ,1700
+702  ,Blade W.Chief    ,Kingdom County               ,65    ,1800
+703  ,Blade W.Master   ,Kingdom County               ,65    ,4000
+704  ,DS Blade Warrior ,Kingdom County               ,66    ,1900
+711  ,Lance Warrior    ,Kingdom County               ,68    ,2200
+712  ,Lance W.Chief    ,Kingdom County               ,68    ,2300
+721  ,Mage             ,Kingdom County               ,71    ,2600
+722  ,Mage Master      ,Kingdom County               ,72    ,2700
+723  ,Insain Mage      ,Kingdom County               ,71    ,2600
+731  ,MB Warrior       ,Kingdom County               ,73    ,2750
+732  ,MB WarriorMaster ,Kingdom County               ,74    ,2900
+741  ,Crow K           ,Kingdom County               ,75    ,3000
+742  ,Crow K II        ,Kingdom County               ,75    ,3100
+743  ,GB Ghost Evil    ,Ancient Tomb lv.2            ,78    ,3150
+744  ,GB Bloody Ghost  ,Ancient Tomb lv.2            ,80    ,3250
+745  ,GB Ghost Devil   ,Ancient Tomb lv.2            ,82    ,3700
+746  ,GB Devil         ,Ancient Tomb lv.2            ,84    ,3800
+751  ,Hell Guard       ,Ancient Tomb lv.1            ,57    ,952
+752  ,YS Hell Guard    ,Ancient Tomb lv.1            ,58    ,980
+753  ,YSHell GuardHead ,Ancient Tomb lv.1            ,58    ,980
+761  ,God of Epidemics ,SungHwa Dungeon              ,52    ,850
+762  ,God of E.Chief   ,SungHwa Dungeon              ,53    ,850
+764  ,B.God of Epidemi ,SungHwa Dungeon              ,52    ,850
+771  ,K Demon          ,SungHwa Dungeon              ,54    ,896
+772  ,K Demon Jinhon   ,SungHwa Dungeon              ,55    ,930
+774  ,Evil K Demon     ,SungHwa Dungeon              ,55    ,930
+781  ,Earth KingStatue ,0                            ,81    ,27000
+782  ,Woon Earth King  ,0                            ,81    ,29000
+783  ,Summoned E.K.S   ,Cash Portal                  ,81    ,27000
+791  ,Monster Statue 1 ,0                            ,87    ,0
+801  ,Monster Statue 2 ,0                            ,88    ,0
+811  ,Monster Statue 3 ,0                            ,89    ,0
+821  ,Asura Statue     ,0                            ,75    ,25000
+822  ,Asura Statue     ,0                            ,75    ,25000
+823  ,Summoned A.Statu ,Cash Portal                  ,75    ,25000
+824  ,Woon Asura       ,0                            ,75    ,27500
+831  ,BF Leg FighterYG ,Kingdom County               ,45    ,644
+832  ,BF Leg FighterJS ,Kingdom County               ,45    ,644
+841  ,BF Swordsman YG  ,Kingdom County               ,46    ,655
+842  ,BF Swordsman JS  ,Kingdom County               ,46    ,655
+843  ,BF Swordsman SG  ,Kingdom County               ,46    ,1310
+851  ,BF Scyther YG    ,Kingdom County               ,47    ,666
+852  ,BF Scyther JS    ,Kingdom County               ,47    ,666
+853  ,BF Scyther SG    ,Kingdom County               ,47    ,1332
+861  ,Alpine Warri  GB ,Kingdom County               ,49    ,741
+862  ,Alpine Warri  MG ,Kingdom County               ,49    ,748
+871  ,Alpine Hunter GB ,Kingdom County               ,50    ,767
+872  ,Alpine Hunter MG ,Kingdom County               ,50    ,774
+873  ,Alpine Hunter GB ,Kingdom County               ,50    ,767
+874  ,Alpine Hunter MG ,Kingdom County               ,50    ,774
+881  ,ZH F.Ch.MB V.Sc  ,Kingdom County               ,48    ,676
+882  ,WC VenomScorpion ,Kingdom County               ,48    ,676
+883  ,GD VenomScorpion ,Kingdom County               ,48    ,1352
+884  ,Monster Scorpion ,SungHwa Dungeon              ,48    ,676
+891  ,Black Scorpion   ,0                            ,51    ,13000
+892  ,Black Scorpion   ,Ancient Tomb lv.1            ,61    ,1166
+893  ,Summoned B.Scorp ,Cash Portal                  ,51    ,13000
+894  ,W Black Scorpion ,0                            ,51    ,20000
+901  ,Black Ghost      ,Ancient Tomb lv.1            ,56    ,930
+902  ,Ghost Spite      ,Ancient Tomb lv.1            ,57    ,952
+903  ,Bloody GB Ghost  ,Ancient Tomb lv.1            ,61    ,1350
+904  ,Bloody GBGhostGH ,Ancient Tomb lv.1            ,62    ,1500
+905  ,Bloody GBGhostGH ,Ancient Tomb lv.1            ,61    ,1350
+941  ,Simitar King     ,SungHwa Dungeon              ,47    ,666
+942  ,Simitar King     ,SungHwa Dungeon              ,48    ,676
+943  ,Bloody Simitar L ,SungHwa Dungeon              ,49    ,741
+944  ,Simitar King     ,0                            ,47    ,999
+945  ,Insain S.K       ,SungHwa Dungeon              ,48    ,676
+946  ,Mad Wind B.S     ,SungHwa Dungeon              ,49    ,741
+961  ,Depraved Monk    ,Kingdom County               ,67    ,2000
+962  ,Depraved Monk L  ,Kingdom County               ,67    ,2100
+963  ,Depraved Monk    ,SungHwa Dungeon              ,49    ,767
+964  ,Insain D.Monk    ,SungHwa Dungeon              ,49    ,767
+971  ,MJ Bloody Monk   ,SungHwa Dungeon              ,50    ,767
+972  ,Ghost Monk       ,SungHwa Dungeon              ,51    ,794
+973  ,Ghost MonkMaster ,SungHwa Dungeon              ,52    ,820
+974  ,Insain B.Monk    ,SungHwa Dungeon              ,50    ,767
+975  ,Insain GhostMonk ,SungHwa Dungeon              ,51    ,794
+981  ,Big Eyed Monster ,Ancient Tomb lv.1            ,67    ,2000
+982  ,Eye Monster      ,Ancient Tomb lv.1            ,69    ,2400
+983  ,Eye Monster JH   ,Ancient Tomb lv.1            ,70    ,2500
+984  ,EG B.E Monster   ,Ancient Tomb lv.1            ,67    ,2000
+1011 ,Corpse Eater     ,Ancient Tomb lv.2            ,72    ,2550
+1012 ,Corpse E.Chief   ,Ancient Tomb lv.2            ,73    ,2700
+1013 ,Corpser E.Spirit ,Ancient Tomb lv.2            ,73    ,2700
+1014 ,Ghostly S.Throw  ,Ancient Tomb lv.2            ,73    ,2700
+1021 ,Monk Demon       ,Ancient Tomb lv.2            ,74    ,3000
+1022 ,K Monk Demon     ,Ancient Tomb lv.2            ,75    ,3000
+1023 ,Lord Demon       ,Ancient Tomb lv.2            ,75    ,3000
+1031 ,Hunter           ,Ancient Tomb lv.2            ,76    ,3050
+1032 ,Hunter JH        ,Ancient Tomb lv.2            ,77    ,3100
+1033 ,Grave Ghost      ,Ancient Tomb lv.2            ,77    ,3100
+1041 ,White Demon      ,Ancient Tomb lv.2            ,78    ,3150
+1042 ,Evil White Demon ,Ancient Tomb lv.2            ,78    ,3150
+1051 ,Corpse Eater     ,Ancient Tomb lv.2            ,79    ,3200
+1061 ,Killer Bird      ,Ancient Tomb lv.2            ,80    ,3250
+1062 ,MJ Killer Bird   ,Ancient Tomb lv.2            ,81    ,3500
+1063 ,GJ Killer Bird   ,Ancient Tomb lv.2            ,81    ,3500
+1071 ,Blue Hunter      ,Ancient Tomb lv.2            ,82    ,3700
+1081 ,Insect Monster   ,Ancient Tomb lv.2            ,83    ,3750
+1082 ,Insect Monster 2 ,Ancient Tomb lv.2            ,84    ,3800
+1083 ,Insect Monster 2 ,Ancient Tomb lv.2            ,84    ,3800
+1091 ,Insect Monster 3 ,Ancient Tomb lv.2            ,85    ,3850
+1101 ,Killer Bird      ,0                            ,88    ,25000
+1102 ,Summoned K.Bird  ,Cash Portal                  ,88    ,25000
+1111 ,Warrior Monster  ,0                            ,91    ,20000
+1112 ,White She-Ghost  ,0                            ,93    ,24000
+1113 ,Woon W.Monster   ,0                            ,91    ,29999
+1114 ,Summoned W.Mon   ,Cash Portal                  ,91    ,20000
+1220 ,Green Monster    ,Dead Sea                     ,90    ,8100
+1221 ,G-Monster Chief  ,Dead Sea                     ,92    ,8438
+1222 ,JS Hell Guard    ,Dead Sea                     ,82    ,6938
+1223 ,Hell Guard Chief ,Dead Sea                     ,84    ,7125
+1230 ,Green B.Devil    ,Tibet                        ,125   ,80000
+1231 ,Gotham Iron B.D  ,0                            ,100   ,29999
+1232 ,Woon Iron B.Demo ,0                            ,100   ,29999
+1233 ,Summoned G.B.D   ,Cash Portal                  ,100   ,29999
+1234 ,Iron Blood Devil ,Tibet                        ,130   ,90000
+1240 ,Yocheon K.Mon    ,0                            ,105   ,40000
+1241 ,Socheon K.Monst  ,0                            ,100   ,0
+1242 ,SumYocheon K.Mon ,Cash Portal                  ,105   ,29999
+1243 ,W Y.Kill Monster ,0                            ,105   ,40000
+1250 ,M Y.Y Swordsman  ,Dead Sea                     ,50    ,1452
+1251 ,Y.Y Sowrdsman C  ,Dead Sea                     ,52    ,1510
+1252 ,M YY Swordsman C ,Dead Sea                     ,50    ,1452
+1253 ,YY Sowrdsman C C ,Dead Sea                     ,52    ,1510
+1254 ,M YY Swordsman L ,Dead Sea                     ,50    ,1452
+1255 ,YY Sowrdsman C L ,Dead Sea                     ,52    ,1510
+1260 ,Wuygo Magician   ,Dead Sea                     ,70    ,4688
+1261 ,Magician Chief   ,Dead Sea                     ,72    ,5063
+1262 ,Magician Master  ,Dead Sea                     ,73    ,5157
+1263 ,Wuygo Magician C ,Dead Sea                     ,70    ,4688
+1264 ,Magician Chief C ,Dead Sea                     ,72    ,5063
+1265 ,Wuygo Magician L ,Dead Sea                     ,70    ,4688
+1266 ,Magician Chief L ,Dead Sea                     ,72    ,5063
+1270 ,Ilsin Temp R.L.F ,Dead Sea                     ,93    ,8663
+1271 ,Ilsin T-L.F Chie ,Dead Sea                     ,96    ,9563
+1272 ,Ilsin Temple L.F ,Dead Sea                     ,94    ,9225
+1280 ,T-Simitar Killer ,Dead Sea                     ,86    ,7313
+1281 ,T-Simitr K-Chief ,Dead Sea                     ,88    ,7875
+1290 ,Dansu B.Warrior  ,Dead Sea                     ,78    ,5907
+1291 ,B.Warrior Chief  ,Dead Sea                     ,80    ,6094
+1300 ,Yegwan Hercules  ,Dead Sea                     ,62    ,2813
+1301 ,Hercules Chief   ,Dead Sea                     ,64    ,3000
+1302 ,Yn-Hercules C    ,Dead Sea                     ,62    ,2813
+1303 ,Hercules Chief C ,Dead Sea                     ,64    ,3000
+1304 ,Yn-Hercules L    ,Dead Sea                     ,62    ,2813
+1305 ,Hercules Chief L ,Dead Sea                     ,64    ,3000
+1310 ,Wansang Flying A ,Dead Sea                     ,54    ,1695
+1311 ,Flying A.Chief   ,Dead Sea                     ,56    ,1744
+1312 ,W.F A Chaotic    ,Dead Sea                     ,54    ,1695
+1313 ,Flying A.Chief C ,Dead Sea                     ,56    ,1744
+1314 ,W.F A Lawful     ,Dead Sea                     ,54    ,1695
+1315 ,Flying A.Chief L ,Dead Sea                     ,56    ,1744
+1320 ,Y Leg Fighter    ,Dead Sea                     ,58    ,1851
+1321 ,Leg Fighter Chie ,Dead Sea                     ,60    ,2125
+1322 ,Leg Fighter M    ,Dead Sea                     ,61    ,2438
+1323 ,Y Leg Fighter Ch ,Dead Sea                     ,58    ,1851
+1324 ,Leg Fighter C.Ch ,Dead Sea                     ,60    ,2125
+1325 ,Leg Fighter M C  ,Dead Sea                     ,61    ,2438
+1326 ,Y Leg Fighter L  ,Dead Sea                     ,58    ,1851
+1327 ,Leg Fighter C.L  ,Dead Sea                     ,60    ,2125
+1328 ,Leg Fighter M L  ,Dead Sea                     ,61    ,2438
+1330 ,MJ Martial Monk  ,Dead Sea                     ,66    ,3563
+1331 ,Martial Monk Ch  ,Dead Sea                     ,68    ,4125
+1332 ,MJ Martial Mon C ,Dead Sea                     ,66    ,3563
+1333 ,Martial Mon Ch C ,Dead Sea                     ,68    ,4125
+1334 ,MJ Martial Mon L ,Dead Sea                     ,66    ,3563
+1335 ,Martial Mon Ch L ,Dead Sea                     ,68    ,4125
+1340 ,Sea F.M Spirit   ,Dead Sea                     ,74    ,5438
+1341 ,Sea F.M Spiri Ch ,Dead Sea                     ,76    ,5719
+1350 ,Jahyeon Scorpion ,Dead Sea                     ,52    ,1510
+1351 ,Ch Scorpion      ,Dead Sea                     ,56    ,1744
+1352 ,Inhyeon Scorpion ,Dead Sea                     ,60    ,2125
+1353 ,M Scorpion       ,Dead Sea                     ,64    ,3000
+1354 ,Jin Scorpion     ,Dead Sea                     ,68    ,4125
+1355 ,Sa Scorpion      ,Dead Sea                     ,72    ,5063
+1356 ,O Scorpion       ,Dead Sea                     ,76    ,5719
+1357 ,Mi Scorpion      ,Dead Sea                     ,80    ,6094
+1358 ,Sh Scorpion      ,Dead Sea                     ,84    ,7125
+1359 ,Yh Scorpion      ,Dead Sea                     ,90    ,8100
+1360 ,Dead Sea V.Py    ,Dead Sea                     ,59    ,1893
+1371 ,Ox-faced Magicia ,Dead Sea                     ,79    ,6002
+1372 ,Ox-faced Phantom ,Dead Sea                     ,81    ,6112
+1373 ,Ox-face Magici C ,Dead Sea                     ,83    ,7023
+1374 ,Ox-faced P-Chief ,Dead Sea                     ,85    ,7125
+1375 ,Ox Face S-Elder  ,Dead Sea                     ,87    ,7313
+1376 ,Ox Face S-Left G ,Dead Sea                     ,91    ,8100
+1400 ,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+1401 ,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+1402 ,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+1403 ,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+1404 ,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+1405 ,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+1410 ,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+1411 ,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+1412 ,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+1413 ,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+1414 ,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+1415 ,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+1420 ,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+1421 ,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+1422 ,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+1501 ,Red Fire         ,Ancient Tomb lv.3            ,86    ,4200
+1502 ,Red Fire SH      ,Ancient Tomb lv.3            ,87    ,4300
+1503 ,Blue Fire        ,Ancient Tomb lv.3            ,90    ,4600
+1504 ,Blue Fire SH     ,Ancient Tomb lv.3            ,91    ,4700
+1505 ,Millennium B.F   ,Ancient Tomb lv.3            ,91    ,5100
+1511 ,Red Blood        ,Ancient Tomb lv.3            ,88    ,4400
+1512 ,Red Blood SH     ,Ancient Tomb lv.3            ,89    ,4500
+1513 ,Millennium R.B   ,Ancient Tomb lv.3            ,89    ,4900
+1514 ,Ice Blood        ,Ancient Tomb lv.3            ,94    ,5000
+1515 ,Ice B.S.H        ,Ancient Tomb lv.3            ,95    ,5100
+1521 ,Gwanchi G.Ins    ,Ancient Tomb lv.3            ,92    ,4000
+1522 ,YS Gwanchi G.Ins ,Ancient Tomb lv.3            ,93    ,4200
+1523 ,V.Gwanchi G.Ins  ,Ancient Tomb lv.3            ,93    ,5300
+1524 ,Ground Blood     ,Ancient Tomb lv.3            ,96    ,4300
+1525 ,Raging G.Blood   ,Ancient Tomb lv.3            ,97    ,4400
+1531 ,Gotham Tiger     ,Ancient Tomb lv.3            ,98    ,5400
+1532 ,Yegwan Gotham T  ,Ancient Tomb lv.3            ,99    ,5500
+1533 ,M.Gotham Tiger   ,Ancient Tomb lv.3            ,99    ,5900
+1534 ,Yosan Mad Tiger  ,Ancient Tomb lv.3            ,102   ,5800
+1535 ,MB Yosan Mad T   ,Ancient Tomb lv.3            ,103   ,5900
+1536 ,Geumgang B.K     ,Ancient Tomb lv.3            ,106   ,6200
+1537 ,M.Geumgang B.K   ,Ancient Tomb lv.3            ,107   ,6300
+1541 ,Big Head B.Eye   ,Ancient Tomb lv.3            ,99    ,5500
+1542 ,One-eyed Monster ,Ancient Tomb lv.3            ,99    ,5500
+1551 ,Tangsu Monster   ,Ancient Tomb lv.3            ,100   ,5600
+1552 ,YongSoo Tangsu M ,Ancient Tomb lv.3            ,101   ,5700
+1553 ,Tangsu Monster   ,Ancient Tomb lv.3            ,101   ,6100
+1554 ,Gungbo Iron F.F  ,Ancient Tomb lv.3            ,104   ,6000
+1555 ,DS Gung Iron F.F ,Ancient Tomb lv.3            ,105   ,6100
+1556 ,Demon Fist Fight ,Ancient Tomb lv.3            ,110   ,6600
+1557 ,Demon F.F Champ  ,Ancient Tomb lv.3            ,111   ,6700
+1561 ,Ghost Zombie     ,Ancient Tomb lv.3            ,108   ,6400
+1562 ,Ghost Zombie Jin ,Ancient Tomb lv.3            ,109   ,6500
+1563 ,Zombie           ,Ancient Tomb lv.3            ,109   ,6900
+1564 ,Yoseon G.Z       ,Ancient Tomb lv.3            ,112   ,6800
+1565 ,Jin Yoseon G.Z   ,Ancient Tomb lv.3            ,113   ,6900
+1571 ,Yoseon Zombie    ,Ancient Tomb lv.3            ,115   ,7100
+1572 ,Yosu Zombie      ,Ancient Tomb lv.3            ,117   ,7300
+1581 ,Large Simit M.D  ,0                            ,125   ,80000
+1582 ,B.Simitar Demon  ,0                            ,127   ,84000
+1583 ,W S.M Demon      ,0                            ,125   ,80000
+1584 ,Summoned L.S-M.D ,Cash Portal                  ,125   ,29999
+1591 ,She-demon B-Yong ,0                            ,135   ,100000
+1592 ,S-She-D-B-Yong   ,Cash Portal                  ,135   ,29999
+1602 ,Green Swordsman  ,Tibet                        ,77    ,3100
+1603 ,ThunderSwordsman ,Tibet                        ,78    ,3150
+1607 ,Bloody Spirit    ,Tibet                        ,80    ,3250
+1608 ,Bloody S-Master  ,Tibet                        ,81    ,3500
+1610 ,Apprentice Go-oh ,Tibet                        ,82    ,3700
+1611 ,Apprentice Jinoh ,Tibet                        ,83    ,3750
+1612 ,Apprentice Light ,Tibet                        ,83    ,7800
+1613 ,Sword Master Sil ,Tibet                        ,84    ,3800
+1614 ,Sword Master Sa  ,Tibet                        ,85    ,3850
+1615 ,Shadow Temple M  ,Tibet                        ,86    ,4200
+1616 ,Temple Monk Dr   ,Tibet                        ,86    ,8100
+1617 ,Swordsman Dark   ,Tibet                        ,87    ,4300
+1618 ,Dark Swordsman   ,Tibet                        ,88    ,4300
+1619 ,Temple W-Monk    ,Tibet                        ,88    ,4300
+1620 ,Warrior Monk Dr  ,Tibet                        ,88    ,8200
+1622 ,Warrior M.Chief  ,Tibet                        ,89    ,4300
+1623 ,Blue Sword       ,Tibet                        ,90    ,4300
+1624 ,Sword Master Sup ,Tibet                        ,91    ,4310
+1625 ,Sword MasterHyul ,Tibet                        ,92    ,4350
+1626 ,Shadow C.W.Monk  ,Tibet                        ,93    ,4400
+1627 ,Chief W.Monk Dr  ,Tibet                        ,93    ,8200
+1628 ,Thunder Sword    ,Tibet                        ,93    ,4420
+1629 ,Sword Monk       ,Tibet                        ,94    ,4500
+1632 ,Temple V.Monk    ,Tibet                        ,96    ,5200
+1633 ,V.Monk Dragon    ,Tibet                        ,96    ,10000
+1634 ,Shadow T.Guardia ,Tibet                        ,97    ,5300
+1635 ,Guardian Da-moon ,Tibet                        ,97    ,10000
+1636 ,Guardian Chief   ,Tibet                        ,98    ,5400
+1639 ,Veteran Chief    ,Tibet                        ,99    ,5500
+1640 ,V-Monk Da-moon   ,Tibet                        ,99    ,11000
+1656 ,S.Temple Master  ,Tibet                        ,125   ,80000
+1657 ,S.Temple Master  ,Cash Portal                  ,125   ,29999
+1658 ,S.T Chief-Dochl  ,Tibet                        ,125   ,40000
+1659 ,H-Green B.Devil  ,Tibet                        ,125   ,40000
+1660 ,D-Iron Blood Devi,Tibet                        ,130   ,45000
+1661 ,B-Y.Kill Monster ,Tibet                        ,140   ,110000
+1663 ,Sky Wolf         ,Tibet                        ,75    ,3800
+1664 ,Bloody Wolf      ,Tibet                        ,76    ,4000
+1665 ,Chaos Swordsman  ,Tibet                        ,100   ,5600
+1666 ,Chaos SwordsmanB ,Tibet                        ,101   ,5700
+1667 ,Excommuni Soo    ,Tibet                        ,102   ,5800
+1668 ,Excommun Poong   ,Tibet                        ,103   ,5900
+1669 ,Chaos Wolf       ,Tibet                        ,104   ,6000
+1670 ,Chaos Wolf B     ,Tibet                        ,105   ,6100
+1671 ,Ascetic W.Monk   ,Tibet                        ,106   ,6200
+1672 ,Ascetic W.M.Chie ,Tibet                        ,107   ,6300
+1673 ,Ascetic Guardian ,Tibet                        ,108   ,6400
+1674 ,Ascetic T.Monk   ,Tibet                        ,109   ,6500
+1675 ,Green Master     ,Tibet                        ,110   ,6600
+1676 ,Fire Master      ,Tibet                        ,111   ,6700
+1677 ,Ascetic V.Monk   ,Tibet                        ,112   ,6800
+1678 ,Ascetic V-Chief  ,Tibet                        ,113   ,6900
+1679 ,Dark Lightning   ,Tibet                        ,114   ,7000
+1680 ,Chao B.Swordsman ,Tibet                        ,115   ,7100
+1681 ,Ascetic G.Chief  ,Tibet                        ,116   ,7200
+1682 ,Ex.Silent Sword  ,Tibet                        ,117   ,7300
+1683 ,Y.Y Swordsman    ,Tibet                        ,118   ,7454
+1684 ,B.Wind Assassin  ,Tibet                        ,119   ,7616
+1685 ,Spirit Master    ,Tibet                        ,120   ,7787
+1686 ,Man of Blood     ,Tibet                        ,121   ,7966
+1687 ,Sea F.M Spirit   ,Tibet                        ,122   ,8154
+1688 ,Master Assassin  ,Tibet                        ,123   ,8351
+1689 ,Ilsin Temple F.F ,Tibet                        ,124   ,8556
+1690 ,MartialSwordsman ,Tibet                        ,125   ,8770
+1691 ,Martial Monk     ,Tibet                        ,126   ,8992
+1692 ,Nwae Scorpion    ,Tibet                        ,127   ,9223
+1693 ,Ox Face Leader   ,Tibet                        ,128   ,9462
+1694 ,Bloody Sword H.G ,Tibet                        ,129   ,9710
+1695 ,C.Green Monster  ,Tibet                        ,130   ,9966
+1696 ,B-Deadly Zombie  ,Tibet                        ,131   ,10231
+1697 ,B-Dog Monster    ,Tibet                        ,132   ,10505
+1698 ,B-Monk Demon     ,Tibet                        ,133   ,10787
+1699 ,B-Deadly Ghost   ,Tibet                        ,134   ,11078
+1700 ,B-She-ghost      ,Tibet                        ,135   ,11377
+1701 ,K-nine           ,Chinese Event                ,1     ,40
+1702 ,Nyun-Soo         ,Chinese Event                ,75    ,29999
+1703 ,B-B.E Monster    ,Tibet                        ,136   ,11685
+1704 ,B-Hunter         ,Tibet                        ,137   ,12001
+1705 ,B-Corpse Eater   ,Tibet                        ,138   ,12326
+1706 ,B-C Deadly Ghost ,Tibet                        ,139   ,12659
+1707 ,B-God of E       ,Tibet                        ,140   ,13001
+1800 ,Red Zombie       ,Valley Village Dungeon       ,38    ,568
+1801 ,Evil Zombie      ,Valley Village Dungeon       ,39    ,579
+1802 ,MH She-ghost     ,Valley Village Dungeon       ,40    ,590
+1803 ,JH She-ghost     ,Valley Village Dungeon       ,41    ,601
+1804 ,PD K Demon       ,Valley Village Dungeon       ,42    ,612
+1805 ,PH K Demon       ,Valley Village Dungeon       ,43    ,622
+1806 ,EH Deadly Zombie ,Valley Village Dungeon       ,44    ,633
+1807 ,JH Deadly Zombie ,Valley Village Dungeon       ,45    ,644
+1808 ,YH Deadly Zombie ,Valley Village Dungeon       ,46    ,655
+1809 ,BM Deadly Ghost  ,Valley Village Dungeon       ,47    ,666
+1810 ,YM Deadly Ghost  ,Valley Village Dungeon       ,48    ,676
+1811 ,Bloody Fan Devil ,Valley Village Dungeon       ,49    ,748
+1812 ,Chaos Devil      ,Valley Village Dungeon       ,50    ,774
+1813 ,Azzu Head        ,Valley Village Dungeon       ,51    ,791
+1814 ,Evil Head        ,Valley Village Dungeon       ,52    ,805
+1815 ,Insect Monste J  ,Valley Village Dungeon       ,53    ,889
+1816 ,Insect Monster Y ,Valley Village Dungeon       ,54    ,904
+1817 ,Insect Monster M ,Valley Village Dungeon       ,55    ,919
+1818 ,Universe Wolf    ,Valley Village Dungeon       ,51    ,13000
+1819 ,Earth Wolf       ,Valley Village Dungeon       ,60    ,20000
+1830 ,Sun              ,Fixed Monster                ,80    ,3600
+1831 ,Yu               ,Fixed Monster                ,82    ,3800
+1832 ,Du               ,Fixed Monster                ,84    ,4000
+1833 ,Fung             ,Fixed Monster                ,86    ,4200
+1834 ,Chin             ,Fixed Monster                ,88    ,4400
+1835 ,Jai              ,Fixed Monster                ,90    ,4600
+1836 ,Zarn             ,Fixed Monster                ,92    ,4800
+1837 ,Lit              ,Fixed Monster                ,94    ,5000
+1838 ,Gai              ,Fixed Monster                ,96    ,5200
+1839 ,Ze               ,Fixed Monster                ,98    ,5400
+1840 ,Dao              ,Fixed Monster                ,100   ,5600
+1841 ,Bin              ,Fixed Monster                ,102   ,5800
+1842 ,Lum              ,Fixed Monster                ,104   ,6000
+1843 ,Zuy              ,Fixed Monster                ,106   ,6200
+1844 ,Min              ,Fixed Monster                ,108   ,6400
+1845 ,Sik              ,Fixed Monster                ,110   ,6600
+1846 ,Hui              ,Fixed Monster                ,112   ,6800
+1847 ,Jut              ,Fixed Monster                ,114   ,7000
+1848 ,Mit              ,Fixed Monster                ,116   ,7200
+1849 ,Wan              ,Fixed Monster                ,118   ,7454
+1850 ,Cun              ,Fixed Monster                ,120   ,7787
+1851 ,Mei              ,Fixed Monster                ,122   ,8154
+1852 ,Fixed Monster S  ,Powerful Fixed Monster       ,124   ,8556
+1853 ,Fixed Monster N  ,Powerful Fixed Monster       ,126   ,8992
+1854 ,Fixed Monster G  ,Powerful Fixed Monster       ,128   ,9462
+1855 ,Fixed Monster K  ,Powerful Fixed Monster       ,130   ,9966
+1856 ,Fixed Monster L  ,Powerful Fixed Monster       ,132   ,10505
+1857 ,Fixed Monster M  ,Powerful Fixed Monster       ,134   ,11078
+1860 ,Mutant BF F.F    ,Valley Village               ,10    ,120
+1861 ,Mutant Alpine W  ,Valley Village               ,20    ,252
+1862 ,Mutant Mad W     ,Valley Village               ,30    ,380
+1863 ,Mutant YS Python ,Kingdom County               ,40    ,590
+1864 ,Mutant MJ B.Monk ,SungHwa Dungeon              ,50    ,767
+1865 ,Mutant S.Wolf    ,Kingdom County               ,60    ,1100
+1866 ,Mutant Belle A   ,Kingdom County               ,70    ,2500
+1867 ,Mutant Killer B  ,Ancient Tomb lv.2            ,80    ,3250
+1868 ,Mutant Blue Fire ,Ancient Tomb lv.3            ,90    ,4600
+1869 ,Mutant Tangsu M  ,Ancient Tomb lv.3            ,100   ,5600
+1870 ,Mutant BF Leg F  ,Valley Village               ,10    ,120
+1871 ,Mutant Alpine W  ,Valley Village               ,20    ,252
+1872 ,Mutant Mad W     ,Valley Village               ,30    ,380
+1873 ,Mutant YS Python ,Kingdom County               ,40    ,590
+1874 ,Mutant MJ B.Monk ,SungHwa Dungeon              ,50    ,767
+1875 ,Mutant S.Wolf    ,Kingdom County               ,60    ,1100
+1876 ,Mutant Belle A   ,Kingdom County               ,70    ,2500
+1877 ,Mutant Killer B  ,Ancient Tomb lv.2            ,80    ,3250
+1878 ,Mutant Blue Fire ,Ancient Tomb lv.3            ,90    ,4600
+1879 ,Mutant Tangsu M  ,Ancient Tomb lv.3            ,100   ,5600
+1880 ,Woon Mad Cow     ,0                            ,27    ,360
+1881 ,Woon ZH Guardian ,0                            ,37    ,540
+1882 ,Woon Scyther Y   ,0                            ,47    ,666
+1883 ,Woon She-ghost   ,0                            ,57    ,952
+1884 ,Woon Depraved M  ,0                            ,67    ,2000
+1885 ,Woon Hunter JH   ,0                            ,77    ,3100
+1886 ,Woon Red Fire    ,0                            ,87    ,4300
+1887 ,Woon GroundBlood ,0                            ,97    ,4400
+1888 ,Woon GeumgangB.K ,0                            ,107   ,6300
+1889 ,Woon Yosu Zombie ,0                            ,117   ,7300
+3001 ,White Hawk       ,Pet (Hawk)                   ,1     ,40
+3002 ,Yellow Eagle     ,Pet (Eagle)                  ,1     ,40
+3003 ,Blue Eagle       ,Pet (Eagle)                  ,1     ,40
+3004 ,Red Eagle        ,Pet (Eagle)                  ,1     ,40
+3005 ,Yellow Hawk      ,Pet (Hawk)                   ,1     ,40
+3006 ,Sky Heron        ,Pet (Heron)                  ,1     ,40
+3007 ,Earth Heron      ,Pet (Heron)                  ,1     ,40
+3008 ,Blue Eagle(Auto) ,Pet (Eagle)                  ,1     ,40
+3009 ,Blue Eagle       ,Pet (Eagle)                  ,1     ,40
+3010 ,Red Eagle        ,Pet (Eagle)                  ,1     ,40
+3011 ,Yellow Hawk      ,Pet (Hawk)                   ,1     ,40
+3101 ,Hyenhawnwoo mutat,Avatar                       ,1     ,29999
+3102 ,Sumunjuka mutatio,Avatar                       ,1     ,29999
+3103 ,Deungharyeng muta,Avatar                       ,1     ,29999
+3104 ,Warrior master mu,Avatar                       ,144   ,100
+3105 ,Assisin master mu,Avatar                       ,144   ,100
+3106 ,Mage master mutat,Avatar                       ,144   ,100
+3107 ,Monk msaster muta,Avatar                       ,144   ,100
+3108 ,White Horse      ,Horse                        ,144   ,100
+3109 ,Block Horse      ,Horse                        ,144   ,100
+3110 ,Red Horse        ,Horse                        ,144   ,100
+3111 ,White Horse(Decor,Horse                        ,144   ,100
+3112 ,Black Horse(Decor,Horse                        ,144   ,100
+3113 ,Red Horse(Decorat,Horse                        ,144   ,100
+3114 ,Brown Horse      ,Horse                        ,144   ,100
+3115 ,White Horse(Middl,Horse                        ,144   ,100
+3116 ,Black Horse(Middl,Horse                        ,144   ,100
+3117 ,Red Horse(Middle),Horse                        ,144   ,100
+3118 ,White Horse(High),Horse                        ,144   ,100
+3119 ,Black Horse(High),Horse                        ,144   ,100
+3120 ,Red Horse(High)  ,Horse                        ,144   ,100
+3121 ,White Horse(Tatto,Horse                        ,144   ,100
+3122 ,Black Horse(Tatto,Horse                        ,144   ,100
+3123 ,Red Horse(Tattoo),Horse                        ,144   ,100
+3124 ,혈풍뢰도 1성     ,신성이룡패                   ,40    ,2950
+3125 ,혈풍뢰도 2성     ,신성이룡패                   ,50    ,3870
+3126 ,혈풍뢰도 3성     ,신성이룡패                   ,60    ,5665
+3127 ,혈풍뢰도 4성     ,신성이룡패                   ,70    ,12500
+3128 ,혈풍뢰도 5성     ,신성이룡패                   ,80    ,16250
+3129 ,혈풍뢰도 6성     ,신성이룡패                   ,90    ,21500
+3130 ,혈풍뢰도 7성     ,신성이룡패                   ,100   ,28000
+3131 ,혈풍뢰도 8성     ,신성이룡패                   ,110   ,33000
+3132 ,혈풍뢰도 9성     ,신성이룡패                   ,120   ,39350
+3133 ,혈풍뢰도 10성    ,신성이룡패                   ,130   ,52100
+3134 ,혈풍뢰도 11성    ,신성이룡패                   ,140   ,69850
+3135 ,혈풍뢰도 12성    ,신성이룡패                   ,150   ,92600
+3136 ,백호             ,타는 호랑이                  ,144   ,100
+3137 ,흑호             ,타는 호랑이                  ,144   ,100
+3138 ,적호             ,타는 호랑이                  ,144   ,100
+3139 ,백호(공격)       ,타는 호랑이                  ,144   ,100
+3140 ,흑호(공격)       ,타는 호랑이                  ,144   ,100
+3141 ,적호(공격)       ,타는 호랑이                  ,144   ,100
+3142 ,백호(방어)       ,타는 호랑이                  ,144   ,100
+3143 ,흑호(방어)       ,타는 호랑이                  ,144   ,100
+3144 ,적호(방어)       ,타는 호랑이                  ,144   ,100
+3145 ,백호(이동)       ,타는 호랑이                  ,144   ,100
+3146 ,흑호(이동)       ,타는 호랑이                  ,144   ,100
+3147 ,적호(이동)       ,타는 호랑이                  ,144   ,100
+5001 ,Socheon Monster  ,0                            ,40    ,590
+5002 ,Jungcheon Monste ,0                            ,45    ,644
+5003 ,Daecheon Monster ,0                            ,50    ,767
+5004 ,Sacheon Monster  ,0                            ,55    ,930
+5005 ,Yacheon Monster  ,0                            ,60    ,1100
+5006 ,Yocheon Monster  ,0                            ,65    ,1800
+5007 ,Macheon Monster  ,0                            ,70    ,2500
+5008 ,Small Ox Warrior ,Small Monster                ,20    ,258
+5009 ,Small F.Ox W     ,Small Monster                ,25    ,310
+5010 ,Small B.Ox W     ,Small Monster                ,30    ,380
+5011 ,Small Asura      ,Small Monster                ,35    ,450
+5012 ,Small Earth King ,Small Monster                ,40    ,590
+5013 ,S-Killer Monster ,Small Monster                ,45    ,930
+5014 ,S-Iron B-Demon   ,Small Monster                ,50    ,1100
+5015 ,S-G Blood Demon  ,Small Monster                ,55    ,1800
+5016 ,B-Ox Champion    ,0                            ,40    ,7000
+5017 ,B-Bear  Champion ,0                            ,50    ,8000
+5018 ,Miner  Champion  ,0                            ,60    ,18000
+5019 ,ZH Champion      ,0                            ,75    ,22000
+5020 ,ZH F-Champion    ,0                            ,81    ,25000
+5021 ,B-Boar Champion  ,0                            ,68    ,20000
+5022 ,BF L.F Champion  ,0                            ,100   ,29999
+5023 ,A.W  Champion    ,0                            ,100   ,29999
+5024 ,Holy Tree        ,For Episode 4                ,144   ,10000
+5025 ,Ice Stone        ,For Episode 4                ,144   ,10000
+5026 ,Fire             ,For Episode 4                ,144   ,10000
+5027 ,Gold             ,For Episode 4                ,144   ,10000
+5028 ,Earth            ,For Episode 4                ,100   ,1
+5030 ,M.Cow  Champion  ,0                            ,91    ,29999
+5031 ,W-T Champion     ,0                            ,110   ,29999
+5032 ,MW Ox Warrior    ,0                            ,20    ,258
+5033 ,MW F.Ox Warrior  ,0                            ,25    ,310
+5034 ,MW B.Ox Warrior  ,0                            ,30    ,380
+5035 ,MW Asura         ,0                            ,35    ,450
+5036 ,MW Earth King    ,0                            ,40    ,590
+5037 ,MW Kill Monster  ,0                            ,45    ,930
+5038 ,MW Iron B-Demon  ,0                            ,50    ,1100
+5039 ,MW G-Blood Demon ,0                            ,55    ,1800
+5040 ,MW B-Ox Champion ,0                            ,40    ,7000
+5041 ,MW B-B Champion  ,0                            ,50    ,8000
+5042 ,MW Mine Champion ,0                            ,60    ,18000
+5043 ,MW ZH Champion   ,0                            ,75    ,22000
+5044 ,MW ZH F-Champion ,0                            ,81    ,25000
+5045 ,MW B-Br Champion ,0                            ,68    ,20000
+5046 ,MW B-F Champion  ,0                            ,100   ,29999
+5047 ,MW A-Champion    ,0                            ,100   ,29999
+5048 ,MW M.C Champion  ,0                            ,91    ,29999
+5049 ,MW W-T Champion  ,0                            ,110   ,29999
+5050 ,Black Ox Warrior ,0                            ,20    ,756
+5051 ,B-Bear  Warrior  ,0                            ,23    ,840
+5052 ,Miner  Warrior   ,0                            ,26    ,1050
+5053 ,B-Boar Warrior   ,0                            ,29    ,1155
+5054 ,BF L-F Warrior   ,0                            ,32    ,1140
+5055 ,A-W  Warrior     ,0                            ,35    ,1350
+5056 ,Mad Cow  Warrior ,0                            ,38    ,1704
+5057 ,W-T Warrior      ,0                            ,40    ,1770
+5058 ,Miner King       ,0                            ,26    ,1050
+5059 ,A-Warrior King   ,0                            ,35    ,1350
+5060 ,White Tiger King ,0                            ,40    ,1770
+5070 ,Black OxKing     ,0                            ,20    ,756
+5071 ,Brown Bear King  ,0                            ,25    ,930
+5072 ,Miner King       ,0                            ,30    ,1140
+5073 ,ZHKing           ,0                            ,35    ,1350
+5074 ,ZH Follower King ,0                            ,40    ,1770
+5075 ,Black Boar King  ,0                            ,45    ,1932
+5076 ,BF L-F King      ,0                            ,50    ,2301
+5077 ,A-Warrior King   ,0                            ,55    ,2736
+5078 ,Mad Cow King     ,0                            ,60    ,3300
+5079 ,White Tiger King ,0                            ,65    ,5100
+5080 ,Small-Kiler Bird ,Small Monster                ,88    ,25000
+6301 ,The DS's Lawful  ,0                            ,1     ,1
+6302 ,The DS's Evil    ,0                            ,1     ,1
+7070 ,Dogoko Master    ,Event                        ,40    ,322
+7071 ,Dogoko Master    ,Event                        ,45    ,384
+7072 ,Dogoko Master    ,Event                        ,50    ,456
+7073 ,Dogoko Master    ,Event                        ,55    ,550
+7074 ,Dogoko Master    ,Event                        ,60    ,850
+7075 ,Dogoko Master    ,Event                        ,65    ,1250
+7076 ,Dogoko Master    ,Event                        ,70    ,1500
+7077 ,Dogoko Master    ,Event                        ,75    ,1625
+7078 ,Dogoko Master    ,Event                        ,80    ,1925
+7079 ,Dogoko Master    ,Event                        ,85    ,2150
+7080 ,Dogoko Master    ,Event                        ,90    ,2550
+7081 ,Dogoko Master    ,Event                        ,95    ,2800
+7082 ,Dogoko Master    ,Event                        ,100   ,3050
+7083 ,Dogoko Master    ,Event                        ,105   ,3300
+7084 ,Dogoko Master    ,Event                        ,110   ,3550
+7085 ,Dogoko Master    ,Event                        ,115   ,3935
+7086 ,Dogoko Master    ,Event                        ,120   ,4510
+7087 ,Dogoko Master    ,Event                        ,125   ,5210
+7088 ,Dogoko Master    ,Event                        ,130   ,6035
+7089 ,Dogoko Master    ,Event                        ,135   ,6985
+7090 ,Dogoko Master    ,Event                        ,140   ,8060
+7091 ,Dogoko Master    ,Event                        ,145   ,9260
+7092 ,Dogoko Master    ,Event                        ,150   ,10585
+7093 ,Dogoko Master    ,Event                        ,155   ,12035
+7094 ,Dogoko Master    ,Event                        ,160   ,13485
+7095 ,Dogoko Master    ,Event                        ,165   ,14935
+7096 ,Dogoko Master    ,Event                        ,170   ,16385
+7097 ,WolKwang Master  ,Event                        ,40    ,322
+7098 ,WolKwang Master  ,Event                        ,45    ,384
+7099 ,WolKwang Master  ,Event                        ,50    ,456
+7100 ,WolKwang Master  ,Event                        ,55    ,550
+7101 ,WolKwang Master  ,Event                        ,60    ,850
+7102 ,WolKwang Master  ,Event                        ,65    ,1250
+7103 ,WolKwang Master  ,Event                        ,70    ,1500
+7104 ,WolKwang Master  ,Event                        ,75    ,1625
+7105 ,WolKwang Master  ,Event                        ,80    ,1925
+7106 ,WolKwang Master  ,Event                        ,85    ,2150
+7107 ,WolKwang Master  ,Event                        ,90    ,2550
+7108 ,WolKwang Master  ,Event                        ,95    ,2800
+7109 ,WolKwang Master  ,Event                        ,100   ,3050
+7110 ,WolKwang Master  ,Event                        ,105   ,3300
+7111 ,WolKwang Master  ,Event                        ,110   ,3550
+7112 ,WolKwang Master  ,Event                        ,115   ,3935
+7113 ,WolKwang Master  ,Event                        ,120   ,4510
+7114 ,WolKwang Master  ,Event                        ,125   ,5210
+7115 ,WolKwang Master  ,Event                        ,130   ,6035
+7116 ,WolKwang Master  ,Event                        ,135   ,6985
+7117 ,WolKwang Master  ,Event                        ,140   ,8060
+7118 ,WolKwang Master  ,Event                        ,145   ,9260
+7119 ,WolKwang Master  ,Event                        ,150   ,10585
+7120 ,WolKwang Master  ,Event                        ,155   ,12035
+7121 ,WolKwang Master  ,Event                        ,160   ,13485
+7122 ,WolKwang Master  ,Event                        ,165   ,14935
+7123 ,WolKwang Master  ,Event                        ,170   ,16385
+7124 ,보름달           ,달놀이 이벤트                ,170   ,4000
+7125 ,Fox              ,하왕현                       ,3     ,43
+7126 ,Halloween(40)    ,할로윈 이벤트                ,40    ,322
+7127 ,Halloween(45)    ,할로윈 이벤트                ,45    ,384
+7128 ,Halloween(50)    ,할로윈 이벤트                ,50    ,456
+7129 ,Halloween(55)    ,할로윈 이벤트                ,55    ,550
+7130 ,Halloween(60)    ,할로윈 이벤트                ,60    ,850
+7131 ,Halloween(65)    ,할로윈 이벤트                ,65    ,1250
+7132 ,Halloween(70)    ,할로윈 이벤트                ,70    ,1500
+7133 ,Halloween(75)    ,할로윈 이벤트                ,75    ,1625
+7134 ,Halloween(80)    ,할로윈 이벤트                ,80    ,1925
+7135 ,Halloween(85)    ,할로윈 이벤트                ,85    ,2150
+7136 ,Halloween(90)    ,할로윈 이벤트                ,90    ,2550
+7137 ,Halloween(95)    ,할로윈 이벤트                ,95    ,2800
+7138 ,Halloween(100)   ,할로윈 이벤트                ,100   ,3050
+7139 ,Halloween(105)   ,할로윈 이벤트                ,105   ,3300
+7140 ,Halloween(110)   ,할로윈 이벤트                ,110   ,3550
+7141 ,Halloween(115)   ,할로윈 이벤트                ,115   ,3935
+7142 ,Halloween(120)   ,할로윈 이벤트                ,120   ,4510
+7143 ,Halloween(125)   ,할로윈 이벤트                ,125   ,5210
+7144 ,Halloween(130)   ,할로윈 이벤트                ,130   ,6035
+7145 ,Halloween(135)   ,할로윈 이벤트                ,135   ,6985
+7146 ,Halloween(140)   ,할로윈 이벤트                ,140   ,8060
+7147 ,Halloween(145)   ,할로윈 이벤트                ,145   ,9260
+7148 ,Halloween(150)   ,할로윈 이벤트                ,150   ,10585
+7149 ,Halloween(155)   ,할로윈 이벤트                ,155   ,12035
+7150 ,Halloween(160)   ,할로윈 이벤트                ,160   ,13485
+7151 ,Halloween(165)   ,할로윈 이벤트                ,165   ,14935
+7152 ,Halloween(170)   ,할로윈 이벤트                ,170   ,16385
+11220,Green Monster    ,Dead Sea                     ,90    ,8100
+11221,G-Monster Chief  ,Dead Sea                     ,92    ,8438
+11222,JS Hell Guard    ,Dead Sea                     ,82    ,6938
+11223,Hell Guard Chief ,Dead Sea                     ,84    ,7125
+11250,M Y.Y Swordsman  ,Dead Sea                     ,50    ,1452
+11251,Y.Y Sowrdsman C  ,Dead Sea                     ,52    ,1510
+11252,M YY Swordsman C ,Dead Sea                     ,50    ,1452
+11253,YY Sowrdsman C C ,Dead Sea                     ,52    ,1510
+11254,M YY Swordsman L ,Dead Sea                     ,50    ,1452
+11255,YY Sowrdsman C L ,Dead Sea                     ,52    ,1510
+11260,Wuygo Magician   ,Dead Sea                     ,70    ,4688
+11261,Magician Chief   ,Dead Sea                     ,72    ,5063
+11262,Magician Master  ,Dead Sea                     ,73    ,5157
+11263,Wuygo Magician C ,Dead Sea                     ,70    ,4688
+11264,Magician Chief C ,Dead Sea                     ,72    ,5063
+11265,Wuygo Magician L ,Dead Sea                     ,70    ,4688
+11266,Magician Chief L ,Dead Sea                     ,72    ,5063
+11270,Ilsin Temp R.L.F ,Dead Sea                     ,93    ,8663
+11271,Ilsin T-L.F Chie ,Dead Sea                     ,96    ,9563
+11272,Ilsin Temple L.F ,Dead Sea                     ,94    ,9225
+11280,T-Simitar Killer ,Dead Sea                     ,86    ,7313
+11281,T-Simitr K-Chief ,Dead Sea                     ,88    ,7875
+11290,Dansu B.Warrior  ,Dead Sea                     ,78    ,5907
+11291,B.Warrior Chief  ,Dead Sea                     ,80    ,6094
+11300,Yegwan Hercules  ,Dead Sea                     ,62    ,2813
+11301,Hercules Chief   ,Dead Sea                     ,64    ,3000
+11302,Yn-Hercules C    ,Dead Sea                     ,62    ,2813
+11303,Hercules Chief C ,Dead Sea                     ,64    ,3000
+11304,Yn-Hercules L    ,Dead Sea                     ,62    ,2813
+11305,Hercules Chief L ,Dead Sea                     ,64    ,3000
+11310,Wansang Flying A ,Dead Sea                     ,54    ,1695
+11311,Flying A.Chief   ,Dead Sea                     ,56    ,1744
+11312,W.F A Chaotic    ,Dead Sea                     ,54    ,1695
+11313,Flying A.Chief C ,Dead Sea                     ,56    ,1744
+11314,W.F A Lawful     ,Dead Sea                     ,54    ,1695
+11315,Flying A.Chief L ,Dead Sea                     ,56    ,1744
+11320,Y Leg Fighter    ,Dead Sea                     ,58    ,1851
+11321,Leg Fighter Chie ,Dead Sea                     ,60    ,2125
+11322,Leg Fighter M    ,Dead Sea                     ,61    ,2438
+11323,Y Leg Fighter Ch ,Dead Sea                     ,58    ,1851
+11324,Leg Fighter C.Ch ,Dead Sea                     ,60    ,2125
+11325,Leg Fighter M C  ,Dead Sea                     ,61    ,2438
+11326,Y Leg Fighter L  ,Dead Sea                     ,58    ,1851
+11327,Leg Fighter C.L  ,Dead Sea                     ,60    ,2125
+11328,Leg Fighter M L  ,Dead Sea                     ,61    ,2438
+11330,MJ Martial Monk  ,Dead Sea                     ,66    ,3563
+11331,Martial Monk Ch  ,Dead Sea                     ,68    ,4125
+11332,MJ Martial Mon C ,Dead Sea                     ,66    ,3563
+11333,Martial Mon Ch C ,Dead Sea                     ,68    ,4125
+11334,MJ Martial Mon L ,Dead Sea                     ,66    ,3563
+11335,Martial Mon Ch L ,Dead Sea                     ,68    ,4125
+11340,Sea F.M Spirit   ,Dead Sea                     ,74    ,5438
+11341,Sea F.M Spiri Ch ,Dead Sea                     ,76    ,5719
+11350,Jahyeon Scorpion ,Dead Sea                     ,52    ,1510
+11351,Ch Scorpion      ,Dead Sea                     ,56    ,1744
+11352,Inhyeon Scorpion ,Dead Sea                     ,60    ,2125
+11353,M Scorpion       ,Dead Sea                     ,64    ,3000
+11354,Jin Scorpion     ,Dead Sea                     ,68    ,4125
+11355,Sa Scorpion      ,Dead Sea                     ,72    ,5063
+11356,O Scorpion       ,Dead Sea                     ,76    ,5719
+11357,Mi Scorpion      ,Dead Sea                     ,80    ,6094
+11358,Sh Scorpion      ,Dead Sea                     ,84    ,7125
+11359,Yh Scorpion      ,Dead Sea                     ,90    ,8100
+11360,Dead Sea V.Py    ,Dead Sea                     ,59    ,1893
+11371,Ox-faced Magicia ,Dead Sea                     ,79    ,6002
+11372,Ox-faced Phantom ,Dead Sea                     ,81    ,6112
+11373,Ox-face Magici C ,Dead Sea                     ,83    ,7023
+11374,Ox-faced P-Chief ,Dead Sea                     ,85    ,7125
+11375,Ox Face S-Elder  ,Dead Sea                     ,87    ,7313
+11376,Ox Face S-Left G ,Dead Sea                     ,91    ,8100
+11400,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+11401,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+11402,Dead Sea Bear    ,Dead Sea                     ,40    ,1180
+11403,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+11404,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+11405,Dead Sea B.Bear  ,Dead Sea                     ,44    ,1266
+11410,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+11411,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+11412,Dead Sea Tiger   ,Dead Sea                     ,42    ,1224
+11413,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+11414,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+11415,Dead Sea W.T     ,Dead Sea                     ,46    ,1310
+11420,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+11421,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+11422,Dead Sea B.Boar  ,Dead Sea                     ,48    ,1352
+11500,M Y.Y Swordsman  ,Dead Sea                     ,50    ,1888
+11501,Wansang Flying A ,Dead Sea                     ,54    ,2204
+11502,Leg Fighter M    ,Dead Sea                     ,61    ,3170
+11503,Wuygo Magician   ,Dead Sea                     ,70    ,6095
+11504,Sea F.M Spirit   ,Dead Sea                     ,74    ,7070
+11505,Dansu B.Warrior  ,Dead Sea                     ,78    ,7680
+11506,JS Hell Guard    ,Dead Sea                     ,82    ,9020
+11507,T-Simitar Killer ,Dead Sea                     ,86    ,9507
+11508,Green Monster    ,Dead Sea                     ,90    ,10530
+11509,Ilsin Temple L.F ,Dead Sea                     ,94    ,11993
+12011,JIN Black Ox     ,Valley Village Daum Monster  ,1     ,40
+12021,JIN Fox pup      ,Valley Village Daum Monster  ,2     ,45
+12022,JIN Fox          ,Valley Village Daum Monster  ,2     ,50
+12031,JIN Wolf Cub     ,Valley Village Daum Monster  ,3     ,55
+12032,JIN Wolf         ,Valley Village Daum Monster  ,3     ,55
+12041,JIN Red Wolf     ,Valley Village Daum Monster  ,4     ,65
+12042,JIN Angry Wolf   ,Valley Village Daum Monster  ,4     ,65
+12051,JIN-W Wolf Cub   ,Valley Village Daum Monster  ,5     ,65
+12052,JIN White Wolf   ,Valley Village Daum Monster  ,6     ,80
+12061,JIN N-tailed fox ,Valley Village Daum Monster  ,8     ,120
+12062,JIN Angry fox    ,Valley Village Daum Monster  ,9     ,125
+12071,JIN G-Blue Wolf  ,Valley Village Daum Monster  ,6     ,90
+12072,JIN O-Blue Wolf  ,Valley Village Daum Monster  ,7     ,110
+12081,JIN Bear         ,Valley Village Daum Monster  ,18    ,250
+12082,JIN Angry Bear   ,Valley Village Daum Monster  ,18    ,260
+12091,JIN BF L-F       ,Valley Village Daum Monster  ,10    ,120
+12092,JIN L-F Chie     ,Valley Village Daum Monster  ,10    ,120
+12101,JIN BF BF S-man  ,Valley Village Daum Monster  ,12    ,190
+12102,JIN S-man Chief  ,Valley Village Daum Monster  ,12    ,200
+12103,JIN S-man Master ,Valley Village Daum Monster  ,13    ,210
+12111,JIN BF Scyther   ,Valley Village Daum Monster  ,11    ,130
+12112,JIN Scyth Chief  ,Valley Village Daum Monster  ,11    ,130
+12121,JIN S-W Training ,Valley Village Daum Monster  ,13    ,200
+12122,JIN Sea Warrior  ,Valley Village Daum Monster  ,14    ,250
+12123,JIN S-W Lead     ,Valley Village Daum Monster  ,14    ,250
+12131,JIN S-W C        ,Valley Village Daum Monster  ,15    ,200
+12132,JIN S-F Master   ,Valley Village Daum Monster  ,16    ,205
+12133,JIN S.F Lord     ,Valley Village Daum Monster  ,16    ,211
+12141,JIN Tiger        ,Valley Village Daum Monster  ,17    ,215
+12142,JIN Angry Tiger  ,Valley Village Daum Monster  ,17    ,200
+12151,JIN A-Warrior    ,Valley Village Daum Monster  ,19    ,246
+12152,JIN Alpine Chief ,Valley Village Daum Monster  ,20    ,252
+12161,JIN A-Hunter     ,Valley Village Daum Monster  ,20    ,258
+12162,JIN Hunter Chief ,Valley Village Daum Monster  ,21    ,265
+12171,JIN White Tiger  ,Valley Village Daum Monster  ,21    ,265
+12172,JIN Angry Tiger  ,Valley Village Daum Monster  ,22    ,285
+12181,JIN Brown Bear   ,Valley Village Daum Monster  ,23    ,280
+12182,JIN Angry Bear   ,Valley Village Daum Monster  ,23    ,280
+12191,JIN Yin-Yang     ,Valley Village Daum Monster  ,24    ,310
+12192,JIN Yin-Yang G   ,Valley Village Daum Monster  ,24    ,313
+12201,JIN Fencer       ,Valley Village Daum Monster  ,25    ,320
+12202,JIN S-man Guard  ,Valley Village Daum Monster  ,25    ,310
+12203,JIN S-man Chief  ,Valley Village Daum Monster  ,26    ,350
+12211,JIN Scorpion     ,Valley Village Daum Monster  ,11    ,130
+12221,JIN Young M.C    ,Valley Village Daum Monster  ,26    ,344
+12222,JIN Mad Cow      ,Valley Village Daum Monster  ,27    ,360
+12231,JIN Fire Ox Calf ,Valley Village Daum Monster  ,30    ,380
+12232,JIN Fire Ox      ,Valley Village Daum Monster  ,31    ,390
+12241,JIN Miner        ,Valley Village Daum Monster  ,28    ,400
+12242,JIN Chief Miner  ,Valley Village Daum Monster  ,28    ,385
+12251,JIN Miner Leader ,Valley Village Daum Monster  ,29    ,385
+12252,JIN Miner Master ,Valley Village Daum Monster  ,29    ,393
+12261,JIN Mad Warrior  ,Valley Village Daum Monster  ,30    ,380
+12262,JIN Mad-W Head   ,Valley Village Daum Monster  ,30    ,380
+12271,JIN ZH Follw Ja  ,Valley Village Daum Monster  ,31    ,380
+12272,JIN ZH Ja Chief  ,Valley Village Daum Monster  ,32    ,380
+12281,JIN ZH F- W      ,Valley Village Daum Monster  ,31    ,380
+12282,JIN ZH W-Chief   ,Valley Village Daum Monster  ,32    ,380
+12291,JIN ZH Guardian  ,Valley Village Daum Monster  ,33    ,430
+12292,JIN ZH Head      ,Valley Village Daum Monster  ,34    ,450
+12301,JIN ZH Archer    ,Valley Village Daum Monster  ,34    ,450
+12302,JIN ZH A-Chief   ,Valley Village Daum Monster  ,34    ,450
+12351,JIN lv.2 Ja      ,Valley Village Daum Monster  ,35    ,450
+12352,JIN lv.2 Ja Head ,Valley Village Daum Monster  ,35    ,450
+12361,JIN lv.2 Woong   ,Valley Village Daum Monster  ,35    ,450
+12362,JIN lv.2 W-Head  ,Valley Village Daum Monster  ,35    ,450
+12371,JIN lv.3 Ja      ,Valley Village Daum Monster  ,36    ,520
+12372,JIN lv.3 Ja M    ,Valley Village Daum Monster  ,36    ,520
+12381,JIN lv.3 Woong   ,Valley Village Daum Monster  ,36    ,526
+12382,JIN lv.3 W-M     ,Valley Village Daum Monster  ,36    ,526
+12391,JIN lv.6 Guardia ,Valley Village Daum Monster  ,37    ,540
+12392,JIN lv.6 Head    ,Valley Village Daum Monster  ,37    ,540
+12401,JIN lv.6 Archer  ,Valley Village Daum Monster  ,37    ,547
+12402,JIN lv.6 A-M     ,Valley Village Daum Monster  ,37    ,547
+12411,JIN S-Scorpion   ,Valley Village Daum Monster  ,27    ,360
+12421,JIN V-Scorpion   ,Valley Village Daum Monster  ,35    ,450
+13011,JIN Black Ox     ,Valley Village Daum Monster  ,1     ,40
+13021,JIN Fox pup      ,Valley Village Daum Monster  ,2     ,45
+13022,JIN Fox          ,Valley Village Daum Monster  ,2     ,50
+13031,JIN Wolf Cub     ,Valley Village Daum Monster  ,3     ,55
+13032,JIN Wolf         ,Valley Village Daum Monster  ,3     ,55
+13041,JIN Red Wolf     ,Valley Village Daum Monster  ,4     ,65
+13042,JIN Angry Wolf   ,Valley Village Daum Monster  ,4     ,65
+13051,JIN-W Wolf Cub   ,Valley Village Daum Monster  ,5     ,65
+13052,JIN White Wolf   ,Valley Village Daum Monster  ,6     ,80
+13061,JIN N-tailed fox ,Valley Village Daum Monster  ,8     ,120
+13062,JIN Angry fox    ,Valley Village Daum Monster  ,9     ,125
+13071,JIN G-Blue Wolf  ,Valley Village Daum Monster  ,6     ,90
+13072,JIN O-Blue Wolf  ,Valley Village Daum Monster  ,7     ,110
+13081,JIN Bear         ,Valley Village Daum Monster  ,18    ,250
+13082,JIN Angry Bear   ,Valley Village Daum Monster  ,18    ,260
+13091,JIN BF L-F       ,Valley Village Daum Monster  ,10    ,120
+13092,JIN L-F Chie     ,Valley Village Daum Monster  ,10    ,120
+13101,JIN BF BF S-man  ,Valley Village Daum Monster  ,12    ,190
+13102,JIN S-man Chief  ,Valley Village Daum Monster  ,12    ,200
+13103,JIN S-man Master ,Valley Village Daum Monster  ,13    ,210
+13111,JIN BF Scyther   ,Valley Village Daum Monster  ,11    ,130
+13112,JIN Scyth Chief  ,Valley Village Daum Monster  ,11    ,130
+13121,JIN S-W Training ,Valley Village Daum Monster  ,13    ,200
+13122,JIN Sea Warrior  ,Valley Village Daum Monster  ,14    ,250
+13123,JIN S-W Lead     ,Valley Village Daum Monster  ,14    ,250
+13131,JIN S-W C        ,Valley Village Daum Monster  ,15    ,200
+13132,JIN S-F Master   ,Valley Village Daum Monster  ,16    ,205
+13133,JIN S.F Lord     ,Valley Village Daum Monster  ,16    ,211
+13141,JIN Tiger        ,Valley Village Daum Monster  ,17    ,215
+13142,JIN Angry Tiger  ,Valley Village Daum Monster  ,17    ,200
+13151,JIN A-Warrior    ,Valley Village Daum Monster  ,19    ,246
+13152,JIN Alpine Chief ,Valley Village Daum Monster  ,20    ,252
+13161,JIN A-Hunter     ,Valley Village Daum Monster  ,20    ,258
+13162,JIN Hunter Chief ,Valley Village Daum Monster  ,21    ,265
+13171,JIN White Tiger  ,Valley Village Daum Monster  ,21    ,265
+13172,JIN Angry Tiger  ,Valley Village Daum Monster  ,22    ,285
+13181,JIN Brown Bear   ,Valley Village Daum Monster  ,23    ,280
+13182,JIN Angry Bear   ,Valley Village Daum Monster  ,23    ,280
+13191,JIN Yin-Yang     ,Valley Village Daum Monster  ,24    ,310
+13192,JIN Yin-Yang G   ,Valley Village Daum Monster  ,24    ,313
+13201,JIN Fencer       ,Valley Village Daum Monster  ,25    ,320
+13202,JIN S-man Guard  ,Valley Village Daum Monster  ,25    ,310
+13203,JIN S-man Head   ,Valley Village Daum Monster  ,26    ,350
+13211,JIN Scorpion     ,Valley Village Daum Monster  ,11    ,130
+13221,JIN Young M.C    ,Valley Village Daum Monster  ,26    ,344
+13222,JIN Mad Cow      ,Valley Village Daum Monster  ,27    ,360
+13231,JIN Fire Ox Calf ,Valley Village Daum Monster  ,30    ,380
+13232,JIN Fire Ox      ,Valley Village Daum Monster  ,31    ,390
+13241,JIN Miner        ,Valley Village Daum Monster  ,28    ,400
+13242,JIN Chief Miner  ,Valley Village Daum Monster  ,28    ,385
+13251,JIN Miner Leader ,Valley Village Daum Monster  ,29    ,385
+13252,JIN Miner Master ,Valley Village Daum Monster  ,29    ,393
+13261,JIN Mad Warrior  ,Valley Village Daum Monster  ,30    ,380
+13262,JIN Mad-W Head   ,Valley Village Daum Monster  ,30    ,380
+13271,JIN ZH Follw Ja  ,Valley Village Daum Monster  ,31    ,380
+13272,JIN ZH Ja Chief  ,Valley Village Daum Monster  ,32    ,380
+13281,JIN ZH F- W      ,Valley Village Daum Monster  ,31    ,380
+13282,JIN ZH W-Chief   ,Valley Village Daum Monster  ,32    ,380
+13291,JIN ZH Guardian  ,Valley Village Daum Monster  ,33    ,430
+13292,JIN ZH Head      ,Valley Village Daum Monster  ,34    ,450
+13301,JIN ZH Archer    ,Valley Village Daum Monster  ,34    ,450
+13302,JIN ZH A-Chief   ,Valley Village Daum Monster  ,34    ,450
+13351,JIN lv.2 Ja      ,Valley Village Daum Monster  ,35    ,450
+13352,JIN lv.2 Ja Head ,Valley Village Daum Monster  ,35    ,450
+13361,JIN lv.2 Woong   ,Valley Village Daum Monster  ,35    ,450
+13362,JIN lv.2 W-Head  ,Valley Village Daum Monster  ,35    ,450
+13371,JIN lv.3 Ja      ,Valley Village Daum Monster  ,36    ,520
+13372,JIN lv.3 Ja M    ,Valley Village Daum Monster  ,36    ,520
+13381,JIN lv.3 Woong   ,Valley Village Daum Monster  ,36    ,526
+13382,JIN lv.3 W-M     ,Valley Village Daum Monster  ,36    ,526
+13391,JIN lv.6 Guardia ,Valley Village Daum Monster  ,37    ,540
+13392,JIN lv.6 Head    ,Valley Village Daum Monster  ,37    ,540
+13401,JIN lv.6 Archer  ,Valley Village Daum Monster  ,37    ,547
+13402,JIN lv.6 A-M     ,Valley Village Daum Monster  ,37    ,547
+13411,JIN S-Scorpion   ,Valley Village Daum Monster  ,27    ,360
+13421,JIN V-Scorpion   ,Valley Village Daum Monster  ,35    ,450
+13500,Ghast YS Python  ,Tomb Guard Monster           ,40    ,1180
+13501,Ghast WC Python  ,Tomb Guard Monster           ,41    ,1202
+13502,Ghast GG B-Br    ,Tomb Guard Monster           ,42    ,1224
+13503,Ghast MB Python  ,Tomb Guard Monster           ,43    ,1244
+13504,Ghast GT Python  ,Tomb Guard Monster           ,44    ,1266
+13505,Ghast BF L-F     ,Tomb Guard Monster           ,45    ,1288
+13506,Ghast BF BF Sman ,Tomb Guard Monster           ,46    ,1310
+13507,Ghast BF Scyther ,Tomb Guard Monster           ,47    ,1332
+13508,Ghast V-Scorpion ,Tomb Guard Monster           ,48    ,1352
+13509,Ghast B-Scorpion ,Tomb Guard Monster           ,49    ,12000
+13510,Ghast A-Hunter   ,Tomb Guard Monster           ,50    ,1548
+13511,Ghast D-Ghost    ,Tomb Guard Monster           ,51    ,1582
+13512,Ghast GB Ghost   ,Tomb Guard Monster           ,52    ,1610
+13513,Ghast YS Ghost   ,Tomb Guard Monster           ,53    ,1778
+13514,Ghast GB Zombie  ,Tomb Guard Monster           ,54    ,1808
+13515,Ghast Zombie     ,Tomb Guard Monster           ,55    ,1838
+13516,Ghast B-Ghost    ,Tomb Guard Monster           ,56    ,1860
+13517,Ghast She-ghost  ,Tomb Guard Monster           ,57    ,1918
+13518,Ghast S-M 2      ,Tomb Guard Monster           ,58    ,1974
+13519,Ghast B-Ox W     ,Tomb Guard Monster           ,59    ,20000
+13520,Ghast D-Monster  ,Tomb Guard Monster           ,60    ,2266
+13521,Ghast A-Warrior  ,Tomb Guard Monster           ,61    ,2600
+13522,Ghast S-Warrior  ,Tomb Guard Monster           ,62    ,3000
+13523,Ghast D-Monster  ,Tomb Guard Monster           ,63    ,3000
+13524,Ghast P-Monster  ,Tomb Guard Monster           ,64    ,3200
+13525,Ghast B-Warrior  ,Tomb Guard Monster           ,65    ,3600
+13526,Ghast D-B Warri  ,Tomb Guard Monster           ,66    ,3800
+13527,Ghast D-Monk     ,Tomb Guard Monster           ,67    ,4200
+13528,Ghast L-Warrior  ,Tomb Guard Monster           ,68    ,4600
+13529,Ghast A-Statue   ,Tomb Guard Monster           ,69    ,25000
+13530,Ghast W Belle A  ,Tomb Guard Monster           ,70    ,5000
+13531,Ghast Mage       ,Tomb Guard Monster           ,71    ,5200
+13532,Ghast Mage B     ,Tomb Guard Monster           ,72    ,5400
+13533,Ghast MB Warrior ,Tomb Guard Monster           ,73    ,5500
+13534,Ghast MB Warri B ,Tomb Guard Monster           ,74    ,5800
+13535,Ghast Crow K     ,Tomb Guard Monster           ,75    ,6000
+13536,Ghast Hunter     ,Tomb Guard Monster           ,76    ,6100
+13537,Ghast Hunter JH  ,Tomb Guard Monster           ,77    ,6200
+13538,Ghast W-Demon    ,Tomb Guard Monster           ,78    ,6300
+13539,Ghast E-K Statue ,Tomb Guard Monster           ,79    ,27000
+13540,Ghast K-Bird     ,Tomb Guard Monster           ,80    ,6500
+13541,Ghast MJ K-Bird  ,Tomb Guard Monster           ,81    ,7000
+13542,Ghast B-Hunter   ,Tomb Guard Monster           ,82    ,7400
+13543,Ghast In-Monster ,Tomb Guard Monster           ,83    ,7500
+13544,Ghast GB Devil   ,Tomb Guard Monster           ,84    ,7600
+13545,Ghast In-Monst 3 ,Tomb Guard Monster           ,85    ,7700
+13546,Ghast Red Fire   ,Tomb Guard Monster           ,86    ,8400
+13547,Ghast Red Fire S ,Tomb Guard Monster           ,87    ,8600
+13548,Ghast Red Blood  ,Tomb Guard Monster           ,88    ,8800
+13549,Ghast K-Bird     ,Tomb Guard Monster           ,89    ,29000
+13550,Ghast Blue Fire  ,Tomb Guard Monster           ,90    ,9200
+13551,Ghast B-Fire S   ,Tomb Guard Monster           ,91    ,9400
+13552,Ghast Gwan G.Ins ,Tomb Guard Monster           ,92    ,8000
+13553,Ghast Gwan G.Ins ,Tomb Guard Monster           ,93    ,8400
+13554,Ghast Ice Blood  ,Tomb Guard Monster           ,94    ,10000
+13555,Ghast I-Blood S  ,Tomb Guard Monster           ,95    ,10200
+13556,Ghast G-Blood    ,Tomb Guard Monster           ,96    ,8600
+13557,Ghast Gw-G Blood ,Tomb Guard Monster           ,97    ,8800
+13558,Ghast Gotham T   ,Tomb Guard Monster           ,98    ,10800
+13559,Ghast W.Monster  ,Tomb Guard Monster           ,99    ,29999
+13560,Ghast T-Mon 1    ,Tomb Guard Monster           ,100   ,11200
+13561,Ghast T-Mon 2    ,Tomb Guard Monster           ,101   ,11400
+13562,Ghast Yosan M-T  ,Tomb Guard Monster           ,102   ,11600
+13563,Ghast M Yosa M-T ,Tomb Guard Monster           ,103   ,11800
+13564,Ghast G.Iron F.F ,Tomb Guard Monster           ,104   ,12000
+13565,Ghast D.Iron F   ,Tomb Guard Monster           ,105   ,12200
+13566,Ghast G.T King   ,Tomb Guard Monster           ,106   ,12400
+13567,Ghast G.K of B   ,Tomb Guard Monster           ,107   ,12600
+13568,Ghast Zombie     ,Tomb Guard Monster           ,108   ,12800
+13569,Ghast Yoch K.Mon ,Tomb Guard Monster           ,109   ,48000
+13600,H Double I.M G   ,Red Keep 1                   ,61    ,1300
+13601,H Luna Warrior G ,Red Keep 1                   ,62    ,1500
+13602,H Moon Warrior D ,Red Keep 1                   ,63    ,1550
+13603,H Excom Monk MG  ,Red Keep 1                   ,64    ,1600
+13604,H V.Spider S     ,Red Keep 1                   ,65    ,1800
+13605,H G.Insect SO    ,Red Keep 1                   ,66    ,1900
+13606,H Moon W.SA      ,Red Keep 1                   ,67    ,2000
+13607,H Human F.S B    ,Red Keep 1                   ,68    ,2300
+13608,H Luna Warrior E ,Red Keep 1                   ,69    ,2400
+13609,H G-Insect P     ,Red Keep 1                   ,70    ,2500
+13610,H Moon W-BO      ,Red Keep 1                   ,71    ,2600
+13611,H MooGoong GA    ,Red Keep 1                   ,72    ,2700
+13612,H Double I.M HA  ,Red Keep 1                   ,73    ,2750
+13613,H Luna W.HG      ,Red Keep 1                   ,74    ,2900
+13614,H V.Spider DO    ,Red Keep 1                   ,75    ,2950
+13615,H Moon W.JI      ,Red Keep 1                   ,76    ,3000
+13616,H G.Insect KY    ,Red Keep 1                   ,77    ,3100
+13617,H Excom.Monk H   ,Red Keep 1                   ,78    ,3150
+13618,H Luna W.SN      ,Red Keep 1                   ,79    ,3200
+13619,H MooGoong EK    ,Red Keep 1                   ,80    ,3250
+13620,G Luna W.GN      ,Red Keep 2                   ,81    ,3500
+13621,G Moon Warrior G ,Red Keep 2                   ,82    ,3700
+13622,G V.Spider D     ,Red Keep 2                   ,83    ,3750
+13623,G H.F Spider MG  ,Red Keep 2                   ,84    ,3800
+13624,G MooGoong S     ,Red Keep 2                   ,85    ,3850
+13625,G G.Insect SO    ,Red Keep 2                   ,86    ,4200
+13626,G G-Insect SA    ,Red Keep 2                   ,87    ,4300
+13627,G G.Insect BE    ,Red Keep 2                   ,88    ,4300
+13628,G Double I.M E   ,Red Keep 2                   ,89    ,4300
+13629,G Excom Monk PK  ,Red Keep 2                   ,90    ,4300
+13630,G Moon W.BO      ,Red Keep 2                   ,91    ,4310
+13631,G Luna W.GA      ,Red Keep 2                   ,92    ,4350
+13632,G Moon W.HA      ,Red Keep 2                   ,93    ,4400
+13633,G Moon W.HG      ,Red Keep 2                   ,94    ,4500
+13634,G Human F.S DO   ,Red Keep 2                   ,95    ,5100
+13635,G G-insect JI    ,Red Keep 2                   ,96    ,5200
+13636,G Double I.M KY  ,Red Keep 2                   ,97    ,5300
+13637,G Moon Warrior H ,Red Keep 2                   ,98    ,5400
+13638,G Luna W.SN      ,Red Keep 2                   ,99    ,5500
+13639,G Excom.Monk EK  ,Red Keep 2                   ,100   ,5600
+13640,G G-Insect T     ,Red Keep 2                   ,101   ,5700
+13641,G MooGoong BO    ,Red Keep 2                   ,102   ,5800
+13642,G Moon W.GY      ,Red Keep 2                   ,103   ,5900
+13643,G Moon Warrior Y ,Red Keep 2                   ,104   ,6000
+13644,G Excom Monk GO  ,Red Keep 2                   ,105   ,6100
+13645,G G-Insect EM    ,Red Keep 2                   ,106   ,6200
+13646,G V-Spider KA    ,Red Keep 2                   ,107   ,6300
+13647,G Luna W.KW      ,Red Keep 2                   ,108   ,6400
+13648,G Moon W.KU      ,Red Keep 2                   ,109   ,6500
+13649,G Double I.M CH  ,Red Keep 2                   ,110   ,6600
+13650,GR G-Insect GN   ,Red Keep 3                   ,111   ,6700
+13651,GR Luna W.G      ,Red Keep 3                   ,112   ,6800
+13652,GR G-Insect D    ,Red Keep 3                   ,113   ,6900
+13653,GR Double I.M MG ,Red Keep 3                   ,114   ,7000
+13654,GR Moon W.S      ,Red Keep 3                   ,115   ,7100
+13655,GR Moon W.S Lun  ,Red Keep 3                   ,116   ,7200
+13656,GR G-Insect SA   ,Red Keep 3                   ,117   ,7300
+13657,GR Excom Monk BE ,Red Keep 3                   ,118   ,7454
+13658,GR Excom Monk E  ,Red Keep 3                   ,119   ,7616
+13659,GR MooGoong PK   ,Red Keep 3                   ,120   ,7787
+13660,GR Mon Warri BO  ,Red Keep 3                   ,121   ,7966
+13661,GR Human F.S GA  ,Red Keep 3                   ,122   ,8154
+13662,GR Moon W.HA     ,Red Keep 3                   ,123   ,8351
+13663,GR G-Insect HG   ,Red Keep 3                   ,124   ,8556
+13664,GR Double I.M DO ,Red Keep 3                   ,125   ,8770
+13665,GR Moon W-JI     ,Red Keep 3                   ,126   ,8992
+13666,GR Luna W-KY     ,Red Keep 3                   ,127   ,9223
+13667,GR V-Spider H    ,Red Keep 3                   ,128   ,9462
+13668,GR Luna W.SN     ,Red Keep 3                   ,129   ,9710
+13669,GR G-Insect EK   ,Red Keep 3                   ,130   ,9966
+13670,GR Human F.Sp.T  ,Red Keep 3                   ,131   ,10231
+13671,GR Mon Warrior B ,Red Keep 3                   ,132   ,10505
+13672,GR Mon Warrior G ,Red Keep 3                   ,133   ,10787
+13673,GR Venom Spide Y ,Red Keep 3                   ,134   ,11078
+13674,GR Mon Warri Go  ,Red Keep 3                   ,135   ,11377
+13675,GR Moon Warri Im ,Red Keep 3                   ,136   ,11685
+13676,GR Ground In-Gan ,Red Keep 3                   ,137   ,12001
+13677,GR Excom-Monk K  ,Red Keep 3                   ,138   ,12326
+13678,GR D-Iron Monk G ,Red Keep 3                   ,139   ,12659
+13679,GR MooGoong C    ,Red Keep 3                   ,140   ,13001
+13680,Infant G-Dragon  ,Red Keep 5                   ,130   ,90000
+13681,Infant B-Dragon  ,Red Keep 5                   ,130   ,90000
+13682,Destroy G-Dragon ,Red Keep 5                   ,140   ,1000000
+13683,Destroy B-Dragon ,Red Keep 5                   ,140   ,1000000
+13684,Hon B-Phantom    ,The Red Castle               ,60    ,20000
+13685,Hon Black Ox W   ,The Red Castle               ,60    ,20000
+13686,Hon Earth King   ,The Red Castle               ,75    ,25000
+13687,Hon E.K Statue   ,The Red Castle               ,81    ,27000
+13688,Hon Killer Bird  ,The Red Castle               ,88    ,25000
+13689,Hon W.Monster    ,The Red Castle               ,91    ,20000
+13690,Hon Yocheo K.Mon ,The Red Castle               ,105   ,40000
+13691,Hon S.Mad Demon  ,The Red Castle               ,125   ,80000
+13692,Hon S.Temple M   ,The Red Castle               ,125   ,80000
+13693,Hon G.B.Demon    ,The Red Castle               ,125   ,80000
+13694,Hon S.B.Demon    ,The Red Castle               ,127   ,84000
+13695,Hon Iron B.Demon ,The Red Castle               ,130   ,90000
+13696,Hon She-D B-Yong ,The Red Castle               ,135   ,100000
+13697,Hon Fire M       ,The Red Castle               ,146   ,120000
+13698,Hon WooKum       ,The Red Castle               ,154   ,150000
+13699,Hon M-dragon     ,The Red Castle               ,160   ,3000000
+13700,SJ Bighead B-eye ,  12 Battle Formations_1st   ,49    ,766
+13701,SJ One-eyed      ,  12 Battle Formations_1st   ,50    ,773
+13702,SJ Hugehead B-eye,  12 Battle Formations_1st   ,51    ,793
+13703,SJ Huge eyed     ,  12 Battle Formations_1st   ,52    ,849
+13704,SC Mad Cow       , 12 Battle Formations_2nd    ,61    ,1300
+13705,SC Fire Cow      , 12 Battle Formations_2nd    ,62    ,1500
+13706,SC Huge Mad Cow  , 12 Battle Formations_2nd    ,63    ,1550
+13707,SC Huge fire Cow , 12 Battle Formations_2nd    ,64    ,1600
+13708,SI Tiger         , 12 Battle Formations_3rd    ,73    ,2750
+13709,SI Gotham Tiger  , 12 Battle Formations_3rd    ,74    ,2900
+13710,SI Huge Tiger    , 12 Battle Formations_3rd    ,75    ,2950
+13711,SI Huge Gotham   , 12 Battle Formations_3rd    ,76    ,3000
+13712,SM Red Fire      , 12 Battle Formations_4th    ,82    ,3700
+13713,SM Red Blood     , 12 Battle Formations_4th    ,83    ,3750
+13714,SM Blue Fire     , 12 Battle Formations_4th    ,84    ,3800
+13715,SM Ice blood     , 12 Battle Formations_4th    ,85    ,3850
+13716,SJ Insect        , 12 Battle Formations_5th    ,87    ,4300
+13717,SJ Insect Mon 2  , 12 Battle Formations_5th    ,88    ,4300
+13718,SJ H-Insect Mon 3, 12 Battle Formations_5th    ,89    ,4300
+13719,SJ H-Insect Mon1 , 12 Battle Formations_5th    ,90    ,4300
+13720,SS YS Python     , 12 Battle Formations_6th    ,91    ,4310
+13721,SS WC Python     , 12 Battle Formations_6th    ,92    ,4350
+13722,SS MB Python     , 12 Battle Formations_6th    ,93    ,4400
+13723,SS Gt Python     , 12 Battle Formations_6th    ,94    ,4500
+13724,SO Tangsu Monster, 12 Battle Formations_7th    ,95    ,5100
+13725,SO Gingbo Iron FF, 12 Battle Formations_7th    ,96    ,5200
+13726,SO Demon F.F     , 12 Battle Formations_7th    ,97    ,5300
+13727,SO Huge F.F      , 12 Battle Formations_7th    ,98    ,5400
+13728,SM SwordsmanB    , 12 Battle Formations_8th    ,99    ,5500
+13729,SM Excommun Poong, 12 Battle Formations_8th    ,100   ,5600
+13730,SM B.Swordsman   , 12 Battle Formations_8th    ,101   ,5700
+13731,SM Ascetic G.Ch  , 12 Battle Formations_8th    ,102   ,5800
+13732,SE DM ZOMBIE     , 12 Battle Formations_9th    ,103   ,5900
+13733,SE Alpine Warrior, 12 Battle Formations_9th    ,104   ,6000
+13734,SE Deadly Ghost  , 12 Battle Formations_9th    ,105   ,6100
+13735,SE H-DM Zombie   , 12 Battle Formations_9th    ,106   ,6200
+13736,SY Killer Bird   , 12 Battle Formations_10th   ,108   ,6400
+13737,SY Killer Bird1  , 12 Battle Formations_10th   ,109   ,6500
+13738,SY MJ Killer Bird, 12 Battle Formations_10th   ,110   ,6600
+13739,SY MK Killer Bird, 12 Battle Formations_10th   ,111   ,6700
+13740,SL White wolf    , 12 Battle Formations_11th   ,113   ,6900
+13741,SL C Dog Monster , 12 Battle Formations_11th   ,114   ,7000
+13742,SL Blue wolf     , 12 Battle Formations_11th   ,115   ,7100
+13743,SL G Dog Monster , 12 Battle Formations_11th   ,116   ,7200
+13744,SH Black Boar    , 12 Battle Formations_12th   ,134   ,11720
+13745,SH M Black Boar  , 12 Battle Formations_12th   ,135   ,12070
+13746,SH GG Black Boar , 12 Battle Formations_12th   ,136   ,12430
+13747,SH MH Black Boar , 12 Battle Formations_12th   ,137   ,12800
+13748,ST MY Zombie     , 12 Battle Formations_13th   ,140   ,13970
+13749,ST King Demon    , 12 Battle Formations_13th   ,141   ,14380
+13750,ST Deadly Zombie , 12 Battle Formations_13th   ,142   ,14800
+13751,ST Big Demon     , 12 Battle Formations_13th   ,143   ,15230
+13752,SP Yoseon Zombie , 12 Battle Formations_14th   ,145   ,16120
+13753,SP Yosu Zombie   , 12 Battle Formations_14th   ,146   ,16580
+13754,SP H-Yoseon Zom  , 12 Battle Formations_14th   ,147   ,17050
+13755,SP H-Yosu Zombie , 12 Battle Formations_14th   ,148   ,17530
+13756,SB White-Tiger   , 12 Battle Formations_15th   ,150   ,18520
+13757,SB Yosan Mad Tr  , 12 Battle Formations_15th   ,151   ,19030
+13758,SB H-White Tiger , 12 Battle Formations_15th   ,152   ,19550
+13759,SB Geumgang B.K  , 12 Battle Formations_15th   ,153   ,20080
+13760,SCH GR-Insect    , 12 Battle Formations_16th   ,155   ,21170
+13761,SCH Human F.SP.T , 12 Battle Formations_16th   ,156   ,21730
+13762,SCH D-iron Monk  , 12 Battle Formations_16th   ,157   ,22300
+13763,SCH MooGoong     , 12 Battle Formations_16th   ,158   ,22880
+13764,SJ Universe Wolf ,  12 Battle Formations_1st   ,53    ,3000
+13765,SC Fire Ox J     , 12 Battle Formations_2nd    ,65    ,4500
+13766,SI Black Ox W    , 12 Battle Formations_3rd    ,77    ,6000
+13767,SM Asura         , 12 Battle Formations_4th    ,86    ,9000
+13768,SJ Earth King    , 12 Battle Formations_5th    ,91    ,30000
+13769,SS S.M Demon     , 12 Battle Formations_6th    ,95    ,33750
+13770,SO W.Monster     , 12 Battle Formations_7th    ,99    ,36000
+13771,SMTemple Master  , 12 Battle Formations_8th    ,103   ,37500
+13772,SE Yocheon K.Mon , 12 Battle Formations_9th    ,107   ,45000
+13773,SY Killer Bird(B), 12 Battle Formations_10th   ,112   ,52500
+13774,SL B-phantom     , 12 Battle Formations_11th   ,117   ,60000
+13775,SH G.B.Demon     , 12 Battle Formations_12th   ,138   ,75000
+13776,ST S..Demon      , 12 Battle Formations_13th   ,144   ,82500
+13777,SP Iron B.Demon  , 12 Battle Formations_14th   ,149   ,117000
+13778,SB She-D B-yong  , 12 Battle Formations_15th   ,154   ,150000
+13779,SCH Y Evil Dragon, 12 Battle Formations_16th   ,159   ,300000
+13780,SCH Y Dark Dragon, 12 Battle Formations_16th   ,159   ,300000
+13781,Angry Evil Dragon, 12 Battle Formations_16th   ,160   ,3000000
+13782,Mini Bonus dragon,Bonus Monster                ,1     ,40
+13783,SJ  sealed       , 12 Battle Formations_1st    ,53    ,562
+13784,SC  sealed       , 12 Battle Formations_2nd    ,65    ,1080
+13785,SI  sealed       , 12 Battle Formations_3rd    ,77    ,1856
+13786,SM  sealed       , 12 Battle Formations_4th    ,86    ,3150
+13787,SJ  sealed       , 12 Battle Formations_5th    ,91    ,1856
+13788,SS  sealed       , 12 Battle Formations_6th    ,95    ,2250
+13789,SO  sealed       , 12 Battle Formations_7th    ,99    ,2868
+13790,SM  sealed       , 12 Battle Formations_8th    ,103   ,4274
+13791,SE  sealed       , 12 Battle Formations_9th    ,107   ,3562
+13792,SY  sealed       , 12 Battle Formations_10th   ,112   ,3838
+13793,SL  sealed       , 12 Battle Formations_11th   ,117   ,4950
+13794,SH  sealed       , 12 Battle Formations_12th   ,138   ,6300
+13795,ST  sealed       , 12 Battle Formations_13th   ,144   ,17820
+13796,SP  sealed       , 12 Battle Formations_14th   ,149   ,32298
+13797,SB  sealed       , 12 Battle Formations_15th   ,154   ,50490
+13798,Majesty Tree     ,Holy treasure                ,144   ,10000
+13799,Majesty Ice Stone,Holy treasure                ,144   ,10000
+13800,Majesty Flame    ,Holy treasure                ,144   ,10000
+13801,Majesty Geumkang ,Holy treasure                ,144   ,10000
+13802,Toham            ,Holy treasure                ,140   ,240
+13900,GC G-Insect GN   ,Red Keep 4                   ,141   ,13351
+13901,GC Luna W.G      ,Red Keep 4                   ,142   ,13710
+13902,GC Moon W D      ,Red Keep 4                   ,143   ,14078
+13903,GC Moon W MG     ,Red Keep 4                   ,144   ,14454
+13904,GC  Human F.S So ,Red Keep 4                   ,145   ,14839
+13905,GC G-Insect Song ,Red Keep 4                   ,146   ,15232
+13906,GC Excom Monk SA ,Red Keep 4                   ,147   ,15634
+13907,GC MooGoong BE   ,Red Keep 4                   ,148   ,16044
+13908,GC Moon Warr E   ,Red Keep 4                   ,149   ,16463
+13909,GC G-Insect PK   ,Red Keep 4                   ,150   ,16890
+13910,GC V.Spider BO   ,Red Keep 4                   ,151   ,17326
+13911,GC Moon Warr GA  ,Red Keep 4                   ,152   ,17770
+13912,GC Double I.M.HA ,Red Keep 4                   ,153   ,18223
+13913,GC Luna W HG     ,Red Keep 4                   ,154   ,18685
+13914,GC Excom Monk DO ,Red Keep 4                   ,155   ,19155
+13915,GC Moon W-JI     ,Red Keep 4                   ,156   ,19634
+13916,GC Luna W-KY     ,Red Keep 4                   ,157   ,20121
+13917,GC V-Spider H    ,Red Keep 4                   ,158   ,20617
+13918,GC Double I.M SN ,Red Keep 4                   ,159   ,21121
+13919,GC MooGoong EK   ,Red Keep 4                   ,160   ,21634
+13920,H Hell Guard     ,Red Keep 1                   ,57    ,900
+13921,H YS Hell Guard  ,Red Keep 1                   ,58    ,1000
+13922,H Sea Monster    ,Red Keep 1                   ,59    ,1100
+13923,H CC Dog Monster ,Red Keep 1                   ,60    ,1200
+14000,ZH lv. 3 W-L     , Revenge Battle Summone Monst,36    ,526
+14001,ZH lv.6  G-H     , Revenge Battle Summone Monst,37    ,540
+14002,Angry Black Boar , Revenge Battle Summone Monst,38    ,568
+14003,Angry M-B Boar   , Revenge Battle Summone Monst,39    ,579
+14004,Angry YS Python  , Revenge Battle Summone Monst,40    ,590
+14005,Angry WC Python  , Revenge Battle Summone Monst,41    ,601
+14006,Angry GG Boar    , Revenge Battle Summone Monst,42    ,612
+14007,Angry MB Python  , Revenge Battle Summone Monst,43    ,622
+14008,Angry GT Python  , Revenge Battle Summone Monst,44    ,633
+14009,BF Leg FighterJS , Revenge Battle Summone Monst,45    ,644
+14010,BF Swordsman JS  , Revenge Battle Summone Monst,46    ,655
+14011,BF Scyther JS    , Revenge Battle Summone Monst,47    ,666
+14012,WC VenomScorpion , Revenge Battle Summone Monst,48    ,676
+14013,Alpine Warri  MG , Revenge Battle Summone Monst,49    ,748
+14014,Alpine Hunter MG , Revenge Battle Summone Monst,50    ,774
+14015,Deadly Ghost     , Revenge Battle Summone Monst,51    ,791
+14016,GB Ghost         , Revenge Battle Summone Monst,52    ,805
+14017,YS Ghost         , Revenge Battle Summone Monst,53    ,889
+14018,GB Zombie        , Revenge Battle Summone Monst,54    ,904
+14019,Zombie           , Revenge Battle Summone Monst,55    ,919
+14020,DM Zombie        , Revenge Battle Summone Monst,56    ,930
+14021,She-ghost        , Revenge Battle Summone Monst,57    ,952
+14022,Sea Monster 2    , Revenge Battle Summone Monst,58    ,987
+14023,Sea Monster      , Revenge Battle Summone Monst,59    ,1017
+14024,MG Dog Monster   , Revenge Battle Summone Monst,60    ,1133
+14025,H Double I.M G   , Revenge Battle Summone Monst,61    ,1300
+14026,H Luna Warrior G , Revenge Battle Summone Monst,62    ,1500
+14027,H Moon Warrior D , Revenge Battle Summone Monst,63    ,1550
+14028,H Excom Monk MG  , Revenge Battle Summone Monst,64    ,1600
+14029,H V.Spider S     , Revenge Battle Summone Monst,65    ,1800
+14030,H G.Insect SO    , Revenge Battle Summone Monst,66    ,1900
+14031,H Moon W.SA      , Revenge Battle Summone Monst,67    ,2000
+14032,H Human F.S B    , Revenge Battle Summone Monst,68    ,2300
+14033,H Luna Warrior E , Revenge Battle Summone Monst,69    ,2400
+14034,H G-Insect P     , Revenge Battle Summone Monst,70    ,2500
+14035,H Moon W-BO      , Revenge Battle Summone Monst,71    ,2600
+14036,H MooGoong GA    , Revenge Battle Summone Monst,72    ,2700
+14037,H Double I.M HA  , Revenge Battle Summone Monst,73    ,2750
+14038,H Luna W.HG      , Revenge Battle Summone Monst,74    ,2900
+14039,H V.Spider DO    , Revenge Battle Summone Monst,75    ,2950
+14040,H Moon W.JI      , Revenge Battle Summone Monst,76    ,3000
+14041,H G.Insect KY    , Revenge Battle Summone Monst,77    ,3100
+14042,H Excom.Monk H   , Revenge Battle Summone Monst,78    ,3150
+14043,H Luna W.SN      , Revenge Battle Summone Monst,79    ,3200
+14044,H MooGoong EK    , Revenge Battle Summone Monst,80    ,3250
+14045,G Luna W.GN      , Revenge Battle Summone Monst,81    ,3500
+14046,G Moon Warrior G , Revenge Battle Summone Monst,82    ,3700
+14047,G V.Spider D     , Revenge Battle Summone Monst,83    ,3750
+14048,G H.F Spider MG  , Revenge Battle Summone Monst,84    ,3800
+14049,G MooGoong S     , Revenge Battle Summone Monst,85    ,3850
+14050,G G.Insect SO    , Revenge Battle Summone Monst,86    ,4200
+14051,G G-Insect SA    , Revenge Battle Summone Monst,87    ,4300
+14052,G G.Insect BE    , Revenge Battle Summone Monst,88    ,4300
+14053,G Double I.M E   , Revenge Battle Summone Monst,89    ,4300
+14054,G Excom Monk PK  , Revenge Battle Summone Monst,90    ,4300
+14055,G Moon W.BO      , Revenge Battle Summone Monst,91    ,4310
+14056,G Luna W.GA      , Revenge Battle Summone Monst,92    ,4350
+14057,G Moon W.HA      , Revenge Battle Summone Monst,93    ,4400
+14058,G Moon W.HG      , Revenge Battle Summone Monst,94    ,4500
+14059,G Human F.S DO   , Revenge Battle Summone Monst,95    ,5100
+14060,G G-insect JI    , Revenge Battle Summone Monst,96    ,5200
+14061,G Double I.M KY  , Revenge Battle Summone Monst,97    ,5300
+14062,G Moon Warrior H , Revenge Battle Summone Monst,98    ,5400
+14063,G Luna W.SN      , Revenge Battle Summone Monst,99    ,5500
+14064,G Excom.Monk EK  , Revenge Battle Summone Monst,100   ,5600
+14065,G G-Insect T     , Revenge Battle Summone Monst,101   ,5700
+14066,G MooGoong BO    , Revenge Battle Summone Monst,102   ,5800
+14067,G Moon W.GY      , Revenge Battle Summone Monst,103   ,5900
+14068,G Moon Warrior Y , Revenge Battle Summone Monst,104   ,6000
+14069,G Excom Monk GO  , Revenge Battle Summone Monst,105   ,6100
+14070,G G-Insect EM    , Revenge Battle Summone Monst,106   ,6200
+14071,G V-Spider KA    , Revenge Battle Summone Monst,107   ,6300
+14072,G Luna W.KW      , Revenge Battle Summone Monst,108   ,6400
+14073,G Moon W.KU      , Revenge Battle Summone Monst,109   ,6500
+14074,G Double I.M CH  , Revenge Battle Summone Monst,110   ,6600
+14075,GR Ground In-Gun , Revenge Battle Summone Monst,111   ,6700
+14076,GR Luna W.G      , Revenge Battle Summone Monst,112   ,6800
+14077,GR Ground In-Dun , Revenge Battle Summone Monst,113   ,6900
+14078,GR D-Iron Monk M , Revenge Battle Summone Monst,114   ,7000
+14079,GR Mon Warri Su  , Revenge Battle Summone Monst,115   ,7100
+14080,GR Moon W.S Lun  , Revenge Battle Summone Monst,116   ,7200
+14081,GR Ground In-Sa  , Revenge Battle Summone Monst,117   ,7300
+14082,GR Excom-Monk B  , Revenge Battle Summone Monst,118   ,7454
+14083,GR Excom-Monk E  , Revenge Battle Summone Monst,119   ,7616
+14084,GR MooGoong PK   , Revenge Battle Summone Monst,120   ,7787
+14085,GR Mon Warrior B , Revenge Battle Summone Monst,121   ,7966
+14086,GR Human F.Sp.G  , Revenge Battle Summone Monst,122   ,8154
+14087,GR Moon Warri Ham, Revenge Battle Summone Monst,123   ,8351
+14088,GR Ground In-Han , Revenge Battle Summone Monst,124   ,8556
+14089,GR D-Iron Monk D , Revenge Battle Summone Monst,125   ,8770
+14090,GR Mon Warri Jin , Revenge Battle Summone Monst,126   ,8992
+14091,GR Luna W-KY     , Revenge Battle Summone Monst,127   ,9223
+14092,GR Venom Spide H , Revenge Battle Summone Monst,128   ,9462
+14093,GR Luna W.SN     , Revenge Battle Summone Monst,129   ,9710
+14094,GR Ground In-IK  , Revenge Battle Summone Monst,130   ,9966
+14095,GR Human F.Sp.T  , Revenge Battle Summone Monst,131   ,10231
+14096,GR Mon Warrior B , Revenge Battle Summone Monst,132   ,10505
+14097,GR Mon Warrior G , Revenge Battle Summone Monst,133   ,10787
+14098,GR Venom Spide Y , Revenge Battle Summone Monst,134   ,11078
+14099,GR Mon Warri Go  , Revenge Battle Summone Monst,135   ,11377
+14100,GR Moon Warri Im , Revenge Battle Summone Monst,136   ,11685
+14101,GR Ground In-Gan , Revenge Battle Summone Monst,137   ,12001
+14102,GR Excom-Monk K  , Revenge Battle Summone Monst,138   ,12326
+14103,GR D-Iron Monk G , Revenge Battle Summone Monst,139   ,12659
+14104,GR MooGoong C    , Revenge Battle Summone Monst,140   ,13001
+14105,Q Ground In-Gan  , Revenge Battle Summone Monst,141   ,13351
+14106,Q Moon W.S Gon   , Revenge Battle Summone Monst,142   ,13710
+14107,Q Mon Warri Dun  , Revenge Battle Summone Monst,143   ,14078
+14108,Q Mon Warri Mon  , Revenge Battle Summone Monst,144   ,14454
+14109,Q Human F.Sp.Su  , Revenge Battle Summone Monst,145   ,14839
+14110,Q Ground In-Song , Revenge Battle Summone Monst,146   ,15232
+14111,Q Excom-Monk Sa  , Revenge Battle Summone Monst,147   ,15634
+14112,Q MooGoong B     , Revenge Battle Summone Monst,148   ,16044
+14113,Q Mon Warri E    , Revenge Battle Summone Monst,149   ,16463
+14114,Q Ground In-P    , Revenge Battle Summone Monst,150   ,16890
+14115,Q Venom Spide B  , Revenge Battle Summone Monst,151   ,17326
+14116,Q Mon Warri Gam  , Revenge Battle Summone Monst,152   ,17770
+14117,Q D-Iron Monk Ham, Revenge Battle Summone Monst,153   ,18223
+14118,Q Moon W.S Han   , Revenge Battle Summone Monst,154   ,18685
+14119,Q Excom-Monk Don , Revenge Battle Summone Monst,155   ,19155
+14120,Q Mon Warri Jin  , Revenge Battle Summone Monst,156   ,19634
+14121,Q Moon W.S Q     , Revenge Battle Summone Monst,157   ,20121
+14122,Q Human F.Sp.Q   , Revenge Battle Summone Monst,158   ,20617
+14123,Q D-Iron Monk Son, Revenge Battle Summone Monst,159   ,21121
+14124,Q MooGoong IK    , Revenge Battle Summone Monst,160   ,21634
+14300,lvl35 M-Dragon   ,이벤트 몹                    ,35    ,900
+14301,lvl40 M-Dragon   ,이벤트 몹                    ,40    ,1180
+14302,lvl45 M-Dragon   ,이벤트 몹                    ,45    ,1288
+14303,lvl50 M-Dragon   ,이벤트 몹                    ,50    ,1536
+14304,lvl55 M-Dragon   ,이벤트 몹                    ,55    ,1824
+14305,lvl60 M-Dragon   ,이벤트 몹                    ,60    ,2200
+14306,lvl65 M-Dragon   ,이벤트 몹                    ,65    ,3400
+14307,lvl70 M-Dragon   ,이벤트 몹                    ,70    ,5000
+14308,lvl75 M-Dragon   ,이벤트 몹                    ,75    ,6000
+14309,lvl80 M-Dragon   ,이벤트 몹                    ,80    ,6500
+14310,lvl85 M-Dragon   ,이벤트 몹                    ,85    ,7700
+14311,lvl90 M-Dragon   ,이벤트 몹                    ,90    ,8600
+14312,lvl95 M-Dragon   ,이벤트 몹                    ,95    ,10200
+14313,lvl100 M-Dragon  ,이벤트 몹                    ,100   ,11200
+14314,lvl105 M-Dragon  ,이벤트 몹                    ,105   ,12200
+14315,lvl110 M-Dragon  ,이벤트 몹                    ,110   ,13200
+14316,lvl115 M-Dragon  ,이벤트 몹                    ,115   ,14200
+14317,lvl120 M-Dragon  ,이벤트 몹                    ,120   ,15740
+14318,lvl125 M-Dragon  ,이벤트 몹                    ,125   ,18040
+14319,lvl130 M-Dragon  ,이벤트 몹                    ,130   ,20840
+14320,lvl135 M-Dragon  ,이벤트 몹                    ,135   ,24140
+14321,lvl140 M-Dragon  ,이벤트 몹                    ,140   ,27940
+14322,lvl145 M-Dragon  ,이벤트 몹                    ,145   ,32240
+14323,lvl150 M-Dragon  ,이벤트 몹                    ,150   ,37040
+14324,lvl155 M-Dragon  ,이벤트 몹                    ,155   ,42340
+14325,lvl160 M-Dragon  ,이벤트 몹                    ,160   ,48140
+14326,건곤 순일랑      ,이벤트 몹                    ,35    ,115
+14327,태건 순일랑      ,이벤트 몹                    ,40    ,150
+14328,이태 순일랑      ,이벤트 몹                    ,45    ,165
+14329,진이 순일랑      ,이벤트 몹                    ,50    ,195
+14330,손진 순일랑      ,이벤트 몹                    ,55    ,230
+14331,감손 순일랑      ,이벤트 몹                    ,60    ,275
+14332,간감 순일랑      ,이벤트 몹                    ,65    ,425
+14333,곤간 순일랑      ,이벤트 몹                    ,70    ,625
+14334,건간 순일랑      ,이벤트 몹                    ,75    ,750
+14335,태곤 순일랑      ,이벤트 몹                    ,80    ,815
+14336,이건 순일랑      ,이벤트 몹                    ,85    ,965
+14337,진태 순일랑      ,이벤트 몹                    ,90    ,1075
+14338,손이 순일랑      ,이벤트 몹                    ,95    ,1275
+14339,감진 순일랑      ,이벤트 몹                    ,100   ,1400
+14340,간손 순일랑      ,이벤트 몹                    ,105   ,1525
+14341,곤감 순일랑      ,이벤트 몹                    ,110   ,1650
+14342,건감 순일랑      ,이벤트 몹                    ,115   ,1775
+14343,태간 순일랑      ,이벤트 몹                    ,120   ,1970
+14344,이곤 순일랑      ,이벤트 몹                    ,125   ,2255
+14345,진건 순일랑      ,이벤트 몹                    ,130   ,2605
+14346,손태 순일랑      ,이벤트 몹                    ,135   ,3020
+14347,감이 순일랑      ,이벤트 몹                    ,140   ,3495
+14348,간진 순일랑      ,이벤트 몹                    ,145   ,4030
+14349,곤손 순일랑      ,이벤트 몹                    ,150   ,4630
+14350,건손 순일랑      ,이벤트 몹                    ,155   ,5295
+14351,태감 순일랑      ,이벤트 몹                    ,160   ,6020
+14352,자혼 성물        ,이벤트용                     ,44    ,799
+14353,축혼 성물        ,이벤트용                     ,54    ,1086
+14354,인혼 성물        ,이벤트용                     ,64    ,1824
+14355,묘혼 성물        ,이벤트용                     ,74    ,3132
+14356,진혼 성물        ,이벤트용                     ,84    ,3876
+14357,사혼 성물        ,이벤트용                     ,94    ,4320
+14358,오혼 성물        ,이벤트용                     ,104   ,5400
+14359,미혼 성물        ,이벤트용                     ,114   ,5880
+14360,신혼 성물        ,이벤트용                     ,124   ,6841
+14361,유혼 성물        ,이벤트용                     ,134   ,8439
+14362,술혼 성물        ,이벤트용                     ,144   ,10343
+14363,해혼 성물        ,이벤트용                     ,154   ,12372
+14364,자혼 수호지호    ,이벤트용                     ,44    ,1902
+14365,축혼 수호지호    ,이벤트용                     ,54    ,2715
+14366,인혼 수호지호    ,이벤트용                     ,64    ,4800
+14367,묘혼 수호지호    ,이벤트용                     ,74    ,8700
+14368,진혼 수호지호    ,이벤트용                     ,84    ,11400
+14369,사혼 수호지호    ,이벤트용                     ,94    ,13500
+14370,오혼 수호지호    ,이벤트용                     ,104   ,18000
+14371,미혼 수호지호    ,이벤트용                     ,114   ,21000
+14372,신혼 수호지호    ,이벤트용                     ,124   ,26310
+14373,유혼 수호지호    ,이벤트용                     ,134   ,35160
+14374,술혼 수호지호    ,이벤트용                     ,144   ,47010
+14375,해혼 수호지호    ,이벤트용                     ,154   ,61860
+14376,1성 이도살수     ,티벳                         ,36    ,1040
+14377,2성 이도살수     ,티벳                         ,44    ,1266
+14378,3성 이도살수     ,티벳                         ,52    ,1640
+14379,4성 이도살수     ,티벳                         ,60    ,2200
+14380,5성 이도살수     ,티벳                         ,68    ,4400
+14381,6성 이도살수     ,티벳                         ,76    ,6100
+14382,7성 이도살수     ,티벳                         ,84    ,7600
+14383,8성 이도살수     ,티벳                         ,92    ,8700
+14384,9성 이도살수     ,티벳                         ,100   ,11200
+14385,10성 이도살수    ,티벳                         ,108   ,12800
+14386,11성 이도살수    ,티벳                         ,116   ,14400
+14387,12성 이도살수    ,티벳                         ,124   ,17540
+14388,13성 이도살수    ,티벳                         ,132   ,22100
+14389,14성 이도살수    ,티벳                         ,140   ,27940
+14390,15성 이도살수    ,티벳                         ,148   ,35060
+14391,16성 이도살수    ,티벳                         ,156   ,43460
+14392,Ghost B-dragon   ,사해주협행용                 ,160   ,2000000
+14393,40 스승          ,스승의날                     ,40    ,1180
+14394,48 스승          ,스승의날                     ,48    ,1352
+14395,56 스승          ,스승의날                     ,56    ,1860
+14396,64 스승          ,스승의날                     ,64    ,3200
+14397,72 스승          ,스승의날                     ,72    ,5100
+14398,80 스승          ,스승의날                     ,80    ,6500
+14399,88 스승          ,스승의날                     ,88    ,8800
+14400,96 스승          ,스승의날                     ,96    ,8600
+14401,104 스승         ,스승의날                     ,104   ,12000
+14402,112 스승         ,스승의날                     ,112   ,13600
+14403,120 스승         ,스승의날                     ,120   ,15740
+14404,128 스승         ,스승의날                     ,128   ,19660
+14405,136 스승         ,스승의날                     ,136   ,24860
+14406,144 스승         ,스승의날                     ,144   ,31340
+14407,152 스승         ,스승의날                     ,152   ,39100
+14408,Madness Hwa      ,티벳 협행용                  ,146   ,80000
+14409,Dice stone1      ,도박용                       ,144   ,100
+14410,Dice stone2      ,도박용                       ,144   ,100
+14411,Taesan           ,시리즈 아이템                ,144   ,100
+14412,EMH ball (35)    ,이벤트 몹                    ,35    ,900
+14413,EMH ball (40)    ,이벤트 몹                    ,40    ,1180
+14414,EMH ball 45)     ,이벤트 몹                    ,45    ,1288
+14415,EMH ball (50)    ,이벤트 몹                    ,50    ,1536
+14416,EMH ball (55)    ,이벤트 몹                    ,55    ,1824
+14417,EMH ball (60)    ,이벤트 몹                    ,60    ,2200
+14418,EMH ball (65)    ,이벤트 몹                    ,65    ,3400
+14419,EMH ball (70)    ,이벤트 몹                    ,70    ,5000
+14420,EMH ball (75)    ,이벤트 몹                    ,75    ,6000
+14421,EMH ball (80)    ,이벤트 몹                    ,80    ,6500
+14422,EMH ball (85)    ,이벤트 몹                    ,85    ,7700
+14423,EMH ball (90)    ,이벤트 몹                    ,90    ,8600
+14424,EMH ball (95)    ,이벤트 몹                    ,95    ,10200
+14425,EMH ball (100)   ,이벤트 몹                    ,100   ,11200
+14426,EMH ball (105)   ,이벤트 몹                    ,105   ,12200
+14427,EMH ball (110)   ,이벤트 몹                    ,110   ,13200
+14428,EMH ball (115)   ,이벤트 몹                    ,115   ,14200
+14429,EMH ball (120)   ,이벤트 몹                    ,120   ,15740
+14430,EMH ball (125)   ,이벤트 몹                    ,125   ,18040
+14431,EMH ball (130)   ,이벤트 몹                    ,130   ,20840
+14432,EMH ball (135)   ,이벤트 몹                    ,135   ,24140
+14433,EMH ball (140)   ,이벤트 몹                    ,140   ,27940
+14434,EMH ball (145)   ,이벤트 몹                    ,145   ,32240
+14435,EMH ball (150)   ,이벤트 몹                    ,150   ,37040
+14436,EMH ball (155)   ,이벤트 몹                    ,155   ,42340
+14437,EMH ball (160)   ,이벤트 몹                    ,160   ,48140
+14438,Skyzone sin      ,천계                         ,144   ,48140
+14439,Skyzone warrior  ,천계                         ,144   ,48140
+14440,Female shaman    ,천계                         ,144   ,48140
+14441,Nine god bird    ,천계                         ,144   ,48140
+14442,Skyzone monk     ,천계                         ,144   ,48140
+14443,King statue      ,천계                         ,144   ,48140
+14444,Skyzone Aura     ,천계                         ,144   ,48140
+14445,Lighting god     ,천계                         ,144   ,48140
+14446,140 B-Mdragon    ,event                        ,140   ,400000
+14447,90 B-Mdragon     ,event                        ,90    ,160000
+14448,140 B-Mdragon    ,event                        ,140   ,400000
+14449,90 B-Mdragon     ,event                        ,90    ,160000
+14450,Thunder Woo Lv1  ,0                            ,40    ,810
+14451,Thunder Woo Lv2  ,0                            ,45    ,967
+14452,Thunder Woo Lv3  ,0                            ,50    ,1148
+14453,Thunder Woo Lv4  ,0                            ,55    ,1386
+14454,Thunder Woo Lv5  ,0                            ,60    ,2142
+14455,Thunder Woo Lv6  ,0                            ,65    ,3150
+14456,Thunder Woo Lv7  ,0                            ,70    ,3780
+14457,Thunder Woo Lv8  ,0                            ,75    ,4095
+14458,Thunder Woo Lv9  ,0                            ,80    ,4851
+14459,Thunder Woo Lv10 ,0                            ,85    ,5418
+14460,Thunder Woo Lv11 ,0                            ,90    ,6426
+14461,Thunder Woo Lv12 ,0                            ,95    ,7056
+14462,Thunder Woo Lv13 ,0                            ,100   ,7686
+14463,Thunder Woo Lv14 ,0                            ,105   ,8316
+14464,Thunder Woo Lv15 ,0                            ,110   ,8946
+14465,Thunder Woo Lv16 ,0                            ,115   ,9916
+14466,Thunder Woo Lv17 ,0                            ,120   ,11365
+14467,Thunder Woo Lv18 ,0                            ,125   ,13129
+14468,Thunder Woo Lv19 ,0                            ,130   ,15208
+14469,Thunder Woo Lv20 ,0                            ,135   ,17602
+14470,Thunder Woo Lv21 ,0                            ,140   ,20311
+14471,혈종 무궁수화 익 ,몹풀이용                     ,80    ,3250
+14472,혈종 폐관승 박   ,몹풀이용                     ,90    ,4300
+14473,혈종 무보장권사  ,몹풀이용                     ,100   ,5600
+14474,혈종 용수마권사  ,몹풀이용                     ,110   ,6600
+14475,혈종 연혼술사    ,몹풀이용                     ,120   ,7787
+14476,혈종 폐관승 익   ,몹풀이용                     ,100   ,5600
+14477,혈종 쌍괴승 췌   ,몹풀이용                     ,110   ,6600
+14478,혈종 무궁수화 박 ,몹풀이용                     ,120   ,7787
+14479,혈종 사구지충 익 ,몹풀이용                     ,130   ,9966
+14480,혈종 무궁수화 췌 ,몹풀이용                     ,140   ,13001
+14481,혈종 사구지충 박 ,몹풀이용                     ,150   ,16890
+14482,Socheon monster(4,event                        ,40    ,901
+14483,Socheon monster(4,event                        ,45    ,1075
+14484,Socheon monster(5,event                        ,50    ,1276
+14485,Socheon monster(5,event                        ,55    ,1540
+14486,Socheon monster(6,event                        ,60    ,2380
+14487,Socheon monster(6,event                        ,65    ,3500
+14488,Socheon monster(7,event                        ,70    ,4200
+14489,Socheon monster(7,event                        ,75    ,4550
+14490,Socheon monster(8,event                        ,80    ,5390
+14491,Socheon monster(8,event                        ,85    ,6020
+14492,Socheon monster(9,event                        ,90    ,7140
+14493,Socheon monster(9,event                        ,95    ,7840
+14494,Socheon monster(1,event                        ,100   ,8540
+14495,Socheon monster(1,event                        ,105   ,9240
+14496,Socheon monster(1,event                        ,110   ,9940
+14497,Socheon monster(1,event                        ,115   ,11018
+14498,Socheon monster(1,event                        ,120   ,12628
+14499,Socheon monster(1,event                        ,125   ,14588
+14500,Socheon monster(1,event                        ,130   ,16898
+14501,Socheon monster(1,event                        ,135   ,19558
+14502,Socheon monster(1,event                        ,140   ,22568
+14503,Socheon monster(1,event                        ,145   ,25928
+14504,Socheon monster(1,event                        ,150   ,29638
+14505,Socheon monster(1,event                        ,155   ,33698
+14506,서리당한 수박    ,이벤트 몹                    ,1     ,1
+14507,SM-Golem         ,Skyzone                      ,152   ,17787
+14508,SM-Assassin      ,Skyzone                      ,153   ,12787
+14509,SM-Shaman        ,Skyzone                      ,154   ,24412
+14510,SM-GodBird       ,Skyzone                      ,155   ,15459
+14511,SH-Golem         ,Skyzone                      ,156   ,21893
+14512,SH-Assassin      ,Skyzone                      ,157   ,16432
+14513,SM-domonk        ,Skyzone                      ,158   ,32176
+14514,SM-Kingstatue    ,Skyzone                      ,159   ,53863
+14515,SC-Golem         ,Skyzone                      ,160   ,28229
+14516,SC-Assassin      ,Skyzone                      ,161   ,22232
+14517,SC-Shaman        ,Skyzone                      ,162   ,36383
+14518,SC-GodBird       ,Skyzone                      ,163   ,24651
+14519,CH-Golem         ,Skyzone                      ,164   ,40488
+14520,CH-Assassin      ,Skyzone                      ,165   ,33650
+14521,CH-Domonk        ,Skyzone                      ,166   ,55111
+14522,CH-KingStatue    ,Skyzone                      ,167   ,96367
+14523,SZ-Golem         ,Skyzone                      ,168   ,58568
+14524,SZ-Assassin      ,Skyzone                      ,169   ,50704
+14525,SZ-Shaman        ,Skyzone                      ,170   ,70777
+14526,SZ-GodBird       ,Skyzone                      ,171   ,53427
+14527,SZ-Domonk        ,Skyzone                      ,172   ,90625
+14528,SZ-KingStatue    ,Skyzone                      ,173   ,153574
+14529,SM-Asura         ,Skyzone                      ,164   ,227682
+14530,SM-Lighting God  ,Skyzone                      ,170   ,326069
+14531,SZ-Asura         ,Skyzone                      ,176   ,537374
+14532,SZ-LightingGod   ,Skyzone                      ,180   ,715055
+14533,서리당한 수박40  ,이벤트 몹                    ,40    ,810
+14534,서리당한 수박45  ,이벤트 몹                    ,45    ,967
+14535,서리당한 수박50  ,이벤트 몹                    ,50    ,1148
+14536,서리당한 수박55  ,이벤트 몹                    ,55    ,1386
+14537,서리당한 수박60  ,이벤트 몹                    ,60    ,2142
+14538,서리당한 수박65  ,이벤트 몹                    ,65    ,3150
+14539,서리당한 수박70  ,이벤트 몹                    ,70    ,3780
+14540,서리당한 수박75  ,이벤트 몹                    ,75    ,4095
+14541,서리당한 수박80  ,이벤트 몹                    ,80    ,4851
+14542,서리당한 수박85  ,이벤트 몹                    ,85    ,5418
+14543,서리당한 수박90  ,이벤트 몹                    ,90    ,6426
+14544,서리당한 수박95  ,이벤트 몹                    ,95    ,7056
+14545,서리당한 수박100 ,이벤트 몹                    ,100   ,7686
+14546,서리당한 수박105 ,이벤트 몹                    ,105   ,8316
+14547,서리당한 수박110 ,이벤트 몹                    ,110   ,8946
+14548,서리당한 수박115 ,이벤트 몹                    ,115   ,9916
+14549,서리당한 수박120 ,이벤트 몹                    ,120   ,11365
+14550,서리당한 수박125 ,이벤트 몹                    ,125   ,13129
+14551,서리당한 수박130 ,이벤트 몹                    ,130   ,15208
+14552,서리당한 수박135 ,이벤트 몹                    ,135   ,17602
+14553,서리당한 수박140 ,이벤트 몹                    ,140   ,20311
+14554,서리당한 수박145 ,이벤트 몹                    ,145   ,23335
+14555,서리당한 수박150 ,이벤트 몹                    ,150   ,26674
+14556,서리당한 수박155 ,이벤트 몹                    ,155   ,30328
+14557,T-Golem K(152)   ,Skyzone2                     ,152   ,17770
+14558,T-Assassin K(153),Skyzone2                     ,153   ,18223
+14559,T-Shaman K(154)  ,Skyzone2                     ,154   ,18685
+14560,T-GodBird K(155) ,Skyzone2                     ,155   ,19155
+14561,SH-Golem K(156)  ,Skyzone2                     ,156   ,19634
+14562,SH-Assassin K(157,Skyzone2                     ,157   ,20121
+14563,T-domonk K(158)  ,Skyzone2                     ,158   ,20617
+14564,T-Kingstatue K(15,Skyzone2                     ,159   ,21121
+14565,T-Golem K(160)   ,Skyzone2                     ,160   ,21634
+14566,T-Assassin K(161),Skyzone2                     ,161   ,22175
+14567,T-Shaman K(162)  ,Skyzone2                     ,162   ,22729
+14568,T-GodBird K(163) ,Skyzone2                     ,163   ,23297
+14569,T-Golem K(164)   ,Skyzone2                     ,164   ,23880
+14570,T-Assassin K(165),Skyzone2                     ,165   ,24477
+14571,T-Domonk K(166)  ,Skyzone2                     ,166   ,25089
+14572,T-KingStatue K(16,Skyzone2                     ,167   ,25716
+14573,T-Golem K(168)   ,Skyzone2                     ,168   ,26359
+14574,T-Assassin K(169),Skyzone2                     ,169   ,27018
+14575,T-Shaman K(170)  ,Skyzone2                     ,170   ,27693
+14576,T-GodBird K(171) ,Skyzone2                     ,171   ,28386
+14577,T-Domonk K(172)  ,Skyzone2                     ,172   ,29095
+14578,T-KingStatue K(17,Skyzone2                     ,173   ,29823
+14579,T-Asura K(164)   ,Skyzone2                     ,164   ,23880
+14580,T-LightingGod K(1,Skyzone2                     ,170   ,27693
+14581,T-Asura(176)     ,Skyzone2                     ,176   ,32116
+14582,T-Lighting God(18,Skyzone2                     ,180   ,35450
+14583,태산             ,외형 테스트                  ,144   ,100
+14584,의천             ,외형 테스트                  ,144   ,100
+14585,독고             ,외형 테스트                  ,144   ,100
+14586,월광             ,외형 테스트                  ,144   ,100
+14587,용왕채대장 황방  ,대장몹 대량                  ,18    ,1000
+14588,일신원주 화진염  ,대장몹 대량                  ,28    ,3000
+14589,지황교주 우금왕  ,대장몹 대량                  ,36    ,5000
+14590,우장             ,대장몹 대량                  ,40    ,7000
+14591,화우장           ,대장몹 대량                  ,40    ,8000
+14592,흑가좌           ,대장몹 대량                  ,51    ,13000
+14593,흑우장           ,대장몹 대량                  ,60    ,20000
+14594,아수라 천왕상    ,대장몹 대량                  ,75    ,25000
+14595,지국 천왕상      ,대장몹 대량                  ,81    ,27000
+14596,영휘 기신열      ,대장몹 대량                  ,91    ,20000
+14597,요천 사인혈      ,대장몹 대량                  ,105   ,40000
+14598,요수 혈조        ,대장몹 대량                  ,88    ,25000
+14599,뇌음사 방장 도허 ,대장몹 대량                  ,125   ,80000
+14600,광인대도사마     ,대장몹 대량                  ,125   ,80000
+14601,마인혈도사마     ,대장몹 대량                  ,127   ,84000
+14602,요마백미령       ,대장몹 대량                  ,135   ,100000
+14603,혼효 초혈신귀    ,대장몹 대량                  ,60    ,20000
+14604,혼효 흑우장      ,대장몹 대량                  ,60    ,20000
+14605,혼효 천왕상      ,대장몹 대량                  ,75    ,25000
+14606,혼효 지국 천왕상 ,대장몹 대량                  ,81    ,27000
+14607,혼효 요수 혈조   ,대장몹 대량                  ,88    ,25000
+14608,혼효 영휘 기신열 ,대장몹 대량                  ,91    ,20000
+14609,혼효 요천 사인혈 ,대장몹 대량                  ,105   ,40000
+14610,혼효 대도사마    ,대장몹 대량                  ,125   ,80000
+14611,혼효 방장 도허   ,대장몹 대량                  ,125   ,80000
+14612,혼효 요마백미령  ,대장몹 대량                  ,135   ,100000
+14613,혼효 화진염      ,대장몹 대량                  ,146   ,120000
+14614,혼효 우금왕      ,대장몹 대량                  ,154   ,150000
+14615,태산2            ,외형 테스트                  ,144   ,100
+14616,의천2            ,외형 테스트                  ,144   ,100
+14617,독고2            ,외형 테스트                  ,144   ,100
+14618,월광2            ,외형 테스트                  ,144   ,100
+14619,태산3            ,외형 테스트                  ,144   ,100
+14620,의천3            ,외형 테스트                  ,144   ,100
+14621,독고3            ,외형 테스트                  ,144   ,100
+14622,월광3            ,외형 테스트                  ,144   ,100
+14623,청랑(30)         ,추석 이벤트                  ,30    ,900
+14624,청랑(35)         ,추석 이벤트                  ,35    ,1180
+14625,청랑(40)         ,추석 이벤트                  ,40    ,1288
+14626,청랑(45)         ,추석 이벤트                  ,45    ,1536
+14627,청랑(50)         ,추석 이벤트                  ,50    ,1824
+14628,청랑(55)         ,추석 이벤트                  ,55    ,2200
+14629,청랑(60)         ,추석 이벤트                  ,60    ,3400
+14630,청랑(65)         ,추석 이벤트                  ,65    ,5000
+14631,청랑(70)         ,추석 이벤트                  ,70    ,6000
+14632,청랑(75)         ,추석 이벤트                  ,75    ,6500
+14633,청랑(80)         ,추석 이벤트                  ,80    ,7700
+14634,청랑(85)         ,추석 이벤트                  ,85    ,8600
+14635,청랑(90)         ,추석 이벤트                  ,90    ,10200
+14636,청랑(95)         ,추석 이벤트                  ,95    ,11200
+14637,청랑(100)        ,추석 이벤트                  ,100   ,12200
+14638,청랑(105)        ,추석 이벤트                  ,105   ,13200
+14639,청랑(110)        ,추석 이벤트                  ,110   ,14200
+14640,청랑(115)        ,추석 이벤트                  ,115   ,15740
+14641,청랑(120)        ,추석 이벤트                  ,120   ,18040
+14642,청랑(125)        ,추석 이벤트                  ,125   ,20840
+14643,청랑(130)        ,추석 이벤트                  ,130   ,24140
+14644,청랑(135)        ,추석 이벤트                  ,135   ,27940
+14645,청랑(140)        ,추석 이벤트                  ,140   ,32240
+14646,청랑(145)        ,추석 이벤트                  ,145   ,37040
+14647,청랑(150)        ,추석 이벤트                  ,150   ,42340
+14648,청랑(155)        ,추석 이벤트                  ,155   ,48140
+14649,정찰 거석괴인    ,11월 이벤트                  ,30    ,810
+14650,정찰 파혈쌍쾌    ,11월 이벤트                  ,35    ,1062
+14651,정찰 아술신녀    ,11월 이벤트                  ,40    ,1159
+14652,정찰 구익신조    ,11월 이벤트                  ,45    ,1382
+14653,정찰 도승천장    ,11월 이벤트                  ,50    ,1641
+14654,정찰 탐탑천왕    ,11월 이벤트                  ,55    ,1980
+14655,정찰 거석괴인    ,11월 이벤트                  ,60    ,3060
+14656,정찰 파혈쌍쾌    ,11월 이벤트                  ,65    ,4500
+14657,정찰 아술신녀    ,11월 이벤트                  ,70    ,5400
+14658,정찰 구익신조    ,11월 이벤트                  ,75    ,5850
+14659,정찰 도승천장    ,11월 이벤트                  ,80    ,6930
+14660,정찰 탐탑천왕    ,11월 이벤트                  ,85    ,7740
+14661,정찰 거석괴인    ,11월 이벤트                  ,90    ,9180
+14662,정찰 파혈쌍쾌    ,11월 이벤트                  ,95    ,10080
+14663,정찰 아술신녀    ,11월 이벤트                  ,100   ,10980
+14664,정찰 구익신조    ,11월 이벤트                  ,105   ,11880
+14665,정찰 도승천장    ,11월 이벤트                  ,110   ,12780
+14666,정찰 탐탑천왕    ,11월 이벤트                  ,115   ,14166
+14667,정찰 거석괴인    ,11월 이벤트                  ,120   ,16236
+14668,정찰 파혈쌍쾌    ,11월 이벤트                  ,125   ,18756
+14669,정찰 아술신녀    ,11월 이벤트                  ,130   ,21726
+14670,정찰 구익신조    ,11월 이벤트                  ,135   ,25146
+14671,정찰 도승천장    ,11월 이벤트                  ,140   ,29016
+14672,정찰 탐탑천왕    ,11월 이벤트                  ,145   ,33336
+14673,정찰 거석괴인    ,11월 이벤트                  ,150   ,38106
+14674,정찰 파혈쌍쾌    ,11월 이벤트                  ,155   ,42876
+14675,정찰 아술신녀    ,11월 이벤트                  ,160   ,47646
+14676,정찰 구익신조    ,11월 이벤트                  ,165   ,52416
+14677,정찰 도승천장    ,11월 이벤트                  ,170   ,57186
+14678,정찰 탐탑천왕    ,11월 이벤트                  ,175   ,61956
+14679,첨병 탐탑천왕    ,144반로협행                  ,159   ,53863
+14680,WhiteTiger(40)   ,2주년 이벤트                 ,40    ,1288
+14681,WhiteTiger(45)   ,2주년 이벤트                 ,45    ,1536
+14682,WhiteTiger(50)   ,2주년 이벤트                 ,50    ,1824
+14683,WhiteTiger(55)   ,2주년 이벤트                 ,55    ,2200
+14684,WhiteTiger(60)   ,2주년 이벤트                 ,60    ,3400
+14685,WhiteTiger(65)   ,2주년 이벤트                 ,65    ,5000
+14686,WhiteTiger(70)   ,2주년 이벤트                 ,70    ,6000
+14687,WhiteTiger(75)   ,2주년 이벤트                 ,75    ,6500
+14688,WhiteTiger(80)   ,2주년 이벤트                 ,80    ,7700
+14689,WhiteTiger(85)   ,2주년 이벤트                 ,85    ,8600
+14690,WhiteTiger(90)   ,2주년 이벤트                 ,90    ,10200
+14691,WhiteTiger(95)   ,2주년 이벤트                 ,95    ,11200
+14692,WhiteTiger(100)  ,2주년 이벤트                 ,100   ,12200
+14693,WhiteTiger(105)  ,2주년 이벤트                 ,105   ,13200
+14694,WhiteTiger(110)  ,2주년 이벤트                 ,110   ,14200
+14695,WhiteTiger(115)  ,2주년 이벤트                 ,115   ,15740
+14696,WhiteTiger(120)  ,2주년 이벤트                 ,120   ,18040
+14697,WhiteTiger(125)  ,2주년 이벤트                 ,125   ,20840
+14698,WhiteTiger(130)  ,2주년 이벤트                 ,130   ,24140
+14699,WhiteTiger(135)  ,2주년 이벤트                 ,135   ,27940
+14700,WhiteTiger(140)  ,2주년 이벤트                 ,140   ,32240
+14701,WhiteTiger(145)  ,2주년 이벤트                 ,145   ,37040
+14702,WhiteTiger(150)  ,2주년 이벤트                 ,150   ,42340
+14703,WhiteTiger(155)  ,2주년 이벤트                 ,155   ,48140
+14785,snow man         ,이벤트 몹                    ,30    ,333
+14786,snow man         ,이벤트 몹                    ,35    ,437
+14787,snow man         ,이벤트 몹                    ,40    ,477
+14788,snow man         ,이벤트 몹                    ,45    ,568
+14789,snow man         ,이벤트 몹                    ,50    ,675
+14790,snow man         ,이벤트 몹                    ,55    ,814
+14791,snow man         ,이벤트 몹                    ,60    ,1259
+14792,snow man         ,이벤트 몹                    ,65    ,1851
+14793,snow man         ,이벤트 몹                    ,70    ,2222
+14794,snow man         ,이벤트 몹                    ,75    ,2407
+14795,snow man         ,이벤트 몹                    ,80    ,2851
+14796,snow man         ,이벤트 몹                    ,85    ,3185
+14797,snow man         ,이벤트 몹                    ,90    ,3777
+14798,snow man         ,이벤트 몹                    ,95    ,4148
+14799,snow man         ,이벤트 몹                    ,100   ,4518
+14800,snow man         ,이벤트 몹                    ,105   ,4888
+14801,snow man         ,이벤트 몹                    ,110   ,5259
+14802,snow man         ,이벤트 몹                    ,115   ,5829
+14803,snow man         ,이벤트 몹                    ,120   ,6681
+14804,snow man         ,이벤트 몹                    ,125   ,7718
+14805,snow man         ,이벤트 몹                    ,130   ,8940
+14806,snow man         ,이벤트 몹                    ,135   ,10348
+14807,snow man         ,이벤트 몹                    ,140   ,11940
+14808,snow man         ,이벤트 몹                    ,145   ,13718
+14809,snow man         ,이벤트 몹                    ,150   ,15681
+14810,snow man         ,이벤트 몹                    ,155   ,17829
+14811,snow man         ,이벤트 몹                    ,160   ,18701
+14812,snow man         ,이벤트 몹                    ,165   ,20190
+14813,snow man         ,이벤트 몹                    ,170   ,28310
+14814,Mini B.Ox(40)    ,Small Monster                ,40    ,1288
+14815,Mini B.Ox(45)    ,Small Monster                ,45    ,1536
+14816,Mini B.Ox(50)    ,Small Monster                ,50    ,1824
+14817,Mini B.Ox(55)    ,Small Monster                ,55    ,2200
+14818,Mini B.Ox(60)    ,Small Monster                ,60    ,3400
+14819,Mini B.Ox(65)    ,Small Monster                ,65    ,5000
+14820,Mini B.Ox(70)    ,Small Monster                ,70    ,6000
+14821,Mini B.Ox(75)    ,Small Monster                ,75    ,6500
+14822,Mini B.Ox(80)    ,Small Monster                ,80    ,7700
+14823,Mini B.Ox(85)    ,Small Monster                ,85    ,8600
+14824,Mini B.Ox(90)    ,Small Monster                ,90    ,10200
+14825,Mini B.Ox(95)    ,Small Monster                ,95    ,11200
+14826,Mini B.Ox(100)   ,Small Monster                ,100   ,12200
+14827,Mini B.Ox(105)   ,Small Monster                ,105   ,13200
+14828,Mini B.Ox(110)   ,Small Monster                ,110   ,14200
+14829,Mini B.Ox(115)   ,Small Monster                ,115   ,15740
+14830,Mini B.Ox(120)   ,Small Monster                ,120   ,18040
+14831,Mini B.Ox(125)   ,Small Monster                ,125   ,20840
+14832,Mini B.Ox(130)   ,Small Monster                ,130   ,24140
+14833,Mini B.Ox(135)   ,Small Monster                ,135   ,27940
+14834,Mini B.Ox(140)   ,Small Monster                ,140   ,32240
+14835,Mini B.Ox(145)   ,Small Monster                ,145   ,37040
+14836,Mini B.Ox(150)   ,Small Monster                ,150   ,42340
+14837,Mini B.Ox(155)   ,Small Monster                ,155   ,48140
+14838,Taesan(40)       ,Event                        ,40    ,1288
+14839,Taesan(45)       ,Event                        ,45    ,1536
+14840,Taesan(50)       ,Event                        ,50    ,1824
+14841,Taesan(55)       ,Event                        ,55    ,2200
+14842,Taesan(60)       ,Event                        ,60    ,3400
+14843,Taesan(65)       ,Event                        ,65    ,5000
+14844,Taesan(70)       ,Event                        ,70    ,6000
+14845,Taesan(75)       ,Event                        ,75    ,6500
+14846,Taesan(80)       ,Event                        ,80    ,7700
+14847,Taesan(85)       ,Event                        ,85    ,8600
+14848,Taesan(90)       ,Event                        ,90    ,10200
+14849,Taesan(95)       ,Event                        ,95    ,11200
+14850,Taesan(100)      ,Event                        ,100   ,12200
+14851,Taesan(105)      ,Event                        ,105   ,13200
+14852,Taesan(110)      ,Event                        ,110   ,14200
+14853,Taesan(115)      ,Event                        ,115   ,15740
+14854,Taesan(120)      ,Event                        ,120   ,18040
+14855,Taesan(125)      ,Event                        ,125   ,20840
+14856,Taesan(130)      ,Event                        ,130   ,24140
+14857,Taesan(135)      ,Event                        ,135   ,27940
+14858,Taesan(140)      ,Event                        ,140   ,32240
+14859,Taesan(145)      ,Event                        ,145   ,37040
+14860,Taesan(150)      ,Event                        ,150   ,42340
+14861,Taesan(155)      ,Event                        ,155   ,48140
+14862,Taesan(160)      ,Event                        ,160   ,53940
+14863,Uichun Master    ,Event                        ,40    ,644
+14864,Uichun Master    ,Event                        ,45    ,768
+14865,Uichun Master    ,Event                        ,50    ,912
+14866,Uichun Master    ,Event                        ,55    ,1100
+14867,Uichun Master    ,Event                        ,60    ,1700
+14868,Uichun Master    ,Event                        ,65    ,2500
+14869,Uichun Master    ,Event                        ,70    ,3000
+14870,Uichun Master    ,Event                        ,75    ,3250
+14871,Uichun Master    ,Event                        ,80    ,3850
+14872,Uichun Master    ,Event                        ,85    ,4300
+14873,Uichun Master    ,Event                        ,90    ,5100
+14874,Uichun Master    ,Event                        ,95    ,5600
+14875,Uichun Master    ,Event                        ,100   ,6100
+14876,Uichun Master    ,Event                        ,105   ,6600
+14877,Uichun Master    ,Event                        ,110   ,7100
+14878,Uichun Master    ,Event                        ,115   ,7870
+14879,Uichun Master    ,Event                        ,120   ,9020
+14880,Uichun Master    ,Event                        ,125   ,10420
+14881,Uichun Master    ,Event                        ,130   ,12070
+14882,Uichun Master    ,Event                        ,135   ,13970
+14883,Uichun Master    ,Event                        ,140   ,16120
+14884,Uichun Master    ,Event                        ,145   ,18520
+14885,Uichun Master    ,Event                        ,150   ,21170
+14886,Uichun Master    ,Event                        ,155   ,24070
+14887,Uichun Master    ,Event                        ,160   ,26970
+14888,SM-Assassin      ,Event                        ,40    ,1180
+14889,SM-Assassin      ,Event                        ,45    ,1288
+14890,SM-Assassin      ,Event                        ,50    ,1548
+14891,SM-Assassin      ,Event                        ,55    ,1838
+14892,SM-Assassin      ,Event                        ,60    ,2266
+14893,SM-Assassin      ,Event                        ,65    ,3600
+14894,SM-Assassin      ,Event                        ,70    ,5000
+14895,SM-Assassin      ,Event                        ,75    ,5900
+14896,SM-Assassin      ,Event                        ,80    ,6500
+14897,SM-Assassin      ,Event                        ,85    ,7700
+14898,SM-Assassin      ,Event                        ,90    ,8600
+14899,SM-Assassin      ,Event                        ,95    ,10200
+14900,SM-Assassin      ,Event                        ,100   ,11200
+14901,SM-Assassin      ,Event                        ,105   ,12200
+14902,SM-Assassin      ,Event                        ,110   ,13200
+14903,SM-Assassin      ,Event                        ,115   ,14200
+14904,SM-Assassin      ,Event                        ,120   ,15574
+14905,SM-Assassin      ,Event                        ,125   ,17540
+14906,SM-Assassin      ,Event                        ,130   ,19932
+14907,SM-Assassin      ,Event                        ,135   ,22754
+14908,SM-Assassin      ,Event                        ,140   ,26002
+14909,SM-Assassin      ,Event                        ,145   ,29678
+14910,SM-Assassin      ,Event                        ,150   ,33780
+14911,SM-Assassin      ,Event                        ,155   ,38310
+14912,SM-Assassin      ,Event                        ,160   ,43268
+14913,Eaten dice-Mob   ,이벤트 몹                    ,36    ,438
+14914,Eaten dice-Mob   ,이벤트 몹                    ,40    ,478
+14915,Eaten dice-Mob   ,이벤트 몹                    ,45    ,569
+14916,Eaten dice-Mob   ,이벤트 몹                    ,50    ,676
+14917,Eaten dice-Mob   ,이벤트 몹                    ,55    ,814
+14918,Eaten dice-Mob   ,이벤트 몹                    ,60    ,1260
+14919,Eaten dice-Mob   ,이벤트 몹                    ,65    ,1851
+14920,Eaten dice-Mob   ,이벤트 몹                    ,70    ,2222
+14921,Eaten dice-Mob   ,이벤트 몹                    ,75    ,2408
+14922,Eaten dice-Mob   ,이벤트 몹                    ,80    ,2851
+14923,Eaten dice-Mob   ,이벤트 몹                    ,85    ,3186
+14924,Eaten dice-Mob   ,이벤트 몹                    ,90    ,3778
+14925,Eaten dice-Mob   ,이벤트 몹                    ,95    ,4149
+14926,Eaten dice-Mob   ,이벤트 몹                    ,100   ,4519
+14927,Eaten dice-Mob   ,이벤트 몹                    ,105   ,4889
+14928,Eaten dice-Mob   ,이벤트 몹                    ,110   ,5260
+14929,Eaten dice-Mob   ,이벤트 몹                    ,115   ,5830
+14930,Eaten dice-Mob   ,이벤트 몹                    ,120   ,6681
+14931,Eaten dice-Mob   ,이벤트 몹                    ,125   ,7719
+14932,Eaten dice-Mob   ,이벤트 몹                    ,130   ,8940
+14933,Eaten dice-Mob   ,이벤트 몹                    ,135   ,10349
+14934,Eaten dice-Mob   ,이벤트 몹                    ,140   ,11940
+14935,Eaten dice-Mob   ,이벤트 몹                    ,145   ,13719
+14936,Eaten dice-Mob   ,이벤트 몹                    ,150   ,15681
+14937,Eaten dice-Mob   ,이벤트 몹                    ,155   ,17830
+14938,Eaten dice-Mob   ,이벤트 몹                    ,160   ,18701
+14939,Eaten dice-Mob   ,이벤트 몹                    ,165   ,20190
+14940,Eaten dice-Mob   ,이벤트 몹                    ,170   ,28310
+15000,PaHwang Box      ,Kingdom County               ,1     ,1
+15001,PaHwang Box      ,Kingdom County               ,1     ,1
+15002,PaHwang Box      ,Kingdom County               ,1     ,1
+15003,PaHwang Box      ,Kingdom County               ,1     ,1
+15004,PaHwang Box      ,Kingdom County               ,1     ,1
+15005,PaHwang Box      ,Kingdom County               ,1     ,1
+15006,PaHwang Box      ,Kingdom County               ,1     ,1
+15007,PaHwang Box      ,Kingdom County               ,1     ,1
+15008,PaHwang Box      ,Kingdom County               ,1     ,1
+15009,PaHwang Box      ,Kingdom County               ,1     ,1
+15010,PaHwang Box      ,Kingdom County               ,1     ,1
+15011,PaHwang Box      ,Kingdom County               ,1     ,1
+15012,PaHwang Box      ,Kingdom County               ,1     ,1
+15013,PaHwang Box      ,Kingdom County               ,1     ,1
+15014,PaHwang Box      ,Kingdom County               ,1     ,1
+15015,PaHwang Box      ,Kingdom County               ,1     ,1
+15016,PaHwang Box      ,Kingdom County               ,1     ,1
+15017,PaHwang Box      ,Kingdom County               ,1     ,1
+15018,PaHwang Box      ,Kingdom County               ,1     ,1
+15019,PaHwang Box      ,Kingdom County               ,1     ,1
+15020,PaHwang Box      ,Kingdom County               ,1     ,1
+15021,PaHwang Box      ,Kingdom County               ,1     ,1
+15022,PaHwang Box      ,Kingdom County               ,1     ,1
+15023,PaHwang Box      ,Kingdom County               ,1     ,1
+15024,PaHwang Box      ,Kingdom County               ,1     ,1
+15025,PaHwang Box      ,Kingdom County               ,1     ,1
+15026,PaHwang Box      ,Kingdom County               ,1     ,1
+15027,PaHwang Box      ,Kingdom County               ,1     ,1
+15028,PaHwang Box      ,Kingdom County               ,1     ,1
+15029,PaHwang Box      ,Kingdom County               ,1     ,1
+15030,PaHwang Box      ,Kingdom County               ,1     ,1
+15031,PaHwang Box      ,Kingdom County               ,1     ,1
+15032,PaHwang Box      ,Kingdom County               ,1     ,1
+15033,PaHwang Box      ,Kingdom County               ,1     ,1
+15034,PaHwang Box      ,Kingdom County               ,1     ,1
+15035,PaHwang Box      ,Kingdom County               ,1     ,1
+15036,PaHwang Box      ,Kingdom County               ,1     ,1
+15037,PaHwang Box      ,Kingdom County               ,1     ,1
+15038,PaHwang Box      ,Kingdom County               ,1     ,1
+15039,PaHwang Box      ,Kingdom County               ,1     ,1
+15040,PaHwang Box      ,Kingdom County               ,1     ,1
+15041,PaHwang Box      ,Kingdom County               ,1     ,1
+15042,PaHwang Box      ,Kingdom County               ,1     ,1
+15043,PaHwang Box      ,Kingdom County               ,1     ,1
+15044,PaHwang Box      ,Kingdom County               ,1     ,1
+15045,PaHwang Box      ,Kingdom County               ,1     ,1
+15046,PaHwang Box      ,Kingdom County               ,1     ,1
+15047,PaHwang Box      ,Kingdom County               ,1     ,1
+15048,PaHwang Box      ,Kingdom County               ,1     ,1
+15049,PaHwang Box      ,Kingdom County               ,1     ,1
+15050,PaHwang Box      ,Kingdom County               ,1     ,1
+15051,PaHwang Box      ,Kingdom County               ,1     ,1
+15052,PaHwang Box      ,Kingdom County               ,1     ,1
+15053,PaHwang Box      ,Kingdom County               ,1     ,1
+15054,PaHwang Box      ,Kingdom County               ,1     ,1
+15055,PaHwang Box      ,Kingdom County               ,1     ,1
+15056,PaHwang Box      ,Kingdom County               ,1     ,1
+15057,PaHwang Box      ,Kingdom County               ,1     ,1
+15058,PaHwang Box      ,Kingdom County               ,1     ,1
+15059,PaHwang Box      ,Kingdom County               ,1     ,1
+15060,PaHwang Box      ,Kingdom County               ,1     ,1
+15061,PaHwang Box      ,Kingdom County               ,1     ,1
+15062,PaHwang Box      ,Kingdom County               ,1     ,1
+15063,PaHwang Box      ,Kingdom County               ,1     ,1
+15064,PaHwang Box      ,Kingdom County               ,1     ,1
+15065,PaHwang Box      ,Kingdom County               ,1     ,1
+15066,PaHwang Box      ,Kingdom County               ,1     ,1
+15067,PaHwang Box      ,Kingdom County               ,1     ,1
+15068,PaHwang Box      ,Kingdom County               ,1     ,1
+15069,PaHwang Box      ,Kingdom County               ,1     ,1
+15070,PaHwang Box      ,Kingdom County               ,1     ,1
+15071,PaHwang Box      ,Kingdom County               ,1     ,1
+15072,PaHwang Box      ,Kingdom County               ,1     ,1
+15073,PaHwang Box      ,Kingdom County               ,1     ,1
+15074,PaHwang Box      ,Kingdom County               ,1     ,1
+15075,PaHwang Box      ,Kingdom County               ,1     ,1
+15076,PaHwang Box      ,Kingdom County               ,1     ,1
+15077,PaHwang Box      ,Kingdom County               ,1     ,1
+15078,PaHwang Box      ,Kingdom County               ,1     ,1
+15079,PaHwang Box      ,Kingdom County               ,1     ,1
+15080,PaHwang Box      ,Kingdom County               ,1     ,1
+15081,PaHwang Box      ,Kingdom County               ,1     ,1
+15082,PaHwang Box      ,Kingdom County               ,1     ,1
+15083,PaHwang Box      ,Kingdom County               ,1     ,1
+15084,PaHwang Box      ,Kingdom County               ,1     ,1
+15085,PaHwang Box      ,Kingdom County               ,1     ,1
+15086,PaHwang Box      ,Kingdom County               ,1     ,1
+15087,PaHwang Box      ,Kingdom County               ,1     ,1
+15088,PaHwang Box      ,Kingdom County               ,1     ,1
+15089,PaHwang Box      ,Kingdom County               ,1     ,1
+15090,PaHwang Box      ,Kingdom County               ,1     ,1
+15091,PaHwang Box      ,Kingdom County               ,1     ,1
+15092,PaHwang Box      ,Kingdom County               ,1     ,1
+15093,PaHwang Box      ,Kingdom County               ,1     ,1
+15094,PaHwang Box      ,Kingdom County               ,1     ,1
+15095,PaHwang Box      ,Kingdom County               ,1     ,1
+15096,PaHwang Box      ,Kingdom County               ,1     ,1
+15097,PaHwang Box      ,Kingdom County               ,1     ,1
+15098,PaHwang Box      ,Kingdom County               ,1     ,1
+15099,PaHwang Box      ,Kingdom County               ,1     ,1
+15100,PaHwang Box      ,Valley Village               ,1     ,1
+15101,PaHwang Box      ,Valley Village               ,1     ,1
+15102,PaHwang Box      ,Valley Village               ,1     ,1
+15103,PaHwang Box      ,Valley Village               ,1     ,1
+15104,PaHwang Box      ,Valley Village               ,1     ,1
+15105,PaHwang Box      ,Valley Village               ,1     ,1
+15106,PaHwang Box      ,Valley Village               ,1     ,1
+15107,PaHwang Box      ,Valley Village               ,1     ,1
+15108,PaHwang Box      ,Valley Village               ,1     ,1
+15109,PaHwang Box      ,Valley Village               ,1     ,1
+15110,PaHwang Box      ,Valley Village               ,1     ,1
+15111,PaHwang Box      ,Valley Village               ,1     ,1
+15112,PaHwang Box      ,Valley Village               ,1     ,1
+15113,PaHwang Box      ,Valley Village               ,1     ,1
+15114,PaHwang Box      ,Valley Village               ,1     ,1
+15115,PaHwang Box      ,Valley Village               ,1     ,1
+15116,PaHwang Box      ,Valley Village               ,1     ,1
+15117,PaHwang Box      ,Valley Village               ,1     ,1
+15118,PaHwang Box      ,Valley Village               ,1     ,1
+15119,PaHwang Box      ,Valley Village               ,1     ,1
+15120,PaHwang Box      ,Valley Village               ,1     ,1
+15121,PaHwang Box      ,Valley Village               ,1     ,1
+15122,PaHwang Box      ,Valley Village               ,1     ,1
+15123,PaHwang Box      ,Valley Village               ,1     ,1
+15124,PaHwang Box      ,Valley Village               ,1     ,1
+15125,PaHwang Box      ,Valley Village               ,1     ,1
+15126,PaHwang Box      ,Valley Village               ,1     ,1
+15127,PaHwang Box      ,Valley Village               ,1     ,1
+15128,PaHwang Box      ,Valley Village               ,1     ,1
+15129,PaHwang Box      ,Valley Village               ,1     ,1
+15130,PaHwang Box      ,Valley Village               ,1     ,1
+15131,PaHwang Box      ,Valley Village               ,1     ,1
+15132,PaHwang Box      ,Valley Village               ,1     ,1
+15133,PaHwang Box      ,Valley Village               ,1     ,1
+15134,PaHwang Box      ,Valley Village               ,1     ,1
+15135,PaHwang Box      ,Valley Village               ,1     ,1
+15136,PaHwang Box      ,Valley Village               ,1     ,1
+15137,PaHwang Box      ,Valley Village               ,1     ,1
+15138,PaHwang Box      ,Valley Village               ,1     ,1
+15139,PaHwang Box      ,Valley Village               ,1     ,1
+15140,PaHwang Box      ,Valley Village               ,1     ,1
+15141,PaHwang Box      ,Valley Village               ,1     ,1
+15142,PaHwang Box      ,Valley Village               ,1     ,1
+15143,PaHwang Box      ,Valley Village               ,1     ,1
+15144,PaHwang Box      ,Valley Village               ,1     ,1
+15145,PaHwang Box      ,Valley Village               ,1     ,1
+15146,PaHwang Box      ,Valley Village               ,1     ,1
+15147,PaHwang Box      ,Valley Village               ,1     ,1
+15148,PaHwang Box      ,Valley Village               ,1     ,1
+15149,PaHwang Box      ,Valley Village               ,1     ,1
+15150,PaHwang Box      ,Valley Village               ,1     ,1
+15151,PaHwang Box      ,Valley Village               ,1     ,1
+15152,PaHwang Box      ,Valley Village               ,1     ,1
+15153,PaHwang Box      ,Valley Village               ,1     ,1
+15154,PaHwang Box      ,Valley Village               ,1     ,1
+15155,PaHwang Box      ,Valley Village               ,1     ,1
+15156,PaHwang Box      ,Valley Village               ,1     ,1
+15157,PaHwang Box      ,Valley Village               ,1     ,1
+15158,PaHwang Box      ,Valley Village               ,1     ,1
+15159,PaHwang Box      ,Valley Village               ,1     ,1
+15160,PaHwang Box      ,Valley Village               ,1     ,1
+15161,PaHwang Box      ,Valley Village               ,1     ,1
+15162,PaHwang Box      ,Valley Village               ,1     ,1
+15163,PaHwang Box      ,Valley Village               ,1     ,1
+15164,PaHwang Box      ,Valley Village               ,1     ,1
+15165,PaHwang Box      ,Valley Village               ,1     ,1
+15166,PaHwang Box      ,Valley Village               ,1     ,1
+15167,PaHwang Box      ,Valley Village               ,1     ,1
+15168,PaHwang Box      ,Valley Village               ,1     ,1
+15169,PaHwang Box      ,Valley Village               ,1     ,1
+15170,PaHwang Box      ,Valley Village               ,1     ,1
+15171,PaHwang Box      ,Valley Village               ,1     ,1
+15172,PaHwang Box      ,Valley Village               ,1     ,1
+15173,PaHwang Box      ,Valley Village               ,1     ,1
+15174,PaHwang Box      ,Valley Village               ,1     ,1
+15175,PaHwang Box      ,Valley Village               ,1     ,1
+15176,PaHwang Box      ,Valley Village               ,1     ,1
+15177,PaHwang Box      ,Valley Village               ,1     ,1
+15178,PaHwang Box      ,Valley Village               ,1     ,1
+15179,PaHwang Box      ,Valley Village               ,1     ,1
+15180,PaHwang Box      ,Valley Village               ,1     ,1
+15181,PaHwang Box      ,Valley Village               ,1     ,1
+15182,PaHwang Box      ,Valley Village               ,1     ,1
+15183,PaHwang Box      ,Valley Village               ,1     ,1
+15184,PaHwang Box      ,Valley Village               ,1     ,1
+15185,PaHwang Box      ,Valley Village               ,1     ,1
+15186,PaHwang Box      ,Valley Village               ,1     ,1
+15187,PaHwang Box      ,Valley Village               ,1     ,1
+15188,PaHwang Box      ,Valley Village               ,1     ,1
+15189,PaHwang Box      ,Valley Village               ,1     ,1
+15190,PaHwang Box      ,Valley Village               ,1     ,1
+15191,PaHwang Box      ,Valley Village               ,1     ,1
+15192,PaHwang Box      ,Valley Village               ,1     ,1
+15193,PaHwang Box      ,Valley Village               ,1     ,1
+15194,PaHwang Box      ,Valley Village               ,1     ,1
+15195,PaHwang Box      ,Valley Village               ,1     ,1
+15196,PaHwang Box      ,Valley Village               ,1     ,1
+15197,PaHwang Box      ,Valley Village               ,1     ,1
+15198,PaHwang Box      ,Valley Village               ,1     ,1
+15199,PaHwang Box      ,Valley Village               ,1     ,1
+15200,MyulChun Coffer  ,Valley Village               ,1     ,1
+15201,MyulChun Coffer  ,Valley Village               ,1     ,1
+15202,MyulChun Coffer  ,Valley Village               ,1     ,1
+15203,MyulChun Coffer  ,Valley Village               ,1     ,1
+15204,MyulChun Coffer  ,Valley Village               ,1     ,1
+15205,MyulChun Coffer  ,Valley Village               ,1     ,1
+15206,MyulChun Coffer  ,Valley Village               ,1     ,1
+15207,MyulChun Coffer  ,Valley Village               ,1     ,1
+15208,MyulChun Coffer  ,Valley Village               ,1     ,1
+15209,MyulChun Coffer  ,Valley Village               ,1     ,1
+15210,MyulChun Coffer  ,Valley Village               ,1     ,1
+15211,MyulChun Coffer  ,Valley Village               ,1     ,1
+15212,MyulChun Coffer  ,Valley Village               ,1     ,1
+15213,MyulChun Coffer  ,Valley Village               ,1     ,1
+15214,MyulChun Coffer  ,Valley Village               ,1     ,1
+15215,MyulChun Coffer  ,Valley Village               ,1     ,1
+15216,MyulChun Coffer  ,Valley Village               ,1     ,1
+15217,MyulChun Coffer  ,Valley Village               ,1     ,1
+15218,MyulChun Coffer  ,Valley Village               ,1     ,1
+15219,MyulChun Coffer  ,Valley Village               ,1     ,1
+15220,MyulChun Coffer  ,Valley Village               ,1     ,1
+15221,MyulChun Coffer  ,Valley Village               ,1     ,1
+15222,MyulChun Coffer  ,Valley Village               ,1     ,1
+15223,MyulChun Coffer  ,Valley Village               ,1     ,1
+15224,MyulChun Coffer  ,Valley Village               ,1     ,1
+15225,MyulChun Coffer  ,Valley Village               ,1     ,1
+15226,MyulChun Coffer  ,Valley Village               ,1     ,1
+15227,MyulChun Coffer  ,Valley Village               ,1     ,1
+15228,MyulChun Coffer  ,Valley Village               ,1     ,1
+15229,MyulChun Coffer  ,Valley Village               ,1     ,1
+15230,MyulChun Coffer  ,Valley Village               ,1     ,1
+15231,MyulChun Coffer  ,Valley Village               ,1     ,1
+15232,MyulChun Coffer  ,Valley Village               ,1     ,1
+15233,MyulChun Coffer  ,Valley Village               ,1     ,1
+15234,MyulChun Coffer  ,Valley Village               ,1     ,1
+15235,MyulChun Coffer  ,Valley Village               ,1     ,1
+15236,MyulChun Coffer  ,Valley Village               ,1     ,1
+15237,MyulChun Coffer  ,Valley Village               ,1     ,1
+15238,MyulChun Coffer  ,Valley Village               ,1     ,1
+15239,MyulChun Coffer  ,Valley Village               ,1     ,1
+15240,MyulChun Coffer  ,Valley Village               ,1     ,1
+15241,MyulChun Coffer  ,Valley Village               ,1     ,1
+15242,MyulChun Coffer  ,Valley Village               ,1     ,1
+15243,MyulChun Coffer  ,Valley Village               ,1     ,1
+15244,MyulChun Coffer  ,Valley Village               ,1     ,1
+15245,MyulChun Coffer  ,Valley Village               ,1     ,1
+15246,MyulChun Coffer  ,Valley Village               ,1     ,1
+15247,MyulChun Coffer  ,Valley Village               ,1     ,1
+15248,MyulChun Coffer  ,Valley Village               ,1     ,1
+15249,MyulChun Coffer  ,Valley Village               ,1     ,1
+15250,MyulChun Coffer  ,Valley Village               ,1     ,1
+15251,MyulChun Coffer  ,Valley Village               ,1     ,1
+15252,MyulChun Coffer  ,Valley Village               ,1     ,1
+15253,MyulChun Coffer  ,Valley Village               ,1     ,1
+15254,MyulChun Coffer  ,Valley Village               ,1     ,1
+15255,MyulChun Coffer  ,Valley Village               ,1     ,1
+15256,MyulChun Coffer  ,Valley Village               ,1     ,1
+15257,MyulChun Coffer  ,Valley Village               ,1     ,1
+15258,MyulChun Coffer  ,Valley Village               ,1     ,1
+15259,MyulChun Coffer  ,Valley Village               ,1     ,1
+15260,MyulChun Coffer  ,Valley Village               ,1     ,1
+15261,MyulChun Coffer  ,Valley Village               ,1     ,1
+15262,MyulChun Coffer  ,Valley Village               ,1     ,1
+15263,MyulChun Coffer  ,Valley Village               ,1     ,1
+15264,MyulChun Coffer  ,Valley Village               ,1     ,1
+15265,MyulChun Coffer  ,Valley Village               ,1     ,1
+15266,MyulChun Coffer  ,Valley Village               ,1     ,1
+15267,MyulChun Coffer  ,Valley Village               ,1     ,1
+25001,Chaotic Town G-T ,0                            ,110   ,29999
+25002,Lawful Town G-T  ,0                            ,110   ,29999
+25003,Protector Sahong ,0                            ,72    ,4000
+25004,P-Jeongcheon     ,0                            ,72    ,4000
+25005,Justice Gate G.S ,0                            ,110   ,10000
+25006,Death Gate G-S   ,0                            ,110   ,10000
+29001,Seonghwan S-L    ,Lawful Faction Town          ,150   ,200000
+29002,Moocheon S-C     ,Evil Faction Town            ,150   ,200000
+29005,Moogeuk S-L      ,Dead Sea                     ,150   ,200000
+29006,Taegeuk S-L      ,Dead Sea                     ,150   ,200000
+29007,Jehwang S-C      ,Dead Sea                     ,150   ,200000
+29008,Cheonma S-C      ,Dead Sea                     ,150   ,200000
+29009,Cheonhwang S-L   ,Dead Sea                     ,150   ,200000
+29010,Sura Statue: C   ,Dead Sea                     ,150   ,200000
+29501,Yeokcheon Stone  ,Haunted Zone in Dead sea     ,144   ,250000
+29502,Geumgang Stone   ,Guryong village in V.V       ,144   ,250000
+29503,Myeongchen Stone ,Nachung Valley in K.C        ,144   ,250000
+29504,Ilwui Stone      ,Haunted Zone in Dead sea     ,144   ,250000
+29505,Hyeoncheon Stone ,Ilsin Temple in V.V          ,144   ,250000
+29506,Cheonra Stone    ,Dungeon of SungHwa           ,144   ,250000
+30036,Mosan Black Boar ,Wheel Monk Summoned  Monster ,39    ,573
+30037,YS Python        ,Wheel Monk Summoned  Monster ,40    ,586
+30038,WC Python        ,Wheel Monk Summoned  Monster ,41    ,599
+30039,GG Black Boar    ,Wheel Monk Summoned  Monster ,42    ,612
+30040,MB Python        ,Wheel Monk Summoned  Monster ,43    ,625
+30041,GT Python        ,Wheel Monk Summoned  Monster ,44    ,638
+30042,BF Leg FighterYG ,Wheel Monk Summoned  Monster ,45    ,651
+30043,BF Swordsman YG  ,Wheel Monk Summoned  Monster ,46    ,664
+30044,BF Scyther YG    ,Wheel Monk Summoned  Monster ,47    ,677
+30045,ZH F.Ch.MB V.Sc  ,Wheel Monk Summoned  Monster ,48    ,690
+30046,Alpine Warri  GB ,Wheel Monk Summoned  Monster ,49    ,703
+30047,Alpine Hunter GB ,Wheel Monk Summoned  Monster ,50    ,716
+30048,MJ Deadly Ghost  ,Wheel Monk Summoned  Monster ,51    ,729
+30049,MJ GB Ghost      ,Wheel Monk Summoned  Monster ,52    ,742
+30050,MJ  YS Ghost     ,Wheel Monk Summoned  Monster ,53    ,755
+30051,CY Zombie        ,Wheel Monk Summoned  Monster ,54    ,768
+30052,YS Zombie        ,Wheel Monk Summoned  Monster ,55    ,781
+30053,DM Zombie        ,Wheel Monk Summoned  Monster ,56    ,794
+30054,She-ghost        ,Wheel Monk Summoned  Monster ,57    ,807
+30055,Sea Monster 1    ,Wheel Monk Summoned  Monster ,58    ,820
+30056,DS Sea Monster   ,Wheel Monk Summoned  Monster ,59    ,1009
+30057,CC Dog Monster   ,Wheel Monk Summoned  Monster ,60    ,1100
+30058,Axe Warrior      ,Wheel Monk Summoned  Monster ,61    ,1166
+30059,Stone Warrior    ,Wheel Monk Summoned  Monster ,62    ,1400
+30060,Gubo Dog Monster ,Wheel Monk Summoned  Monster ,63    ,1500
+30061,Pig Monster      ,Wheel Monk Summoned  Monster ,64    ,1600
+30062,Blade Warrior    ,Wheel Monk Summoned  Monster ,65    ,1700
+30063,DS Blade Warrior ,Wheel Monk Summoned  Monster ,66    ,1900
+30064,Depraved Monk    ,Wheel Monk Summoned  Monster ,67    ,2000
+30065,Lance Warrior    ,Wheel Monk Summoned  Monster ,68    ,2200
+30066,Belle Assassin   ,Wheel Monk Summoned  Monster ,69    ,2400
+30067,WS BelleAssassin ,Wheel Monk Summoned  Monster ,70    ,2500
+30068,Mage             ,Wheel Monk Summoned  Monster ,71    ,2600
+30069,MB Warrior       ,Wheel Monk Summoned  Monster ,73    ,2750
+30070,Crow K           ,Wheel Monk Summoned  Monster ,75    ,3000
+30071,Hunter           ,Wheel Monk Summoned  Monster ,76    ,3050
+30072,Hunter JH        ,Wheel Monk Summoned  Monster ,77    ,3100
+30073,White Demon      ,Wheel Monk Summoned  Monster ,78    ,3150
+30074,Corpse Eater     ,Wheel Monk Summoned  Monster ,79    ,3200
+30075,Killer Bird      ,Wheel Monk Summoned  Monster ,80    ,3250
+30076,MJ Killer Bird   ,Wheel Monk Summoned  Monster ,81    ,3500
+30077,Blue Hunter      ,Wheel Monk Summoned  Monster ,82    ,3700
+30078,Insect Monster   ,Wheel Monk Summoned  Monster ,83    ,3750
+30079,Insect Monster 2 ,Wheel Monk Summoned  Monster ,84    ,3800
+30080,Insect Monster 3 ,Wheel Monk Summoned  Monster ,85    ,3850
+30081,Red Fire         ,Wheel Monk Summoned  Monster ,86    ,4200
+30082,Red Fire SH      ,Wheel Monk Summoned  Monster ,87    ,4300
+30083,Red Blood        ,Wheel Monk Summoned  Monster ,88    ,4400
+30084,Red Blood SH     ,Wheel Monk Summoned  Monster ,89    ,4500
+30085,Blue Fire        ,Wheel Monk Summoned  Monster ,90    ,4600
+30086,Blue Fire SH     ,Wheel Monk Summoned  Monster ,91    ,4700
+30087,Gwanchi G.Ins    ,Wheel Monk Summoned  Monster ,92    ,4000
+30088,YS Gwanchi G.Ins ,Wheel Monk Summoned  Monster ,93    ,4100
+30089,Ice Blood        ,Wheel Monk Summoned  Monster ,94    ,5000
+30090,Ice B.S.H        ,Wheel Monk Summoned  Monster ,95    ,5100
+30091,Ground Blood     ,Wheel Monk Summoned  Monster ,96    ,4400
+30092,Raging G.Blood   ,Wheel Monk Summoned  Monster ,97    ,4500
+30093,Gotham Tiger     ,Wheel Monk Summoned  Monster ,98    ,5400
+30094,Yegwan Gotham T  ,Wheel Monk Summoned  Monster ,99    ,5500
+30095,Big Head B.Eye   ,Wheel Monk Summoned  Monster ,99    ,5500
+30096,One-eyed Monster ,Wheel Monk Summoned  Monster ,99    ,5500
+30097,Tangsu Monster   ,Wheel Monk Summoned  Monster ,100   ,5600
+30098,YongSoo Tangsu M ,Wheel Monk Summoned  Monster ,101   ,5700
+30099,Yosan Mad Tiger  ,Wheel Monk Summoned  Monster ,102   ,5800
+30100,MB Yosan Mad T   ,Wheel Monk Summoned  Monster ,103   ,5900
+30101,Gungbo Iron F.F  ,Wheel Monk Summoned  Monster ,104   ,6000
+30102,DS Gung Iron F.F ,Wheel Monk Summoned  Monster ,105   ,6100
+30103,Geumgang B.K     ,Wheel Monk Summoned  Monster ,106   ,6200
+30104,M.Geumgang B.K   ,Wheel Monk Summoned  Monster ,107   ,6300
+30105,Ghost Zombie     ,Wheel Monk Summoned  Monster ,108   ,6400
+30106,Ghost Zombie Jin ,Wheel Monk Summoned  Monster ,109   ,6500
+30107,Demon Fist Fight ,Wheel Monk Summoned  Monster ,110   ,6600
+30108,Demon F.F Champ  ,Wheel Monk Summoned  Monster ,111   ,6700
+30109,Yoseon G.Z       ,Wheel Monk Summoned  Monster ,112   ,6800
+30110,Jin Yoseon G.Z   ,Wheel Monk Summoned  Monster ,113   ,6900
+30111,Dark Lightning   ,Wheel Monk Summoned  Monster ,114   ,7000
+30112,Chao B.Swordsman ,Wheel Monk Summoned  Monster ,115   ,7100
+30113,Ascetic G.Chief  ,Wheel Monk Summoned  Monster ,116   ,7200
+30114,Ex.Silent Sword  ,Wheel Monk Summoned  Monster ,117   ,7300
+30115,Y.Y Swordsman    ,Wheel Monk Summoned  Monster ,118   ,7480
+30116,B.Wind Assassin  ,Wheel Monk Summoned  Monster ,119   ,7670
+30117,Spirit Master    ,Wheel Monk Summoned  Monster ,120   ,7870
+30118,Man of Blood     ,Wheel Monk Summoned  Monster ,121   ,8080
+30119,Sea F.M Spirit   ,Wheel Monk Summoned  Monster ,122   ,8300
+30120,Master Assassin  ,Wheel Monk Summoned  Monster ,123   ,8530
+30121,Ilsin Temple F.F ,Wheel Monk Summoned  Monster ,124   ,8770
+30122,MartialSwordsman ,Wheel Monk Summoned  Monster ,125   ,9020
+30123,Martial Monk     ,Wheel Monk Summoned  Monster ,126   ,9280
+30124,Nwae Scorpion    ,Wheel Monk Summoned  Monster ,127   ,9550
+30125,Ox Face Leader   ,Wheel Monk Summoned  Monster ,128   ,9830
+30126,Bloody Sword H.G ,Wheel Monk Summoned  Monster ,129   ,10120
+30127,C.Green Monster  ,Wheel Monk Summoned  Monster ,130   ,10420
+30128,GR Human F.Sp.T  ,Wheel Monk Summoned  Monster ,131   ,10730
+30129,GR Mon Warrior B ,Wheel Monk Summoned  Monster ,132   ,11050
+30130,GR Mon Warrior G ,Wheel Monk Summoned  Monster ,133   ,11380
+30131,GR Venom Spide Y ,Wheel Monk Summoned  Monster ,134   ,11720
+30132,GR Mon Warri Go  ,Wheel Monk Summoned  Monster ,135   ,12070
+30133,GR Moon Warri Im ,Wheel Monk Summoned  Monster ,136   ,12430
+30134,GR Ground In-Gan ,Wheel Monk Summoned  Monster ,137   ,12800
+30135,GR Excom-Monk K  ,Wheel Monk Summoned  Monster ,138   ,13180
+30136,GR D-Iron Monk G ,Wheel Monk Summoned  Monster ,139   ,13570
+30137,GR MooGoong C    ,Wheel Monk Summoned  Monster ,140   ,13970
+30138,KC G-insect GN   ,Wheel Monk Summoned  Monster ,141   ,14380
+30139,KC luna Warri G  ,Wheel Monk Summoned  Monster ,142   ,14800
+30140,KC Moon Warri D  ,Wheel Monk Summoned  Monster ,143   ,15230
+30141,KC Moon Warri MG ,Wheel Monk Summoned  Monster ,144   ,15670
+30142,KC H.F Spider MG ,Wheel Monk Summoned  Monster ,145   ,16120
+30143,KC G-insect SO   ,Wheel Monk Summoned  Monster ,146   ,16580
+30144,KC Excom Monk Sa ,Wheel Monk Summoned  Monster ,147   ,17050
+30145,GC MooGoong BE   ,Wheel Monk Summoned  Monster ,148   ,16044
+30146,GC Moon Warr E   ,Wheel Monk Summoned  Monster ,149   ,16463
+30147,GC G-Insect PK   ,Wheel Monk Summoned  Monster ,150   ,16890
+30148,GC V.Spider BO   ,Wheel Monk Summoned  Monster ,151   ,17326
+30149,GC Moon Warr GA  ,Wheel Monk Summoned  Monster ,152   ,17770
+30150,GC Double I.M.HA ,Wheel Monk Summoned  Monster ,153   ,18223
+30151,GC Luna W HG     ,Wheel Monk Summoned  Monster ,154   ,18685
+30152,GC Excom Monk DO ,Wheel Monk Summoned  Monster ,155   ,19155
+30153,GC Moon W-JI     ,Wheel Monk Summoned  Monster ,156   ,19634
+30154,GC Luna W-KY     ,Wheel Monk Summoned  Monster ,157   ,20121
+30155,GC V-Spider H    ,Wheel Monk Summoned  Monster ,158   ,20617
+30156,GC Double I.M SN ,Wheel Monk Summoned  Monster ,159   ,21121
+30157,GC MooGoong EK   ,Wheel Monk Summoned  Monster ,160   ,21634
+31036,Mosan Black Boar ,Glove Mage Summoned  Monster ,39    ,573
+31037,YS Python        ,Glove Mage Summoned  Monster ,40    ,586
+31038,WC Python        ,Glove Mage Summoned  Monster ,41    ,599
+31039,GG Black Boar    ,Glove Mage Summoned  Monster ,42    ,612
+31040,MB Python        ,Glove Mage Summoned  Monster ,43    ,625
+31041,GT Python        ,Glove Mage Summoned  Monster ,44    ,638
+31042,BF Leg FighterYG ,Glove Mage Summoned  Monster ,45    ,651
+31043,BF Swordsman YG  ,Glove Mage Summoned  Monster ,46    ,664
+31044,BF Scyther YG    ,Glove Mage Summoned  Monster ,47    ,677
+31045,ZH F.Ch.MB V.Sc  ,Glove Mage Summoned  Monster ,48    ,690
+31046,Alpine Warri  GB ,Glove Mage Summoned  Monster ,49    ,703
+31047,Alpine Hunter GB ,Glove Mage Summoned  Monster ,50    ,716
+31048,MJ Deadly Ghost  ,Glove Mage Summoned  Monster ,51    ,729
+31049,MJ GB Ghost      ,Glove Mage Summoned  Monster ,52    ,742
+31050,MJ  YS Ghost     ,Glove Mage Summoned  Monster ,53    ,755
+31051,CY Zombie        ,Glove Mage Summoned  Monster ,54    ,768
+31052,YS Zombie        ,Glove Mage Summoned  Monster ,55    ,781
+31053,DM Zombie        ,Glove Mage Summoned  Monster ,56    ,794
+31054,She-ghost        ,Glove Mage Summoned  Monster ,57    ,807
+31055,Sea Monster 1    ,Glove Mage Summoned  Monster ,58    ,820
+31056,DS Sea Monster   ,Glove Mage Summoned  Monster ,59    ,1009
+31057,CC Dog Monster   ,Glove Mage Summoned  Monster ,60    ,1100
+31058,Axe Warrior      ,Glove Mage Summoned  Monster ,61    ,1166
+31059,Stone Warrior    ,Glove Mage Summoned  Monster ,62    ,1400
+31060,Gubo Dog Monster ,Glove Mage Summoned  Monster ,63    ,1500
+31061,Pig Monster      ,Glove Mage Summoned  Monster ,64    ,1600
+31062,Blade Warrior    ,Glove Mage Summoned  Monster ,65    ,1700
+31063,DS Blade Warrior ,Glove Mage Summoned  Monster ,66    ,1900
+31064,Depraved Monk    ,Glove Mage Summoned  Monster ,67    ,2000
+31065,Lance Warrior    ,Glove Mage Summoned  Monster ,68    ,2200
+31066,Belle Assassin   ,Glove Mage Summoned  Monster ,69    ,2400
+31067,WS BelleAssassin ,Glove Mage Summoned  Monster ,70    ,2500
+31068,Mage             ,Glove Mage Summoned  Monster ,71    ,2600
+31069,MB Warrior       ,Glove Mage Summoned  Monster ,73    ,2750
+31070,Crow K           ,Glove Mage Summoned  Monster ,75    ,3000
+31071,Hunter           ,Glove Mage Summoned  Monster ,76    ,3050
+31072,Hunter JH        ,Glove Mage Summoned  Monster ,77    ,3100
+31073,White Demon      ,Glove Mage Summoned  Monster ,78    ,3150
+31074,Corpse Eater     ,Glove Mage Summoned  Monster ,79    ,3200
+31075,Killer Bird      ,Glove Mage Summoned  Monster ,80    ,3250
+31076,MJ Killer Bird   ,Glove Mage Summoned  Monster ,81    ,3500
+31077,Blue Hunter      ,Glove Mage Summoned  Monster ,82    ,3700
+31078,Insect Monster   ,Glove Mage Summoned  Monster ,83    ,3750
+31079,Insect Monster 2 ,Glove Mage Summoned  Monster ,84    ,3800
+31080,Insect Monster 3 ,Glove Mage Summoned  Monster ,85    ,3850
+31081,Red Fire         ,Glove Mage Summoned  Monster ,86    ,4200
+31082,Red Fire SH      ,Glove Mage Summoned  Monster ,87    ,4300
+31083,Red Blood        ,Glove Mage Summoned  Monster ,88    ,4400
+31084,Red Blood SH     ,Glove Mage Summoned  Monster ,89    ,4500
+31085,Blue Fire        ,Glove Mage Summoned  Monster ,90    ,4600
+31086,Blue Fire SH     ,Glove Mage Summoned  Monster ,91    ,4700
+31087,Gwanchi G.Ins    ,Glove Mage Summoned  Monster ,92    ,4000
+31088,YS Gwanchi G.Ins ,Glove Mage Summoned  Monster ,93    ,4100
+31089,Ice Blood        ,Glove Mage Summoned  Monster ,94    ,5000
+31090,Ice B.S.H        ,Glove Mage Summoned  Monster ,95    ,5100
+31091,Ground Blood     ,Glove Mage Summoned  Monster ,96    ,4400
+31092,Raging G.Blood   ,Glove Mage Summoned  Monster ,97    ,4500
+31093,Gotham Tiger     ,Glove Mage Summoned  Monster ,98    ,5400
+31094,Yegwan Gotham T  ,Glove Mage Summoned  Monster ,99    ,5500
+31095,Big Head B.Eye   ,Glove Mage Summoned  Monster ,99    ,5500
+31096,One-eyed Monster ,Glove Mage Summoned  Monster ,99    ,5500
+31097,Tangsu Monster   ,Glove Mage Summoned  Monster ,100   ,5600
+31098,YongSoo Tangsu M ,Glove Mage Summoned  Monster ,101   ,5700
+31099,Yosan Mad Tiger  ,Glove Mage Summoned  Monster ,102   ,5800
+31100,MB Yosan Mad T   ,Glove Mage Summoned  Monster ,103   ,5900
+31101,Gungbo Iron F.F  ,Glove Mage Summoned  Monster ,104   ,6000
+31102,DS Gung Iron F.F ,Glove Mage Summoned  Monster ,105   ,6100
+31103,Geumgang B.K     ,Glove Mage Summoned  Monster ,106   ,6200
+31104,M.Geumgang B.K   ,Glove Mage Summoned  Monster ,107   ,6300
+31105,Ghost Zombie     ,Glove Mage Summoned  Monster ,108   ,6400
+31106,Ghost Zombie Jin ,Glove Mage Summoned  Monster ,109   ,6500
+31107,Demon Fist Fight ,Glove Mage Summoned  Monster ,110   ,6600
+31108,Demon F.F Champ  ,Glove Mage Summoned  Monster ,111   ,6700
+31109,Yoseon G.Z       ,Glove Mage Summoned  Monster ,112   ,6800
+31110,Jin Yoseon G.Z   ,Glove Mage Summoned  Monster ,113   ,6900
+31111,Dark Lightning   ,Glove Mage Summoned  Monster ,114   ,7000
+31112,Chao B.Swordsman ,Glove Mage Summoned  Monster ,115   ,7100
+31113,Ascetic G.Chief  ,Glove Mage Summoned  Monster ,116   ,7200
+31114,Ex.Silent Sword  ,Glove Mage Summoned  Monster ,117   ,7300
+31115,Y.Y Swordsman    ,Glove Mage Summoned  Monster ,118   ,7480
+31116,B.Wind Assassin  ,Glove Mage Summoned  Monster ,119   ,7670
+31117,Spirit Master    ,Glove Mage Summoned  Monster ,120   ,7870
+31118,Man of Blood     ,Glove Mage Summoned  Monster ,121   ,8080
+31119,Sea F.M Spirit   ,Glove Mage Summoned  Monster ,122   ,8300
+31120,Master Assassin  ,Glove Mage Summoned  Monster ,123   ,8530
+31121,Ilsin Temple F.F ,Glove Mage Summoned  Monster ,124   ,8770
+31122,MartialSwordsman ,Glove Mage Summoned  Monster ,125   ,9020
+31123,Martial Monk     ,Glove Mage Summoned  Monster ,126   ,9280
+31124,Nwae Scorpion    ,Glove Mage Summoned  Monster ,127   ,9550
+31125,Ox Face Leader   ,Glove Mage Summoned  Monster ,128   ,9830
+31126,Bloody Sword H.G ,Glove Mage Summoned  Monster ,129   ,10120
+31127,C.Green Monster  ,Glove Mage Summoned  Monster ,130   ,10420
+31128,GR Human F.Sp.T  ,Glove Mage Summoned  Monster ,131   ,10730
+31129,GR Mon Warrior B ,Glove Mage Summoned  Monster ,132   ,11050
+31130,GR Mon Warrior G ,Glove Mage Summoned  Monster ,133   ,11380
+31131,GR Venom Spide Y ,Glove Mage Summoned  Monster ,134   ,11720
+31132,GR Mon Warri Go  ,Glove Mage Summoned  Monster ,135   ,12070
+31133,GR Moon Warri Im ,Glove Mage Summoned  Monster ,136   ,12430
+31134,GR Ground In-Gan ,Glove Mage Summoned  Monster ,137   ,12800
+31135,GR Excom-Monk K  ,Glove Mage Summoned  Monster ,138   ,13180
+31136,GR D-Iron Monk G ,Glove Mage Summoned  Monster ,139   ,13570
+31137,GR MooGoong C    ,Glove Mage Summoned  Monster ,140   ,13970
+31138,KC G-insect GN   ,Glove Mage Summoned  Monster ,141   ,14380
+31139,KC luna Warri G  ,Glove Mage Summoned  Monster ,142   ,14800
+31140,KC Moon Warri D  ,Glove Mage Summoned  Monster ,143   ,15230
+31141,KC Moon Warri MG ,Glove Mage Summoned  Monster ,144   ,15670
+31142,KC H.F Spider MG ,Glove Mage Summoned  Monster ,145   ,16120
+31143,KC G-insect SO   ,Glove Mage Summoned  Monster ,146   ,16580
+31144,KC Excom Monk Sa ,Glove Mage Summoned  Monster ,147   ,17050
+31145,GC MooGoong BE   ,Glove Mage Summoned  Monster ,148   ,16044
+31146,GC Moon Warr E   ,Glove Mage Summoned  Monster ,149   ,16463
+31147,GC G-Insect PK   ,Glove Mage Summoned  Monster ,150   ,16890
+31148,GC V.Spider BO   ,Glove Mage Summoned  Monster ,151   ,17326
+31149,GC Moon Warr GA  ,Glove Mage Summoned  Monster ,152   ,17770
+31150,GC Double I.M.HA ,Glove Mage Summoned  Monster ,153   ,18223
+31151,GC Luna W HG     ,Glove Mage Summoned  Monster ,154   ,18685
+31152,GC Excom Monk DO ,Glove Mage Summoned  Monster ,155   ,19155
+31153,GC Moon W-JI     ,Glove Mage Summoned  Monster ,156   ,19634
+31154,GC Luna W-KY     ,Glove Mage Summoned  Monster ,157   ,20121
+31155,GC V-Spider H    ,Glove Mage Summoned  Monster ,158   ,20617
+31156,GC Double I.M SN ,Glove Mage Summoned  Monster ,159   ,21121
+31157,GC MooGoong EK   ,Glove Mage Summoned  Monster ,160   ,21634
+15281,Lightning Temple ,Glove Mage Summoned  Monster ,160   ,21634
+15268,Temple W-Monk    ,Tibet                        ,90    ,4300
+15269,Warrior Monk Dr  ,Tibet                        ,120   ,273218
+15270,Warrior M.Chief  ,Tibet                        ,90    ,4300
+15271,Shadow C.W.Monk  ,Tibet                        ,95    ,4400
+15272,Chief W.Monk Dr  ,Tibet                        ,130   ,225218
+15273,Temple V.Monk    ,Tibet                        ,96    ,5200
+15274,V.Monk Dragon    ,Tibet                        ,140   ,273218
+15275,Shadow T.Guardia ,Tibet                        ,97    ,5300
+15276,Guardian Da-moon ,Tibet                        ,150   ,391282
+15277,Guardian Chief   ,Tibet                        ,98    ,5400
+15278,Veteran Chief    ,Tibet                        ,99    ,5500
+15279,V-Monk Da-moon   ,Tibet                        ,160   ,644848
+15280,S.Temple Master  ,Tibet                        ,170   ,858066
+15282,90 Jackpot Rdrago,event                        ,140   ,395062
+15283,140 Jackpot Rdrag,event                        ,90    ,158024
+15284,90 Jackpot Gdrago,event                        ,140   ,395062
+15285,140 Jackpot Gdrag,event                        ,90    ,158024
+15286,Helloween        ,이벤트 몹                    ,30    ,333
+15287,Helloween        ,이벤트 몹                    ,40    ,477
+15288,Helloween        ,이벤트 몹                    ,50    ,675
+15289,Helloween        ,이벤트 몹                    ,60    ,1259
+15290,Helloween        ,이벤트 몹                    ,70    ,2222
+15291,Helloween        ,이벤트 몹                    ,80    ,2851
+15292,Helloween        ,이벤트 몹                    ,90    ,3777
+15293,Helloween        ,이벤트 몹                    ,100   ,4518
+15294,Helloween        ,이벤트 몹                    ,110   ,5259
+15295,Helloween        ,이벤트 몹                    ,120   ,6681
+15296,Helloween        ,이벤트 몹                    ,130   ,8940
+15297,Helloween        ,이벤트 몹                    ,140   ,11940
+15298,Helloween        ,이벤트 몹                    ,150   ,15681
+15299,Helloween        ,이벤트 몹                    ,160   ,18701
+15300,Dragon           ,11월                         ,144   ,100
+15301,Dragon 1         ,11월                         ,144   ,100
+15302,Dragon 2         ,11월                         ,144   ,100
+15303,Dragon(3)        ,11월                         ,36    ,100
+15304,Banner           ,11월                         ,1     ,100
+15305,Banner 2         ,11월                         ,1     ,100
+15306,Drunken Fake Sant,12월                         ,30    ,333
+15307,Drunken Fake Sant,12월                         ,40    ,477
+15308,Drunken Fake Sant,12월                         ,50    ,675
+15309,Drunken Fake Sant,12월                         ,60    ,1259
+15310,Drunken Fake Sant,12월                         ,70    ,2222
+15311,Drunken Fake Sant,12월                         ,80    ,2851
+15312,Drunken Fake Sant,12월                         ,90    ,3777
+15313,Drunken Fake Sant,12월                         ,100   ,4518
+15314,Drunken Fake Sant,12월                         ,110   ,5259
+15315,Drunken Fake Sant,12월                         ,120   ,6681
+15316,Drunken Fake Sant,12월                         ,130   ,8940
+15317,Drunken Fake Sant,12월                         ,140   ,11940
+15318,Drunken Fake Sant,12월                         ,150   ,15681
+15319,Drunken Fake Sant,12월                         ,160   ,18701
+15320,Santa            ,12월                         ,100   ,4518
+15321,Red Tiger cub    ,1월                          ,10    ,265
+15322,White Tiger cub  ,1월                          ,22    ,285
+15323,Belle’s beauty s,1월                          ,69    ,2400
