@@ -34,6 +34,7 @@ public class SetFameCommand implements ChatCommandExecutor {
 		  }else{
 			  System.out.println("Command failed");
 		  }
+		  //Commit to the fame branch
 		  
 	 }  
 	  
