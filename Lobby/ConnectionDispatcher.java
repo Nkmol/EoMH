@@ -14,7 +14,7 @@ import ServerCore.ServerFacade;
  */
 
 public class ConnectionDispatcher implements PacketHandler {
-	private final String ip = "77.166.68.150";
+	private final String ip = "127.0.0.1";
 	private final String port = "11000";
 
 	private byte[] pckt;
