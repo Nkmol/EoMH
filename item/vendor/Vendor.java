@@ -56,7 +56,7 @@ public class Vendor {
 	
 	public byte[] removeFromVendorList() throws VendorException {
 		if(!WMap.getInstance().removeVendorList(cur))
-			throw new VendorException("Something went wrong adding this vendor");
+			throw new VendorException("Something went wrong deleting this vendor");
 		return VendorPackets.getVendorListPacket(cur);
 	}
 	

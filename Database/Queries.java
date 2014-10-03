@@ -616,6 +616,13 @@ public class Queries {
 		return st;
 	}
 	
+	public static PreparedStatement saveCharacterFameTitle(Connection con, Character ch) throws Exception {
+		PreparedStatement st = con.prepareStatement("UPDATE characters SET fametitle=? WHERE CharacterID = ?;");
+		st.setInt(1, ch.getFameTitle());
+		st.setInt(2, ch.getCharID());
+		return st;
+	}
+	
 	//----------
 
 	public static PreparedStatement showGrants(Connection connection) throws Exception {

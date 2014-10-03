@@ -507,6 +507,18 @@ public class CharacterDAO {
 		}
 	}
 	
+	public static boolean saveCharacterFameTitle(Character chara) {
+		try {
+			PreparedStatement ps = Queries.saveCharacterFame(sqlConnection, chara);
+			boolean b = ps.execute();
+			return b;
+		} catch (SQLException e) {
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	public static boolean saveCharacterDead(Character chara) {
 		try {
 			PreparedStatement ps=Queries.saveCharacterDead(sqlConnection, chara);
@@ -561,6 +573,7 @@ public class CharacterDAO {
 			newCharacter.setLevel(rs.getInt("level"));
 			newCharacter.setExp(rs.getLong("exp"));
 			newCharacter.setFame(rs.getInt("fame"));
+			newCharacter.setFameTitle(rs.getShort("fametitle"));
 
 			newCharacter.setX(rs.getInt("locationX"));
 			newCharacter.setY(rs.getInt("locationY"));

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import Connections.Connection;
 import Gamemaster.GameMaster;
@@ -22,7 +23,7 @@ public class CharacterMaster {
 	private static int highestLvl=9;
 	private static final float runningSpeed=24.5f;
 	private static final float walkingSpeed=7;
-	private static final Map<Integer, Short> fametitles = new HashMap<Integer, Short>() {
+	private static final TreeMap<Integer, Short> fametitles = new TreeMap<Integer, Short>() {
 		{
 			put(18580416, (short)1);
 			put(12386944, (short)2);
@@ -50,7 +51,8 @@ public class CharacterMaster {
 	}
 	
 	public static short getFameTitle(int fame) {
-		for (Map.Entry<Integer, Short> index : fametitles.entrySet()) {
+		Map<Integer, Short> descending = fametitles.descendingMap();
+		for (Map.Entry<Integer, Short> index : descending.entrySet()) {
 			if(fame >= index.getKey()) {
 				return index.getValue();
 			}

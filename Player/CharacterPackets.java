@@ -70,6 +70,7 @@ public class CharacterPackets {
 		
 		fameVen[20] = (byte)cur.getFameTitle(); //fame title
 		fameVen[21] = (byte)points;
+		fameVen[22] = (byte)cur.getGMrank();
 		fameVen[26] = (byte)0x02;
 		fameVen[27] = (byte)0x03;
 		

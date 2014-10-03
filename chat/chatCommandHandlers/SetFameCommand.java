@@ -2,6 +2,7 @@ package chat.chatCommandHandlers;
 
 import Player.Character;
 import Player.CharacterMaster;
+import Player.CharacterPackets;
 import Gamemaster.GameMaster;
 import Player.PlayerConnection;
 import Connections.Connection;
@@ -28,9 +29,15 @@ public class SetFameCommand implements ChatCommandExecutor {
 		  
 		  if(parameters.length>0 && StringTools.isInteger(parameters[0]))
 		  {
-			  cur.setFame(Integer.parseInt(parameters[0]));
-			  cur.setFameTitle(CharacterMaster.getFameTitle(CharacterMaster.getFameTitle(cur.getFame())));
+			  int fame = Integer.parseInt(parameters[0]);
+			  if(fame > 2000000000 ) 
+				  fame = 2000000000;
+			  
+			  cur.setFame(fame);
+			  cur.setFameTitle(CharacterMaster.getFameTitle(fame));
+			  System.out.print(CharacterMaster.getFameTitle(fame));
 			  cur.updateFame(cur);
+			  cur.sendToMap(CharacterPackets.getFameVendingPacket(cur));
 		  }else{
 			  System.out.println("Command failed");
 		  }

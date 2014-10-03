@@ -243,8 +243,12 @@ public class VendorPackets {
 				//36 is length of shop
 				for(int j=0;j<4;j++) {
 					vendorlist[14 + i*36 + j] = bCh[j];
+				}	
+				
+				for(int j=0;j<vendorname.length;j++) {
 					vendorlist[18 + i*36 + j] = vendorname[j];
-				}		
+				}
+				vendorlist[49 + i*36] = (byte)0x08;
 			}
 		}
 		
