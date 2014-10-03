@@ -2,7 +2,6 @@ package Mob;
 
 import Configuration.ConfigurationManager;
 import Database.MobDAO;
-import World.WMap;
 import World.Waypoint;
 
 public class MobMaster {
@@ -25,12 +24,13 @@ public class MobMaster {
 		
 		int []data = new int[]{map,(int)w.getX(),(int)w.getY(),radius,10,0,0};
 		System.out.println("Creating controller with x: " + data[1] + " y: " + data[2]);
-		MobController run = new MobController(mobid, amount, poolId, data, isTemp, onlyStars, expFactor);
+		new MobController(mobid, amount, poolId, data, isTemp, onlyStars, expFactor);
+		/*MobController run = new MobController(mobid, amount, poolId, data, isTemp, onlyStars, expFactor);
 		try{
 		WMap.getInstance().getGrid(data[0]).getThreadPool().executeProcess(run);
 		}catch (Exception e){
 			e.printStackTrace();
-		}
+		}*/
 		poolId += amount;
 		
 	}

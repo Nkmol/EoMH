@@ -118,8 +118,9 @@ public class MobDAO {
 				data[5] = rs.getInt("waypointHop");
 				data[6] = rs.getInt("respawnTime");
 				System.out.println("Creating controller with x: " + data[1] + " y: " + data[2]);
-				MobController run = new MobController(mobid, count, pool, data, false, false, 1f);
-				WMap.getInstance().getGrid(data[0]).getThreadPool().executeProcess(run);
+				new MobController(mobid, count, pool, data, false, false, 1f);
+				//MobController run = new MobController(mobid, count, pool, data, false, false, 1f);
+				//WMap.getInstance().getGrid(data[0]).getThreadPool().executeProcess(run);
 				pool += count;
 			}
 			MobMaster.setPoolId(pool);
