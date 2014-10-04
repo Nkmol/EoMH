@@ -1,6 +1,7 @@
 package Mob;
 
 
+import Player.Character;
 import Tools.BitTools;
 import World.Waypoint;
 
@@ -141,6 +142,28 @@ public class MobPackets {
     	
     	return skillpckt;
     	
+	}
+	
+	public static byte[] famepacket(int uid, int iChid, int fame) {
+        byte[] famepacket = new byte[28];
+    	byte[] Uid = BitTools.intToByteArray(uid);
+    	byte[] chid = BitTools.intToByteArray(iChid);
+		byte[] Fame = BitTools.intToByteArray(fame);
+        famepacket[0] = (byte)0x1c;
+        famepacket[4] = (byte)0x05;
+        famepacket[6] = (byte)0x09;
+        famepacket[8] = (byte)0x01;
+		 for(int i=0;i<4;i++) {
+			 famepacket[i+12] = chid[i];	
+			 famepacket[i+20] = Uid[i]; 
+			 famepacket[i+24] = Fame[i];
+		 }
+	       famepacket[16] = (byte)0x02;
+	       famepacket[17] = (byte)0x29;
+	       famepacket[18] = (byte)0x37;
+	       famepacket[19] = (byte)0x08;
+       
+        return famepacket;
 	}
 
 }

@@ -14,6 +14,7 @@ import java.util.Random;
 
 import logging.ServerLogger;
 import Player.Character;
+import Player.CharacterMaster;
 import Player.Fightable;
 import ServerCore.ServerFacade;
 import Skills.CastableSkill;
@@ -438,6 +439,17 @@ public class Mob implements Location, Fightable{
 		this.setDied(System.currentTimeMillis());
 		this.setAlive(false);
 		this.send(MobPackets.getDeathPacket(this.uid, this, star));
+		//fame
+		if(Math.random() < 0.04) { // 3% chance
+			Character cur = this.wmap.getCharacter(aggroID);
+			if(cur.getLevel() >= 36 && cur.getFaction() != 0 && this.data.getLvl() >= 36)	{
+				int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
+				cur.addFame(fame);
+				cur.setFameTitle(CharacterMaster.getFameTitle(cur.getFame()));
+				this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
+			}
+		}
+		
 		if(control.isTemp()){
 			setDeleted(true);
 		}else{

@@ -63,7 +63,7 @@ public class MobParserSQL extends Parser{
 			
 			if(basexp<1)
 				basexp=1;
-			basefame=1;
+			basefame=lvl/5;
 			aggro=30;
 			attrange=15;
 			follow=100;

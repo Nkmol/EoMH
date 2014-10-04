@@ -35,7 +35,6 @@ public class SetFameCommand implements ChatCommandExecutor {
 			  
 			  cur.setFame(fame);
 			  cur.setFameTitle(CharacterMaster.getFameTitle(fame));
-			  System.out.print(CharacterMaster.getFameTitle(fame));
 			  cur.updateFame(cur);
 			  cur.sendToMap(CharacterPackets.getFameVendingPacket(cur));
 		  }else{

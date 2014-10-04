@@ -150,7 +150,7 @@ public class MobParser extends Parser{
 			
 			out.write("ID        , NAME             , LOCATION                         , ");
 			out.write("LVL       , MINATK    , MAXATK    , DEF       , HP        , ATKSUC    , DEFSUC    , COINS     , EXP            , ");
-			out.write("SKILL1    , SKILL2    , SKILL3    , ");
+			out.write("BASEFAME            , SKILL1    , SKILL2    , SKILL3    , ");
 			out.newLine();
 			while(!mobs.isEmpty()){
 				mob=mobs.removeFirst();
@@ -197,6 +197,9 @@ public class MobParser extends Parser{
 					exp=1;
 				String expS=Long.toString(exp);
 				out.write(expS);
+				//FAME lvl/5
+				int fame = lvl/5;
+				out.write(fame);
 				for(int i=0;i<15-expS.length();i++){
 					out.write(" ");
 				}

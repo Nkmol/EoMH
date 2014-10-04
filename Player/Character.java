@@ -907,6 +907,9 @@ public class Character implements Location, Fightable {
 	
 	public void setFameTitle(short fameTitle) {
 		this.fameTitle = fameTitle;
+		if(!isBot)
+			CharacterDAO.saveCharacterFameTitle(this);
+		
 	}
 	
 	public short getKao() {

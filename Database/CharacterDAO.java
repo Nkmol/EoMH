@@ -509,7 +509,7 @@ public class CharacterDAO {
 	
 	public static boolean saveCharacterFameTitle(Character chara) {
 		try {
-			PreparedStatement ps = Queries.saveCharacterFame(sqlConnection, chara);
+			PreparedStatement ps = Queries.saveCharacterFameTitle(sqlConnection, chara);
 			boolean b = ps.execute();
 			return b;
 		} catch (SQLException e) {
