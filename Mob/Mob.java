@@ -120,6 +120,12 @@ public class Mob implements Location, Fightable{
 			// System.out.println("Got area " + a.getuid());
 			this.setMyArea(a);
 			this.iniPackets.addAll(a.addMemberAndGetMembers(this));
+			for(Iterator<Integer> it=this.iniPackets.iterator();it.hasNext();){
+				Integer i = it.next();
+		    	if (!WMap.getInstance().CharacterExists(i)){
+		    		it.remove();
+		    	}
+			}
 			if(!isRegistered && !iniPackets.isEmpty()){
 				control.register(this);
 				isRegistered=true;
@@ -440,12 +446,11 @@ public class Mob implements Location, Fightable{
 		this.setAlive(false);
 		this.send(MobPackets.getDeathPacket(this.uid, this, star));
 		//fame
-		if(Math.random() < 0.04) { // 3% chance
-			Character cur = this.wmap.getCharacter(aggroID);
-			if(cur.getLevel() >= 36 && cur.getFaction() != 0 && this.data.getLvl() >= 36)	{
+		if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
+			if(Math.random() < 0.04) { // 3% chance
 				int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
-				cur.addFame(fame);
-				cur.setFameTitle(CharacterMaster.getFameTitle(cur.getFame()));
+				ch.addFame(fame);
+				ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
 				this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
 			}
 		}

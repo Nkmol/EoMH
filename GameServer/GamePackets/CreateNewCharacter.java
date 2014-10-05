@@ -42,7 +42,7 @@ public class CreateNewCharacter implements Packet {
 			realLengthname[i] = characterName[i];
 		}
 		String name = new String(realLengthname);
-		if(CharacterDAO.doesCharNameExist(name)){
+		if(CharacterDAO.doesCharNameExist(name) || name.length()>13){
 			final byte[] fail = new byte[] { //static packet to respond to clients' character creation request failed by name
 					(byte)0x14, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x03, (byte)0x00, (byte)0x06, (byte)0x00, (byte)0x00, (byte)0xce, 
 					(byte)0x9f, (byte)0x2a, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00 
