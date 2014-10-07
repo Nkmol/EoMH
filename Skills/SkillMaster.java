@@ -7,7 +7,9 @@ import Mob.Mob;
 import Player.Character;
 import Player.Fightable;
 import Tools.BitTools;
+import World.Location;
 import World.OutOfGridException;
+import World.WMap;
 import Connections.Connection;
 import Database.SkillDAO;
 import GameServer.GamePackets.PaketException;
@@ -120,6 +122,13 @@ public class SkillMaster {
 		if(skill.getStaminaCost()>ch.getStamina()){
 			throw new SkillException("Cannot cast skill [not enough stamina]");
 		}
+		
+	}
+	
+	public static void canCastToTarget(Location ch, Location target) throws SkillException{
+		
+		if(WMap.distance(ch.getlastknownX(), ch.getlastknownY(), target.getlastknownX(), target.getlastknownY())>150)
+			throw new SkillException("Cannot cast skill [target is too far away]");
 		
 	}
 	
@@ -463,6 +472,9 @@ public class SkillMaster {
     			target=cur.getArea().getFightableNear(BitTools.byteArrayToInt(targetByte));
     		else
     			throw new PaketException();
+    		
+    		//check for distance
+    		canCastToTarget((Location)cur, (Location)target);
     		
         	totalDmg=dmgInt;
         	
