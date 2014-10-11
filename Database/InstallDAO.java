@@ -439,6 +439,29 @@ public class InstallDAO {
 		return b;
 		
 	}
+	
+	public boolean createMobSpawnEntry(Connection sql, int map, int id, int amount, float rx, float ry, float radius) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createMobSpawnEntry(sql, map, id, amount, rx, ry, radius);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+
+		return b;
+		
+	}
+	
 	public boolean createEquipmentTable() {
 		boolean b = true;
 		try{

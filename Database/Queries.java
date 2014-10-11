@@ -283,7 +283,7 @@ public class Queries {
 	}
 	public static PreparedStatement createMobsTable(Connection con) throws Exception{
 		PreparedStatement st = con.prepareStatement("CREATE TABLE `mobs` ("+
-													"`id` int(11) NOT NULL,"+
+													"`id` int(11) NOT NULL AUTO_INCREMENT,"+
 													"`mobType` int(11) NOT NULL,"+
 													"`map` int(11) NOT NULL,"+
 													"`spawnCount` int(11) NOT NULL,"+
@@ -528,6 +528,21 @@ public class Queries {
 			st.setInt(19+i*2, drops[i]);
 			st.setFloat(20+i*2, dropchances[i]);
 		}
+		return st;
+	}
+	
+	public static PreparedStatement createMobSpawnEntry(Connection con, int map, int id, int amount, float rx, float ry, float radius) throws Exception{
+		String s="INSERT INTO mobs(mobType, map, spawnCount, spawnRadius, spawnX, spawnY, respawnTime, waypointCount, waypointHop) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		PreparedStatement st = con.prepareStatement(s);
+		st.setInt(1, id);
+		st.setInt(2, map);
+		st.setInt(3, amount);
+		st.setInt(4, (int)radius);
+		st.setInt(5, (int)rx);
+		st.setInt(6, (int)ry);
+		st.setInt(7, 30000);
+		st.setInt(8, 8);
+		st.setInt(9, 8);
 		return st;
 	}
 	

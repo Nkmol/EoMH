@@ -32,6 +32,8 @@ import Parser.LvlexpParser;
 import Parser.LvlexpParserSQL;
 import Parser.MobParser;
 import Parser.MobParserSQL;
+import Parser.MobSpawnsParser;
+import Parser.MobSpawnsParserSQL;
 import Parser.SkillParser;
 import Parser.SkillParserSQL;
 
@@ -134,6 +136,11 @@ public class Installer {
                         	this.createMobData();
                         	System.out.println("Done");
                         }
+                        if(bol[5]){
+                        	System.out.println("Creating mobSpawn entries");
+                        	this.createMobSpawns();
+                        	System.out.println("Done");
+                        }
                         if(bol[11]){
                         	System.out.println("Creating lvl entries");
                         	this.createLvlData();
@@ -157,6 +164,12 @@ public class Installer {
         private void createMobData() {
         	
         	MobParserSQL.parseMobsToSQL(dao, MobParser.getMoblistFromScr("Data/mobs.scr", 456), MobParser.getDroplistFromScr("Data/mobsitem.scr",1012,800));
+        	
+		}
+        
+        private void createMobSpawns() {
+        	
+        	MobSpawnsParserSQL.parseMobspawnsToSQL(dao, MobSpawnsParser.getMobspawnlistFromArr("Data/MobSpawnsMaps.txt", 20));
         	
 		}
         
