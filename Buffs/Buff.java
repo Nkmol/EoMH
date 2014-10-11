@@ -1,6 +1,7 @@
 package Buffs;
 
 import java.util.Timer;
+import Player.Character;
 
 public abstract class Buff {
 

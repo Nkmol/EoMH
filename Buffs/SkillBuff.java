@@ -1,5 +1,7 @@
 package Buffs;
 
+import Player.Character;
+
 public class SkillBuff extends Buff{
 
 	public SkillBuff(Character owner, int buffId, long buffLength, int buffValue){
