@@ -40,7 +40,8 @@ public class ChatParser {
 		this.commandList.put("vendorpoints", new VenderPoints(30));
 		this.commandList.put("pd", new PartyDuelCommand(0));
 		this.commandList.put("showcommands", new ShowCommands(0));
-		this.commandList.put("tp", new teleportCommand(30));
+		this.commandList.put("tp", new teleportCommand(20));
+		this.commandList.put("bufficon", new bufficon(30));
 	}
 	
 	public static synchronized ChatParser getInstance(){

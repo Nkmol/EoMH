@@ -5,6 +5,7 @@ import item.ItemInInv;
 import item.inventory.InventoryException;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import Player.Character;
 import Player.CharacterPackets;
@@ -99,8 +100,9 @@ public class UsableItem implements Packet {
         con.addWrite(useitem);
         cur.sendToMap(extuseitem);
         
+        ConsumableItem consumableitem = ((ConsumableItem)(item.getItem()));
         if(item!=null && item.getItem() instanceof ConsumableItem){
-    		cur.addHpMpSp(((ConsumableItem)(item.getItem())).getHealhp(), ((ConsumableItem)(item.getItem())).getHealmana(), (short)0);
+    		cur.addHpMpSp(consumableitem.getHealhp(), consumableitem.getHealmana(), (short)0);
     	}
         
 		return null;

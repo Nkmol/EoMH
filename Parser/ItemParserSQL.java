@@ -22,7 +22,8 @@ public class ItemParserSQL extends Parser{
 		monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,healhp,vit,bonusvit,
 		intl,bonusintl,healmana,agi,bonusagi,life,bonuslife,mana,bonusmana,stam,bonusstam,
 		critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,defpower,bonusdefpower,
-		pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed;
+		pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1, 
+		buffvalue1,bufficon2,bufftime2,buffvalue2;
 		float atkrange,atkscs,bonusatkscs,defscs,bonusdefscs,critchance,bonuscritchance;
 		
 		int count=0;
@@ -97,13 +98,25 @@ public class ItemParserSQL extends Parser{
 				seteffectid=convertBytesToInteger(item,420);
 				amountsetpieces=convertBytesToByte(item,424);
 				movespeed=convertBytesToByte(item,428);
+				bufficon1 = 0; bufftime1 = 0; buffvalue1 = 0; bufficon2 = 0; bufftime2 = 0; buffvalue2 = 0;
+				if(item.size() > 456) {
+					bufficon1 = convertBytesToSmall(item,456);
+					bufftime1 = convertBytesToSmall(item,458);
+					buffvalue1 = convertBytesToByte(item,460);
+					if(item.size() > 464) {
+						bufficon2 = convertBytesToSmall(item,464);
+						bufftime2 = convertBytesToSmall(item,466);
+						buffvalue2 = convertBytesToByte(item,468);
+					}
+				}
 						
 				dao.addItem(con,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 						price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed);
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1,buffvalue1,
+						bufficon2,bufftime2,buffvalue2);
 					
 				count++;
 				
@@ -188,7 +201,7 @@ public class ItemParserSQL extends Parser{
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed);
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed, 0, 0, 0, 0, 0, 0);
 					
 				count++;
 				

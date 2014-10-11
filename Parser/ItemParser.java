@@ -108,7 +108,7 @@ public class ItemParser extends Parser{
 				out.write("BONUSAGI  , HEALHP    , LIFE      , BONUSLIFE , HEALMANA  , MANA      , BONUSMANA , STAMINA   , BONUSSTAM , ");
 				out.write("ATKSCS    , BONUSATKSC, DEFSCS    , BONUSDEFSC, CRITCHANCE, BONUSCRCH , CRITDMG   , ");
 				out.write("BONUSCRITD, MINDMG    , MAXDMG    , OFFPOWER  , BONUSOFFP , DEFPOWER  , BONUSDEFP , ");
-				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , ");
+				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , BUFFICON1 , BUFFTIME1 , BUFFVALUE1 , BUFFICON2 , BUFFTIME2 , BUFFVALUE2");
 				out.newLine();
 				while(!items.isEmpty()){
 					item=items.removeFirst();
@@ -246,6 +246,36 @@ public class ItemParser extends Parser{
 					writeByteString(out, item, 424);
 					//MOVESPEED
 					writeByteString(out, item, 428);
+					if(item.size() > 456) {
+						//BUFFICON
+						writeByteString(out, item, 456);
+						//BUFFTIME
+						writeSmallString(out, item, 458);
+						//BUFFVALUE
+						writeByteString(out, item, 460);
+						//System.out.println(item.size() + " ID: " + writeIntegerString(out, item, 52));
+						if(item.size() > 464) {
+							//BUFFICON2
+							writeByteString(out, item, 464);
+							//BUFFTIME2
+							writeSmallString(out, item, 466);
+							//BUFFVALUE2
+							writeByteString(out, item, 468);
+						}
+						else {
+							out.write("0         , ");
+							out.write("0         , ");
+							out.write("0         , ");
+						}
+					}
+					else {
+						out.write("0         , ");
+						out.write("0         , ");
+						out.write("0         , ");
+						out.write("0         , ");
+						out.write("0         , ");
+						out.write("0         , ");
+					}
 					out.newLine();
 				}
 			}else{
@@ -259,7 +289,7 @@ public class ItemParser extends Parser{
 				out.write("BONUSAGI  , LIFE      , BONUSLIFE , MANA      , BONUSMANA , STAMINA   , BONUSSTAM , ");
 				out.write("ATKSCS    , BONUSATKSC, DEFSCS    , BONUSDEFSC, CRITCHANCE, BONUSCRCH , CRITDMG   , ");
 				out.write("BONUSCRITD, MINDMG    , MAXDMG    , OFFPOWER  , BONUSOFFP , DEFPOWER  , BONUSDEFP , ");
-				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , ");
+				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , BUFFICON");
 				out.newLine();
 				while(!items.isEmpty()){
 					item=items.removeFirst();
@@ -393,6 +423,7 @@ public class ItemParser extends Parser{
 					writeByteString(out, item, 372);
 					//MOVESPEED
 					writeByteString(out, item, 376);
+
 					out.newLine();
 				}
 			}
@@ -410,8 +441,8 @@ public class ItemParser extends Parser{
 		//---------- CHANGE THESE VALUES ----------
 		
 		//PATH
-		String path1String=System.getProperty("user.dir")+"/src/Data/items.scr";
-		String path2String=System.getProperty("user.dir")+"/src/Data/items.txt";
+		String path1String=System.getProperty("user.dir")+"/Data/items.scr";
+		String path2String=System.getProperty("user.dir")+"/Data/items.txt";
 		//CLIENT 1=KOREAN 2=GMH
 		int client=1;
 		
@@ -421,7 +452,7 @@ public class ItemParser extends Parser{
 		System.out.println("START [256mb heap needed]");
 		int itemBytesLengthMin;
 		if(client==1)
-			itemBytesLengthMin=456;
+			itemBytesLengthMin=456; //Eastern potion = 428
 		else
 			itemBytesLengthMin=404;
 		createItemlist(path2String, getItemlistFromScr(path1String, itemBytesLengthMin), client);

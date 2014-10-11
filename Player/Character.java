@@ -10,7 +10,9 @@ import item.inventory.Inventory;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +103,9 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
+	private int buffAmountActive=0;
+	private Map<Short, HashMap<String, Short>> buffActive = new HashMap<Short, HashMap<String, Short>>();
+	
 	
 	public Character(Doll doll){
 		this.doll=doll;
