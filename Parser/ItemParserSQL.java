@@ -76,8 +76,8 @@ public class ItemParserSQL extends Parser{
 				healmana=convertBytesToSmall(item,272);
 				mana=convertBytesToSmall(item,276);
 				bonusmana=convertBytesToSmall(item,280);
-				stam=convertBytesToSmall(item,292);
-				bonusstam=0;
+				stam=0;
+				bonusstam=convertBytesToSmall(item,292);
 				atkscs=convertBytesToFloat(item,296);
 				bonusatkscs=convertBytesToFloat(item,300);
 				defscs=convertBytesToFloat(item,308);

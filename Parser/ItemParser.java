@@ -204,10 +204,10 @@ public class ItemParser extends Parser{
 					writeSmallString(out, item, 276);
 					//BONUSMANA
 					writeSmallString(out, item, 280);
-					//STAMINA
-					writeSmallString(out, item, 292);
-					//BONUSSTAMINA?
+					//STAMINA?
 					out.write("0         , ");
+					//BONUSSTAMINA
+					writeSmallString(out, item, 292);
 					//ATKSCS
 					writeFloatString(out, item, 296);
 					//BONUSATKSCS
