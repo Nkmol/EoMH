@@ -213,6 +213,7 @@ public class Queries {
 							" `currentMana` int(11) NOT NULL,"+
 							" `currentStamina` int(11) NOT NULL, "+
 							" `fame` int(11) NOT NULL,"+
+							" `fametitle` tinyint(10) NOT NULL,"+
 							" `flags` int(11) DEFAULT NULL,"+
 							" `locationX` int(11) NOT NULL,"+
 							" `locationY` int(11) NOT NULL,"+
@@ -319,14 +320,14 @@ public class Queries {
 			int warusable,int sinusable,int mageusable,int monkusable,int faction,int upgradelvl,int str,int bonusstr,int dex,int bonusdex,int vit,int bonusvit,
 			int intl,int bonusintl,int agi,int bonusagi,int healhp,int life,int bonuslife,int healmana,int mana,int bonusmana,int stam,int bonusstam,float atkscs,float bonusatkscs,float defscs,
 			float bonusdefscs,float critchance,float bonuscritchance,int critdmg,int bonuscritdmg,int mindmg,int maxdmg,int offpower,int bonusoffpower,
-			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int seteffectid,int amountsetpieces,int movespeed) throws Exception{
+			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) throws Exception{
 		PreparedStatement st = con.prepareStatement("INSERT INTO items(itemid, ItemIDOfBaseItem, Category, AgainstType, BonusType, TypeDmg, BonusTypeDmg, AtkRange,"
 				+ " Price, IsConsumable, IsPermanent, Equipslot, Width, Height, MinLvl, MaxLvl, ReqStr, ReqDex, ReqVit, ReqInt, ReqAgi,"
 				+ " WarUsable, SinUsable, MageUsable, MonkUsable, Faction, UpgradeLvl, Str, BonusStr, Dex, BonusDex, Vit, BonusVit,"
 				+ " Intl, BonusIntl, Agi, BonusAgi, HealHp, Life, BonusLife, HealMana, Mana, BonusMana, Stam, BonusStam, AtkScs, BonusAtkScs, DefScs,"
 				+ " BonusDefScs, CritChance, BonusCritChance, CritDmg, BonusCritDmg, MinDmg, MaxDmg, OffPower, BonusOffPower,"
-				+ " DefPower, BonusDefPower, PvpDmgInc, TimeToExpire, SetEffectID, AmountSetPieces, MoveSpeed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+				+ " DefPower, BonusDefPower, PvpDmgInc, TimeToExpire, SetEffectID, AmountSetPieces, MoveSpeed, BuffId1, BuffTime1, BuffValue1, BuffId2, BuffTime2, BuffValue2)" 
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 		st.setInt(1, itemid);
 		st.setInt(2, baseid);
 		st.setInt(3, category);
@@ -391,6 +392,12 @@ public class Queries {
 		st.setInt(62, seteffectid);
 		st.setInt(63, amountsetpieces);
 		st.setInt(64, movespeed);
+		st.setInt(65, buffid1);
+		st.setInt(66, bufftime1);
+		st.setInt(67, buffvalue1);
+		st.setInt(68, buffid2);
+		st.setInt(69, bufftime2);
+		st.setInt(70, buffvalue2);
 		return st;
 	}
 	public static PreparedStatement dropCharacterTable(Connection sqlc) throws Exception{
@@ -700,6 +707,12 @@ public class Queries {
 													"`SetEffectID` int(10) unsigned NOT NULL," +
 													"`AmountSetPieces` smallint(6) unsigned NOT NULL," +
 													"`MoveSpeed` int(10) unsigned NOT NULL," +
+													"`BuffId1` smallint(6) unsigned NOT NULL," +
+													"`BuffTime1` int(10) unsigned NOT NULL," +
+													"`BuffValue1` smallint(6) unsigned NOT NULL," +
+													"`BuffId2` smallint(6) unsigned NOT NULL," +
+													"`BuffTime2` int(10) unsigned NOT NULL," +
+													"`BuffValue2` smallint(6) unsigned NOT NULL," +
 													"PRIMARY KEY (`itemid`)," +
 													"UNIQUE KEY `equid_UNIQUE` (`itemid`)" +
 													") ENGINE=InnoDB DEFAULT CHARSET=ascii;");

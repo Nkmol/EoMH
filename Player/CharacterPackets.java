@@ -6,6 +6,7 @@ import item.ItemInInv;
 import java.nio.ByteBuffer;
 
 import Gamemaster.GameMaster;
+import ServerCore.ServerFacade;
 import Skills.SkillFrame;
 import Skills.SkillMaster;
 import Tools.BitTools;
@@ -559,6 +560,41 @@ public class CharacterPackets {
 		}
 		return stuff;
 		
+	}
+	
+	public static byte[] getBuffIconPacket(Character ch, short id, short time, short value, short slot) {
+    	byte[] chid = BitTools.intToByteArray(ch.getCharID());
+		byte[] buffIcon = new byte[44];
+		buffIcon[0] = (byte)0x2c; 
+		buffIcon[4] = (byte)0x05;
+		buffIcon[6] = (byte)0x1f;
+		buffIcon[8] = (byte)0x01;// 1 = player | 2 = mob
+		
+		for(int i=0;i<4;i++){
+			buffIcon[12+i] = chid[i]; 				
+		}	
+		
+		
+		byte[] buffId = BitTools.shortToByteArray(id);
+		byte[] buffSlot = BitTools.shortToByteArray(slot);
+		byte[] buffTime = BitTools.shortToByteArray(time);
+		byte[] buffValue = BitTools.shortToByteArray(value);
+		for(int i=0;i<2;i++) {
+			buffIcon[i+16] = buffSlot[i];
+			buffIcon[i+20] = buffId[i];
+			buffIcon[i+22] = buffTime[i]; // time (Time in mh = EXAMPLE: 192 / 4 = 48 -> 48 is deci  = 30 Hex)
+			buffIcon[i+24] = buffValue[i]; // value
+		}
+		
+		buffIcon[26] = (byte)0x01; 
+		buffIcon[28] = (byte)0x89; 
+		buffIcon[32] = (byte)0x89; 
+		buffIcon[36] = (byte)0x7e; 
+		buffIcon[38] = (byte)0x7e; 
+		buffIcon[40] = (byte)0x60; 
+		buffIcon[42] = (byte)0x60;	 
+
+		 return buffIcon;
 	}
 	
 	public static byte[] getJoinGameWorldStuffPacket2(Character ch){

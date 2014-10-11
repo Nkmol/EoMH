@@ -37,8 +37,8 @@ private int needsCommandPower;
 	    	else if(parameters.length==1) {
 	    		Character ch = WMap.getInstance().getCharacter(parameters[0]);
 	    		cur.setCurrentMap(ch.getCurrentMap());
-	    		cur.setX(ch.getAreaCoords()[0]);
-	    		cur.setY(ch.getAreaCoords()[1]);
+	    		cur.setX(ch.getlastknownX());
+	    		cur.setY(ch.getlastknownX());
 	    	}
 	    	source.addWrite(CharacterMaster.backToSelection(source));
 	    }

@@ -110,6 +110,14 @@ public class ItemDAO {
 		try{
 			it.setHealhp((short)rs.getInt("HealHp"));
 			it.setHealmana((short)rs.getInt("HealMana"));
+			//Add buffs to usable item
+			short[] buffid = new short[2], bufftime = new short[2], buffvalue = new short[2];
+			for(int i = 1; i <= 2; i++) {
+				buffid[i] = (short)rs.getInt("BuffId" + i);
+				bufftime[i] = (short)rs.getInt("BuffTime" + i);
+				buffvalue[i] = (short)rs.getInt("BuffValue"  + i);
+			}
+			it.setBuff(buffid, bufftime, buffvalue);
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
