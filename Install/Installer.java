@@ -34,6 +34,8 @@ import Parser.MobParser;
 import Parser.MobParserSQL;
 import Parser.MobSpawnsParser;
 import Parser.MobSpawnsParserSQL;
+import Parser.NpcSpawnsParser;
+import Parser.NpcSpawnsParserSQL;
 import Parser.SkillParser;
 import Parser.SkillParserSQL;
 
@@ -96,7 +98,7 @@ public class Installer {
                         boolean bol[] = this.checkTables();
                 
                         System.out.print("Creating tables..");
-                        if (bol[0]) if (!this.dao.createAccountTable()) { System.out.println("Failed to create table \"accounts\"... terminating, install failed"); return; }
+                        /*if (bol[0]) if (!this.dao.createAccountTable()) { System.out.println("Failed to create table \"accounts\"... terminating, install failed"); return; }
                         if (bol[3]) if (!this.dao.createMapTable()){ System.out.println("Failed to create table \"maps\".. terminating, install failed"); return; }
                         if (bol[2]) if (!this.dao.createItemsTable()){ System.out.println("Failed to create table \"items\".. terminating, install failed"); return; }
                         if (bol[1]) if (!this.dao.createCharacterTable()) { System.out.println("Failed to create table \"character\".. terminating, install failed"); return; }
@@ -109,7 +111,8 @@ public class Installer {
                         if (bol[10]) if (!this.dao.createCharSkillbarsTable()){ System.out.println("Failed to create table \"charskillbars\".. terminating, install failed"); return; }
                         if (bol[11]) if (!this.dao.createLvlsTable()){ System.out.println("Failed to create table \"lvls\".. terminating, install failed"); return; }
                         if (bol[12]) if (!this.dao.createGamemasterTable()){ System.out.println("Failed to create table \"gamemaster\".. terminating, install failed"); return; }
-                        System.out.println("Done");
+                        */if (bol[13]) if (!this.dao.createNpcSpawnsTable()) { System.out.println("Failed to create table \"npcSpawns\".. terminating, install failed"); return; }
+                        /*System.out.println("Done");
                 
                         if(bol[2]){
                         	System.out.print("Creating item entries. ");
@@ -151,6 +154,11 @@ public class Installer {
                         	this.createGamemasterData();
                         	System.out.println("Done");
                         }
+                        */if(bol[13]){
+                        	System.out.println("Creating npcSpawn entries");
+                        	this.createNpcSpawns();
+                        	System.out.println("Done");
+                        }
                         
                         System.out.println("ALL DONE");
                 }
@@ -170,6 +178,12 @@ public class Installer {
         private void createMobSpawns() {
         	
         	MobSpawnsParserSQL.parseMobspawnsToSQL(dao, MobSpawnsParser.getMobspawnlistFromArr("Data/MobSpawnsMaps.txt", 20));
+        	
+		}
+        
+        private void createNpcSpawns() {
+        	
+        	NpcSpawnsParserSQL.parseNpcspawnsToSQL(dao, NpcSpawnsParser.getNpcspawnlistFromArr("Data/NpcSpawnsMaps.txt", 28));
         	
 		}
         
@@ -345,8 +359,8 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobData", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobData", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcSpawns"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

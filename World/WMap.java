@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import Mob.Mob;
 import Mob.MobController;
+import NPCs.Npc;
 import Player.Character;
 import logging.ServerLogger;
 // WMap.class
@@ -18,6 +19,7 @@ public class WMap
 	private final Map<Integer, Grid> grids = Collections.synchronizedMap(new HashMap<Integer, Grid>());	
     private final Map<Integer, Character>  Characters = Collections.synchronizedMap(new HashMap<Integer, Character>());	
 	private Map<Integer, Mob> mobs = Collections.synchronizedMap(new HashMap<Integer, Mob>());
+	private Map<Integer, Npc> npcs = Collections.synchronizedMap(new HashMap<Integer, Npc>());
 	private Map<Integer, DroppedItem> items = Collections.synchronizedMap(new HashMap<Integer, DroppedItem>()); 
 	private CopyOnWriteArrayList<Character> vendingList = new CopyOnWriteArrayList<Character>(); 
 	private	static WMap instance; 
@@ -170,6 +172,24 @@ public class WMap
 		
 	}
 	
+	// add dopped item to be tracked
+	public boolean addNpc(Npc npc){
+		if (!this.itemExist(npc.getuid())){
+			this.npcs.put(npc.getuid(), npc);
+			return true;
+		}
+		return false;
+	}
+	// get dropped item instance
+	public Npc getNpc(int uid){
+		return this.npcs.get(uid);
+	}
+		
+	// remove dropped item
+	public void removeNpc(Integer uid) {
+		this.npcs.remove(uid);
+			
+	}
 	
 }
  

@@ -87,4 +87,8 @@ public class MoveSyncTimer extends TimerTask{
 		target=null;
 	}
 	
+	public Waypoint getTarget(){
+		return target;
+	}
+	
 }

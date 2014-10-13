@@ -64,7 +64,7 @@ public class MobSpawnsParser extends Parser{
 						byteatm++;
 					}
 					if(!wholeMobspawn.equals(oldMobspawn)){
-						if(!mobspawns.isEmpty() && byteatm!=20){
+						if(!mobspawns.isEmpty() && byteatm!=mobBytesLengthMin){
 							mobspawns.getLast().add(0, maps.get(files));
 							mobspawns.getLast().add(3, (short)counter);
 						}
@@ -88,7 +88,7 @@ public class MobSpawnsParser extends Parser{
 				int id=convertBytesToSmall(i.next(),0);
 				if(id==0){
 					i.remove();
-					System.out.println("wrong mob detected at index "+counter);
+					System.out.println("wrong mobspawn detected at index "+counter);
 				}
 				counter++;
 			}
@@ -101,7 +101,7 @@ public class MobSpawnsParser extends Parser{
 		
 	}
 	
-	public static void createMoblist(String pathString, LinkedList<ArrayList<Short>> mobspawns){
+	public static void createMobspawnlist(String pathString, LinkedList<ArrayList<Short>> mobspawns){
 		
 		try{
 			System.out.println("CREATE MOBSPAWN LIST TEXT FILE...");
@@ -110,7 +110,7 @@ public class MobSpawnsParser extends Parser{
 			BufferedWriter out = new BufferedWriter(new FileWriter(pathString));
 			ArrayList<Short> mobspawn;
 			
-			out.write("MAP       , ID        , AMOUNT    , X1        , Y1        , X2        , Y2        , RX        , RY        , RADIUS    , ");
+			out.write("MAP       , ID        , AMOUNT    , X1        , Y1        , DX        , DY        , RX        , RY        , RADIUS    , ");
 			out.newLine();
 			while(!mobspawns.isEmpty()){
 				mobspawn=mobspawns.removeFirst();
@@ -196,7 +196,7 @@ public class MobSpawnsParser extends Parser{
 		int mobBytesLengthMin;
 		mobBytesLengthMin=20;
 		
-		createMoblist(path2String, getMobspawnlistFromArr(path1String, mobBytesLengthMin));
+		createMobspawnlist(path2String, getMobspawnlistFromArr(path1String, mobBytesLengthMin));
 		
 	}
 	

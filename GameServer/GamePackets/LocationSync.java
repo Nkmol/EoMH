@@ -48,13 +48,6 @@ public class LocationSync implements Packet {
 			locSync[6] = (byte)0x0D;
 			
 			byte[] id = BitTools.intToByteArray(current.getCharID());
-			byte externmove[] = new byte[48]; 
-			
-			externmove[0] = (byte)externmove.length;
-			externmove[4] = (byte)0x05;
-			externmove[6] = (byte)0x0D;
-			
-			externmove[8]  = (byte)0x01;
 			
 			//byte[] mahtimuna = new byte[] {(byte)0x01, (byte)0xed, (byte)0x5f, (byte)0xbf, (byte)0x00, (byte)0x00, (byte)0x80, (byte)0x3f, (byte)0x03, (byte)0x00, (byte)0x00, (byte)0x36};
 			//byte[] mahtileka = new byte[] {(byte)0x13, (byte)0xad, (byte)0xbc, (byte)0x3e};
@@ -77,12 +70,6 @@ public class LocationSync implements Packet {
 				//character id
 				locSync[i+12] = id[i];
 				
-				//externmove is same thing, except this time the packet is to be sent to other players nearby telling them our character moved
-				externmove[i+20] = x[3-i];
-				externmove[i+24] = y[3-i];			   
-				externmove[i+28] = x[3-i];
-				externmove[i+32] = y[3-i];			
-				externmove[i+12] = id[i];
 				//externmove[i+16] = mahtileka[i];
 			}
 			
@@ -90,7 +77,6 @@ public class LocationSync implements Packet {
 			locSync[40]=decrypted[13];
 			current.setWalking(decrypted[13]==0);
 			
-			externmove[36]=decrypted[13];
 			//externmove[37]=(byte)0x04;
 			//externmove[38]=(byte)0x4a;
 			//externmove[39]=(byte)0x08;
@@ -99,7 +85,7 @@ public class LocationSync implements Packet {
 			//externmove[43]=(byte)0x3f;
 			//externmove[44]=(byte)0x03;//decrypted[17];
 			
-			current.sendToMap(externmove);
+			current.sendExternMovementPacket(BitTools.byteArrayToFloat(x), BitTools.byteArrayToFloat(y), decrypted[13]);
 		}
 		
 		con.addWrite(locSync);

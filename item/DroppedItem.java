@@ -91,7 +91,7 @@ public class DroppedItem implements Location{
 			sendInit(area.addMemberAndGetMembers(this));
 		}
 		else {
-			ServerLogger.getInstance().logMessage(Level.SEVERE, this, "Failed to load grid for teim "+this.Uid +" map:" +this.map + ", disconnecting");
+			ServerLogger.getInstance().logMessage(Level.SEVERE, this, "Failed to load grid for item "+this.Uid +" map:" +this.map + ", disconnecting");
 		}
 	}
 	
@@ -190,7 +190,8 @@ public class DroppedItem implements Location{
 		
 		if (this.iniPackets.contains(player) && !add && !wmap.getCharacter(player).isBot()){
 			this.iniPackets.remove(player);
-			ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), vanish());
+			Character ch=this.wmap.getCharacter(player);
+			ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), vanish(ch));
 		}
 		if (add && !this.iniPackets.contains(player)){
 			this.iniPackets.add(player);
@@ -201,21 +202,20 @@ public class DroppedItem implements Location{
 	
 	public void sendVanishToAll(){
 		
-		byte[] iv=vanish();
-		
 		Iterator<Map.Entry<Integer, Character>> iter = WMap.getInstance().getCharacterMap().entrySet().iterator();
 		Character tmp;
 		while(iter.hasNext()) {
 			Map.Entry<Integer, Character> pairs = iter.next();
 			tmp = pairs.getValue();
 			if(!tmp.isBot())
-			ServerFacade.getInstance().addWriteByChannel(tmp.GetChannel(), iv);
+			ServerFacade.getInstance().addWriteByChannel(tmp.GetChannel(), vanish(tmp));
 		}
 		
 	}
 	
-	private byte[] vanish(){
+	private byte[] vanish(Character ch){
 		
+		byte[] chid = BitTools.intToByteArray(ch.getCharID());
 		byte[] uid=BitTools.intToByteArray(Uid);
 		
 		byte[] iv = new byte[20];
@@ -226,6 +226,7 @@ public class DroppedItem implements Location{
 		
 		
 		for(int i=0;i<4;i++) {
+			iv[12+i] = chid[i];
 			iv[16+i] = uid[i];
 		}
 		

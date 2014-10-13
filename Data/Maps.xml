@@ -96,7 +96,7 @@
 		<mapx>1000</mapx>
 		<mapy>12500</mapy>
 		<areaSize>300</areaSize>
-		<gridSize>28</gridSize>
+		<gridSize>29</gridSize>
 		<mobPool>500</mobPool>
 	</Map>
 	<Map>

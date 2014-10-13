@@ -242,6 +242,27 @@ public class InstallDAO {
 		}
 		return b;
 	}
+	
+	public boolean createNpcSpawnsTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcSpawnsTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean createItemsTable() {
 		boolean b = true;
 		try{
@@ -444,6 +465,28 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createMobSpawnEntry(sql, map, id, amount, rx, ry, radius);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+
+		return b;
+		
+	}
+	
+	public boolean createNpcSpawnEntry(Connection sql, int map, int id, float x, float y) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcSpawnEntry(sql, map, id, x, y);
 			ps.execute();
 			ps.close();
 			

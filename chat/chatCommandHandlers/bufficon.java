@@ -3,8 +3,6 @@ package chat.chatCommandHandlers;
 import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
-import ServerCore.ServerFacade;
-import Tools.BitTools;
 import Connections.Connection;
 import Gamemaster.GameMaster;
 import chat.ChatCommandExecutor;

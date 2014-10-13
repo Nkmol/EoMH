@@ -6,7 +6,6 @@ import item.ItemInInv;
 import java.nio.ByteBuffer;
 
 import Gamemaster.GameMaster;
-import ServerCore.ServerFacade;
 import Skills.SkillFrame;
 import Skills.SkillMaster;
 import Tools.BitTools;
@@ -860,4 +859,36 @@ public class CharacterPackets {
 		}
 		return extvendor;
 	}
+	
+	public static byte[] getExtMovementPacket(Character ch, float chX, float chY, Character target, byte run){
+		
+		byte[] chid = BitTools.intToByteArray(ch.getCharID());
+		byte[] chx = BitTools.floatToByteArray(chX);
+		byte[] chy = BitTools.floatToByteArray(chY);
+		byte[] tx = BitTools.floatToByteArray(target.getlastknownX());
+		byte[] ty = BitTools.floatToByteArray(target.getlastknownY());
+		
+		byte externmove[] = new byte[48]; 
+		
+		externmove[0] = (byte)externmove.length;
+		externmove[4] = (byte)0x05;
+		externmove[6] = (byte)0x0D;
+		
+		externmove[8]  = (byte)0x01;
+		
+		for(int i=0;i<4;i++) {
+			externmove[i+12] = chid[i];
+			externmove[i+20] = tx[3-i];
+			externmove[i+24] = ty[3-i];
+			externmove[i+28] = chx[i];
+			externmove[i+32] = chy[i];	
+		}
+		
+		//run/walk
+		externmove[36]=run;
+		
+		return externmove;
+		
+	}
+	
 }
