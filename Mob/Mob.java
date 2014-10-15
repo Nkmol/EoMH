@@ -37,7 +37,7 @@ public class Mob implements Location, Fightable{
     private int mobID, uid;
 	private MobData data;
 	private MobController control;
-	private List<Integer> iniPackets = new ArrayList<Integer>();
+	private List<Integer> iniPackets = Collections.synchronizedList(new ArrayList<Integer>());
 	private ServerLogger log = ServerLogger.getInstance();
 	private Waypoint spawn;
 	private Waypoint location;

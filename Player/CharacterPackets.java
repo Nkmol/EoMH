@@ -860,13 +860,45 @@ public class CharacterPackets {
 		return extvendor;
 	}
 	
-	public static byte[] getExtMovementPacket(Character ch, float chX, float chY, Character target, byte run){
+	public static byte[] getMovementPacket(Character ch, float targetX, float targetY, byte run){
 		
 		byte[] chid = BitTools.intToByteArray(ch.getCharID());
-		byte[] chx = BitTools.floatToByteArray(chX);
-		byte[] chy = BitTools.floatToByteArray(chY);
-		byte[] tx = BitTools.floatToByteArray(target.getlastknownX());
-		byte[] ty = BitTools.floatToByteArray(target.getlastknownY());
+		byte[] tx = BitTools.floatToByteArray(targetX);
+		byte[] ty = BitTools.floatToByteArray(targetY);
+		byte[] chx = BitTools.floatToByteArray(ch.getlastknownX());
+		byte[] chy = BitTools.floatToByteArray(ch.getlastknownY());
+		
+		byte[] locSync = new byte[56]; 
+		
+		locSync[0] = (byte)locSync.length;
+		locSync[4] = (byte)0x04;
+		locSync[6] = (byte)0x0D;
+		
+		for(int i=0;i<4;i++) {
+			//1st set
+			locSync[16+i] = chx[i];   
+			locSync[20+i] = chy[i]; 
+			//2nd set 
+			locSync[24+i] = tx[i];
+			locSync[28+i] = ty[i];
+			//character id
+			locSync[i+12] = chid[i];
+		}
+		
+		//run/walk
+		locSync[40]=run;
+		
+		return locSync;
+		
+	}
+	
+	public static byte[] getExtMovementPacket(Character ch, float targetX, float targetY, byte run){
+		
+		byte[] chid = BitTools.intToByteArray(ch.getCharID());
+		byte[] tx = BitTools.floatToByteArray(targetX);
+		byte[] ty = BitTools.floatToByteArray(targetY);
+		byte[] chx = BitTools.floatToByteArray(ch.getlastknownX());
+		byte[] chy = BitTools.floatToByteArray(ch.getlastknownY());
 		
 		byte externmove[] = new byte[48]; 
 		
@@ -878,10 +910,12 @@ public class CharacterPackets {
 		
 		for(int i=0;i<4;i++) {
 			externmove[i+12] = chid[i];
-			externmove[i+20] = tx[3-i];
-			externmove[i+24] = ty[3-i];
-			externmove[i+28] = chx[i];
-			externmove[i+32] = chy[i];	
+			//character actual coords
+			externmove[i+20] = chx[i];
+			externmove[i+24] = chy[i];
+			//character target coords
+			externmove[i+28] = tx[i];
+			externmove[i+32] = ty[i];	
 		}
 		
 		//run/walk

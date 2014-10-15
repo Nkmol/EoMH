@@ -18,7 +18,7 @@ public class LocationSync implements Packet {
 
 	
 	public byte[] returnWritableByteBuffer(byte[] buffyTheVampireSlayer, Connection con) throws PaketException{
-		byte[] locSync=null;
+		//byte[] locSync=null;
 		if(con!=null){
 			byte[] decrypted = new byte[(buffyTheVampireSlayer[0] & 0xFF)-8];
 			
@@ -41,41 +41,9 @@ public class LocationSync implements Packet {
 			//new: movesyncsystem
 			current.startMoveTo(BitTools.byteArrayToFloat(x), BitTools.byteArrayToFloat(y));
 			
-			locSync = new byte[56]; 
-			
-			locSync[0] = (byte)locSync.length;
-			locSync[4] = (byte)0x04;
-			locSync[6] = (byte)0x0D;
-			
-			byte[] id = BitTools.intToByteArray(current.getCharID());
-			
-			//byte[] mahtimuna = new byte[] {(byte)0x01, (byte)0xed, (byte)0x5f, (byte)0xbf, (byte)0x00, (byte)0x00, (byte)0x80, (byte)0x3f, (byte)0x03, (byte)0x00, (byte)0x00, (byte)0x36};
-			//byte[] mahtileka = new byte[] {(byte)0x13, (byte)0xad, (byte)0xbc, (byte)0x3e};
-			
-			//for(int i=0;i<mahtimuna.length;i++) {
-			//	externmove[i+36] = mahtimuna[i];
-			//}
-			
-			/*
-			 * location sync has 2 sets of coordinates: 1st is current location, 2nd is next location sync will take place at
-			 * but I'm taking a little shortcut here and just setting both as new intented location as told to us by client
-			 */
-			for(int i=0;i<4;i++) {
-				//1st set
-				locSync[16+i] = x[i];   
-				locSync[20+i] = y[i]; 
-				//2nd set 
-				locSync[24+i] = x[i];
-				locSync[28+i] = y[i];
-				//character id
-				locSync[i+12] = id[i];
-				
-				//externmove[i+16] = mahtileka[i];
-			}
-			
-			//run/walk
-			locSync[40]=decrypted[13];
 			current.setWalking(decrypted[13]==0);
+			
+			//current.sendMovementPackets(BitTools.byteArrayToFloat(x), BitTools.byteArrayToFloat(y), decrypted[13]);
 			
 			//externmove[37]=(byte)0x04;
 			//externmove[38]=(byte)0x4a;
@@ -84,11 +52,9 @@ public class LocationSync implements Packet {
 			//externmove[42]=(byte)0x80;
 			//externmove[43]=(byte)0x3f;
 			//externmove[44]=(byte)0x03;//decrypted[17];
-			
-			current.sendExternMovementPacket(BitTools.byteArrayToFloat(x), BitTools.byteArrayToFloat(y), decrypted[13]);
 		}
 		
-		con.addWrite(locSync);
+		//con.addWrite(locSync);
 		throw new PaketException();
 	}
 

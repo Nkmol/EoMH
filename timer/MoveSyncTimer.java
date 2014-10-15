@@ -48,12 +48,19 @@ public class MoveSyncTimer extends TimerTask{
 			long newTime=System.currentTimeMillis();
 			long timeDif=newTime-oldTime;
 			timeUntilTarget-=timeDif;
+			byte run=(byte)1;
+			if(owner.isWalking())
+				run=(byte)0;
 			if(timeUntilTarget>0){
-				Waypoint oldWp=owner.getLocation();
-				float newX,newY;
+				int bonustime=500;
+				if (timeUntilTarget<bonustime)
+					bonustime=(int)timeUntilTarget;
+				float newX,newY,targetX,targetY;
 				float movedDistance=timeDif*owner.getSpeed()/1000f;
-				float distanceLeft=WMap.distance(oldWp.getX(), oldWp.getY(), target.getX(), target.getY());
+				float movedDistanceTarget=(timeDif+bonustime)*owner.getSpeed()/1000f;
+				float distanceLeft=WMap.distance(owner.getlastknownX(), owner.getlastknownY(), target.getX(), target.getY());
 				float distanceFactor=movedDistance/distanceLeft;
+				float distanceFactorTarget=movedDistanceTarget/distanceLeft;
 				
 				//System.out.println("movedDistance: "+movedDistance);
 				//System.out.println("distanceLeft: "+distanceLeft);
@@ -61,13 +68,22 @@ public class MoveSyncTimer extends TimerTask{
 				//System.out.println("timeDif: "+timeDif);
 				//System.out.println("timeUntilTarget: "+timeUntilTarget);
 				
-				newX=oldWp.getX()+(target.getX()-oldWp.getX())*distanceFactor;
-				newY=oldWp.getY()+(target.getY()-oldWp.getY())*distanceFactor;
+				newX=owner.getlastknownX()+(target.getX()-owner.getlastknownX())*distanceFactor;
+				newY=owner.getlastknownY()+(target.getY()-owner.getlastknownY())*distanceFactor;
+				targetX=owner.getlastknownX()+(target.getX()-owner.getlastknownX())*distanceFactorTarget;
+				targetY=owner.getlastknownY()+(target.getY()-owner.getlastknownY())*distanceFactorTarget;
 				
 				owner.updateLocation(newX, newY);
 				oldTime=newTime;
+				
+				//packet
+				owner.sendMovementPackets(targetX, targetY, run);
 			}else{
 				owner.updateLocation(target.getX(), target.getY());
+				
+				//packet
+				owner.sendMovementPackets(target.getX(), target.getY(), run);
+				
 				target=null;
 			}
 		}

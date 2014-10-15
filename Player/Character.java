@@ -159,7 +159,7 @@ public class Character implements Location, Fightable {
 		//move sync timer
 		timer=new Timer();
 		moveSyncTimer=new MoveSyncTimer(this);
-		timer.scheduleAtFixedRate(moveSyncTimer,1000,1000);
+		timer.scheduleAtFixedRate(moveSyncTimer,500,500);
 		
 		//regeneration timer
 		healingTimer=new Timer();
@@ -1127,6 +1127,10 @@ public class Character implements Location, Fightable {
 		updateSpeed();
 	}
 	
+	public boolean isWalking(){
+		return walking;
+	}
+	
 	public void setTurboSpeed(float turboSpeed){
 		this.turboSpeed=turboSpeed;
 		updateSpeed();
@@ -1557,7 +1561,8 @@ public class Character implements Location, Fightable {
 		return moveSyncTimer.getTarget();
 	}
 	
-	public void sendExternMovementPacket(float chX, float chY, byte run){
+	public void sendMovementPackets(float targetX, float targetY, byte run){
+		ServerFacade.getInstance().addWriteByChannel(GetChannel(), CharacterPackets.getMovementPacket(this, targetX, targetY, run));
 		synchronized(this.iniPackets) {
 			Iterator<Integer> iter = this.iniPackets.iterator();
 				while(iter.hasNext()) {
@@ -1565,7 +1570,7 @@ public class Character implements Location, Fightable {
 					if (plUid != this.charID){
 						Character ch = this.wmap.getCharacter(plUid.intValue());
 						if(ch != null && !ch.isBot()) {
-							ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), CharacterPackets.getExtMovementPacket(this, chX, chY, ch, run));
+							ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), CharacterPackets.getExtMovementPacket(this, targetX, targetY, run));
 						}
 					}
 				}
