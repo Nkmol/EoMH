@@ -5,6 +5,7 @@ import item.ItemInInv;
 
 import java.nio.ByteBuffer;
 
+import Buffs.Buff;
 import Gamemaster.GameMaster;
 import ServerCore.ServerFacade;
 import Skills.SkillFrame;
@@ -562,7 +563,7 @@ public class CharacterPackets {
 		
 	}
 	
-	public static byte[] getBuffIconPacket(Character ch, short id, short time, short value, short slot) {
+	public static byte[] getBuffPacket(Character ch, short buffid, short slot, Buff buff) {
     	byte[] chid = BitTools.intToByteArray(ch.getCharID());
 		byte[] buffIcon = new byte[44];
 		buffIcon[0] = (byte)0x2c; 
@@ -575,10 +576,10 @@ public class CharacterPackets {
 		}	
 		
 		
-		byte[] buffId = BitTools.shortToByteArray(id);
+		byte[] buffId = BitTools.shortToByteArray(buffid);
 		byte[] buffSlot = BitTools.shortToByteArray(slot);
-		byte[] buffTime = BitTools.shortToByteArray(time);
-		byte[] buffValue = BitTools.shortToByteArray(value);
+		byte[] buffTime = BitTools.shortToByteArray(buff.getBuffTime());
+		byte[] buffValue = BitTools.shortToByteArray(buff.getBuffValue());
 		for(int i=0;i<2;i++) {
 			buffIcon[i+16] = buffSlot[i];
 			buffIcon[i+20] = buffId[i];

@@ -3,8 +3,8 @@ package chat.chatCommandHandlers;
 import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
-import ServerCore.ServerFacade;
-import Tools.BitTools;
+import Buffs.Buff;
+import Buffs.ItemBuff;
 import Connections.Connection;
 import Gamemaster.GameMaster;
 import chat.ChatCommandExecutor;
@@ -37,7 +37,8 @@ public class bufficon implements ChatCommandExecutor {
 		    }
 	    	else
 	    	{
-	    		source.addWrite(CharacterPackets.getBuffIconPacket(cur, Short.parseShort(parameters[0]), (short)0, (short)0, Short.parseShort(parameters[1])));
+	    		Buff buff = new ItemBuff(cur, Short.parseShort(parameters[0]), (short)8, (short)1);
+	    		source.addWrite(CharacterPackets.getBuffPacket(cur, Short.parseShort(parameters[0]), Short.parseShort(parameters[1]), buff));
 	    	}
 	    }
 	    else

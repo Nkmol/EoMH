@@ -44,7 +44,21 @@ public class ConsumableItem extends ItemFrame {
 	
 
 	public void setBuff(short[] buffId, short[] buffTime, short[] buffValue) {
-		
+		this.buffId = buffId;
+		this.buffTime = buffTime;
+		this.buffValue = buffValue;
+	}
+	
+	public short[] getBuffId() {
+		return buffId;
+	}
+	
+	public short[] getBuffTime() {
+		return buffTime;
+	}
+	
+	public short[] getBuffValue() {
+		return buffValue;
 	}
 
 }

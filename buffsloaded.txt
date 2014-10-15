@@ -1,0 +1,60 @@
+ID:1 	//hp??
+ID:2 	//increase Max hp
+ID:3 	//increase Max mana
+ID:4	//increase exp rate %
+ID:5	//increase atk
+ID:6 	//increase hp regen
+ID:7 	//increase Max hp
+ID:9 	//increase Max mana
+ID:11	//??
+ID:13	//reduce exp %
+ID:14	//increase gold drop %
+ID:15	//increase atk
+ID:16	//increase deff
+ID:17	//final damage
+ID:18	//final defense
+ID:19	//?? critcal damage % or value
+ID:20	//increase deff
+ID:21	//increase atk succes rate
+ID:22	//increase crit chance
+ID:23	//atk succes rate?? final?
+ID:24	//crit chance?? final?
+ID:25	//%?
+ID:30	//increase atk range
+ID:42	//transform live into mana
+ID:43	//stun - unable to move
+ID:44	//stealth - not visable to other players - % damage
+ID:46	//sleep - unable to move
+ID:47	//poison - value is damage. every 4 sec damage
+ID:48	//final deff succes rate
+ID:49	//unable to move
+ID:50	//angry point?`? blue warrior buffs 100271
+ID:51	//bugged Lance skill shoulder 110111
+ID:52	//offense critical?
+ID:57	//Increase critical damage
+ID:58	//summoning skill - value?
+ID:59	//open cargo timed?
+ID:60	//getting fat :D
+ID:62	//?? red
+ID:63	//?? blue
+ID:64	//Illusion bullet buff?
+ID:81	//set live points to value
+ID:82	//??
+ID:83	//set atk to 0?
+ID:84	//??
+ID:85	//??
+ID:86	//??
+ID:87	//
+ID:88	//
+ID:89	//
+ID:90	//fame rate increase %
+ID:91	//drop rate increase %
+ID:92	//coins rate increase %
+ID:93	//increase atk+2 def+2 hp+100 mana+9 stam+6 ??
+ID:94	//increase atk
+ID:46776
+ID:48556
+ID:59833
+ID:63930
+
+atk 46 def 45 hp 137 mana 126 

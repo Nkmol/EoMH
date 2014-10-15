@@ -4,13 +4,13 @@ import Player.Character;
 
 public class ItemBuff extends Buff{
 	
-	public ItemBuff(Character owner, int buffId, long buffLength, int buffValue){
+	public ItemBuff(Character owner, short buffId, short buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
-		startBuff();
+		//startBuff();
 	}
 	
 	@Override
-	protected boolean startBuff(){
+	public boolean startBuff(){
 		if(super.startBuff()){
 			//do item buff start stuff
 			
@@ -38,5 +38,4 @@ public class ItemBuff extends Buff{
 	public Character getOwner(){
 		return super.getOwner();
 	}
-
 }

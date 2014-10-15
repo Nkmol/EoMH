@@ -23,6 +23,9 @@ import java.util.logging.Level;
 import timer.MoveSyncTimer;
 import timer.HealingTimer;
 import logging.ServerLogger;
+import Buffs.Buff;
+import Buffs.ItemBuff;
+import Buffs.SkillBuff;
 import Database.CharacterDAO;
 import Duel.Duel;
 import Parties.Party;
@@ -103,8 +106,8 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
-	private int buffAmountActive=0;
-	private Map<Short, HashMap<String, Short>> buffActive = new HashMap<Short, HashMap<String, Short>>();
+	private HashMap<Short, Buff> buffActive = new LinkedHashMap <Short, Buff>();
+	private HashMap<Short, Short> buffSlot = new LinkedHashMap<Short, Short>();
 	
 	
 	public Character(Doll doll){
@@ -1131,6 +1134,30 @@ public class Character implements Location, Fightable {
 		updateSpeed();
 	}
 	
+	public void addBuff(short buffid, Buff buff, short slot) {
+		buffActive.put(buffid, buff);
+		buffSlot.put(buffid, slot);
+		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buffid, slot, buff));
+	}
+	
+	public void removeBuff(short buffid) {
+		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buffid, buffSlot.get(buffid), new ItemBuff(this, (short)0, (short)0, (short)0)));
+		buffActive.remove(buffid);
+		buffSlot.remove(buffid);
+	}
+	
+	public Buff getBuff(short buffid) {
+		return buffActive.get(buffid);
+	}
+	
+	public short getBuffSlot(short buffid) {
+		return buffSlot.get(buffid);
+	}
+	
+	public int getBuffLength() {
+		return buffSlot.size();
+	}
+	
 	public void updateLocation(float x, float y){
 		/*
 		if (this.timer != null){ if (!this.timer.isCompleted()) this.timer.cancel(); }
@@ -1547,6 +1574,4 @@ public class Character implements Location, Fightable {
 	public void stopMovement(){
 		moveSyncTimer.stopMovement();
 	}
-
-	
 }
