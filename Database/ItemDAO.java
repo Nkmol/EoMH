@@ -3,7 +3,11 @@ package Database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import Buffs.BuffAction;
 import item.ConsumableItem;
 import item.EquipableItem;
 import item.EquipableSetItem;
@@ -19,6 +23,44 @@ public class ItemDAO {
 	
 	public static ItemDAO getInstance() {
 		return (instance == null) ? new ItemDAO() : instance;
+	}
+	
+	//Get item buffs
+	public List<Integer> getItemBuffs() {
+		ResultSet rs = null;
+		List<Integer> itemBuffs = new ArrayList<Integer>();
+		try {
+			rs = Queries.getItemBuffs(this.sqlConnection).executeQuery();
+			while (rs.next()) {
+				itemBuffs.add(rs.getInt("buffs")) ;
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return itemBuffs;
+	}
+	
+	//Get skill buffs
+	public List<Integer> getSkillBuffs() {
+		ResultSet rs = null;
+		List<Integer> skillBuffs = new ArrayList<Integer>();
+		try {
+			rs = Queries.getSkillBuffs(this.sqlConnection).executeQuery();
+			while (rs.next()) {
+				skillBuffs.add(rs.getInt("buffs")) ;
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return skillBuffs;
 	}
 	
 	// retrieve item data from db and return it as base type of ItemFrame
@@ -113,9 +155,9 @@ public class ItemDAO {
 			//Add buffs to usable item
 			short[] buffid = new short[2], bufftime = new short[2], buffvalue = new short[2];
 			for(int i = 1; i <= 2; i++) {
-				buffid[i] = (short)rs.getInt("BuffId" + i);
-				bufftime[i] = (short)rs.getInt("BuffTime" + i);
-				buffvalue[i] = (short)rs.getInt("BuffValue"  + i);
+				buffid[i-1] = (short)rs.getInt("BuffId" + i);
+				bufftime[i-1] = (short)rs.getInt("BuffTime" + i);
+				buffvalue[i-1] = (short)rs.getInt("BuffValue"  + i);
 			}
 			it.setBuff(buffid, bufftime, buffvalue);
 		} catch (SQLException e){
@@ -232,5 +274,4 @@ public class ItemDAO {
 		}
 		return rs;
 	}
-
 }

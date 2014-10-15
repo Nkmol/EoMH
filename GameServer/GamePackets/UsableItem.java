@@ -10,6 +10,8 @@ import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
 import Tools.BitTools;
+import Buffs.Buff;
+import Buffs.ItemBuff;
 import Connections.Connection;
 import Encryption.Decryptor;
 import GameServer.ServerPackets.ServerMessage;
@@ -99,10 +101,26 @@ public class UsableItem implements Packet {
         con.addWrite(useitem);
         cur.sendToMap(extuseitem);
         
-        ConsumableItem consumableitem = ((ConsumableItem)(item.getItem()));
+        ConsumableItem conitem = ((ConsumableItem)(item.getItem()));
         if(item!=null && item.getItem() instanceof ConsumableItem){
-    		cur.addHpMpSp(consumableitem.getHealhp(), consumableitem.getHealmana(), (short)0);
+    		cur.addHpMpSp(conitem.getHealhp(), conitem.getHealmana(), (short)0);
     	}
+        
+        //BUFF
+        if(conitem.getBuffId()[0] > 0) {
+	        ItemBuff[] itembuff = new ItemBuff[conitem.getBuffId().length];
+	        for(int i=0; i<itembuff.length;i++) {
+	        	if(conitem.getBuffId()[i] > 0) {
+		        	short buffId = conitem.getBuffId()[i];
+		            itembuff[i] = new ItemBuff(cur, buffId, conitem.getBuffTime()[i], conitem.getBuffValue()[i]);
+		            System.out.println("buffId: " + buffId);
+		        	
+		        	//Run buff
+		        	itembuff[i].startBuff();
+	        	}
+	        }
+        }
+        
         
 		return null;
 	}

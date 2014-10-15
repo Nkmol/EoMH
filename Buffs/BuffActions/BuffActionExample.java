@@ -6,7 +6,7 @@ import Player.Character;
 public class BuffActionExample implements BuffAction{
 	
 	public BuffActionExample(){
-		
+
 	}
 
 	public void startBuff(Character ch,int value){
@@ -15,6 +15,5 @@ public class BuffActionExample implements BuffAction{
 	
 	public void endBuff(Character ch,int value){
 		//for example ch.decreaseBonusAtk(value); ch.calculateCharacterStats();
-	}
-	
+	}	
 }

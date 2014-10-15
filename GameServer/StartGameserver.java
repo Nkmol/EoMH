@@ -4,6 +4,7 @@ import logging.ServerLogger;
 import Configuration.ConfigurationManager;
 import ServerCore.ServerFacade;
 import Skills.SkillMaster;
+import Buffs.BuffMaster;
 import Database.CharacterDAO;
 import Database.GamemasterDAO;
 import Database.MobDAO;
@@ -44,6 +45,7 @@ public class StartGameserver {
 			ServerLogger.getInstance().info(StartGameserver.class, "Server started");
 			StartupDAO.loadMaps();
 			SkillMaster.loadAllSkills();
+			BuffMaster.getAllBuffs();
 			GamemasterDAO.loadGamemasterRanks();
 			CharacterDAO.loadCharacterLvl(81);
 			MobDAO.initMobs();

@@ -690,6 +690,14 @@ public class Queries {
 		st.setInt(1, id);
 		return st;
 	}
+	public static PreparedStatement getItemBuffs(Connection con) throws Exception {
+		PreparedStatement st = con.prepareStatement("SELECT `BuffId1` as buffs FROM items WHERE BuffId1 > 0 UNION SELECT `BuffId2` FROM items WHERE BuffId2 > 0");
+		return st;
+	}
+	public static PreparedStatement getSkillBuffs(Connection con) throws Exception {
+		PreparedStatement st = con.prepareStatement("SELECT `effId1` as buffs FROM skills WHERE effId1 > 0 UNION SELECT `effId2` FROM skills WHERE effId2 > 0 UNION SELECT `effId3` FROM skills WHERE effId3 > 0");
+		return st;
+	}
 	public static PreparedStatement createItemsTable(Connection con) throws Exception {
 		PreparedStatement st = con.prepareStatement("CREATE TABLE `items` (" +
 													"`itemid` int(10) unsigned NOT NULL," +

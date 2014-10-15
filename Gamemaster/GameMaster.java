@@ -49,7 +49,6 @@ public class GameMaster {
 	public static boolean hasGMname(Character ch){
 		
 		int rank=ch.getGMrank();
-		System.out.println("Has GM name: " + (ranks.containsKey(rank) && ranks.get(rank).gotGMname()));
 		if(ranks.containsKey(rank) && ranks.get(rank).gotGMname()){
 			return true;
 		}
