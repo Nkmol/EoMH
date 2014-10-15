@@ -1,9 +1,6 @@
 package Player;
 
-import item.ItemVendor;
-
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +21,11 @@ public class CharacterMaster {
 	private static final float runningSpeed=24.5f;
 	private static final float walkingSpeed=7;
 	private static final TreeMap<Integer, Short> fametitles = new TreeMap<Integer, Short>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5098513966635876479L;
+
 		{
 			put(18580416, (short)1);
 			put(12386944, (short)2);

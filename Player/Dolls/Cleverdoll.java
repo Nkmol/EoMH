@@ -49,7 +49,7 @@ public class Cleverdoll extends Thread{
 						Doll d=doll.remove(0);
 						String s=botSession.think(message.remove(0));
 						d.writeInPublicChat(s);
-						Thread.sleep(1000);
+						sleep(1000);
 					}catch(Exception e){
 						e.printStackTrace();
 					}

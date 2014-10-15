@@ -32,6 +32,10 @@ import Parser.LvlexpParser;
 import Parser.LvlexpParserSQL;
 import Parser.MobParser;
 import Parser.MobParserSQL;
+import Parser.MobSpawnsParser;
+import Parser.MobSpawnsParserSQL;
+import Parser.NpcSpawnsParser;
+import Parser.NpcSpawnsParserSQL;
 import Parser.SkillParser;
 import Parser.SkillParserSQL;
 
@@ -107,6 +111,7 @@ public class Installer {
                         if (bol[10]) if (!this.dao.createCharSkillbarsTable()){ System.out.println("Failed to create table \"charskillbars\".. terminating, install failed"); return; }
                         if (bol[11]) if (!this.dao.createLvlsTable()){ System.out.println("Failed to create table \"lvls\".. terminating, install failed"); return; }
                         if (bol[12]) if (!this.dao.createGamemasterTable()){ System.out.println("Failed to create table \"gamemaster\".. terminating, install failed"); return; }
+                        if (bol[13]) if (!this.dao.createNpcSpawnsTable()) { System.out.println("Failed to create table \"npcSpawns\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[2]){
@@ -134,6 +139,11 @@ public class Installer {
                         	this.createMobData();
                         	System.out.println("Done");
                         }
+                        if(bol[5]){
+                        	System.out.println("Creating mobSpawn entries");
+                        	this.createMobSpawns();
+                        	System.out.println("Done");
+                        }
                         if(bol[11]){
                         	System.out.println("Creating lvl entries");
                         	this.createLvlData();
@@ -142,6 +152,11 @@ public class Installer {
                         if(bol[12]){
                         	System.out.println("Creating gamemaster entries");
                         	this.createGamemasterData();
+                        	System.out.println("Done");
+                        }
+                        if(bol[13]){
+                        	System.out.println("Creating npcSpawn entries");
+                        	this.createNpcSpawns();
                         	System.out.println("Done");
                         }
                         
@@ -157,6 +172,18 @@ public class Installer {
         private void createMobData() {
         	
         	MobParserSQL.parseMobsToSQL(dao, MobParser.getMoblistFromScr("Data/mobs.scr", 456), MobParser.getDroplistFromScr("Data/mobsitem.scr",1012,800));
+        	
+		}
+        
+        private void createMobSpawns() {
+        	
+        	MobSpawnsParserSQL.parseMobspawnsToSQL(dao, MobSpawnsParser.getMobspawnlistFromArr("Data/MobSpawnsMaps.txt", 20));
+        	
+		}
+        
+        private void createNpcSpawns() {
+        	
+        	NpcSpawnsParserSQL.parseNpcspawnsToSQL(dao, NpcSpawnsParser.getNpcspawnlistFromArr("Data/NpcSpawnsMaps.txt", 28));
         	
 		}
         
@@ -332,8 +359,8 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobData", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobData", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcSpawns"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

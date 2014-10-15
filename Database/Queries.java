@@ -282,9 +282,10 @@ public class Queries {
 													
 		return st;
 	}
+	
 	public static PreparedStatement createMobsTable(Connection con) throws Exception{
 		PreparedStatement st = con.prepareStatement("CREATE TABLE `mobs` ("+
-													"`id` int(11) NOT NULL,"+
+													"`id` int(11) NOT NULL AUTO_INCREMENT,"+
 													"`mobType` int(11) NOT NULL,"+
 													"`map` int(11) NOT NULL,"+
 													"`spawnCount` int(11) NOT NULL,"+
@@ -304,6 +305,24 @@ public class Queries {
 		return st;
 		
 	}
+	
+	public static PreparedStatement createNpcSpawnsTable(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("CREATE TABLE `npcspawns` ("+
+													"`id` int(11) NOT NULL AUTO_INCREMENT,"+
+													"`npcType` int(11) NOT NULL,"+
+													"`map` int(11) NOT NULL,"+
+													"`spawnX` int(11) NOT NULL,"+
+													"`spawnY` int(11) NOT NULL,"+
+													"PRIMARY KEY (`id`),"+
+													"UNIQUE KEY `id_UNIQUE` (`id`),"+
+													"KEY `type` (`npcType`),"+
+													"KEY `map` (`map`),"+
+													"CONSTRAINT `map2` FOREIGN KEY (`map`) REFERENCES `maps` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION"+
+													") ENGINE=InnoDB DEFAULT CHARSET=ascii;");
+		return st;
+		
+	}
+	
 	public static PreparedStatement addMap(Connection con, int id, String name, int gridsize, int areasize, int x, int y, int pool) throws Exception{
 		PreparedStatement st = con.prepareStatement("INSERT INTO maps(id, name, gridSize, areaSize, mapx, mapy, poolSize) VALUES (?, ?, ?, ?, ?, ?, ?);");
 		st.setInt(1, id);
@@ -438,6 +457,11 @@ public class Queries {
 		PreparedStatement st = con.prepareStatement("SELECT * FROM mobs;");
 		return st;
 	}
+	
+	public static PreparedStatement getNpcSpawns(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM npcspawns;");
+		return st;
+	}
 
 	public static PreparedStatement getZones(Connection con) throws Exception {
 		PreparedStatement st = con.prepareStatement("SELECT * FROM zones;");
@@ -535,6 +559,31 @@ public class Queries {
 			st.setInt(19+i*2, drops[i]);
 			st.setFloat(20+i*2, dropchances[i]);
 		}
+		return st;
+	}
+	
+	public static PreparedStatement createMobSpawnEntry(Connection con, int map, int id, int amount, float rx, float ry, float radius) throws Exception{
+		String s="INSERT INTO mobs(mobType, map, spawnCount, spawnRadius, spawnX, spawnY, respawnTime, waypointCount, waypointHop) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		PreparedStatement st = con.prepareStatement(s);
+		st.setInt(1, id);
+		st.setInt(2, map);
+		st.setInt(3, amount);
+		st.setInt(4, (int)radius);
+		st.setInt(5, (int)rx);
+		st.setInt(6, (int)ry);
+		st.setInt(7, 30000);
+		st.setInt(8, 8);
+		st.setInt(9, 8);
+		return st;
+	}
+	
+	public static PreparedStatement createNpcSpawnEntry(Connection con, int map, int id, float x, float y) throws Exception{
+		String s="INSERT INTO npcspawns(npcType, map, spawnX, spawnY) VALUES(?, ?, ?, ?);";
+		PreparedStatement st = con.prepareStatement(s);
+		st.setInt(1, id);
+		st.setInt(2, map);
+		st.setInt(3, (int)x);
+		st.setInt(4, (int)y);
 		return st;
 	}
 	

@@ -19,7 +19,7 @@ public class MobParser extends Parser{
 			byte[] data = Files.readAllBytes(path);
 			System.out.println("BYTES: "+data.length+" ,CREATE MOB LISTS...");
 			
-			//GET ITEMS TO LIST
+			//GET MOBS TO LIST
 			LinkedList<ArrayList<Short>> mobs=new LinkedList<ArrayList<Short>>();
 			int byteatm=0;
 			short shortdata=0;
@@ -64,7 +64,7 @@ public class MobParser extends Parser{
 			byte[] data = Files.readAllBytes(path);
 			System.out.println("BYTES: "+data.length+" ,CREATE DROP LISTS...");
 			
-			//GET ITEMS TO LIST
+			//GET DROPS TO LIST
 			LinkedList<ArrayList<Short>> drops=new LinkedList<ArrayList<Short>>();
 			int byteatm=0;
 			short shortdata=0;
@@ -104,7 +104,7 @@ public class MobParser extends Parser{
 		try{
 			System.out.println("CREATE DROP LIST TEXT FILE...");
 			
-			//CREATE ITEM LIST TEXT FILE
+			//CREATE MOB LIST TEXT FILE
 			BufferedWriter out = new BufferedWriter(new FileWriter(pathString));
 			ArrayList<Short> drop1,drop2;
 			
@@ -144,7 +144,7 @@ public class MobParser extends Parser{
 		try{
 			System.out.println("CREATE MOB LIST TEXT FILE...");
 			
-			//CREATE ITEM LIST TEXT FILE
+			//CREATE MOB LIST TEXT FILE
 			BufferedWriter out = new BufferedWriter(new FileWriter(pathString));
 			ArrayList<Short> mob;
 			

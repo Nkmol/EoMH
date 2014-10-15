@@ -1,11 +1,5 @@
 package item;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import Player.CharacterPackets;
-import Player.Character;
-
 public class ConsumableItem extends ItemFrame {
 	private short[] buffId;
 	private short[] buffTime;

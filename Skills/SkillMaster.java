@@ -127,6 +127,8 @@ public class SkillMaster {
 	
 	public static void canCastToTarget(Location ch, Location target) throws SkillException{
 		
+		if(target==null)
+			throw new SkillException("Cannot cast skill [target doesnt exist]");
 		if(WMap.distance(ch.getlastknownX(), ch.getlastknownY(), target.getlastknownX(), target.getlastknownY())>150)
 			throw new SkillException("Cannot cast skill [target is too far away]");
 		

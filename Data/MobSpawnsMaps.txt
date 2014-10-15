@@ -1,0 +1,16 @@
+mob001.arr
+mob002.arr
+mob003.arr
+mob004.arr
+mob005.arr
+mob006.arr
+mob007.arr
+mob008.arr
+mob009.arr
+mob010.arr
+mob011.arr
+mob204.arr
+mob205.arr
+mob209.arr
+mob210.arr
+mob300.arr

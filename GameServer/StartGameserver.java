@@ -8,6 +8,7 @@ import Buffs.BuffMaster;
 import Database.CharacterDAO;
 import Database.GamemasterDAO;
 import Database.MobDAO;
+import Database.NpcDAO;
 import Database.StartupDAO;
 
 
@@ -48,6 +49,7 @@ public class StartGameserver {
 			GamemasterDAO.loadGamemasterRanks();
 			CharacterDAO.loadCharacterLvl(81);
 			MobDAO.initMobs();
+			NpcDAO.initNpcs();
 			ServerFacade.getInstance(); 
 			
 		}

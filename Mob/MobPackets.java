@@ -1,7 +1,6 @@
 package Mob;
 
 
-import Player.Character;
 import Tools.BitTools;
 import World.Waypoint;
 

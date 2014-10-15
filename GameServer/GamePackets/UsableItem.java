@@ -5,7 +5,6 @@ import item.ItemInInv;
 import item.inventory.InventoryException;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 import Player.Character;
 import Player.CharacterPackets;

@@ -7,7 +7,7 @@
 		<mapy>-5100</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>52</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>oc</name>
@@ -16,7 +16,7 @@
 		<mapy>-3000</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>41</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>tibet</name>
@@ -25,7 +25,7 @@
 		<mapy>39900</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>40</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>rc</name>
@@ -34,7 +34,7 @@
 		<mapy>53150</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>42</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>mc</name>
@@ -43,7 +43,7 @@
 		<mapy>60325</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>34</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>sz</name>
@@ -52,7 +52,7 @@
 		<mapy>57350</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>28</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>casino</name>
@@ -61,7 +61,7 @@
 		<mapy>55250</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>3</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>at1</name>
@@ -70,7 +70,7 @@
 		<mapy>33300</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>17</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>at2</name>
@@ -79,7 +79,7 @@
 		<mapy>35200</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>17</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>at3</name>
@@ -88,7 +88,7 @@
 		<mapy>34500</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>25</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>dl</name>
@@ -96,8 +96,8 @@
 		<mapx>1000</mapx>
 		<mapy>12500</mapy>
 		<areaSize>300</areaSize>
-		<gridSize>28</gridSize>
-		<mobPool>50</mobPool>
+		<gridSize>29</gridSize>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>character creation</name>
@@ -106,7 +106,7 @@
 		<mapy>-10000</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>3</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>beginner island</name>
@@ -115,7 +115,7 @@
 		<mapy>49300</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>3</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>144+ map</name>
@@ -124,7 +124,7 @@
 		<mapy>53200</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>42</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>144+ cave</name>
@@ -133,7 +133,7 @@
 		<mapy>24500</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>11</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>Lawful cave</name>
@@ -142,7 +142,7 @@
 		<mapy>24500</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>11</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>Evil cave</name>
@@ -151,7 +151,7 @@
 		<mapy>24500</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>11</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>Sungwha</name>
@@ -160,7 +160,7 @@
 		<mapy>24500</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>17</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>GM island</name>
@@ -169,7 +169,7 @@
 		<mapy>49100</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>3</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>GM island 2</name>
@@ -178,7 +178,7 @@
 		<mapy>56300</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>3</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>Graveyard 1</name>
@@ -187,7 +187,7 @@
 		<mapy>28600</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>10</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>Graveyard 2</name>
@@ -196,7 +196,7 @@
 		<mapy>28600</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>10</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 	<Map>
 		<name>rb</name>
@@ -205,6 +205,6 @@
 		<mapy>10200</mapy>
 		<areaSize>300</areaSize>
 		<gridSize>34</gridSize>
-		<mobPool>50</mobPool>
+		<mobPool>500</mobPool>
 	</Map>
 </Maps>

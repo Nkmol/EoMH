@@ -15,6 +15,10 @@ public class Parser {
 		return shortList.get(firstIndex)+shortList.get(firstIndex+1)*256;
 	}
 	
+	public static int convertReversedBytesToSmall(ArrayList<Short> shortList, int firstIndex){
+		return shortList.get(firstIndex+1)+shortList.get(firstIndex)*256;
+	}
+	
 	public static int convertBytesToByte(ArrayList<Short> shortList, int firstIndex){
 		return shortList.get(firstIndex);
 	}
@@ -55,6 +59,21 @@ public class Parser {
 		String string;
 		String add;
 		int num=shortList.get(firstIndex)+shortList.get(firstIndex+1)*256;
+		string=new Integer(num).toString();
+		add="";
+		for(int i=string.length();i<10;i++)
+			add+=" ";
+		try{
+			out.write(string+add);
+			out.write(", ");
+		}catch(Exception e){}
+		return num;
+	}
+	
+	public static int writeReversedSmallString(BufferedWriter out, ArrayList<Short> shortList, int firstIndex){
+		String string;
+		String add;
+		int num=shortList.get(firstIndex+1)+shortList.get(firstIndex)*256;
 		string=new Integer(num).toString();
 		add="";
 		for(int i=string.length();i<10;i++)

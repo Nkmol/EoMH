@@ -233,8 +233,10 @@ public class Character implements Location, Fightable {
 		if(skillTimer!=null)
 			skillTimer.cancel();
 		
-		this.area.rmMember(this);
-		this.wmap.rmCharacter(charID);
+		if(area!=null)
+			this.area.rmMember(this);
+		if(wmap!=null)
+			this.wmap.rmCharacter(charID);
 		Iterator<Integer> it = this.iniPackets.iterator();
 		Integer player;
 		while (it.hasNext()){
@@ -1573,5 +1575,28 @@ public class Character implements Location, Fightable {
 	
 	public void stopMovement(){
 		moveSyncTimer.stopMovement();
+	}
+	
+	public void refreshCoords(){
+		moveSyncTimer.refreshWaypoint();
+	}
+	
+	public Waypoint getTarget(){
+		return moveSyncTimer.getTarget();
+	}
+	
+	public void sendExternMovementPacket(float chX, float chY, byte run){
+		synchronized(this.iniPackets) {
+			Iterator<Integer> iter = this.iniPackets.iterator();
+				while(iter.hasNext()) {
+					Integer plUid = iter.next();               
+					if (plUid != this.charID){
+						Character ch = this.wmap.getCharacter(plUid.intValue());
+						if(ch != null && !ch.isBot()) {
+							ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), CharacterPackets.getExtMovementPacket(this, chX, chY, ch, run));
+						}
+					}
+				}
+		}
 	}
 }
