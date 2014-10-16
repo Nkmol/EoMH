@@ -11,7 +11,7 @@ public class StartupDAO {
 
 	
 	public static void loadMaps(){
-		int x,y,gridsize,areasize, pool, id;
+		int x,y,gridsizex,gridsizey,areasize, pool, id;
 		ServerLogger log = ServerLogger.getInstance();
 		String name;
 		Grid grid;
@@ -22,14 +22,15 @@ public class StartupDAO {
 					id = rs.getInt("id");
 					x = rs.getInt("mapx");
 					y = rs.getInt("mapy");
-					gridsize = rs.getInt("gridSize");
+					gridsizex = rs.getInt("gridSizeX");
+					gridsizey = rs.getInt("gridSizeY");
 					areasize = rs.getInt("areaSize");
 					name = rs.getString("name");
 					pool = rs.getInt("poolSize");
-					grid = new Grid(id, gridsize, areasize, name, x, y, pool);
+					grid = new Grid(id, gridsizex, gridsizey, areasize, name, x, y, pool);
 					WMap.getInstance().addGrid(grid);
 					
-					log.info(StartupDAO.class, "Map id:" + id + " name:" +name +" gridsize:" + gridsize + " areasize:" +areasize);
+					log.info(StartupDAO.class, "Map id:" + id + " name:" +name +" gridsizeX:" + gridsizex +" gridsizeY:" + gridsizey + " areasize:" +areasize);
 					log.info(StartupDAO.class, " x:" +x + " y:" +y + " poolsize:" +pool);
 				}
 				rs.close();

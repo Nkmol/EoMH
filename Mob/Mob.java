@@ -119,12 +119,14 @@ public class Mob implements Location, Fightable{
 			Area a = this.grid.update(this);
 			// System.out.println("Got area " + a.getuid());
 			this.setMyArea(a);
-			this.iniPackets.addAll(a.addMemberAndGetMembers(this));
-			for(Iterator<Integer> it=this.iniPackets.iterator();it.hasNext();){
-				Integer i = it.next();
-		    	if (!WMap.getInstance().CharacterExists(i)){
-		    		it.remove();
-		    	}
+			synchronized(this.iniPackets){
+				this.iniPackets.addAll(a.addMemberAndGetMembers(this));
+				for(Iterator<Integer> it=this.iniPackets.iterator();it.hasNext();){
+					Integer i = it.next();
+					if (!WMap.getInstance().CharacterExists(i)){
+						it.remove();
+					}
+				}
 			}
 			if(!isRegistered && !iniPackets.isEmpty()){
 				control.register(this);
@@ -153,28 +155,30 @@ public class Mob implements Location, Fightable{
 			List<Integer> ls;
 		    ls = this.area.addMemberAndGetMembers(this);
 		    Iterator<Integer> it = this.iniPackets.iterator();
-		    while (it.hasNext()){
-		    	Integer i = it.next();
-		    	if (!WMap.getInstance().CharacterExists(i)){
-		    		it.remove();
+		    synchronized(this.iniPackets){
+		    	while (it.hasNext()){
+		    		Integer i = it.next();
+		    		if (!WMap.getInstance().CharacterExists(i)){
+		    			it.remove();
+		    		}
+		    		else if (!ls.contains(i)){
+		    			it.remove();
+		    			if(!wmap.getCharacter(i).isBot())
+		    				ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(i).GetChannel(), MobPackets.getDeathPacket(this.uid, this,false));
+		    		}
 		    	}
-		    	else if (!ls.contains(i)){
-		    		it.remove();
-		    		if(!wmap.getCharacter(i).isBot())
-		    			ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(i).GetChannel(), MobPackets.getDeathPacket(this.uid, this,false));
-		    	}
-		    }
-		    ls.removeAll(iniPackets);
-		    this.sendInitToList(ls);
-		    this.iniPackets.addAll(ls);
+		    	ls.removeAll(iniPackets);
+		    	this.sendInitToList(ls);
+		    	this.iniPackets.addAll(ls);
 		    
 	
-		    if(this.iniPackets.isEmpty() && this.isRegistered) {
-		    	this.control.unregister(this);
-		    	this.isRegistered = false;
-		    } else if(!this.isRegistered && !this.iniPackets.isEmpty()) {
-		    	this.control.register(this);
-		    	this.isRegistered = true;
+		    	if(this.iniPackets.isEmpty() && this.isRegistered) {
+		    		this.control.unregister(this);
+		    		this.isRegistered = false;
+		    	} else if(!this.isRegistered && !this.iniPackets.isEmpty()) {
+		    		this.control.register(this);
+		    		this.isRegistered = true;
+		    	}
 		    }
 		}
 	}
@@ -217,8 +221,18 @@ public class Mob implements Location, Fightable{
 			int starty = -1* this.data.getMoveSpeed();
 			int x = startx + r.nextInt(2 * this.data.getMoveSpeed());
 			int y = starty + r.nextInt(2 * this.data.getMoveSpeed());
+			float newX=this.getlastknownX() + (float)x;
+			float newY=this.getlastknownY() + (float)y;
+			if(newX<control.getSpawnx()-control.getSpawnRadius())
+				newX=control.getSpawnx()-control.getSpawnRadius();
+			if(newX>control.getSpawnx()+control.getSpawnRadius())
+				newX=control.getSpawnx()+control.getSpawnRadius();
+			if(newY<control.getSpawny()-control.getSpawnRadius())
+				newY=control.getSpawny()-control.getSpawnRadius();
+			if(newY>control.getSpawny()+control.getSpawnRadius())
+				newY=control.getSpawny()+control.getSpawnRadius();
 			
-			ls.add(new Waypoint(this.getlastknownX() + (float)x, this.getlastknownY() + (float)y));
+			ls.add(new Waypoint(newX, newY));
 			for(int u=0;u<this.data.getWaypointDelay();u++) {
 				ls.add(null);
 			}
@@ -520,24 +534,26 @@ public class Mob implements Location, Fightable{
 	// update near by objects, called by area
 	// receive updated list for nearby objects
 	public synchronized void updateEnvironment(Integer player, boolean add) {
-		if (this.iniPackets.contains(player) && !add){
-			this.iniPackets.remove(player);
-			if(!wmap.getCharacter(player).isBot())
-				ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), MobPackets.getDeathPacket(this.uid, this, false));
-			if(this.iniPackets.isEmpty() && this.isRegistered) {
-		    	this.control.unregister(this);
-		    	this.isRegistered = false;
-		    }
-		}
-		if (add && !this.iniPackets.contains(player)){
-			this.iniPackets.add(player);
-			this.sendInit(player);
-			if(!this.isRegistered) {
-		    	this.control.register(this);
-		    	this.isRegistered = true;
-		    }
-			if(!this.control.isActive()) {
-				this.grid.getThreadPool().executeProcess(this.control);
+		synchronized(this.iniPackets){
+			if (this.iniPackets.contains(player) && !add){
+				this.iniPackets.remove(player);
+				if(!wmap.getCharacter(player).isBot())
+					ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), MobPackets.getDeathPacket(this.uid, this, false));
+				if(this.iniPackets.isEmpty() && this.isRegistered) {
+					this.control.unregister(this);
+					this.isRegistered = false;
+				}
+			}
+			if (add && !this.iniPackets.contains(player)){
+				this.iniPackets.add(player);
+				this.sendInit(player);
+				if(!this.isRegistered) {
+					this.control.register(this);
+					this.isRegistered = true;
+				}
+				if(!this.control.isActive()) {
+					this.grid.getThreadPool().executeProcess(this.control);
+				}
 			}
 		}
 	}

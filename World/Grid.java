@@ -16,6 +16,8 @@ public class Grid
     private Map<Object, Area> grid = Collections.synchronizedMap(new HashMap<Object, Area>());	
 	private int uid;
 	private int areaSize = 200;
+	private int gridSizeX = 500;
+	private int gridSizeY = 500;
 	private int gridSize = 500;
 	private float[] dimenssions;
 	private String name;
@@ -32,16 +34,21 @@ public class Grid
 	// x  - x-coordinate in-game from which the grid begins
 	// y  - y-coordinate in-game from which the grid begins
 	// poolSize - number of threads allocated for MobControllers in this grid
-	public Grid(int id, int gsize, int areasize, String name, float x, float y, int poolSize)
+	public Grid(int id, int gsizex, int gsizey, int areasize, String name, float x, float y, int poolSize)
     {
 	  this.log.info(this, "Creating Grid for map " + name + " id " + id + " ... ");
       this.uid = id;
 	  this.setName(name);
-	  this.gridSize = gsize;
+	  this.gridSizeX = gsizex;
+	  this.gridSizeX = gsizex;
+	  if(gridSizeX>gridSizeY)
+		  	gridSize=gridSizeX;
+		  else
+			  gridSize=gridSizeY;
 	  this.mx = x;
 	  this.my = y;
-	  this.ex = x + (gsize * areasize);
-	  this.ey = y + (gsize * areasize);
+	  this.ex = x + (gsizex * areasize);
+	  this.ey = y + (gsizey * areasize);
 	  this.areaSize = areasize;
 	  this.gridPool = new MobThreadPool(poolSize);
 	  this.initGrid();
@@ -94,9 +101,9 @@ public class Grid
 	{
 	  Area tmp;
 	  int count = 0;
-	  for (int i =0; i < this.gridSize; i++)
+	  for (int i =0; i < this.gridSizeY; i++)
 	  {
-	    for (int u =0; u < this.gridSize; u++)
+	    for (int u =0; u < this.gridSizeX; u++)
 		{
 	      tmp = new Area(u, i, this);
 		  tmp.setuid((u * this.gridSize) + i);

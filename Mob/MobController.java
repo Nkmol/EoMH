@@ -160,4 +160,16 @@ public class MobController implements Runnable {
 		return expFactor;
 	}
 	
+	public int getSpawnx(){
+		return spawnx;
+	}
+	
+	public int getSpawny(){
+		return spawny;
+	}
+	
+	public int getSpawnRadius(){
+		return spawnRadius;
+	}
+	
 }

@@ -238,13 +238,15 @@ public class Character implements Location, Fightable {
 			this.wmap.rmCharacter(charID);
 		Iterator<Integer> it = this.iniPackets.iterator();
 		Integer player;
-		while (it.hasNext()){
-			player = it.next();
-			Character ch = wmap.getCharacterMap().get(player);
-			if(ch!=null && !ch.isBot())
-				ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), CharacterPackets.getVanishByID(this.charID));
+		synchronized(this.iniPackets){
+			while (it.hasNext()){
+				player = it.next();
+				Character ch = wmap.getCharacterMap().get(player);
+				if(ch!=null && !ch.isBot())
+					ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), CharacterPackets.getVanishByID(this.charID));
+			}
+			this.iniPackets.clear();
 		}
-		this.iniPackets.clear();
 		
 		if(!isBot){
 			pl.refreshCharacterOrder();
@@ -481,7 +483,7 @@ public class Character implements Location, Fightable {
 	
 	public void refreshHpMpSp(){
 		
-		if(!isBot){
+		if(!isBot && GetChannel()!=null){
 			byte[] healpckt = CharacterPackets.getHealPacket(this);
 			ServerFacade.getInstance().getConnectionByChannel(GetChannel()).addWrite(healpckt);
 			CharacterDAO.saveCharacterHpMpSp(this);

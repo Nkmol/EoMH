@@ -114,6 +114,9 @@ public class MobDAO {
 				data[1] = rs.getInt("spawnX");
 				data[2] = rs.getInt("spawnY");
 				data[3] = rs.getInt("spawnRadius");
+				//skyzone has creepy spawns
+				if(data[0]==12)
+					data[3]+=100;
 				data[4] = rs.getInt("waypointCount");
 				data[5] = rs.getInt("waypointHop");
 				data[6] = rs.getInt("respawnTime");

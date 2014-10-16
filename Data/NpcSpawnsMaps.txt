@@ -15,6 +15,7 @@ npc204.arr
 npc205.arr
 npc206.arr
 npc207.arr
+npc208.arr
 npc209.arr
 npc210.arr
 npc300.arr

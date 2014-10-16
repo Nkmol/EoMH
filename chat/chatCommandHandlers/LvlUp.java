@@ -36,8 +36,8 @@ public class LvlUp implements ChatCommandExecutor {
 		      
 		      if (StringTools.isInteger(parameters[0]))
 		      {
-		       if (parameters[0].length()>3 || Integer.parseInt(parameters[0])>167)
-		    	   lvlInt=167;
+		       if (parameters[0].length()>3 || Integer.parseInt(parameters[0])>255)
+		    	   lvlInt=255;
 		       else
 		    	   lvlInt=Integer.parseInt(parameters[0]);
 		      }

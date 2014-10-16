@@ -50,17 +50,19 @@ public class Npc implements Location{
 		Iterator<Integer> plIter = this.iniPackets.iterator();
 		Integer tmp = null;
 		
-		while(plIter.hasNext()) {
-			tmp = plIter.next();
-			if(!players.contains(tmp)) {//if character is no longer in range, remove it
-				plIter.remove();	
+		synchronized(this.iniPackets){
+			while(plIter.hasNext()) {
+				tmp = plIter.next();
+				if(!players.contains(tmp)) {//if character is no longer in range, remove it
+					plIter.remove();	
+				}
+				else { // remove from need ini list if we already have it on the list
+					players.remove(tmp);
+				}
+				if(!this.wmap.CharacterExists(tmp)) { // remove if not a valid character
+					players.remove(tmp);
+				} 
 			}
-			else { // remove from need ini list if we already have it on the list
-				players.remove(tmp);
-			}
-			if(!this.wmap.CharacterExists(tmp)) { // remove if not a valid character
-				players.remove(tmp);
-			} 
 		}
 		
 		this.sendInit(players);
@@ -88,7 +90,9 @@ public class Npc implements Location{
 	public void leaveGameWorld() {
 		this.area.rmMember(this);
 		this.wmap.removeItem(Uid);
-		this.iniPackets.clear();
+		synchronized(this.iniPackets){
+			this.iniPackets.clear();
+		}
 		sendVanishToAll();
 	}
 	private void sendInit(List<Integer> sendList) {
@@ -103,7 +107,9 @@ public class Npc implements Location{
 					ServerFacade.getInstance().getConnectionByChannel(sc).addWrite(this.npcSpawnPacket(t));
 			}
 		}
-		this.iniPackets.addAll(sendList);
+		synchronized(this.iniPackets){
+			this.iniPackets.addAll(sendList);
+		}
 	}
 	
 	private void sendInit(Integer player){
@@ -155,14 +161,16 @@ public class Npc implements Location{
 	@Override
 	public void updateEnvironment(Integer player, boolean add) {
 		
-		if (this.iniPackets.contains(player) && !add && !wmap.getCharacter(player).isBot()){
-			this.iniPackets.remove(player);
-			Character ch=this.wmap.getCharacter(player);
-			ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), vanish(ch));
-		}
-		if (add && !this.iniPackets.contains(player)){
-			this.iniPackets.add(player);
-			this.sendInit(player);
+		synchronized(this.iniPackets){
+			if (this.iniPackets.contains(player) && !add && !wmap.getCharacter(player).isBot()){
+				this.iniPackets.remove(player);
+				Character ch=this.wmap.getCharacter(player);
+				ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), vanish(ch));
+			}
+			if (add && !this.iniPackets.contains(player)){
+				this.iniPackets.add(player);
+				this.sendInit(player);
+			}
 		}
 		
 	}

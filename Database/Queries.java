@@ -35,8 +35,8 @@ public class Queries {
 		PreparedStatement st = null;
 		try {
 			st = sqlc.prepareStatement("INSERT INTO " +
-					"characters(charname, commands, GMrank, charClass, face, size, kao, isAbandoned, isDead, faction, level, exp, currentHP, currentMana, currentStamina, fame, flags, locationX, locationY, map, intelligence, vitality, agility, strength, dexterity, statpoints, skillpoints, ownerID) " +
-					"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+					"characters(charname, commands, GMrank, charClass, face, size, kao, isAbandoned, isDead, faction, level, exp, currentHP, currentMana, currentStamina, fame, fametitle, flags, locationX, locationY, map, intelligence, vitality, agility, strength, dexterity, statpoints, skillpoints, ownerID) " +
+					"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);");
 	
 		st.setString(1, name);  //character name
 		st.setInt(2, 1);  		//commands
@@ -54,24 +54,25 @@ public class Queries {
 		st.setInt(14, 10);		//current mana
 		st.setInt(15, 10);		//current stamina
 		st.setInt(16, 0);		//fame
-		st.setInt(17, 10);		//flags
+		st.setInt(17, 0);		//fametitle
+		st.setInt(18, 10);		//flags
 		
 	
 		
-		st.setInt(18, xCoords);		//x coords
-		st.setInt(19, yCoords);		//y coords
+		st.setInt(19, xCoords);		//x coords
+		st.setInt(20, yCoords);		//y coords
 		
-		st.setInt(20, 1);			//map
+		st.setInt(21, 1);			//map
 		
-		st.setInt(21, (int)stats[0]);		//INT
-		st.setInt(23, (int)stats[1]);		//AGI
-		st.setInt(22, (int)stats[2]);		//VIT
-		st.setInt(25, (int)stats[3]);		//DEX
-		st.setInt(24, (int)stats[4]);		//STR
+		st.setInt(22, (int)stats[0]);		//INT
+		st.setInt(24, (int)stats[1]);		//AGI
+		st.setInt(23, (int)stats[2]);		//VIT
+		st.setInt(26, (int)stats[3]);		//DEX
+		st.setInt(25, (int)stats[4]);		//STR
 		
-		st.setInt(26, (int)statpoints);		//statpoints
-		st.setInt(27, (int)skillpoints);	//skillpoints
-		st.setInt(28, owner); 				//owner account
+		st.setInt(27, (int)statpoints);		//statpoints
+		st.setInt(28, (int)skillpoints);	//skillpoints
+		st.setInt(29, owner); 				//owner account
 		} catch (SQLException e) {
 			log.logMessage(Level.WARNING, Queries.class, e.getMessage());
 		}
@@ -213,7 +214,7 @@ public class Queries {
 							" `currentMana` int(11) NOT NULL,"+
 							" `currentStamina` int(11) NOT NULL, "+
 							" `fame` int(11) NOT NULL,"+
-							" `fametitle` tinyint(10) NOT NULL,"+
+							" `fametitle` tinyint(10) NOT NULL DEFAULT '0',"+
 							" `flags` int(11) DEFAULT NULL,"+
 							" `locationX` int(11) NOT NULL,"+
 							" `locationY` int(11) NOT NULL,"+
@@ -238,7 +239,8 @@ public class Queries {
 		PreparedStatement st = con.prepareStatement("CREATE TABLE `maps` ("+
 													" `id` int(11) NOT NULL,"+
 													"`name` varchar(45) NOT NULL,"+
-													"`gridSize` int(11) NOT NULL,"+
+													"`gridSizeX` int(11) NOT NULL,"+
+													"`gridSizeY` int(11) NOT NULL,"+
 													"`areaSize` int(11) NOT NULL,"+
 													" `mapx` int(11) NOT NULL,"+
 													"`mapy` int(11) NOT NULL,"+
@@ -323,15 +325,16 @@ public class Queries {
 		
 	}
 	
-	public static PreparedStatement addMap(Connection con, int id, String name, int gridsize, int areasize, int x, int y, int pool) throws Exception{
-		PreparedStatement st = con.prepareStatement("INSERT INTO maps(id, name, gridSize, areaSize, mapx, mapy, poolSize) VALUES (?, ?, ?, ?, ?, ?, ?);");
+	public static PreparedStatement addMap(Connection con, int id, String name, int gridsizex, int gridsizey, int areasize, int x, int y, int pool) throws Exception{
+		PreparedStatement st = con.prepareStatement("INSERT INTO maps(id, name, gridSizeX, gridSizeY, areaSize, mapx, mapy, poolSize) VALUES (?, ?, ?, ?, ?, ?, ?,?);");
 		st.setInt(1, id);
 		st.setString(2, name);
-		st.setInt(3, gridsize);
-		st.setInt(4, areasize);
-		st.setInt(5, x);
-		st.setInt(6, y);
-		st.setInt(7, pool);
+		st.setInt(3, gridsizex);
+		st.setInt(4, gridsizey);
+		st.setInt(5, areasize);
+		st.setInt(6, x);
+		st.setInt(7, y);
+		st.setInt(8, pool);
 		return st;
 	}
 	public static PreparedStatement addItem(Connection con,int itemid,int baseid,int category,int againsttype,int bonustype,int typedmg,int bonustypedmg,float atkrange,

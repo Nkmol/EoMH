@@ -2,7 +2,6 @@ package Install;
 
 import java.io.Console;
 import java.io.File;
-import java.sql.Connection;
 import java.sql.Driver;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,7 +21,6 @@ import org.w3c.dom.Element;
 
 import Configuration.Configuration;
 import Configuration.ConfigurationManager;
-import Configuration.XMLParser;
 import Database.InstallDAO;
 import Database.RuntimeDriverLoader;
 import Database.SQLconnection;
@@ -30,6 +28,8 @@ import Parser.ItemParser;
 import Parser.ItemParserSQL;
 import Parser.LvlexpParser;
 import Parser.LvlexpParserSQL;
+import Parser.MapParser;
+import Parser.MapParserSQL;
 import Parser.MobParser;
 import Parser.MobParserSQL;
 import Parser.MobSpawnsParser;
@@ -211,7 +211,8 @@ public class Installer {
 			
 		}
 		private void createMaps() {
-			XMLParser par = new XMLParser("Data/Maps.xml");
+			MapParserSQL.parseMapsToSQL(dao, MapParser.getMaplistFromTxt("Data/maps.txt"));
+			/*XMLParser par = new XMLParser("Data/Maps.xml");
             Element root = par.getRoot();
 			Element el = null;
 			if (par.getElementName(root) == "Maps"){
@@ -236,7 +237,7 @@ public class Installer {
 					
 					System.out.print(".");
 				}
-			}
+			}*/
 		}
 		
 		private void createItems() {

@@ -10,7 +10,6 @@ import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
 import Tools.BitTools;
-import Buffs.Buff;
 import Buffs.ItemBuff;
 import Connections.Connection;
 import Encryption.Decryptor;

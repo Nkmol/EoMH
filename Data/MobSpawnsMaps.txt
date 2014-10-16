@@ -9,6 +9,7 @@ mob008.arr
 mob009.arr
 mob010.arr
 mob011.arr
+mob012.arr
 mob204.arr
 mob205.arr
 mob209.arr

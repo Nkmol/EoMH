@@ -302,10 +302,10 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addMap(Connection sql, int id, String name, int gridsize, int areasize, int x, int y, int pool) {
+	public boolean addMap(Connection sql, int id, String name, int xgridsize, int ygridsize, int areasize, int x, int y, int pool) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addMap(sql, id, name, gridsize, areasize,x,y,pool);
+			PreparedStatement ps=Queries.addMap(sql, id, name, xgridsize, ygridsize, areasize,x,y,pool);
 			ps.execute();
 			ps.close();
 			
