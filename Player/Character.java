@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -24,8 +25,6 @@ import timer.MoveSyncTimer;
 import timer.HealingTimer;
 import logging.ServerLogger;
 import Buffs.Buff;
-import Buffs.ItemBuff;
-import Buffs.SkillBuff;
 import Database.CharacterDAO;
 import Duel.Duel;
 import Parties.Party;
@@ -106,8 +105,8 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
-	private HashMap<Short, Buff> buffActive = new LinkedHashMap <Short, Buff>();
-	private HashMap<Short, Short> buffSlot = new LinkedHashMap<Short, Short>();
+	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
+	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	
 	
 	public Character(Doll doll){
@@ -272,7 +271,27 @@ public class Character implements Location, Fightable {
 		
 	}
 	
+	public void calculateBonusStats(){
+		bonusAttributes = new HashMap<String, Object>();
+		Set<Short> set=buffsActive.keySet();
+		Iterator<Short> it=set.iterator();
+		Buff buff;
+		while(it.hasNext()){
+			buff=buffsActive.get(it.next());
+			changeBonusAttribute(buff.getAction().getValueType(), buff.getBuffValue());
+		}
+	}
+	
 	public void calculateCharacterStats() {
+		
+		calculateBonusStats();
+		
+		int bonusMaxhp=0;
+		if(bonusAttributes.containsKey("maxhp"))
+			bonusMaxhp=(Integer)bonusAttributes.get("maxhp");
+		int bonusDmg=0;
+		if(bonusAttributes.containsKey("bonusDmg"))
+			bonusMaxhp=(Integer)bonusAttributes.get("bonusDmg");
 		
 		float hardness=1;
 		if(doll!=null){
@@ -282,7 +301,7 @@ public class Character implements Location, Fightable {
 		for(int i=0;i<5;i++){
 			stats[i]=(short) (cStats[i]+eqstats[i]);
 		}
-		maxhp=(int) ((30+equips.getHp()+stats[0]*2.2+stats[1]*2.4+stats[2]*2.5+stats[3]*1.6+stats[4]*1.5)*hardness);
+		maxhp=(int) ((30+bonusMaxhp+equips.getHp()+stats[0]*2.2+stats[1]*2.4+stats[2]*2.5+stats[3]*1.6+stats[4]*1.5)*hardness);
 		maxmana=(int) ((30+equips.getMana()+stats[0]*1.4+stats[1]*1.7+stats[2]*1.5+stats[3]*3.5+stats[4]*1.5)*hardness);
 		maxstamina=(int) ((30+equips.getStamina()+stats[0]*0.9+stats[1]*1.3+stats[2]*1.5+stats[3]*1.7+stats[4]*1.3)*hardness);
 		hpreg=(short)((stats[2]+stats[0]/2)*hardness);
@@ -291,8 +310,8 @@ public class Character implements Location, Fightable {
 		healingSpeed=5000;
 		attack=(short) ((level/2+equips.getAtk()+stats[0]*0.5+stats[1]*0.46+stats[2]*0.4+stats[3]*0.2+stats[4]*0.2)*hardness);
 		defence=(short) ((level/2+equips.getDeff()+stats[0]*0.28+stats[1]*0.3+stats[2]*0.53+stats[3]*0.22+stats[4]*0.42)*hardness);
-		minDmg=(short)(equips.getMinDmg()*hardness);
-		maxDmg=(short)(equips.getMaxDmg()*hardness);
+		minDmg=(short)((bonusDmg+equips.getMinDmg())*hardness);
+		maxDmg=(short)((bonusDmg+equips.getMaxDmg())*hardness);
 		basicAtkSuc=(int)((stats[0]*0.5+stats[1]*0.6+stats[2]*0.3+stats[3]*1+stats[4]*0.8+level*6)*hardness);
 		basicDefSuc=(int)(stats[0]*0.2+stats[1]*0.2+stats[2]*0.5+stats[3]*0.7+stats[4]*0.6+level*4);
 		basicCritRate=(int)((stats[0]*0.1+stats[1]*1+stats[2]*0.1+stats[3]*0.5+stats[4]*0.3+level*2)*hardness)-300;
@@ -1140,28 +1159,76 @@ public class Character implements Location, Fightable {
 		updateSpeed();
 	}
 	
-	public void addBuff(short buffid, Buff buff, short slot) {
-		buffActive.put(buffid, buff);
-		buffSlot.put(buffid, slot);
-		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buffid, slot, buff));
+	private short getBuffSlot(short buffId) {
+		if(buffsActive.containsValue(buffId)){
+			Set<Short> set=buffsActive.keySet();
+			boolean found=false;
+			Iterator<Short> it=set.iterator();
+			short i=0;
+			while(found==false && it.hasNext()){
+				Short s=it.next();
+				if(s.equals(buffId))
+					found=true;
+				else
+					i++;
+			}
+			return i;
+		}else{
+			return (short)buffsActive.size();
+		}
 	}
 	
-	public void removeBuff(short buffid) {
-		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buffid, buffSlot.get(buffid), new ItemBuff(this, (short)0, (short)0, (short)0)));
-		buffActive.remove(buffid);
-		buffSlot.remove(buffid);
+	public void addBuff(Buff buff) {
+		//TO DO: throw BuffException when slot limit is reached
+		short buffSlot=getBuffSlot(buff.getId());
+		buffsActive.put(buffSlot, buff);
+		buff.getAction().startBuff(buff.getOwner(),buff.getBuffValue());
+		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 	}
 	
-	public Buff getBuff(short buffid) {
-		return buffActive.get(buffid);
+	public void removeBuff(Buff buff) {
+		short buffSlot=getBuffSlot(buff.getId());
+		buffsActive.remove(buff.getId());
+		buff.getAction().endBuff(buff.getOwner(),buff.getBuffValue());
+		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 	}
 	
-	public short getBuffSlot(short buffid) {
-		return buffSlot.get(buffid);
+	public void saveBuffs(){
+		Set<Short> set=buffsActive.keySet();
+		Iterator<Short> it=set.iterator();
+		Buff buff;
+		while(it.hasNext()){
+			buff=buffsActive.get(it.next());
+			//TO DO: save buff attributes to db
+			//buff.getId() buff.getBuffTime() buff.getBuffValue()
+		}
 	}
 	
-	public int getBuffLength() {
-		return buffSlot.size();
+	public void changeBonusAttribute(String attribute, Object value){
+		if(bonusAttributes.containsKey(attribute)){
+			if(value instanceof Integer){
+				bonusAttributes.put(attribute, new Integer(((Integer)bonusAttributes.get(attribute))+(Integer)value));
+				return;
+			}
+			if(value instanceof Short){
+				bonusAttributes.put(attribute, new Short((short)(((Short)bonusAttributes.get(attribute))+(Short)value)));
+				return;
+			}
+			if(value instanceof Float){
+				bonusAttributes.put(attribute, new Float(((Float)bonusAttributes.get(attribute))+(Float)value));
+				return;
+			}
+			if(value instanceof Double){
+				bonusAttributes.put(attribute, new Double(((Double)bonusAttributes.get(attribute))+(Double)value));
+				return;
+			}
+			if(value instanceof Byte){
+				bonusAttributes.put(attribute, new Byte((byte)(((Byte)bonusAttributes.get(attribute))+(Byte)value)));
+				return;
+			}
+		}else{
+			bonusAttributes.put(attribute, value);
+		}
 	}
 	
 	public void updateLocation(float x, float y){

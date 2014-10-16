@@ -6,11 +6,10 @@ public class ItemBuff extends Buff{
 	
 	public ItemBuff(Character owner, short buffId, short buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
-		//startBuff();
 	}
 	
 	@Override
-	public boolean startBuff(){
+	protected boolean startBuff(){
 		if(super.startBuff()){
 			//do item buff start stuff
 			
@@ -29,13 +28,4 @@ public class ItemBuff extends Buff{
 		return false;
 	}
 	
-	@Override
-	public long getTimeLeft(){
-		return super.getTimeLeft();
-	}
-	
-	@Override
-	public Character getOwner(){
-		return super.getOwner();
-	}
 }

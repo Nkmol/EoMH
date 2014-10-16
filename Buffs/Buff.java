@@ -3,7 +3,6 @@ package Buffs;
 import java.util.Timer;
 
 import Player.Character;
-import Player.CharacterPackets;
 
 public abstract class Buff {
 
@@ -13,7 +12,6 @@ public abstract class Buff {
 	private short value;
 	private short buffLength;
 	private short timeLeft;
-	private short buffId;
 	protected boolean started;
 	
 	public Buff(Character owner, short buffId, short buffLength, short buffValue){
@@ -21,20 +19,20 @@ public abstract class Buff {
 		this.value=buffValue;
 		this.buffLength=buffLength;
 		this.timeLeft=this.buffLength;
-		this.buffId = buffId;
 		this.action=BuffMaster.getBuffAction(buffId);
 		this.timer=new Timer();
 		this.started=false;
 	}
 	
+	public void activate(){
+		startBuff();
+	}
+	
 	protected boolean startBuff(){
 		if(started==false){
 			timer.scheduleAtFixedRate(new BuffTimer(this),4000,4000);
-			action.startBuff(owner,value);
+        	owner.addBuff(this);
 			started=true;
-       
-            //Save buff
-        	owner.addBuff(buffId, this, getSlot());
 			
 			return true;
 		}
@@ -44,10 +42,8 @@ public abstract class Buff {
 	protected boolean endBuff(){
 		if(started==true){
 			this.timer.cancel();
-			action.endBuff(owner, value);
+			owner.removeBuff(this);
 			started=false;
-					
-			owner.removeBuff(buffId);
 			
 			return true;
 		}
@@ -61,14 +57,8 @@ public abstract class Buff {
 		}
 	}
 	
-	private short getSlot() {
-		 //Activate buff
-    	if(owner.getBuff(buffId) != null) {
-    		return owner.getBuffSlot(buffId);
-    	}
-    	else {
-    		return (short)owner.getBuffLength();
-    	}
+	public short getId(){
+		return action.getId();
 	}
 	
 	public long getTimeLeft(){
@@ -85,5 +75,9 @@ public abstract class Buff {
 	
 	public short getBuffTime() {
 		return buffLength;
+	}
+	
+	public BuffAction getAction(){
+		return action;
 	}
 }

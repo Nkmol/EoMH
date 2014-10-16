@@ -6,7 +6,6 @@ public class SkillBuff extends Buff{
 
 	public SkillBuff(Character owner, short buffId, short buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
-		startBuff();
 	}
 	
 	@Override
@@ -27,16 +26,6 @@ public class SkillBuff extends Buff{
 			return true;
 		}
 		return false;
-	}
-	
-	@Override
-	public long getTimeLeft(){
-		return super.getTimeLeft();
-	}
-	
-	@Override
-	public Character getOwner(){
-		return super.getOwner();
 	}
 	
 }

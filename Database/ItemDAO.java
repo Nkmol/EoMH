@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import Buffs.BuffAction;
 import item.ConsumableItem;
 import item.EquipableItem;
 import item.EquipableSetItem;
@@ -26,13 +24,13 @@ public class ItemDAO {
 	}
 	
 	//Get item buffs
-	public List<Integer> getItemBuffs() {
+	public List<Short> getItemBuffs() {
 		ResultSet rs = null;
-		List<Integer> itemBuffs = new ArrayList<Integer>();
+		List<Short> itemBuffs = new ArrayList<Short>();
 		try {
 			rs = Queries.getItemBuffs(this.sqlConnection).executeQuery();
 			while (rs.next()) {
-				itemBuffs.add(rs.getInt("buffs")) ;
+				itemBuffs.add(rs.getShort("buffs")) ;
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -45,13 +43,13 @@ public class ItemDAO {
 	}
 	
 	//Get skill buffs
-	public List<Integer> getSkillBuffs() {
+	public List<Short> getSkillBuffs() {
 		ResultSet rs = null;
-		List<Integer> skillBuffs = new ArrayList<Integer>();
+		List<Short> skillBuffs = new ArrayList<Short>();
 		try {
 			rs = Queries.getSkillBuffs(this.sqlConnection).executeQuery();
 			while (rs.next()) {
-				skillBuffs.add(rs.getInt("buffs")) ;
+				skillBuffs.add(rs.getShort("buffs")) ;
 			}
 		} catch (SQLException e){
 			e.printStackTrace();

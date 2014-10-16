@@ -116,7 +116,7 @@ public class UsableItem implements Packet {
 		            System.out.println("buffId: " + buffId);
 		        	
 		        	//Run buff
-		        	itembuff[i].startBuff();
+		        	itembuff[i].activate();
 	        	}
 	        }
         }
