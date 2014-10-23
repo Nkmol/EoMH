@@ -4,8 +4,14 @@ import item.ItemFrame;
 import item.ItemInInv;
 
 import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+import java.util.Iterator;
 
 import Buffs.Buff;
+import Buffs.BuffMaster;
 import Gamemaster.GameMaster;
 import Skills.SkillFrame;
 import Skills.SkillMaster;
@@ -145,7 +151,7 @@ public class CharacterPackets {
      
         for(int i=0;i<stuff.length;i++) {
                 cdata[i+66-8-3] = stuff[i];
-        }
+        }        
         
         //equip
         byte[] bytes;
@@ -161,6 +167,25 @@ public class CharacterPackets {
         	}
         }
         
+        //buffs
+        Map<Short, Buff> buffs = ch.getBuffs();
+        Iterator it = buffs.entrySet().iterator();
+        int buffIter =0;
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            byte[] buffId = BitTools.shortToByteArray((short) pairs.getKey());
+            Buff buff = (Buff)pairs.getValue();
+            byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
+            byte[] buffValue = BitTools.shortToByteArray((short)buff.getBuffValue());
+            for(int i = 0; i < 2; i++) {
+                cdata[316+8*buffIter+i] = buffId[i];
+                cdata[318+8*buffIter+i] = buffTime[i];
+                cdata[320+8*buffIter+i] = buffValue[i];
+            }
+            cdata[322+8*buffIter] = (byte)0x01;
+            //it.remove(); // avoids a ConcurrentModificationException
+            buffIter++;
+        }
         cdata[465] = (byte)ch.getInventory().getVendingPoints();
         
         //abandoned in char selection
@@ -577,12 +602,12 @@ public class CharacterPackets {
 		
 		byte[] buffId = BitTools.shortToByteArray(buffid);
 		byte[] buffSlot = BitTools.shortToByteArray(slot);
-		byte[] buffTime = BitTools.shortToByteArray(buff.getBuffTime());
+		byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
 		byte[] buffValue = BitTools.shortToByteArray(buff.getBuffValue());
 		for(int i=0;i<2;i++) {
 			buffIcon[i+16] = buffSlot[i];
 			buffIcon[i+20] = buffId[i];
-			buffIcon[i+22] = buffTime[i]; // time (Time in mh = EXAMPLE: 192 / 4 = 48 -> 48 is deci  = 30 Hex)
+			buffIcon[i+22] = buffTime[i];
 			buffIcon[i+24] = buffValue[i]; // value
 		}
 		

@@ -4,7 +4,7 @@ import Player.Character;
 
 public class SkillBuff extends Buff{
 
-	public SkillBuff(Character owner, short buffId, short buffLength, short buffValue){
+	public SkillBuff(Character owner, short buffId, long buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
 	}
 	

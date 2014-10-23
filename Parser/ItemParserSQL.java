@@ -100,13 +100,16 @@ public class ItemParserSQL extends Parser{
 				movespeed=convertBytesToByte(item,428);
 				bufficon1 = 0; bufftime1 = 0; buffvalue1 = 0; bufficon2 = 0; bufftime2 = 0; buffvalue2 = 0;
 				if(item.size() > 456) {
-					bufficon1 = convertBytesToSmall(item,456);
-					bufftime1 = convertBytesToSmall(item,458);
-					buffvalue1 = convertBytesToByte(item,460);
-					if(item.size() > 464) {
-						bufficon2 = convertBytesToSmall(item,464);
-						bufftime2 = convertBytesToSmall(item,466);
-						buffvalue2 = convertBytesToByte(item,468);
+					// TODO Fix old items?
+					if(bufficon1 < 300) { //bugged items (old items from pandora) will be ignored
+						bufficon1 = convertBytesToSmall(item,456);
+						bufftime1 = convertBytesToSmall(item,458);
+						buffvalue1 = convertBytesToByte(item,460);
+						if(item.size() > 464) {
+							bufficon2 = convertBytesToSmall(item,464);
+							bufftime2 = convertBytesToSmall(item,466);
+							buffvalue2 = convertBytesToByte(item,468);
+						}
 					}
 				}
 						

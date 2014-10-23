@@ -54,6 +54,7 @@ public class Gameserver implements PacketHandler {
 		this.packetsByHeader.put(Integer.valueOf(1349), new SkillIntoBar()); 		//move item/skill into the slots
 		this.packetsByHeader.put(Integer.valueOf(1351), new NPCShopOpen());			//open npc shop
 		this.packetsByHeader.put(Integer.valueOf(1353), new DeleteItem());			//delete item from inventory
+		//this.packetsByHeader.put(Integer.valueOf(1358), new Quests());    			//Quests
 		this.packetsByHeader.put(Integer.valueOf(1361), new SetStats());			//set stats in character window
 		this.packetsByHeader.put(Integer.valueOf(1362), new CheckEquipment());		//check equip
 		this.packetsByHeader.put(Integer.valueOf(1367), new PartyJoinPacket());		//join party

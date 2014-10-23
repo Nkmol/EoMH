@@ -10,6 +10,7 @@ import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
 import Tools.BitTools;
+import Buffs.BuffMaster;
 import Buffs.ItemBuff;
 import Connections.Connection;
 import Encryption.Decryptor;
@@ -107,15 +108,18 @@ public class UsableItem implements Packet {
         
         //BUFF
         if(conitem.getBuffId()[0] > 0) {
-	        ItemBuff[] itembuff = new ItemBuff[conitem.getBuffId().length];
-	        for(int i=0; i<itembuff.length;i++) {
+	        //ItemBuff[] itembuff = new ItemBuff[conitem.getBuffId().length];
+	        for(int i=0; i<conitem.getBuffId().length;i++) {
 	        	if(conitem.getBuffId()[i] > 0) {
-		        	short buffId = conitem.getBuffId()[i];
-		            itembuff[i] = new ItemBuff(cur, buffId, conitem.getBuffTime()[i], conitem.getBuffValue()[i]);
-		            System.out.println("buffId: " + buffId);
+	        		long time = BuffMaster.timeClientToServer(conitem.getBuffTime()[i]); // MH time = int * 4. Also converting to miliseconds
+		            ItemBuff buff = new ItemBuff(cur, conitem.getBuffId()[i], time, conitem.getBuffValue()[i]);
 		        	
-		        	//Run buff
-		        	itembuff[i].activate();
+		            if(buff.getAction() == null) {
+		            	System.out.println("Buffaction not created for buffid " + conitem.getBuffId()[i]);
+		            	return null;
+		            }
+		        	//Run buff 
+		            buff.activate();
 	        	}
 	        }
         }

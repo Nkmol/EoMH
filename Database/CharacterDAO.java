@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import logging.ServerLogger;
+import Buffs.Buff;
+import Buffs.ItemBuff;
 import Player.Character;
 import Player.CharacterMaster;
 import Player.Player;
@@ -50,6 +52,7 @@ public class CharacterDAO {
 					newCharacter.setCharacterSkills(getCharSkills(newCharacter));
 					createCharSkillbarEntry(newCharacter);
 					newCharacter.setCharacterSkillbar(getCharSkillbar(newCharacter));
+					createCharBuffEntry(newCharacter);
 					rs.close();
 					return newCharacter;
 				} else {
@@ -136,6 +139,23 @@ public class CharacterDAO {
 		}
 		
 	}
+	
+	private static void createCharBuffEntry(Character ch) throws Exception {
+		
+		try{
+			PreparedStatement ps=Queries.createCharBuffs(sqlConnection, ch.getuid());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 
 	/*
 	 * Load a single character with given name
@@ -602,6 +622,7 @@ public class CharacterDAO {
 			newCharacter.setCharacterSkillbar(getCharSkillbar(newCharacter));
 			if(newCharacter.getEquips()!=null)
 				newCharacter.createCharacterStats();
+			newCharacter.setCharacterBuffs(getBuffs(newCharacter));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -806,6 +827,52 @@ public class CharacterDAO {
 	public static void saveCharSkillbar(int uid, CharacterSkillbar chSkillbar){
 		try {
 			PreparedStatement ps=Queries.storeCharSkillbars(sqlConnection, uid, chSkillbar);
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//----------BUFFS----------
+	
+	public static HashMap<Short, Buff> getBuffs(Character ch) {
+		HashMap<Short, Buff> buffActive = new HashMap<Short, Buff>();
+		Buff buff = null;
+		try {
+			long buffTime;
+			short buffId, buffValue;
+			ResultSet rs = Queries.getCharBuffs(sqlConnection, ch.getuid()).executeQuery();
+			for(int i=0;i<57;i+=3){
+				if (rs.next()) {
+					buffId=rs.getShort(i+1);
+					buffTime=rs.getLong(i+2);
+					buffValue=rs.getShort(i+3);
+					System.out.println(!(buffId==0 || buffTime==0 || buffValue==0));
+					if(!(buffId==0 || buffTime==0 || buffValue==0)){
+						buffActive.put(buffId, new ItemBuff(ch, buffId, buffTime, buffValue)); //Doesn't matter if item- or skillbuff?
+					}
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return buffActive;
+	}
+	
+	public static void saveCharBuffs(int uid, HashMap<Short, Buff> buffActive){
+		try {
+			PreparedStatement ps=Queries.storeCharBuffs(sqlConnection, uid, buffActive);
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
