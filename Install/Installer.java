@@ -112,6 +112,7 @@ public class Installer {
                         if (bol[11]) if (!this.dao.createLvlsTable()){ System.out.println("Failed to create table \"lvls\".. terminating, install failed"); return; }
                         if (bol[12]) if (!this.dao.createGamemasterTable()){ System.out.println("Failed to create table \"gamemaster\".. terminating, install failed"); return; }
                         if (bol[13]) if (!this.dao.createNpcSpawnsTable()) { System.out.println("Failed to create table \"npcSpawns\".. terminating, install failed"); return; }
+                        if (bol[14]) if (!this.dao.createCharBuffTable()) { System.out.println("Failed to create table \"activebuffs\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[2]){
@@ -159,6 +160,7 @@ public class Installer {
                         	this.createNpcSpawns();
                         	System.out.println("Done");
                         }
+    
                         
                         System.out.println("ALL DONE");
                 }
@@ -360,8 +362,8 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobData", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcSpawns"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

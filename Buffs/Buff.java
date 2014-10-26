@@ -1,6 +1,7 @@
 package Buffs;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 import Player.Character;
 
@@ -10,11 +11,11 @@ public abstract class Buff {
 	private BuffAction action;
 	private Timer timer;
 	private short value;
-	private short buffLength;
-	private short timeLeft;
+	private long buffLength;
+	private long timeLeft;
 	protected boolean started;
 	
-	public Buff(Character owner, short buffId, short buffLength, short buffValue){
+	public Buff(Character owner, short buffId, long buffLength, short buffValue){
 		this.owner=owner;
 		this.value=buffValue;
 		this.buffLength=buffLength;
@@ -24,16 +25,16 @@ public abstract class Buff {
 		this.started=false;
 	}
 	
-	public void activate(){
-		startBuff();
+	public boolean activate(){
+		return startBuff();
 	}
 	
 	protected boolean startBuff(){
 		if(started==false){
 			timer.scheduleAtFixedRate(new BuffTimer(this),4000,4000);
-        	owner.addBuff(this);
 			started=true;
-			
+        	owner.addBuff(this);
+			action.startBuff(owner, value);
 			return true;
 		}
 		return false;
@@ -41,10 +42,9 @@ public abstract class Buff {
 	
 	protected boolean endBuff(){
 		if(started==true){
-			this.timer.cancel();
+			stopTimer();
 			owner.removeBuff(this);
-			started=false;
-			
+			action.endBuff(owner, value);
 			return true;
 		}
 		return false;
@@ -55,6 +55,17 @@ public abstract class Buff {
 		if(timeLeft<=0){
 			endBuff();
 		}
+	}
+	
+	public void startTimer() {
+		timer = new Timer(); //timer.cancel doesn't allow new tasks on old instance /* Used for relog */
+		timer.scheduleAtFixedRate(new BuffTimer(this),4000,4000);
+		started=true;
+	}
+	
+	public void stopTimer() {
+		timer.cancel(); //cancels all current timer threads?
+		started=false;
 	}
 	
 	public short getId(){
@@ -73,7 +84,7 @@ public abstract class Buff {
 		return value;
 	}
 	
-	public short getBuffTime() {
+	public long getBuffTime() {
 		return buffLength;
 	}
 	

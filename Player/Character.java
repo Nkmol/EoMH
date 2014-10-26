@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -149,7 +150,9 @@ public class Character implements Location, Fightable {
 			
 			//spawnpacket
 			sendSpawnPacket();
-			
+
+			//Activatebuffs
+			startBuffTimers();
 		}
 		
 		refreshHpMpSp();
@@ -206,6 +209,9 @@ public class Character implements Location, Fightable {
 			CharacterDAO.saveCharacterLocation(this);
 			//load other stuff
 			CharacterDAO.loadCharacterStuffForRelog(this);
+			saveBuffs();
+			System.out.println(buffsActive.size());
+			stopTimerBuffs();
 		}
 		
 		walking=false;
@@ -287,12 +293,13 @@ public class Character implements Location, Fightable {
 		
 		calculateBonusStats();
 		
-		int bonusMaxhp=0;
+		short bonusMaxhp=0;
 		if(bonusAttributes.containsKey("maxhp"))
-			bonusMaxhp=(Integer)bonusAttributes.get("maxhp");
-		int bonusDmg=0;
+			bonusMaxhp=(Short)bonusAttributes.get("maxhp"); 
+		
+		short bonusDmg=0;
 		if(bonusAttributes.containsKey("bonusDmg"))
-			bonusMaxhp=(Integer)bonusAttributes.get("bonusDmg");
+			bonusDmg=(Short)bonusAttributes.get("bonusDmg");
 		
 		float hardness=1;
 		if(doll!=null){
@@ -1160,8 +1167,28 @@ public class Character implements Location, Fightable {
 		updateSpeed();
 	}
 	
+	public HashMap<Short, Buff> getBuffs() {
+		return this.buffsActive;
+	}
+	
+	public void setCharacterBuffs(HashMap<Short, Buff> buffsActive) {
+		this.buffsActive = buffsActive;
+	}
+	
+	public void startBuffTimers() {
+		for(Entry<Short, Buff> entry : buffsActive.entrySet()) {
+			entry.getValue().startTimer();
+		}
+	}
+	
+	public void stopTimerBuffs() {
+		for(Entry<Short, Buff> entry : buffsActive.entrySet()) {
+			entry.getValue().stopTimer();
+		}
+	}
+	
 	private short getBuffSlot(short buffId) {
-		if(buffsActive.containsValue(buffId)){
+		if(buffsActive.containsKey(buffId)) {
 			Set<Short> set=buffsActive.keySet();
 			boolean found=false;
 			Iterator<Short> it=set.iterator();
@@ -1180,33 +1207,38 @@ public class Character implements Location, Fightable {
 	}
 	
 	public void addBuff(Buff buff) {
-		//TO DO: throw BuffException when slot limit is reached
-		short buffSlot=getBuffSlot(buff.getId());
-		buffsActive.put(buffSlot, buff);
-		buff.getAction().startBuff(buff.getOwner(),buff.getBuffValue());
+		//TODO: throw BuffException when slot limit is reached
+		short buffSlot=getBuffSlot((short)buff.getId());
+		System.out.println(buffsActive.containsKey(buff.getId()));
+		if(buffsActive.containsKey(buff.getId())) 
+			buffsActive.get(buff.getId()).stopTimer();
+		buffsActive.put(buff.getId(), buff);
+		//CharacterDAO.saveCharBuffs(this.charID, this.buffsActive); //TODO: Save whole map or only new one?
 		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 	}
 	
 	public void removeBuff(Buff buff) {
-		short buffSlot=getBuffSlot(buff.getId());
+		short buffSlot=getBuffSlot((short)buff.getId());
 		buffsActive.remove(buff.getId());
-		buff.getAction().endBuff(buff.getOwner(),buff.getBuffValue());
-		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
+		//buff.getAction().endBuff(buff.getOwner(),buff.getBuffValue());
+		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
 	}
 	
-	public void saveBuffs(){
-		Set<Short> set=buffsActive.keySet();
-		Iterator<Short> it=set.iterator();
-		Buff buff;
-		while(it.hasNext()){
-			buff=buffsActive.get(it.next());
-			//TO DO: save buff attributes to db
-			//buff.getId() buff.getBuffTime() buff.getBuffValue()
-		}
+	public void saveBuffs() {
+//		Set<Short> set=buffsActive.keySet();
+//		Iterator<Short> it=set.iterator();
+//		Buff buff;
+//		
+//		while(it.hasNext()){
+//			buff=buffsActive.get(it.next());
+//			//TO DO: save buff attributes to db
+//			//buff.getId() buff.getBuffTime() buff.getBuffValue()
+//		}
+		CharacterDAO.saveCharBuffs(charID, buffsActive); //TODO: Save whole map or only new one?
 	}
 	
-	public void changeBonusAttribute(String attribute, Object value){
-		if(bonusAttributes.containsKey(attribute)){
+	public void changeBonusAttribute(String attribute, Object value) {
+		if(bonusAttributes.containsKey(attribute)) {
 			if(value instanceof Integer){
 				bonusAttributes.put(attribute, new Integer(((Integer)bonusAttributes.get(attribute))+(Integer)value));
 				return;

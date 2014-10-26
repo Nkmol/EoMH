@@ -4,15 +4,21 @@ import item.ItemInInv;
 import item.inventory.Inventory;
 
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import logging.ServerLogger;
 import Player.Character;
 import Skills.CharacterSkillbar;
 import Skills.CharacterSkills;
+import Tools.BitTools;
+import Buffs.Buff;
 import Configuration.ConfigurationManager;
 
 public class Queries {
@@ -324,6 +330,25 @@ public class Queries {
 		return st;
 		
 	}
+	
+	public static PreparedStatement createCharBuffTable(Connection con) throws Exception{
+		String query = "CREATE TABLE `charbuffs` (";
+		for(int i=0;i<19;i++) { //max of 19 slots
+			query +=   "`buffId"+i+"` tinyint(4) DEFAULT '0',"+
+					   "`buffTime"+i+"` int unsigned DEFAULT '0',"+
+					   "`buffValue"+i+"` tinyint(4) DEFAULT '0',";
+		}
+		query +=  	   "`belongsTo` int(10) unsigned NOT NULL," +
+				       "PRIMARY KEY (`belongsTo`)," +
+				       "UNIQUE KEY `belongsTo_UNIQUE` (`belongsTo`)," +
+				       "KEY `belongsTo_idx` (`belongsTo`), " +
+				       "CONSTRAINT `characterID` FOREIGN KEY (`belongsTo`) REFERENCES `accounts` (`accountID`) ON DELETE NO ACTION ON UPDATE NO ACTION" +
+				       ") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+
+		PreparedStatement st = con.prepareStatement(query);
+		return st;
+	}
+	
 	
 	public static PreparedStatement addMap(Connection con, int id, String name, int gridsizex, int gridsizey, int areasize, int x, int y, int pool) throws Exception{
 		PreparedStatement st = con.prepareStatement("INSERT INTO maps(id, name, gridSizeX, gridSizeY, areaSize, mapx, mapy, poolSize) VALUES (?, ?, ?, ?, ?, ?, ?,?);");
@@ -1270,6 +1295,67 @@ public class Queries {
 		
 		return st;
 		
+	}
+	
+	public static PreparedStatement getCharBuffs(Connection con, int id) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM charbuffs WHERE belongsTo = ?;");
+		st.setInt(1, id);
+		return st;
+	}
+	
+	public static PreparedStatement createCharBuffs(Connection con, int id) throws Exception{
+		
+		String s="INSERT INTO charbuffs(";
+		for(int i=0;i<19;i++){
+			s+="buffId"+i+", buffTime"+i+", buffValue"+i+", ";
+		}
+		s+="belongsTo) VALUES (";
+		for(int i=0;i<19;i++){
+			s+="?, ?, ?, ";
+		}
+		s+="?);";
+
+		PreparedStatement st = con.prepareStatement(s);
+		
+		for(int i=0;i<19*3;i++) {
+			st.setInt(i+1, 0);
+		}
+		st.setInt(58, id);
+		
+		return st;
+	}
+	
+	public static PreparedStatement storeCharBuffs(Connection con, int id, HashMap<Short, Buff> buffActive) throws Exception {
+		String s="UPDATE charbuffs SET ";
+		
+		for(int i=0;i<19;i++){
+			if(i==18)
+				s+="buffId"+i+"=?, buffTime"+i+"=?, buffValue"+i+"=? "; // no ", "
+			else
+				s+="buffId"+i+"=?, buffTime"+i+"=?, buffValue"+i+"=?, ";
+		}
+		s+="  WHERE belongsTo = ?;";
+
+		PreparedStatement st = con.prepareStatement(s);
+		Iterator it = buffActive.entrySet().iterator();
+		for(int i=0;i<19*3;i+=3) {
+			if (it.hasNext()) {
+				Map.Entry pairs = (Map.Entry)it.next();
+	            Buff buff = (Buff)pairs.getValue();
+		        st.setShort(i+1, (short) pairs.getKey());
+		        st.setShort(i+2, (short) buff.getTimeLeft());
+		        st.setShort(i+3, (short) buff.getBuffValue());
+		    }
+			else {
+				st.setShort(i+1, (short)0);
+		        st.setShort(i+2, (short)0);
+		        st.setShort(i+3, (short)0);
+			}
+		}
+		
+		st.setInt(58, id);
+		
+		return st;
 	}
 	
 	public static PreparedStatement storeCharSkillbars(Connection con, int id, CharacterSkillbar chSkillbar) throws Exception{
