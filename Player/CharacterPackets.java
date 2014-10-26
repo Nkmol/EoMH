@@ -177,6 +177,7 @@ public class CharacterPackets {
 	
 	public static byte[] getExtCharPacket(Character ch, Character receiver){
 		
+		System.out.println("EXT CHAR PACKET");
 		byte[] cedata = new byte[612];
 		short length = (short)cedata.length;
 		byte[] lengthbytes = BitTools.shortToByteArray(length);
@@ -485,6 +486,7 @@ public class CharacterPackets {
 	
 	public static byte[] getVanishByID(int uid) {
 		
+		System.out.println("VANISH CHAR PACKET");
 		byte[] vanish = new byte[20];
 		byte[] bUid = BitTools.intToByteArray(uid);
 		byte[] stuffz = new byte[] {(byte)0x01, (byte)0x10, (byte)0xa0, (byte)0x36, (byte)0x00, (byte)0xee, (byte)0x5f, (byte)0xbf};
