@@ -79,10 +79,7 @@ public abstract class Buff {
 		return timeLeft;
 	}
 	
-	public Object getOwner(){
-		if(owner == null)
-			return mobowner;
-		else
+	public Character getOwner(){
 			return owner;
 	}
 	

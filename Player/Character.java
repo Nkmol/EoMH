@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,7 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
-	private HashMap<Short, Buff> buffsActive = new HashMap <Short, Buff>();
+	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	
 	

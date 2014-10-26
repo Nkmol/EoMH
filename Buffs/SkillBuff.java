@@ -1,17 +1,10 @@
 package Buffs;
 
 import Player.Character;
-import Player.Fightable;
 
 public class SkillBuff extends Buff{
 	
-	private boolean targetable;
-	
 	public SkillBuff(Character owner, short buffId, long buffLength, short buffValue){
-		super(owner, buffId, buffLength, buffValue);
-	}
-	
-	public SkillBuff(Fightable owner, short buffId, long buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
 	}
 	
@@ -33,9 +26,5 @@ public class SkillBuff extends Buff{
 			return true;
 		}
 		return false;
-	}
-	
-	public void setTargetable(boolean targetable) {
-		this.targetable = targetable;
 	}
 }
