@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Player.Character;
+import Player.Fightable;
 
 public abstract class Buff {
 
@@ -14,7 +15,7 @@ public abstract class Buff {
 	private long buffLength;
 	private long timeLeft;
 	protected boolean started;
-	
+
 	public Buff(Character owner, short buffId, long buffLength, short buffValue){
 		this.owner=owner;
 		this.value=buffValue;
@@ -25,11 +26,11 @@ public abstract class Buff {
 		this.started=false;
 	}
 	
-	public boolean activate(){
+	public boolean activate() throws BuffsException{
 		return startBuff();
 	}
 	
-	protected boolean startBuff(){
+	protected boolean startBuff() throws BuffsException{
 		if(started==false){
 			timer.scheduleAtFixedRate(new BuffTimer(this),4000,4000);
 			started=true;
@@ -52,6 +53,7 @@ public abstract class Buff {
 	
 	public void decreaseTimeLeft(long time){
 		timeLeft-=time;
+		System.out.println("[decrease time] item " + action.getId() + " has " + timeLeft + " timeleft");
 		if(timeLeft<=0){
 			endBuff();
 		}
@@ -65,6 +67,7 @@ public abstract class Buff {
 	
 	public void stopTimer() {
 		timer.cancel(); //cancels all current timer threads?
+		System.out.println("Stop timer for buff id" + action.getId());
 		started=false;
 	}
 	
@@ -76,8 +79,11 @@ public abstract class Buff {
 		return timeLeft;
 	}
 	
-	public Character getOwner(){
-		return owner;
+	public Object getOwner(){
+		if(owner == null)
+			return mobowner;
+		else
+			return owner;
 	}
 	
 	public short getBuffValue(){

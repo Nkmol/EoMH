@@ -13,6 +13,9 @@ public class SkillFrame{
 	private int typeGeneral;
 	private int typeSpecific;
 	private int stage;
+	private short effId1, effId2, effId3;
+	private short effDuration1, effDuration2, effDuration3;
+	private short effValue1, effValue2, effValue3;
 	
 	public SkillFrame(int id){
 		this.id=id;
@@ -102,4 +105,33 @@ public class SkillFrame{
 		this.stage = stage;
 	}
 	
+	public void setEffectsId(short effId1, short effId2, short effId3) {
+		this.effId1 = effId1;
+		this.effId2 = effId2;
+		this.effId3 = effId3;
+	}
+	
+	public short[] getEffectsId() {
+		return new short[]{effId1, effId2, effId3};
+	}
+	
+	public void setEffectsDuration(short effDuration1, short effDuration2, short effDuration3) {
+		this.effDuration1 = effDuration1;
+		this.effDuration2 = effDuration2;
+		this.effDuration3 = effDuration3;
+	}
+	
+	public short[] getEffectsDuration() {
+		return new short[]{effDuration1, effDuration2, effDuration3};
+	}
+	
+	public void setEffectsValue(short effValue1, short effValue2, short effValue3) {
+		this.effValue1 = effValue1;
+		this.effValue2 = effValue2;
+		this.effValue3 = effValue3;
+	}
+	
+	public short[] getEffectsValue() {
+		return new short[]{effValue1, effValue2, effValue3};
+	}
 }

@@ -9,7 +9,7 @@ public class ItemBuff extends Buff{
 	}
 	
 	@Override
-	protected boolean startBuff(){
+	protected boolean startBuff() throws BuffsException{
 		if(super.startBuff()){
 			//do item buff start stuff
 			

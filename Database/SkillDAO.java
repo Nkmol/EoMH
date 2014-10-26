@@ -64,6 +64,12 @@ public class SkillDAO {
 				skill = new SkillFrame(rs.getInt("skillid"));
 			}
 			
+			if(rs.getShort("effId1") > 0 || rs.getShort("effId2") > 0 || rs.getShort("effId3") > 0) {
+				skill.setEffectsId(rs.getShort("effId1"), rs.getShort("effId2"), rs.getShort("effId3"));
+				skill.setEffectsDuration(rs.getShort("effDuration1"), rs.getShort("effDuration2"), rs.getShort("effDuration3"));
+				skill.setEffectsValue(rs.getShort("effValue1"), rs.getShort("effValue2"), rs.getShort("effValue3"));
+			}
+			
 			skill.setTypeGeneral(rs.getInt("generalType"));
 			skill.setTypeSpecific(rs.getInt("specificType"));
 			skill.setStage(rs.getInt("stage"));

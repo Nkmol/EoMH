@@ -42,6 +42,14 @@ public class BuffMaster {
 						buff=new BuffAction17(buffId);
 						break;
 					}
+					case 21:{
+						buff=new BuffAction21(buffId);
+						break;
+					}
+					case 47:{
+						buff=new BuffAction47(buffId);
+						break;
+					}
 					default:{
 						buff=null;
 						break;

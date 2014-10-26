@@ -11,6 +11,7 @@ import Player.CharacterPackets;
 import Player.PlayerConnection;
 import Tools.BitTools;
 import Buffs.BuffMaster;
+import Buffs.BuffsException;
 import Buffs.ItemBuff;
 import Connections.Connection;
 import Encryption.Decryptor;
@@ -119,7 +120,12 @@ public class UsableItem implements Packet {
 		            	return null;
 		            }
 		        	//Run buff 
-		            buff.activate();
+		            try {
+						buff.activate();
+					} catch (BuffsException e) {
+						System.out.print(e.getMessage());
+				        //TODO add the used item or don't let the packet be excecuted
+					}
 	        	}
 	        }
         }

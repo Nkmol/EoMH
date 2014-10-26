@@ -588,17 +588,17 @@ public class CharacterPackets {
 	}
 	
 	public static byte[] getBuffPacket(Character ch, short buffid, short slot, Buff buff) {
-    	byte[] chid = BitTools.intToByteArray(ch.getCharID());
+
 		byte[] buffIcon = new byte[44];
 		buffIcon[0] = (byte)0x2c; 
 		buffIcon[4] = (byte)0x05;
 		buffIcon[6] = (byte)0x1f;
+		
 		buffIcon[8] = (byte)0x01;// 1 = player | 2 = mob
-		
-		for(int i=0;i<4;i++){
-			buffIcon[12+i] = chid[i]; 				
-		}	
-		
+	    byte[] chid = BitTools.intToByteArray(ch.getCharID());
+		for(int i=0;i<4;i++) {
+			buffIcon[12+i] = chid[i]; 
+		}
 		
 		byte[] buffId = BitTools.shortToByteArray(buffid);
 		byte[] buffSlot = BitTools.shortToByteArray(slot);
