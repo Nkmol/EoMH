@@ -82,7 +82,7 @@ public class Area
 		Area tmp = null;
 		for (int a=0; a <3; a++){
 			for (int b=0; b <3; b++){
-				if (!(a==0&&b==0) && !(a==0&&b==2) && !(a==2&&b==0) && !(a==2&&b==2) &&this.grid.areaExists(area)){
+				if (this.grid.areaExists(area)){
 					tmp = this.grid.getArea(area);
 					if (add)tmp.addNear(loc);
 					else tmp.rmNear(loc);
