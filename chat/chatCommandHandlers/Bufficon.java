@@ -30,13 +30,13 @@ public class Bufficon implements ChatCommandExecutor {
 		
 	    if (parameters.length>0) 
 	    {
-	    	System.out.println("buff id: " + parameters[0]);
 	    	if (parameters.length>2) 
 		    {
 	    		//source.addWrite(CharacterPackets.getBuffIconPacket(cur, Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3])));
 		    }
 	    	else
 	    	{
+	    		System.out.println("buff id: " + parameters[0]);
 	    		Buff buff = new ItemBuff(cur, Short.parseShort(parameters[0]), (short)8, (short)1);
 	    		source.addWrite(CharacterPackets.getBuffPacket(cur, Short.parseShort(parameters[0]), Short.parseShort(parameters[1]), buff));
 	    	}

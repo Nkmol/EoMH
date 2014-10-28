@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import timer.MoveSyncTimer;
 import timer.HealingTimer;
 import logging.ServerLogger;
 import Buffs.Buff;
+import Buffs.BuffsException;
 import Database.CharacterDAO;
 import Duel.Duel;
 import Parties.Party;
@@ -105,7 +107,7 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
-	private HashMap<Short, Buff> buffsActive = new HashMap <Short, Buff>();
+	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	
 	
@@ -301,6 +303,10 @@ public class Character implements Location, Fightable {
 		if(bonusAttributes.containsKey("bonusDmg"))
 			bonusDmg=(Short)bonusAttributes.get("bonusDmg");
 		
+		short bonusAtkSucces=0;
+		if(bonusAttributes.containsKey("bonusAtkSucces"))
+			bonusAtkSucces=(Short)bonusAttributes.get("bonusAtkSucces");
+		
 		float hardness=1;
 		if(doll!=null){
 			hardness=doll.getHardness();
@@ -323,7 +329,7 @@ public class Character implements Location, Fightable {
 		basicAtkSuc=(int)((stats[0]*0.5+stats[1]*0.6+stats[2]*0.3+stats[3]*1+stats[4]*0.8+level*6)*hardness);
 		basicDefSuc=(int)(stats[0]*0.2+stats[1]*0.2+stats[2]*0.5+stats[3]*0.7+stats[4]*0.6+level*4);
 		basicCritRate=(int)((stats[0]*0.1+stats[1]*1+stats[2]*0.1+stats[3]*0.5+stats[4]*0.3+level*2)*hardness)-300;
-		additionalAtkSuc=1000;
+		additionalAtkSuc=1000+bonusAtkSucces;
 		additionalDefSuc=500;
 		additionalCritRate=2000;
 		atkSucMul=equips.getAtkSucMul();
@@ -1187,53 +1193,48 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
-	private short getBuffSlot(short buffId) {
+	private short getBuffSlot(short buffId)  {
 		if(buffsActive.containsKey(buffId)) {
-			Set<Short> set=buffsActive.keySet();
-			boolean found=false;
-			Iterator<Short> it=set.iterator();
-			short i=0;
-			while(found==false && it.hasNext()){
-				Short s=it.next();
-				if(s.equals(buffId))
-					found=true;
+			List<Short> keyList = new ArrayList<Short>(buffsActive.keySet()); //linked to linkedhashmap
+			short j = 0;
+			for (int i = keyList.size()-1;i>= 0;i--) {
+				short key = keyList.get(i);
+				if(key == buffId)
+					return (short)j;
 				else
-					i++;
+					j++;
 			}
-			return i;
-		}else{
+			return (short)-1; //doesn't suppose to happen
+		}
+		else {
 			return (short)buffsActive.size();
 		}
 	}
 	
-	public void addBuff(Buff buff) {
+	public void addBuff(Buff buff) throws BuffsException {
 		//TODO: throw BuffException when slot limit is reached
 		short buffSlot=getBuffSlot((short)buff.getId());
-		System.out.println(buffsActive.containsKey(buff.getId()));
+		
+		if(buffSlot > 18)
+			throw new BuffsException("[Buff exception] No slots left for another buff");
+		
+		if(buffSlot < 0)
+			throw new BuffsException("[Buff exception] Invalid slot requested");
+		
 		if(buffsActive.containsKey(buff.getId())) 
 			buffsActive.get(buff.getId()).stopTimer();
+		
 		buffsActive.put(buff.getId(), buff);
-		//CharacterDAO.saveCharBuffs(this.charID, this.buffsActive); //TODO: Save whole map or only new one?
 		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 	}
 	
 	public void removeBuff(Buff buff) {
 		short buffSlot=getBuffSlot((short)buff.getId());
 		buffsActive.remove(buff.getId());
-		//buff.getAction().endBuff(buff.getOwner(),buff.getBuffValue());
 		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
 	}
 	
 	public void saveBuffs() {
-//		Set<Short> set=buffsActive.keySet();
-//		Iterator<Short> it=set.iterator();
-//		Buff buff;
-//		
-//		while(it.hasNext()){
-//			buff=buffsActive.get(it.next());
-//			//TO DO: save buff attributes to db
-//			//buff.getId() buff.getBuffTime() buff.getBuffValue()
-//		}
 		CharacterDAO.saveCharBuffs(charID, buffsActive); //TODO: Save whole map or only new one?
 	}
 	

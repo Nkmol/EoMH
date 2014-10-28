@@ -10,6 +10,10 @@ import Tools.BitTools;
 import World.Location;
 import World.OutOfGridException;
 import World.WMap;
+import Buffs.BuffMaster;
+import Buffs.BuffsException;
+import Buffs.ItemBuff;
+import Buffs.SkillBuff;
 import Connections.Connection;
 import Database.SkillDAO;
 import GameServer.GamePackets.PaketException;
@@ -511,6 +515,28 @@ public class SkillMaster {
     	    		cur.getPt().dollsGetNewAggro(cur, targetId);
     	    	}
     		}
+    		
+    		//BUFF
+//            if(skill.getEffectsId()[0] > 0) {
+//    	        //ItemBuff[] itembuff = new ItemBuff[conitem.getBuffId().length];
+//    	        for(int i=0; i<skill.getEffectsId().length;i++) {
+//    	        	if(skill.getEffectsId()[i] > 0) {
+//    	        		long time = BuffMaster.timeClientToServer(skill.getEffectsDuration()[i]); // MH time = int * 4. Also converting to miliseconds
+//    		            SkillBuff buff = new SkillBuff(target, skill.getEffectsId()[i], time, skill.getEffectsValue()[i]);
+//    		        	
+//    		            if(buff.getAction() == null) {
+//    		            	System.out.println("Buffaction not created for buffid " + skill.getEffectsId()[i]);
+//    		            	return null;
+//    		            }
+//    		        	//Run buff 
+//    		            try {
+//    						buff.activate();
+//    					} catch (BuffsException e) {
+//    						System.out.print(e.getMessage());
+//    					}
+//    	        	}
+//   	        }
+//           }
     	}
     	
     	//send basic atk packet to other players

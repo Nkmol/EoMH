@@ -3,13 +3,13 @@ package Buffs;
 import Player.Character;
 
 public class SkillBuff extends Buff{
-
+	
 	public SkillBuff(Character owner, short buffId, long buffLength, short buffValue){
 		super(owner, buffId, buffLength, buffValue);
 	}
 	
 	@Override
-	protected boolean startBuff(){
+	protected boolean startBuff() throws BuffsException{
 		if(super.startBuff()){
 			//do skill buff start stuff
 			
@@ -27,5 +27,4 @@ public class SkillBuff extends Buff{
 		}
 		return false;
 	}
-	
 }
