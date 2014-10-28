@@ -9,11 +9,11 @@ import Connections.Connection;
 import Gamemaster.GameMaster;
 import chat.ChatCommandExecutor;
 
-public class bufficon implements ChatCommandExecutor {
+public class Bufficon implements ChatCommandExecutor {
 
 	private int needsCommandPower;
 	
-	public bufficon(int needsCommandPower){
+	public Bufficon(int needsCommandPower){
 		this.needsCommandPower=needsCommandPower;
 	}
 	

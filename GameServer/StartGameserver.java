@@ -47,7 +47,7 @@ public class StartGameserver {
 			SkillMaster.loadAllSkills();
 			BuffMaster.getAllBuffs();
 			GamemasterDAO.loadGamemasterRanks();
-			CharacterDAO.loadCharacterLvl(81);
+			CharacterDAO.loadCharacterLvl(167);
 			MobDAO.initMobs();
 			NpcDAO.initNpcs();
 			ServerFacade.getInstance(); 

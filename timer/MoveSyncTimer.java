@@ -73,16 +73,16 @@ public class MoveSyncTimer extends TimerTask{
 				targetX=owner.getlastknownX()+(target.getX()-owner.getlastknownX())*distanceFactorTarget;
 				targetY=owner.getlastknownY()+(target.getY()-owner.getlastknownY())*distanceFactorTarget;
 				
-				owner.updateLocation(newX, newY);
+				owner.updateLocation(newX, newY, targetX, targetY, run);
 				oldTime=newTime;
 				
 				//packet
-				owner.sendMovementPackets(targetX, targetY, run);
+				//owner.sendMovementPackets(targetX, targetY, run);
 			}else{
-				owner.updateLocation(target.getX(), target.getY());
+				owner.updateLocation(target.getX(), target.getY(), target.getX(), target.getY(), run);
 				
 				//packet
-				owner.sendMovementPackets(target.getX(), target.getY(), run);
+				//owner.sendMovementPackets(target.getX(), target.getY(), run);
 				
 				target=null;
 			}

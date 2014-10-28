@@ -2,6 +2,7 @@ package chat.chatCommandHandlers;
 
 import Mob.MobMaster;
 import Player.Character;
+import ExperimentalStuff.EffectMaster;
 import Gamemaster.GameMaster;
 import Player.PlayerConnection;
 import Connections.Connection;
@@ -42,7 +43,7 @@ public class SpawnMobCommand implements ChatCommandExecutor {
 				  spawnRadius=1000;
 			  
 			  MobMaster.spawnMob(Integer.parseInt(parameters[0]), amount, cur.getCurrentMap(), cur.getLocation(), spawnRadius, true, false, 1f);
-			  
+			  EffectMaster.spawnEffects(cur.getCurrentMap(), cur.getlastknownX(), cur.getlastknownY(), 1);
 			  
 		  }else{
 			  System.out.println("Command failed");

@@ -4,7 +4,6 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 import logging.ServerLogger;
@@ -84,17 +83,14 @@ public class Npc implements Location{
 		}
 	}
 	
-	/*
-	 * item has been picked and this instance is no longer required
-	 */
 	public void leaveGameWorld() {
 		this.area.rmMember(this);
 		this.wmap.removeItem(Uid);
 		synchronized(this.iniPackets){
 			this.iniPackets.clear();
 		}
-		sendVanishToAll();
 	}
+	
 	private void sendInit(List<Integer> sendList) {
 		Iterator<Integer> siter = sendList.iterator();
 		Integer tmp = null;
@@ -164,33 +160,12 @@ public class Npc implements Location{
 		synchronized(this.iniPackets){
 			if (this.iniPackets.contains(player) && !add && !wmap.getCharacter(player).isBot()){
 				this.iniPackets.remove(player);
-				Character ch=this.wmap.getCharacter(player);
-				ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), vanish(ch));
 			}
 			if (add && !this.iniPackets.contains(player)){
 				this.iniPackets.add(player);
 				this.sendInit(player);
 			}
 		}
-		
-	}
-	
-	public void sendVanishToAll(){
-		
-		Iterator<Map.Entry<Integer, Character>> iter = WMap.getInstance().getCharacterMap().entrySet().iterator();
-		Character tmp;
-		while(iter.hasNext()) {
-			Map.Entry<Integer, Character> pairs = iter.next();
-			tmp = pairs.getValue();
-			if(!tmp.isBot())
-			ServerFacade.getInstance().addWriteByChannel(tmp.GetChannel(), vanish(tmp));
-		}
-		
-	}
-	
-	private byte[] vanish(Character ch){
-		
-		return NpcPackets.getNpcVanishPacket(this,ch);
 		
 	}
 }

@@ -210,6 +210,4 @@ public class CharacterMaster {
 		return walkingSpeed;
 	}
 	
-	
-	
 }

@@ -1264,7 +1264,7 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
-	public void updateLocation(float x, float y){
+	public void updateLocation(float x, float y, float tx, float ty, byte run){
 		/*
 		if (this.timer != null){ if (!this.timer.isCompleted()) this.timer.cancel(); }
 		if (WMap.distance(x, y, this.getX(), this.getY()) > this.syncDistance){
@@ -1278,7 +1278,9 @@ public class Character implements Location, Fightable {
 			//System.out.println(CharacterDAO.saveCharacterLocation(this));
 			try {
 				Area t = this.grid.update(this);
+				boolean changeArea;
 				if (t != this.area){
+					changeArea=true;
 					this.area.moveTo(this, t);
 					this.area = t;
 					List<Integer> ls;
@@ -1297,7 +1299,10 @@ public class Character implements Location, Fightable {
 					ls.removeAll(iniPackets);
 					this.sendInitToList(ls);
 					this.iniPackets.addAll(ls);
+				}else{
+					changeArea=false;
 				}
+				sendMovementPackets(tx, ty, run, changeArea);
 			} catch(OutOfGridException oe) {
 				log.logMessage(Level.SEVERE, this, oe.getMessage() + " Illegal state for player: " + this.charID + " (moved outside grid) - disconnecting");
 				if(!isBot)
@@ -1689,7 +1694,7 @@ public class Character implements Location, Fightable {
 		return moveSyncTimer.getTarget();
 	}
 	
-	public void sendMovementPackets(float targetX, float targetY, byte run){
+	public void sendMovementPackets(float targetX, float targetY, byte run, boolean changeArea){
 		ServerFacade.getInstance().addWriteByChannel(GetChannel(), CharacterPackets.getMovementPacket(this, targetX, targetY, run));
 		synchronized(this.iniPackets) {
 			Iterator<Integer> iter = this.iniPackets.iterator();
@@ -1698,7 +1703,7 @@ public class Character implements Location, Fightable {
 					if (plUid != this.charID){
 						Character ch = this.wmap.getCharacter(plUid.intValue());
 						if(ch != null && !ch.isBot()) {
-							ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), CharacterPackets.getExtMovementPacket(this, targetX, targetY, run));
+							ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), CharacterPackets.getExtMovementPacket(this, targetX, targetY, run, changeArea));
 						}
 					}
 				}

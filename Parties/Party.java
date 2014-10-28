@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import Duel.PartyDuel;
+import ExperimentalStuff.EffectMaster;
 import GameServer.ServerPackets.ServerMessage;
 import Mob.MobMaster;
 import Player.Character;
@@ -165,6 +166,7 @@ public class Party {
 				ptlvl+=1;
 				s="Party lvled up to lvl"+ptlvl+"! New exprate is "+(int)(PartyMaster.getExpFactorByPtLvl(this)*100)+"%.";
 				sendMessageToMembers(s);
+				EffectMaster.spawnEffects(ch.getCurrentMap(), ch.getlastknownX(), ch.getlastknownY(), 4);
 			}else{
 				int lvl=getHighestLvl();
 				if(lvl>=36){
@@ -175,6 +177,7 @@ public class Party {
 					MobMaster.spawnMob(mobid, 1, ch.getCurrentMap(), ch.getLocation(), 1, true, true, 10);
 					s="Party spawned a secret mob!";
 					sendMessageToMembers(s);
+					EffectMaster.spawnEffects(ch.getCurrentMap(), ch.getlastknownX(), ch.getlastknownY(), 4);
 				}
 			}
 			

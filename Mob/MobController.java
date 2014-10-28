@@ -172,4 +172,8 @@ public class MobController implements Runnable {
 		return spawnRadius;
 	}
 	
+	public int getMap(){
+		return map;
+	}
+	
 }

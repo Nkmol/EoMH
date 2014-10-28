@@ -4,10 +4,7 @@ import item.ItemFrame;
 import item.ItemInInv;
 
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 import java.util.Iterator;
 
 import Buffs.Buff;
@@ -169,10 +166,10 @@ public class CharacterPackets {
         
         //buffs
         Map<Short, Buff> buffs = ch.getBuffs();
-        Iterator it = buffs.entrySet().iterator();
+        Iterator<Map.Entry<Short, Buff>> it = buffs.entrySet().iterator();
         int buffIter =0;
         while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
+            Map.Entry<Short, Buff> pairs = (Map.Entry<Short, Buff>)it.next();
             byte[] buffId = BitTools.shortToByteArray((short) pairs.getKey());
             Buff buff = (Buff)pairs.getValue();
             byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
@@ -202,7 +199,6 @@ public class CharacterPackets {
 	
 	public static byte[] getExtCharPacket(Character ch, Character receiver){
 		
-		System.out.println("EXT CHAR PACKET");
 		byte[] cedata = new byte[612];
 		short length = (short)cedata.length;
 		byte[] lengthbytes = BitTools.shortToByteArray(length);
@@ -274,6 +270,38 @@ public class CharacterPackets {
         //TEST
         for(int i=0;i<ch.getTestByteIndexExt().size();i++)
         	cedata[ch.getTestByteIndexExt().get(i)]=ch.getTestByteValueExt().get(i);
+        
+        return cedata;
+		
+	}
+	
+	public static byte[] getSimpleDummyExtPacket(float X, float Y, int uid){
+		
+		byte[] cedata = new byte[612];
+		short length = (short)cedata.length;
+		byte[] lengthbytes = BitTools.shortToByteArray(length);
+		byte[] chID = BitTools.intToByteArray(uid);
+		byte[] xCoords = BitTools.floatToByteArray(X);
+		byte[] yCoords = BitTools.floatToByteArray(Y);
+		
+		cedata[0] = lengthbytes[0];
+		cedata[1] = lengthbytes[1];
+		cedata[4] = (byte)0x05;
+		cedata[6] = (byte)0x01;
+		cedata[8] = (byte)0x01;
+		
+		for(int i=0;i<4;i++) {
+			cedata[i+12] = chID[i]; //character ID
+			cedata[i+88] = xCoords[i]; //location x
+			cedata[i+92] = yCoords[i]; //location y
+		}
+		
+		for(int i=0;i<16;i++) {
+			cedata[37+i] = (byte)0x30; //character packets have 16 times 30(0 in ASCII) in row. Mysteries of CRS.
+		}
+		
+		cedata[60] = (byte)0x01; //gender byte
+		cedata[68] = (byte)0x01; //class byte
         
         return cedata;
 		
@@ -511,7 +539,6 @@ public class CharacterPackets {
 	
 	public static byte[] getVanishByID(int uid) {
 		
-		System.out.println("VANISH CHAR PACKET");
 		byte[] vanish = new byte[20];
 		byte[] bUid = BitTools.intToByteArray(uid);
 		byte[] stuffz = new byte[] {(byte)0x01, (byte)0x10, (byte)0xa0, (byte)0x36, (byte)0x00, (byte)0xee, (byte)0x5f, (byte)0xbf};
@@ -838,7 +865,13 @@ public class CharacterPackets {
 	
 	public static byte[] getExtUseItemPacket(Character ch, int item){
 		
-		byte[] cid=BitTools.intToByteArray(ch.getCharID());
+		return getExtUseItemPacket(ch.getCharID(),item);
+    	
+	}
+	
+	public static byte[] getExtUseItemPacket(int uid, int item){
+		
+		byte[] cid=BitTools.intToByteArray(uid);
 		byte[] itemid = BitTools.intToByteArray(item);
 		
 		byte[] extuseitem=new byte[40];
@@ -920,7 +953,7 @@ public class CharacterPackets {
 		
 	}
 	
-	public static byte[] getExtMovementPacket(Character ch, float targetX, float targetY, byte run){
+	public static byte[] getExtMovementPacket(Character ch, float targetX, float targetY, byte run, boolean changeArea){
 		
 		byte[] chid = BitTools.intToByteArray(ch.getCharID());
 		byte[] tx = BitTools.floatToByteArray(targetX);
@@ -948,6 +981,13 @@ public class CharacterPackets {
 		
 		//run/walk
 		externmove[36]=run;
+		
+		externmove[42]=(byte)0x80;
+		externmove[43]=(byte)0x3f;
+		if(changeArea)
+			externmove[44]=(byte)0x05;
+		else
+			externmove[44]=(byte)0x03;
 		
 		return externmove;
 		

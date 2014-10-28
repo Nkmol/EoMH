@@ -18,7 +18,6 @@ public class Grid
 	private int areaSize = 200;
 	private int gridSizeX = 500;
 	private int gridSizeY = 500;
-	private int gridSize = 500;
 	private float[] dimenssions;
 	private String name;
 	private float mx, my;
@@ -41,10 +40,6 @@ public class Grid
 	  this.setName(name);
 	  this.gridSizeX = gsizex;
 	  this.gridSizeX = gsizex;
-	  if(gridSizeX>gridSizeY)
-		  	gridSize=gridSizeX;
-		  else
-			  gridSize=gridSizeY;
 	  this.mx = x;
 	  this.my = y;
 	  this.ex = x + (gsizex * areasize);
@@ -57,7 +52,7 @@ public class Grid
     private void addArea(Area a)
 	{
 	 int tmp[] = a.getcoords();
-	 int foo = ((tmp[0] *this.gridSize) + tmp[1] );
+	 int foo = ((tmp[1] *this.gridSizeX) + tmp[0] );
 	 // System.out.println("Addin coords ("+tmp[0]+","+tmp[1]+") uid:" + foo);
 	 if(this.areaExists(tmp)){ this.log.warning(this,"Warning duplicate unique id's formed for area"); }
 	 grid.put(foo, a);
@@ -65,13 +60,13 @@ public class Grid
 	// returns true if area in coordinates coords[] does exists, otherwise returns false
 	public boolean areaExists(int []coords)
 	{
-	  int foo = (coords[0] * this.gridSize) + coords[1];
+	  int foo = (coords[1] * this.gridSizeX) + coords[0];
 	  return grid.containsKey(foo);
 	}
 	// returns area that is in coordinates coords[]
 	public Area getArea(int [] coords)
 	{
-	  int foo = (coords[0] * this.gridSize) + coords[1];
+	  int foo = (coords[1] * this.gridSizeX) + coords[0];
 	  return grid.get(foo);
 	}
 	// return thread pool associated to this grid
@@ -106,7 +101,7 @@ public class Grid
 	    for (int u =0; u < this.gridSizeX; u++)
 		{
 	      tmp = new Area(u, i, this);
-		  tmp.setuid((u * this.gridSize) + i);
+		  tmp.setuid((i * this.gridSizeX) + u);
 		  this.addArea(tmp);
 		  tmp = null;
 		  count++;
@@ -148,5 +143,21 @@ public class Grid
 	  }
 	public boolean areaExists(int x, int y) {
 		return this.areaExists(new int[]{x,y});
+	}
+	public Area getAreaByCoords(float tx, float ty) throws OutOfGridException{
+		int []ret = new int[]{-1,-1};
+		Area ar = null;
+		if (tx >= this.getStartX() && tx <= this.getEndX() && ty >= this.getStartY() && ty <= this.getEndY()){
+			  
+			float gx = WMap.distance(this.getStartX(), tx);
+			float gy = WMap.distance(this.getStartY(), ty);
+
+			ret[0] = (int)(Math.floor(gx / this.areaSize));
+			ret[1] = (int)(Math.floor(gy / this.areaSize));
+			ar = this.getArea(ret);
+		}else{
+			throw new OutOfGridException();
+		}
+		return ar;
 	}
 }

@@ -4,7 +4,6 @@ import item.ItemInInv;
 import item.inventory.Inventory;
 
 import java.sql.Connection;
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -17,7 +16,6 @@ import logging.ServerLogger;
 import Player.Character;
 import Skills.CharacterSkillbar;
 import Skills.CharacterSkills;
-import Tools.BitTools;
 import Buffs.Buff;
 import Configuration.ConfigurationManager;
 
@@ -1337,10 +1335,10 @@ public class Queries {
 		s+="  WHERE belongsTo = ?;";
 
 		PreparedStatement st = con.prepareStatement(s);
-		Iterator it = buffActive.entrySet().iterator();
+		Iterator<Map.Entry<Short, Buff>> it = buffActive.entrySet().iterator();
 		for(int i=0;i<19*3;i+=3) {
 			if (it.hasNext()) {
-				Map.Entry pairs = (Map.Entry)it.next();
+				Map.Entry<Short, Buff> pairs = (Map.Entry<Short, Buff>)it.next();
 	            Buff buff = (Buff)pairs.getValue();
 		        st.setShort(i+1, (short) pairs.getKey());
 		        st.setShort(i+2, (short) buff.getTimeLeft());

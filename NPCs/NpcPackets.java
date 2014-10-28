@@ -15,6 +15,7 @@ public class NpcPackets {
 		byte[] id = BitTools.intToByteArray(npc.getId());
 		byte[] chid = BitTools.intToByteArray(ch.getCharID());
 		byte[] unique = BitTools.intToByteArray(npc.getuid());
+		byte[] areaid = BitTools.shortToByteArray((short)ch.getArea().getuid());
 		
 
 		for(int i=0;i<name.length;i++) {
@@ -33,6 +34,7 @@ public class NpcPackets {
 			
 		for(int i=0;i<2;i++)  {
 			npcSpawn[82+i] = id[i];
+			npcSpawn[i+13] = areaid[i];
 		}
 		
 		for(int i=0;i<4;i++) {
@@ -48,27 +50,6 @@ public class NpcPackets {
 		npcSpawn[613] = (byte)0x08;
 			
 		return npcSpawn;
-	}
-	
-	public static byte[] getNpcVanishPacket(Npc npc, Character ch){
-		
-		byte[] uid=BitTools.intToByteArray(npc.getuid());
-		byte[] chid = BitTools.intToByteArray(ch.getCharID());
-		
-		byte[] nv = new byte[20];
-		nv[0] = (byte)nv.length;
-		nv[4] = (byte)0x05;
-		nv[6] = (byte)0x0F;
-		nv[8] = (byte)0x01;
-		
-		
-		for(int i=0;i<4;i++) {
-			nv[12+i] = chid[i];
-			nv[16+i] = uid[i];
-		}
-		
-		return nv;
-		
 	}
 	
 }

@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Random;
 
 import logging.ServerLogger;
+import ExperimentalStuff.EffectMaster;
+import GameServer.ServerPackets.ServerMessage;
 import Player.Character;
 import Player.CharacterMaster;
 import Player.Fightable;
@@ -163,8 +165,8 @@ public class Mob implements Location, Fightable{
 		    		}
 		    		else if (!ls.contains(i)){
 		    			it.remove();
-		    			if(!wmap.getCharacter(i).isBot())
-		    				ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(i).GetChannel(), MobPackets.getDeathPacket(this.uid, this,false));
+		    			//if(!wmap.getCharacter(i).isBot())
+		    			//	ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(i).GetChannel(), MobPackets.getDeathPacket(this.uid, this,false));
 		    		}
 		    	}
 		    	ls.removeAll(iniPackets);
@@ -426,6 +428,16 @@ public class Mob implements Location, Fightable{
 		boolean star=false;
 		int coinfactor=1;
 		float expfactor=1*control.expFactor();
+		if(!control.onlyStars() && ((int)(Math.random()*1666))==0){
+			star=true;
+			expfactor*=166;
+			coinfactor*=16;
+			EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 3);
+			if(ch.getPt()!=null)
+				ch.getPt().sendMessageToMembers("WOW! Gz for super starmob!");
+			else
+				new ServerMessage().execute("WOW! Gz for super starmob!", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+		}else
 		if(control.onlyStars() || ((int)(Math.random()*100))==0){
 			star=true;
 			expfactor*=45;
@@ -537,8 +549,8 @@ public class Mob implements Location, Fightable{
 		synchronized(this.iniPackets){
 			if (this.iniPackets.contains(player) && !add){
 				this.iniPackets.remove(player);
-				if(!wmap.getCharacter(player).isBot())
-					ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), MobPackets.getDeathPacket(this.uid, this, false));
+				//if(!wmap.getCharacter(player).isBot())
+				//	ServerFacade.getInstance().addWriteByChannel(this.wmap.getCharacter(player).GetChannel(), MobPackets.getDeathPacket(this.uid, this, false));
 				if(this.iniPackets.isEmpty() && this.isRegistered) {
 					this.control.unregister(this);
 					this.isRegistered = false;

@@ -842,7 +842,6 @@ public class CharacterDAO {
 	
 	public static HashMap<Short, Buff> getBuffs(Character ch) {
 		HashMap<Short, Buff> buffActive = new HashMap<Short, Buff>();
-		Buff buff = null;
 		try {
 			long buffTime;
 			short buffId, buffValue;
