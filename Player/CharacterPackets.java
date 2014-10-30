@@ -148,7 +148,16 @@ public class CharacterPackets {
      
         for(int i=0;i<stuff.length;i++) {
                 cdata[i+66-8-3] = stuff[i];
-        }        
+        }
+        
+        //coords
+        byte[] bx=BitTools.floatToByteArray(ch.getlastknownX());
+        byte[] by=BitTools.floatToByteArray(ch.getlastknownY());
+        
+        for(int i=0;i<4;i++){
+        	cdata[68+i]=bx[i];
+        	cdata[72+i]=by[i];
+        }
         
         //equip
         byte[] bytes;

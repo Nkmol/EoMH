@@ -26,6 +26,8 @@ import Database.RuntimeDriverLoader;
 import Database.SQLconnection;
 import Parser.ItemParser;
 import Parser.ItemParserSQL;
+import Parser.ItemsetParser;
+import Parser.ItemsetParserSQL;
 import Parser.LvlexpParser;
 import Parser.LvlexpParserSQL;
 import Parser.MapParser;
@@ -113,6 +115,7 @@ public class Installer {
                         if (bol[12]) if (!this.dao.createGamemasterTable()){ System.out.println("Failed to create table \"gamemaster\".. terminating, install failed"); return; }
                         if (bol[13]) if (!this.dao.createNpcSpawnsTable()) { System.out.println("Failed to create table \"npcSpawns\".. terminating, install failed"); return; }
                         if (bol[14]) if (!this.dao.createCharBuffTable()) { System.out.println("Failed to create table \"activebuffs\".. terminating, install failed"); return; }
+                        if (bol[15]) if (!this.dao.createItemsetsTable()) { System.out.println("Failed to create table \"itemset\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[2]){
@@ -158,6 +161,11 @@ public class Installer {
                         if(bol[13]){
                         	System.out.println("Creating npcSpawn entries");
                         	this.createNpcSpawns();
+                        	System.out.println("Done");
+                        }
+                        if(bol[15]){
+                        	System.out.println("Creating itemset entries");
+                        	this.createItemsets();
                         	System.out.println("Done");
                         }
     
@@ -208,8 +216,12 @@ public class Installer {
         	
         }
         
+        private void createItemsets() {
+        	ItemsetParserSQL.parseItemsetToSQL(dao, ItemsetParser.structurize(ItemsetParser.getItemsetlistFromTxt("Data/Itemset.txt")));
+        }
+        
 		private void createDefaultAccount() {
-        	this.dao.CreateAccount(1, "127.0.0.1", "localhost", "localhost", 1);
+        	this.dao.CreateAccount(new SQLconnection().getConnection(),1, "127.0.0.1", "localhost", "localhost", 1);
 			
 		}
 		private void createMaps() {
@@ -362,8 +374,8 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs", "itemset"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

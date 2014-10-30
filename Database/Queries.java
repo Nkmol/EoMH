@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -347,6 +348,14 @@ public class Queries {
 		return st;
 	}
 	
+	public static PreparedStatement dropCharBuffTable(Connection connection) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st =  connection.prepareStatement("DROP TABLE charbuffs;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
 	
 	public static PreparedStatement addMap(Connection con, int id, String name, int gridsizex, int gridsizey, int areasize, int x, int y, int pool) throws Exception{
 		PreparedStatement st = con.prepareStatement("INSERT INTO maps(id, name, gridSizeX, gridSizeY, areaSize, mapx, mapy, poolSize) VALUES (?, ?, ?, ?, ?, ?, ?,?);");
@@ -487,6 +496,14 @@ public class Queries {
 	public static PreparedStatement getNpcSpawns(Connection con) throws Exception{
 		PreparedStatement st = con.prepareStatement("SELECT * FROM npcspawns;");
 		return st;
+	}
+	
+	public static PreparedStatement dropNpcSpawnsTable(Connection connection) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st =  connection.prepareStatement("DROP TABLE npcspawns;");
+			return st;
+		}
+		throw new Exception();
 	}
 
 	public static PreparedStatement getZones(Connection con) throws Exception {
@@ -1471,6 +1488,112 @@ public class Queries {
 	public static PreparedStatement getGamemasterRank(Connection con, int rank) throws Exception{
 		PreparedStatement st = con.prepareStatement("SELECT * FROM gamemaster WHERE rank = ?;");
 		st.setInt(1, rank);
+		return st;
+	}
+	
+	public static PreparedStatement createItemsetsTable(Connection con) throws Exception{
+		String s="CREATE TABLE `itemset` ("+
+				"`name` char(16) NOT NULL," +
+				"`password` char(16) NOT NULL,";
+		for(int i=0;i<60;i++){
+			s+="`itemid"+(i+1)+"` int(10) unsigned DEFAULT '0',";
+			s+="`itemamount"+(i+1)+"` int(10) unsigned DEFAULT '0',";
+		}
+		s+="PRIMARY KEY (`name`), " +
+		"UNIQUE KEY `setitem_unique` (`name`)" +
+		") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropItemsetsTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE itemset;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addItemset(Connection con, String name, String password, LinkedList<Integer> itemIds, LinkedList<Integer> itemAmounts) throws Exception{
+		String s="INSERT INTO itemset(name, password, ";
+		for(int i=0;i<59;i++){
+			s+="itemid"+(i+1)+", ";
+			s+="itemamount"+(i+1)+", ";
+		}
+		s+="itemid60, itemamount60) VALUES (?,?,";
+		for(int i=0;i<59;i++){
+			s+="?,?,";
+		}
+		s+="?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, name);
+		st.setString(2, password);
+		for(int i=0;i<60;i++){
+			if(!itemIds.isEmpty() && !itemAmounts.isEmpty()){
+				st.setInt(3+i*2, itemIds.removeFirst());
+				st.setInt(4+i*2, itemAmounts.removeFirst());
+			}else{
+				st.setInt(3+i*2, 0);
+				st.setInt(4+i*2, 0);
+			}
+		}
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeItemset(Connection con, String name, LinkedList<Integer> itemIds, LinkedList<Integer> itemAmounts) throws Exception{
+		String s="UPDATE itemset SET ";
+		for(int i=0;i<59;i++){
+			s+="itemid"+(i+1)+"=?, ";
+			s+="itemamount"+(i+1)+"=?, ";
+		}
+		s+="itemid60=?, itemamount60=? WHERE name=?;";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		for(int i=0;i<60;i++){
+			if(!itemIds.isEmpty() && !itemAmounts.isEmpty()){
+				st.setInt(1+i*2, itemIds.removeFirst());
+				st.setInt(2+i*2, itemAmounts.removeFirst());
+			}else{
+				st.setInt(1+i*2, 0);
+				st.setInt(2+i*2, 0);
+			}
+		}
+		st.setString(121, name);
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeItemsetPassword(Connection con, String name, String password) throws Exception{
+		PreparedStatement st=con.prepareStatement("UPDATE itemset SET password=? WHERE name=?;");
+		st.setString(1, password);
+		st.setString(2, name);
+		return st;
+	}
+	
+	public static PreparedStatement deleteItemset(Connection con, String name) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM itemset WHERE name=?;");
+		st.setString(1, name);
+		return st;
+	}
+	
+	public static PreparedStatement deleteAllItemset(Connection con) throws Exception{
+		PreparedStatement st=con.prepareStatement("TRUNCATE itemset;");
+		return st;
+	}
+	
+	public static PreparedStatement getAllItemsets(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM itemset;");
+		return st;
+	}
+	
+	public static PreparedStatement getItemset(Connection con, String name) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM itemset WHERE name = ?;");
+		st.setString(1, name);
 		return st;
 	}
 	

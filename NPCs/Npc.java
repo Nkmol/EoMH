@@ -153,6 +153,10 @@ public class Npc implements Location{
 	public String getName(){
 		return "NPC";
 	}
+	
+	public int getMap(){
+		return map;
+	}
 
 	@Override
 	public void updateEnvironment(Integer player, boolean add) {

@@ -3,7 +3,6 @@ package Buffs;
 import java.util.Timer;
 
 import Player.Character;
-import Player.Fightable;
 
 public abstract class Buff {
 

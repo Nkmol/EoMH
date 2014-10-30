@@ -13,7 +13,8 @@ public static void parseMobspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 		
 		System.out.println("Parsing mobspawns into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> mobspawn;
 		
 		int map,id,amount;
@@ -38,7 +39,7 @@ public static void parseMobspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 			ry=y+dy/2;
 			radius=Math.min(Math.abs(dx), Math.abs(dy));
 						
-			dao.createMobSpawnEntry(con,map,id,amount,rx,ry,radius);
+			dao.createMobSpawnEntry(sql, map,id,amount,rx,ry,radius);
 					
 				count++;
 				

@@ -190,6 +190,10 @@ public class DroppedItem implements Location{
 	public int getAmount(){
 		return amount;
 	}
+	
+	public int getMap(){
+		return map;
+	}
 
 	@Override
 	public void updateEnvironment(Integer player, boolean add) {

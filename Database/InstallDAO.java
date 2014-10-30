@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import logging.ServerLogger;
 
 public class InstallDAO {
 	private ServerLogger log = ServerLogger.getInstance();
 	private static InstallDAO instance;
-	
 	
 	private InstallDAO(){
 		this.log = ServerLogger.getInstance();
@@ -129,6 +129,21 @@ public class InstallDAO {
 			}
 			else if (n == 12){
 				ps = Queries.dropGamemasterTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 13){
+				ps = Queries.dropNpcSpawnsTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 14){
+				ps = Queries.dropCharBuffTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 15){
+				ps = Queries.dropItemsetsTable(new SQLconnection().getConnection());
 				b = ps.execute();
 				ps.close();
 			}
@@ -322,10 +337,10 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addMap(Connection sql, int id, String name, int xgridsize, int ygridsize, int areasize, int x, int y, int pool) {
+	public boolean addMap(Connection sqlConnection, int id, String name, int xgridsize, int ygridsize, int areasize, int x, int y, int pool) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addMap(sql, id, name, xgridsize, ygridsize, areasize,x,y,pool);
+			PreparedStatement ps=Queries.addMap(sqlConnection, id, name, xgridsize, ygridsize, areasize,x,y,pool);
 			ps.execute();
 			ps.close();
 			
@@ -342,7 +357,7 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addItem(Connection sql,int itemid,int baseid,int category,int againsttype,int bonustype,int typedmg,int bonustypedmg,float atkrange,
+	public boolean addItem(Connection sqlConnection, int itemid,int baseid,int category,int againsttype,int bonustype,int typedmg,int bonustypedmg,float atkrange,
 			int price,int isconsumable,int ispermanent,int equipslot,int width,int height,int minlvl,int maxlvl,int reqstr,int reqdex,int reqvit,int reqint,int reqagi,
 			int warusable,int sinusable,int mageusable,int monkusable,int faction,int upgradelvl,int str,int bonusstr,int dex,int bonusdex,int vit,int bonusvit,
 			int intl,int bonusintl,int agi,int bonusagi,int healhp,int life,int bonuslife,int healmana,int mana,int bonusmana,int stam,int bonusstam,float atkscs,float bonusatkscs,float defscs,
@@ -350,7 +365,7 @@ public class InstallDAO {
 			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addItem(sql,
+			PreparedStatement ps=Queries.addItem(sqlConnection,
 					itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 					price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 					warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
@@ -373,13 +388,13 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addSkill(Connection sql,int skillid,int skillgroup,int chclass,int stage,int effectOnWep,int reqSkill1,int reqSkill2,int reqSkill3,int skillpoints,int nextSkillLawful,
+	public boolean addSkill(Connection sqlConnection, int skillid,int skillgroup,int chclass,int stage,int effectOnWep,int reqSkill1,int reqSkill2,int reqSkill3,int skillpoints,int nextSkillLawful,
 			int nextSkillEvil,int lvl,int specificType,int moreSpecificType,int normalDmgFont,int mobDmgFont,int targets,int generalType,int faction,
 			int needsWepToCast,int ultiSetId,int isCastable,int isSpecialCast,int healCost,int manaCost,int staminaCost,int dmg,float speed,int effAmount,
 			int effId1,int effDuration1,int effValue1,int effId2,int effDuration2,int effValue2,int effId3,int effDuration3,int effValue3) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addSkill(sql,
+			PreparedStatement ps=Queries.addSkill(sqlConnection,
 					skillid,skillgroup,chclass,stage,effectOnWep,reqSkill1,reqSkill2,reqSkill3,skillpoints,nextSkillLawful,
 					nextSkillEvil,lvl,specificType,moreSpecificType,normalDmgFont,mobDmgFont,targets,generalType,faction,
 					needsWepToCast,ultiSetId,isCastable,isSpecialCast,healCost,manaCost,staminaCost,dmg,speed,effAmount,
@@ -400,10 +415,10 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addLvl(Connection sql,int lvl,long exp) {
+	public boolean addLvl(Connection sqlConnection, int lvl,long exp) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addLvl(sql,lvl,exp);
+			PreparedStatement ps=Queries.addLvl(sqlConnection,lvl,exp);
 			ps.execute();
 			ps.close();
 			
@@ -420,11 +435,11 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addGamemasterRank(Connection sql,int rank,String prename,boolean gotGMname,int commandpower,
+	public boolean addGamemasterRank(Connection sqlConnection, int rank,String prename,boolean gotGMname,int commandpower,
 			int allocateGMrank,boolean isPlayer) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addGamemasterRank(sql,rank,prename,gotGMname,commandpower,allocateGMrank,isPlayer);
+			PreparedStatement ps=Queries.addGamemasterRank(sqlConnection,rank,prename,gotGMname,commandpower,allocateGMrank,isPlayer);
 			ps.execute();
 			ps.close();
 			
@@ -441,10 +456,30 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean CreateAccount(int accountID, String ip, String username, String password, int flags) {
+	public boolean addItemset(Connection sqlConnection, String name,String password, LinkedList<Integer> itemIds, LinkedList<Integer> itemAmounts) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.CreateUserAccount(new SQLconnection().getConnection(), ip, username, password, flags);
+			PreparedStatement ps=Queries.addItemset(sqlConnection,name,password,itemIds,itemAmounts);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.CreateUserAccount(sqlConnection, ip, username, password, flags);
 			ps.execute();
 			ps.close();
 		}catch (SQLException e) {
@@ -459,10 +494,10 @@ public class InstallDAO {
 		}
 		return b;
 	}
-	public boolean createMobDataEntry(Connection sql, int id, int lvl, int skill1, int skill2, int skill3, int minatk, int maxatk, int deff, int hp, int atksuc, int defsuc, long basexp, int coins, int basefame, int aggro, int attrange, int follow,int move,int[] drops,float[] dropchances) {
+	public boolean createMobDataEntry(Connection sqlConnection, int id, int lvl, int skill1, int skill2, int skill3, int minatk, int maxatk, int deff, int hp, int atksuc, int defsuc, long basexp, int coins, int basefame, int aggro, int attrange, int follow,int move,int[] drops,float[] dropchances) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createMobDataEntry(sql, id, lvl, minatk, maxatk, deff, skill1, skill2, skill3, hp, atksuc, defsuc, basexp, coins, basefame, aggro, follow, move, attrange, drops, dropchances);
+			PreparedStatement ps=Queries.createMobDataEntry(sqlConnection, id, lvl, minatk, maxatk, deff, skill1, skill2, skill3, hp, atksuc, defsuc, basexp, coins, basefame, aggro, follow, move, attrange, drops, dropchances);
 			ps.execute();
 			ps.close();
 			
@@ -481,10 +516,10 @@ public class InstallDAO {
 		
 	}
 	
-	public boolean createMobSpawnEntry(Connection sql, int map, int id, int amount, float rx, float ry, float radius) {
+	public boolean createMobSpawnEntry(Connection sqlConnection, int map, int id, int amount, float rx, float ry, float radius) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createMobSpawnEntry(sql, map, id, amount, rx, ry, radius);
+			PreparedStatement ps=Queries.createMobSpawnEntry(sqlConnection, map, id, amount, rx, ry, radius);
 			ps.execute();
 			ps.close();
 			
@@ -503,10 +538,10 @@ public class InstallDAO {
 		
 	}
 	
-	public boolean createNpcSpawnEntry(Connection sql, int map, int id, float x, float y) {
+	public boolean createNpcSpawnEntry(Connection sqlConnection, int map, int id, float x, float y) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createNpcSpawnEntry(sql, map, id, x, y);
+			PreparedStatement ps=Queries.createNpcSpawnEntry(sqlConnection, map, id, x, y);
 			ps.execute();
 			ps.close();
 			
@@ -629,6 +664,26 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createGamemasterTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createItemsetsTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createItemsetsTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

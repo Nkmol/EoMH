@@ -12,7 +12,7 @@ public class MapParserSQL extends Parser{
 		
 		System.out.println("Parsing maps into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
 		
 		int id, xgrids, ygrids, xorigin, yorigin, areasize;
 		String name;
@@ -28,7 +28,7 @@ public class MapParserSQL extends Parser{
 			xorigin=(int)map.removeFirst();
 			yorigin=(int)map.removeFirst();
 			areasize=(int)map.removeFirst();
-			dao.addMap(con, id, name, xgrids, ygrids, areasize, xorigin, yorigin, 500);
+			dao.addMap(sql, id, name, xgrids, ygrids, areasize, xorigin, yorigin, 500);
 		}
 		
 		System.out.println("Parsing into SQL done");

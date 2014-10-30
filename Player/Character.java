@@ -1265,7 +1265,16 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
-	public void updateLocation(float x, float y, float tx, float ty, byte run){
+	public void teleportTo(int map, float X, float Y){
+		stopMovement();
+		leaveGameWorld(true);
+		this.currentMap=map;
+		setX(X);
+		setY(Y);
+		joinGameWorld();
+	}
+	
+	public void updateLocation(float x, float y, float tx, float ty, byte run, boolean sendMovement){
 		/*
 		if (this.timer != null){ if (!this.timer.isCompleted()) this.timer.cancel(); }
 		if (WMap.distance(x, y, this.getX(), this.getY()) > this.syncDistance){
@@ -1303,7 +1312,8 @@ public class Character implements Location, Fightable {
 				}else{
 					changeArea=false;
 				}
-				sendMovementPackets(tx, ty, run, changeArea);
+				if(sendMovement)
+					sendMovementPackets(tx, ty, run, changeArea);
 			} catch(OutOfGridException oe) {
 				log.logMessage(Level.SEVERE, this, oe.getMessage() + " Illegal state for player: " + this.charID + " (moved outside grid) - disconnecting");
 				if(!isBot)

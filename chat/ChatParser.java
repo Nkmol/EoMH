@@ -17,32 +17,35 @@ public class ChatParser {
 		//20=can harm players
 		//30=can harm server
 		//100=only admin
-		this.commandList.put("item", new ItemSpawner(20));
-		this.commandList.put("itemblitz", new ItemBlitz(30));
-		this.commandList.put("announce", new GMChat(10));
-		this.commandList.put("heal", new HealCommand(20));
-		this.commandList.put("npc", new NPCSpawn(30));
-		this.commandList.put("debug", new ThreadDebug(30));
-		this.commandList.put("setstats", new ChatSetStats(20));
-		this.commandList.put("doll", new ChatDollCommand(30));
-		this.commandList.put("reskillmeplx", new Reskill(20));
-		this.commandList.put("gainexp", new GainExp(20));
-		this.commandList.put("lvlup", new LvlUp(20));
-		this.commandList.put("faction", new ChangeFactionCommand(20));
-		this.commandList.put("rejoin", new RejoinWorldCommand(30));
-		this.commandList.put("changesize", new ChangeSizeCommand(20));
-		this.commandList.put("setkao", new SetKaoCommand(20));
-		this.commandList.put("setGMrank", new SetGMrankCommand(20));
+		this.commandList.put("-item", new ItemSpawner(20));
+		this.commandList.put("-itemblitz", new ItemBlitz(30));
+		this.commandList.put("-announce", new GMChat(10));
+		this.commandList.put("-heal", new HealCommand(20));
+		this.commandList.put("-npc", new NPCSpawn(30));
+		this.commandList.put("-debug", new ThreadDebug(30));
+		this.commandList.put("-setstats", new ChatSetStats(20));
+		this.commandList.put("-doll", new ChatDollCommand(30));
+		this.commandList.put("-reskillmeplx", new Reskill(20));
+		this.commandList.put("-gainexp", new GainExp(20));
+		this.commandList.put("-lvlup", new LvlUp(20));
+		this.commandList.put("-faction", new ChangeFactionCommand(20));
+		this.commandList.put("-rejoin", new RejoinWorldCommand(30));
+		this.commandList.put("-changesize", new ChangeSizeCommand(20));
+		this.commandList.put("-setkao", new SetKaoCommand(20));
+		this.commandList.put("-setGMrank", new SetGMrankCommand(20));
 		//this.commandList.put("startevent", new StartEventCommand(100));
-		this.commandList.put("setfame", new SetFameCommand(20));
-		this.commandList.put("spawnmob", new SpawnMobCommand(20));
-		this.commandList.put("printstats", new PrintStatsCommand(30));
-		this.commandList.put("vendorpoints", new VenderPoints(30));
-		this.commandList.put("pd", new PartyDuelCommand(0));
-		this.commandList.put("showcommands", new ShowCommands(0));
-		this.commandList.put("tp", new teleportCommand(20));
-		this.commandList.put("bufficon", new Bufficon(30));
-		this.commandList.put("testtest", new TestCommand(30));
+		this.commandList.put("-setfame", new SetFameCommand(20));
+		this.commandList.put("-spawnmob", new SpawnMobCommand(20));
+		this.commandList.put("-printstats", new PrintStatsCommand(30));
+		this.commandList.put("-vendorpoints", new VenderPoints(30));
+		this.commandList.put("-pd", new PartyDuelCommand(0));
+		this.commandList.put("-showcommands", new ShowCommands(0));
+		this.commandList.put("-tp", new TeleportCommand(20));
+		this.commandList.put("-bufficon", new Bufficon(30));
+		this.commandList.put("-test", new TestCommand(30));
+		this.commandList.put("-itemset", new ItemsetCommand(30));
+		this.commandList.put("-export", new ExportCommand(100));
+		this.commandList.put("-import", new ImportCommand(100));
 	}
 	
 	public static synchronized ChatParser getInstance(){

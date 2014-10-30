@@ -17,7 +17,7 @@ public class TestCommand implements ChatCommandExecutor {
 	}
 	
 	public void execute(String[] parameters, Connection source) {
-		System.out.println("Received chat command to reskill!");
+		System.out.println("Received test command!");
 		
 		Character cur = ((PlayerConnection)source).getActiveCharacter();
 		
@@ -26,7 +26,7 @@ public class TestCommand implements ChatCommandExecutor {
 			return;
 		}
 		
-		new ServerMessage().execute("AreaID: "+cur.getArea().getuid(), source);
+		new ServerMessage().execute("Hello!", source);
 		
 	}
 	

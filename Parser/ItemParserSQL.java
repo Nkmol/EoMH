@@ -13,7 +13,8 @@ public class ItemParserSQL extends Parser{
 		
 		System.out.println("Parsing items into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> item;
 		
 		int itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,
@@ -113,7 +114,7 @@ public class ItemParserSQL extends Parser{
 					}
 				}
 						
-				dao.addItem(con,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
+				dao.addItem(sql,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 						price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
@@ -199,7 +200,7 @@ public class ItemParserSQL extends Parser{
 				amountsetpieces=convertBytesToByte(item,372);
 				movespeed=convertBytesToByte(item,376);
 						
-				dao.addItem(con,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
+				dao.addItem(sql,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 						price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,

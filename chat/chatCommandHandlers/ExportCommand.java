@@ -1,0 +1,78 @@
+package chat.chatCommandHandlers;
+
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.sql.ResultSet;
+
+import Player.Character;
+import GameServer.ServerPackets.ServerMessage;
+import Gamemaster.GameMaster;
+import Player.PlayerConnection;
+import Connections.Connection;
+import Database.ItemDAO;
+import chat.ChatCommandExecutor;
+
+public class ExportCommand implements ChatCommandExecutor{
+
+	private int needsCommandPower;
+	
+	public ExportCommand(int needsCommandPower){
+		this.needsCommandPower=needsCommandPower;
+	}
+	
+	public void execute(String[] parameters, Connection source) {
+		System.out.println("Received test command!");
+		
+		Character cur = ((PlayerConnection)source).getActiveCharacter();
+		
+		if(!GameMaster.canUseCommand(cur, needsCommandPower)){
+			System.out.println("Not enough command power");
+			return;
+		}
+		
+		//----------EXPORT ITEMSETS----------
+		if(parameters.length>0 && parameters[0].equals("itemset")){
+			try{
+				BufferedWriter out = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/Data/Itemset.txt"));
+				ResultSet rs=ItemDAO.getInstance().fetchItemsets();
+				int id,amount;
+				out.write(completeString("Name",16));
+				out.write(completeString("Password",16));
+				for(int i=0;i<60;i++){
+					out.write(completeString("ItemID"+((Integer)(i+1)).toString(),9));
+					out.write(completeString("Amount"+((Integer)(i+1)).toString(),9));
+				}
+				while(rs.next()){
+					out.write("\n");
+					out.write(completeString(rs.getString(1),16));
+					out.write(completeString(rs.getString(2),16));
+					for(int i=0;i<60;i++){
+						id=rs.getInt(3+i*2);
+						amount=rs.getInt(4+i*2);
+						if(id!=0 && amount!=0){
+							out.write(completeString(((Integer)id).toString(),9));
+							out.write(completeString(((Integer)amount).toString(),9));
+						}
+					}
+				}
+				out.close();
+				rs.close();
+				new ServerMessage().execute("Exported itemset", source);
+			}catch(Exception e){
+				new ServerMessage().execute("Something went wrong", source);
+				return;
+			}
+		}
+		
+	}
+	
+	public String completeString(String s,int letters){
+		for(int i=s.length();i<letters;i++){
+			s+=" ";
+		}
+		s+=", ";
+		return s;
+	}
+	
+}

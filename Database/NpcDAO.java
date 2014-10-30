@@ -7,7 +7,6 @@ import java.util.logging.Level;
 
 import logging.ServerLogger;
 import Configuration.ConfigurationManager;
-import Mob.MobMaster;
 import NPCs.Npc;
 import NPCs.NpcData;
 //import World.WMap;
@@ -65,7 +64,7 @@ public class NpcDAO {
 	public static void initNpcs(){
 		int npcid,map,pool;
 		float x,y;
-		pool = ConfigurationManager.getConf("world").getIntVar("mobUIDPool");
+		pool = ConfigurationManager.getConf("world").getIntVar("npcUIDPool");
 		try{
 			ResultSet rs = Queries.getNpcSpawns(sqlConnection).executeQuery();
 			while(rs.next()){
@@ -77,7 +76,6 @@ public class NpcDAO {
 				System.out.println("Creating NPC with id: "+npcid);
 				pool++;
 			}
-			MobMaster.setPoolId(pool);
 			if (rs!=null)
 				rs.close();
 		} catch (SQLException e){

@@ -12,7 +12,7 @@ public class LvlexpParserSQL extends Parser{
 		
 		System.out.println("Parsing lvls into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
 		
 		long exp;
 		int lvlAmount=168;
@@ -23,7 +23,7 @@ public class LvlexpParserSQL extends Parser{
 			else
 				exp=0;
 		
-			dao.addLvl(con,i,exp);
+			dao.addLvl(sql,i,exp);
 		}
 		
 		System.out.println("Parsing into SQL done");

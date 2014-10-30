@@ -672,7 +672,7 @@ public class Inventory {
 		}
 		
 		//items block
-		System.out.println("Items blocking ("+hash.size()+")");
+		//System.out.println("Items blocking ("+hash.size()+")");
 		return false;
 		
 	}

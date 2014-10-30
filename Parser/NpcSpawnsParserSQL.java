@@ -13,7 +13,8 @@ public static void parseNpcspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 		
 		System.out.println("Parsing npcspawns into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> npcspawn;
 		
 		int map,id;
@@ -30,7 +31,7 @@ public static void parseNpcspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 			x=convertBytesToFloat(npcspawn, 5);
 			y=convertBytesToFloat(npcspawn, 9);
 						
-			dao.createNpcSpawnEntry(con,map,id,x,y);
+			dao.createNpcSpawnEntry(sql, map,id,x,y);
 					
 				count++;
 				
