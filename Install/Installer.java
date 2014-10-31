@@ -30,6 +30,8 @@ import Parser.ItemsetParser;
 import Parser.ItemsetParserSQL;
 import Parser.LvlexpParser;
 import Parser.LvlexpParserSQL;
+import Parser.MacroParser;
+import Parser.MacroParserSQL;
 import Parser.MapParser;
 import Parser.MapParserSQL;
 import Parser.MobParser;
@@ -227,7 +229,7 @@ public class Installer {
         }
         
         private void createMacro() {
-        	ItemsetParserSQL.parseItemsetToSQL(dao, ItemsetParser.structurize(ItemsetParser.getItemsetlistFromTxt("Data/Itemset.txt")));
+        	MacroParserSQL.parseMacroToSQL(dao, MacroParser.getMacrolistFromTxt("Data/Macro.txt"));
         }
         
 		private void createDefaultAccount() {
