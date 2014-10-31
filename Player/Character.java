@@ -142,6 +142,11 @@ public class Character implements Location, Fightable {
 	 */
 	public void joinGameWorld() {
 		
+		//move sync timer
+		timer=new Timer();
+		moveSyncTimer=new MoveSyncTimer(this);
+		timer.scheduleAtFixedRate(moveSyncTimer,500,500);
+		
 		//standard stats
 		createCharacterStats();
 		
@@ -162,11 +167,6 @@ public class Character implements Location, Fightable {
 		gainExp(exp,false);
 		
 		lastHit=getuid();
-		
-		//move sync timer
-		timer=new Timer();
-		moveSyncTimer=new MoveSyncTimer(this);
-		timer.scheduleAtFixedRate(moveSyncTimer,500,500);
 		
 		//regeneration timer
 		healingTimer=new Timer();
@@ -1271,6 +1271,7 @@ public class Character implements Location, Fightable {
 		this.currentMap=map;
 		setX(X);
 		setY(Y);
+		CharacterDAO.saveCharacterLocation(this);
 		joinGameWorld();
 	}
 	

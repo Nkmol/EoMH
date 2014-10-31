@@ -147,6 +147,11 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 16){
+				ps = Queries.dropMacroTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -476,6 +481,26 @@ public class InstallDAO {
 		return b;
 	}
 	
+	public boolean addMacro(Connection sqlConnection, String name,String password, String content) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addMacro(sqlConnection,name,password,content);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
 		boolean b = true;
 		try{
@@ -684,6 +709,26 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createItemsetsTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createMacroTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createMacroTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

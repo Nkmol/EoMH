@@ -1597,4 +1597,77 @@ public class Queries {
 		return st;
 	}
 	
+	public static PreparedStatement createMacroTable(Connection con) throws Exception{
+		String s="CREATE TABLE `macro` ("+
+				"`name` char(16) NOT NULL," +
+				"`password` char(16) NOT NULL,"+
+				"`content` char(85) NOT NULL,"+
+				"PRIMARY KEY (`name`), " +
+				"UNIQUE KEY `macro_unique` (`name`)" +
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropMacroTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE macro;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addMacro(Connection con, String name, String password, String content) throws Exception{
+		String s="INSERT INTO macro(name, password, content) VALUES (?,?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, name);
+		st.setString(2, password);
+		st.setString(3, content);
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeMacro(Connection con, String name, String content) throws Exception{
+		String s="UPDATE macro SET content=? WHERE name=?;";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, content);
+		st.setString(2, name);
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeMacroPassword(Connection con, String name, String password) throws Exception{
+		PreparedStatement st=con.prepareStatement("UPDATE macro SET password=? WHERE name=?;");
+		st.setString(1, password);
+		st.setString(2, name);
+		return st;
+	}
+	
+	public static PreparedStatement deleteMacro(Connection con, String name) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM macro WHERE name=?;");
+		st.setString(1, name);
+		return st;
+	}
+	
+	public static PreparedStatement deleteAllMacros(Connection con) throws Exception{
+		PreparedStatement st=con.prepareStatement("TRUNCATE macro;");
+		return st;
+	}
+	
+	public static PreparedStatement getAllMacros(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM macro;");
+		return st;
+	}
+	
+	public static PreparedStatement getMacro(Connection con, String name) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM macro WHERE name = ?;");
+		st.setString(1, name);
+		return st;
+	}
+	
 }

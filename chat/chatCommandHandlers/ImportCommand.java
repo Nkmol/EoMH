@@ -23,7 +23,7 @@ public class ImportCommand implements ChatCommandExecutor {
 	}
 	
 	public void execute(String[] parameters, Connection source) {
-		System.out.println("Received test command!");
+		System.out.println("Received import command!");
 		
 		Character cur = ((PlayerConnection)source).getActiveCharacter();
 		

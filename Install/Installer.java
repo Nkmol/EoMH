@@ -116,6 +116,7 @@ public class Installer {
                         if (bol[13]) if (!this.dao.createNpcSpawnsTable()) { System.out.println("Failed to create table \"npcSpawns\".. terminating, install failed"); return; }
                         if (bol[14]) if (!this.dao.createCharBuffTable()) { System.out.println("Failed to create table \"activebuffs\".. terminating, install failed"); return; }
                         if (bol[15]) if (!this.dao.createItemsetsTable()) { System.out.println("Failed to create table \"itemset\".. terminating, install failed"); return; }
+                        if (bol[16]) if (!this.dao.createMacroTable()) { System.out.println("Failed to create table \"macro\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[2]){
@@ -168,6 +169,11 @@ public class Installer {
                         	this.createItemsets();
                         	System.out.println("Done");
                         }
+                        if(bol[16]){
+                        	System.out.println("Creating macro entries");
+                        	this.createMacro();
+                        	System.out.println("Done");
+                        }
     
                         
                         System.out.println("ALL DONE");
@@ -217,6 +223,10 @@ public class Installer {
         }
         
         private void createItemsets() {
+        	ItemsetParserSQL.parseItemsetToSQL(dao, ItemsetParser.structurize(ItemsetParser.getItemsetlistFromTxt("Data/Itemset.txt")));
+        }
+        
+        private void createMacro() {
         	ItemsetParserSQL.parseItemsetToSQL(dao, ItemsetParser.structurize(ItemsetParser.getItemsetlistFromTxt("Data/Itemset.txt")));
         }
         
@@ -374,8 +384,8 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs", "itemset"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs", "itemset", "macro"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

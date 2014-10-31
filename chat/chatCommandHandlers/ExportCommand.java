@@ -11,6 +11,7 @@ import Gamemaster.GameMaster;
 import Player.PlayerConnection;
 import Connections.Connection;
 import Database.ItemDAO;
+import Database.MacroDAO;
 import chat.ChatCommandExecutor;
 
 public class ExportCommand implements ChatCommandExecutor{
@@ -22,7 +23,7 @@ public class ExportCommand implements ChatCommandExecutor{
 	}
 	
 	public void execute(String[] parameters, Connection source) {
-		System.out.println("Received test command!");
+		System.out.println("Received export command!");
 		
 		Character cur = ((PlayerConnection)source).getActiveCharacter();
 		
@@ -59,6 +60,30 @@ public class ExportCommand implements ChatCommandExecutor{
 				out.close();
 				rs.close();
 				new ServerMessage().execute("Exported itemset", source);
+				return;
+			}catch(Exception e){
+				new ServerMessage().execute("Something went wrong", source);
+				return;
+			}
+		}
+		
+		//----------EXPORT MACROS----------
+		if(parameters.length>0 && parameters[0].equals("macro")){
+			try{
+				BufferedWriter out = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/Data/Macro.txt"));
+				ResultSet rs=MacroDAO.getInstance().fetchMacros();
+				out.write(completeString("Name",16));
+				out.write(completeString("Password",16));
+				out.write(completeString("Content",85));
+				while(rs.next()){
+					out.write("\n");
+					out.write(completeString(rs.getString(1),16));
+					out.write(completeString(rs.getString(2),16));
+					out.write(completeString(rs.getString(3),85));
+				}
+				out.close();
+				rs.close();
+				new ServerMessage().execute("Exported macros", source);
 			}catch(Exception e){
 				new ServerMessage().execute("Something went wrong", source);
 				return;

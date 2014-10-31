@@ -3,8 +3,11 @@ package chat;
 import java.util.HashMap;
 import java.util.Map;
 
-import Connections.Connection;
+import Database.MacroDAO;
+import Player.ChatMaster;
+import ServerCore.ServerFacade;
 import chat.chatCommandHandlers.*;
+import Player.Character;
 
 public class ChatParser {
 	private static volatile ChatParser instance = null;
@@ -46,6 +49,7 @@ public class ChatParser {
 		this.commandList.put("-itemset", new ItemsetCommand(30));
 		this.commandList.put("-export", new ExportCommand(100));
 		this.commandList.put("-import", new ImportCommand(100));
+		this.commandList.put("-macro", new MacroCommand(30));
 	}
 	
 	public static synchronized ChatParser getInstance(){
@@ -67,18 +71,40 @@ public class ChatParser {
 		return commandList;
 	}
 
-	public boolean parseAndExecuteChatCommand(String msg, Connection con) {
-		System.out.println("Parsing a chat command: " + msg);
-		String[] commands = msg.split(this.cmdDelimiter);
-		for(int i=0;i<commands.length;i++) {
-			String[] splat = commands[i].split(paramDelimiter);
-			if(this.commandList.containsKey(splat[0])) {
-				String[] params = new String[splat.length-1];
-				for(int ri=1;ri<splat.length;ri++) {
-					params[ri-1] = splat[ri]; 
+	public boolean parseAndExecuteChatCommand(Character ch, String name, String text, byte type, Character target, String targetName) {
+		System.out.println("Parsing a chat command: " + text);
+		if(text.startsWith("<")){
+			text=text.substring(1);
+			String macro=MacroDAO.getInstance().getMacro(text);
+			if(macro==null)
+				return false;
+			String[] commands = macro.split(this.cmdDelimiter);
+			for(int i=0;i<commands.length;i++) {
+				String[] splat = commands[i].split(paramDelimiter);
+				if(macro!=null && this.commandList.containsKey(splat[0])) {
+					String[] params = new String[splat.length-1];
+					for(int ri=1;ri<splat.length;ri++) {
+						params[ri-1] = splat[ri]; 
+					}
+					this.commandList.get(splat[0]).execute(params, ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+				}else{
+					if(macro!=null){
+						ChatMaster.prepareSendingChat(ch, name, macro, type, target, targetName, true);
+					}
 				}
-				this.commandList.get(splat[0]).execute(params, con);
-				return true;
+			}
+			return true;
+		}else{
+			for(int i=0;i<text.length();i++) {
+				String[] splat = text.split(paramDelimiter);
+				if(this.commandList.containsKey(splat[0])) {
+					String[] params = new String[splat.length-1];
+					for(int ri=1;ri<splat.length;ri++) {
+						params[ri-1] = splat[ri]; 
+					}
+					this.commandList.get(splat[0]).execute(params, ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+					return true;
+				}
 			}
 		}
 		return false;

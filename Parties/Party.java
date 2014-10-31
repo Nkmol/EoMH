@@ -271,7 +271,7 @@ public class Party {
 		
 		this.pd=pd;
 		sendAnnounceToMembers("Party duel request by "+ch.getName());
-		sendMessageToMembers("To accept/refuse the party duel type pd:y/pd:n");
+		sendMessageToMembers("To accept/refuse the party duel type -pd:y/-pd:n");
 		
 	}
 	
