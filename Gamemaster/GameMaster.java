@@ -17,7 +17,7 @@ public class GameMaster {
 		
 		int rank=ch.getGMrank();
 		
-		if(ranks.containsKey(rank) && ranks.get(rank).getCommandpower()>=needsCommandPower){
+		if(needsCommandPower==0 || (ranks.containsKey(rank) && ranks.get(rank).getCommandpower()>=needsCommandPower)){
 			return true;
 		}
 		return false;

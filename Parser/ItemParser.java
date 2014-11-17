@@ -240,6 +240,12 @@ public class ItemParser extends Parser{
 					writeByteString(out, item, 368);
 					//TIMETOEXPIRE
 					writeSmallString(out, item, 400);
+					//TELEMAP
+					writeIntegerString(out, item, 408);
+					//TELEX
+					writeFloatString(out, item, 412);
+					//TELEY
+					writeFloatString(out, item, 416);
 					//SETEFFECTID
 					writeIntegerString(out, item, 420);
 					//SETPIECES
@@ -289,7 +295,7 @@ public class ItemParser extends Parser{
 				out.write("BONUSAGI  , LIFE      , BONUSLIFE , MANA      , BONUSMANA , STAMINA   , BONUSSTAM , ");
 				out.write("ATKSCS    , BONUSATKSC, DEFSCS    , BONUSDEFSC, CRITCHANCE, BONUSCRCH , CRITDMG   , ");
 				out.write("BONUSCRITD, MINDMG    , MAXDMG    , OFFPOWER  , BONUSOFFP , DEFPOWER  , BONUSDEFP , ");
-				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , BUFFICON");
+				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED");
 				out.newLine();
 				while(!items.isEmpty()){
 					item=items.removeFirst();

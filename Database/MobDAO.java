@@ -43,7 +43,7 @@ public class MobDAO {
 				data.setSkills(skills);
 				data.setMinatk((int)(rs.getInt("minatk")*1.4+30));
 				data.setMaxatk((int)(rs.getInt("maxatk")*1.4+30));
-				data.setDefence((int)((rs.getInt("defence")+10)*3));
+				data.setDefence((int)((rs.getInt("defence")+10)*2.5));//was *3 before
 				data.setMaxhp(rs.getInt("maxhp")+10);
 				data.setAtksuc(rs.getInt("atksuc"));
 				data.setDefsuc(rs.getInt("defsuc"));
@@ -116,7 +116,7 @@ public class MobDAO {
 				data[3] = rs.getInt("spawnRadius");
 				//skyzone has creepy spawns
 				if(data[0]==12)
-					data[3]+=100;
+					data[3]+=300;
 				data[4] = rs.getInt("waypointCount");
 				data[5] = rs.getInt("waypointHop");
 				data[6] = rs.getInt("respawnTime");

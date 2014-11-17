@@ -10,8 +10,10 @@ import GameServer.ServerPackets.ServerMessage;
 import Gamemaster.GameMaster;
 import Player.PlayerConnection;
 import Connections.Connection;
+import Database.FilterDAO;
 import Database.ItemDAO;
 import Database.MacroDAO;
+import Database.ValueDescriptionDAO;
 import chat.ChatCommandExecutor;
 
 public class ExportCommand implements ChatCommandExecutor{
@@ -84,6 +86,49 @@ public class ExportCommand implements ChatCommandExecutor{
 				out.close();
 				rs.close();
 				new ServerMessage().execute("Exported macros", source);
+			}catch(Exception e){
+				new ServerMessage().execute("Something went wrong", source);
+				return;
+			}
+		}
+		
+		//----------EXPORT FILTERS----------
+		if(parameters.length>1 && parameters[0].equals("filter")){
+			try{
+				BufferedWriter out = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/Data/"+parameters[1]+"Filters.txt"));
+				ResultSet rs=FilterDAO.getInstance().fetchFilters();
+				while(rs.next()){
+					out.write(rs.getString(1)+",");
+					out.write(rs.getString(2)+",");
+					out.write(rs.getInt(3)+",");
+					out.write(rs.getInt(4)+",");
+					out.write(rs.getInt(5)+",");
+					if(!rs.isLast())
+						out.write("\n");
+				}
+				out.close();
+				rs.close();
+				new ServerMessage().execute("Exported filters", source);
+			}catch(Exception e){
+				new ServerMessage().execute("Something went wrong", source);
+				return;
+			}
+		}
+		
+		//----------EXPORT DESCRIPTIONS----------
+		if(parameters.length>1 && parameters[0].equals("description")){
+			try{
+				BufferedWriter out = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/Data/"+parameters[1]+"CategoryDescriptions.txt"));
+				ResultSet rs=ValueDescriptionDAO.getInstance().fetchDescriptions();
+				while(rs.next()){
+					out.write(rs.getInt(1)+",");
+					out.write(rs.getString(2)+",");
+					if(!rs.isLast())
+						out.write("\n");
+				}
+				out.close();
+				rs.close();
+				new ServerMessage().execute("Exported descriptions", source);
 			}catch(Exception e){
 				new ServerMessage().execute("Something went wrong", source);
 				return;

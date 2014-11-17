@@ -49,7 +49,9 @@ public class ChatParser {
 		this.commandList.put("-itemset", new ItemsetCommand(30));
 		this.commandList.put("-export", new ExportCommand(100));
 		this.commandList.put("-import", new ImportCommand(100));
-		this.commandList.put("-macro", new MacroCommand(30));
+		this.commandList.put("-macro", new MacroCommand(0));
+		this.commandList.put("-itemlist", new ItemListCommand(30));
+		this.commandList.put("-showinfo", new EnableInfosCommand(10));
 	}
 	
 	public static synchronized ChatParser getInstance(){

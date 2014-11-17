@@ -30,7 +30,7 @@ public class NpcPackets {
 		npcSpawn[8] = (byte)0x01;
 		
 		npcSpawn[25] = (byte)0x03; //Some kind of type indicator
-		npcSpawn[68] = (byte)0x12; //NPC dialog ID
+		npcSpawn[68] = (byte)npc.getModule(); 
 			
 		for(int i=0;i<2;i++)  {
 			npcSpawn[82+i] = id[i];

@@ -73,10 +73,10 @@ public class Npc implements Location{
 			try {
 				this.grid = this.wmap.getGrid(this.map);
 				this.area = this.grid.update(this);
+				sendInit(area.addMemberAndGetMembers(this));
 			} catch (OutOfGridException e) {
 				this.log.warning(this, e.getMessage() + " Somehow an npc is outside grid.");
 			}
-			sendInit(area.addMemberAndGetMembers(this));
 		}
 		else {
 			ServerLogger.getInstance().logMessage(Level.SEVERE, this, "Failed to load grid for npc "+this.Uid +" map:" +this.map + ", disconnecting");
@@ -148,6 +148,14 @@ public class Npc implements Location{
 	
 	public int getId(){
 		return data.getId();
+	}
+	
+	public int getModule(){
+		return data.getModule();
+	}
+	
+	public int getItem(int index){
+		return data.getItem(index);
 	}
 	
 	public String getName(){

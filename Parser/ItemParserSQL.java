@@ -96,6 +96,9 @@ public class ItemParserSQL extends Parser{
 				bonusdefpower=convertBytesToSmall(item,358);
 				pvpdmginc=convertBytesToByte(item,368);
 				timetoexpire=convertBytesToSmall(item,400);
+				//TELEMAP 408
+				//TELEX 412
+				//TELEY 416
 				seteffectid=convertBytesToInteger(item,420);
 				amountsetpieces=convertBytesToByte(item,424);
 				movespeed=convertBytesToByte(item,428);

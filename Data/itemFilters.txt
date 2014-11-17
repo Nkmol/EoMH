@@ -1,0 +1,7 @@
+Category,Category,1,2000,1,
+War,WarUsable,0,1,0,
+Sin,SinUsable,0,1,0,
+Mage,MageUsable,0,1,0,
+Monk,MonkUsable,0,1,0,
+Lvl,MinLvl,1,167,1,
++,UpgradeLvl,0,12,0,

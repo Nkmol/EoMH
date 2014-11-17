@@ -152,6 +152,21 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 17){
+				ps = Queries.dropNpcDataTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 18){
+				ps = Queries.dropFilterTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 19){
+				ps = Queries.dropDescriptionTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -243,6 +258,27 @@ public class InstallDAO {
 		}
 		return b;
 	}
+	
+	public boolean createNpcDataTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcDataTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean createMobsTable() {
 		boolean b = true;
 		try{
@@ -501,6 +537,46 @@ public class InstallDAO {
 		return b;
 	}
 	
+	public boolean addFilter(Connection sqlConnection, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addFilter(sqlConnection, category, command, sqlName, minValue, maxValue, standardValue);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addDescription(Connection sqlConnection, String category, int deskValue, String description) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addDescription(sqlConnection, category, deskValue, description);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
 		boolean b = true;
 		try{
@@ -523,6 +599,28 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createMobDataEntry(sqlConnection, id, lvl, minatk, maxatk, deff, skill1, skill2, skill3, hp, atksuc, defsuc, basexp, coins, basefame, aggro, follow, move, attrange, drops, dropchances);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+
+		return b;
+		
+	}
+	
+	public boolean createNpcDataEntry(Connection sqlConnection, int id, int module, int[] items) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcDataEntry(sqlConnection, id, module, items);
 			ps.execute();
 			ps.close();
 			
@@ -729,6 +827,46 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createMacroTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createFilterTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createFilterTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createDescriptionTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createDescriptionTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

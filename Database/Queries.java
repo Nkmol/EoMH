@@ -290,6 +290,23 @@ public class Queries {
 		return st;
 	}
 	
+	public static PreparedStatement createNpcDataTable(Connection con) throws Exception{
+		String s="CREATE TABLE `npcData` ("+
+				"`npcID` int(10) unsigned NOT NULL,"+
+				"`module` int(10) unsigned NOT NULL,";
+		
+		for(int i=0;i<60;i++){
+			s+="`item"+(i+1)+"` int(10) unsigned NOT NULL DEFAULT '0',";
+		}
+		
+		s+=		"PRIMARY KEY (`npcID`),"+
+				"UNIQUE KEY `npcID_UNIQUE` (`npcID`)"+
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st = con.prepareStatement(s);
+													
+		return st;
+	}
+	
 	public static PreparedStatement createMobsTable(Connection con) throws Exception{
 		PreparedStatement st = con.prepareStatement("CREATE TABLE `mobs` ("+
 													"`id` int(11) NOT NULL AUTO_INCREMENT,"+
@@ -488,6 +505,18 @@ public class Queries {
 		st.setInt(1, mobID);
 		return st;
 	}
+	
+	public static PreparedStatement getNpcData(Connection con, int npcID) throws Exception {
+		PreparedStatement st = con.prepareStatement("SELECT * FROM npcData WHERE npcID = ?;");
+		st.setInt(1, npcID);
+		return st;
+	}
+	
+	public static PreparedStatement getAllNpcData(Connection con) throws Exception {
+		PreparedStatement st = con.prepareStatement("SELECT * FROM npcData;");
+		return st;
+	}
+	
 	public static PreparedStatement getMobs(Connection con) throws Exception{
 		PreparedStatement st = con.prepareStatement("SELECT * FROM mobs;");
 		return st;
@@ -534,6 +563,15 @@ public class Queries {
 		}
 		throw new Exception();
 	}
+	
+	public static PreparedStatement dropNpcDataTable(Connection connection) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st =  connection.prepareStatement("DROP TABLE npcData;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
 	public static PreparedStatement dropItemsTable(Connection connection) throws Exception {
 		if (ConfigurationManager.getProcessName().contentEquals("install")){
 			PreparedStatement st =  connection.prepareStatement("DROP TABLE items;");
@@ -601,6 +639,25 @@ public class Queries {
 		for(int i=0;i<80;i++){
 			st.setInt(19+i*2, drops[i]);
 			st.setFloat(20+i*2, dropchances[i]);
+		}
+		return st;
+	}
+	
+	public static PreparedStatement createNpcDataEntry(Connection con, int id, int module, int[] items) throws Exception{
+		String s="INSERT INTO npcData(npcID, module, ";
+		for(int i=0;i<59;i++){
+			s+="item"+(i+1)+", ";
+		}
+		s+="item60) VALUES(?, ?, ";
+		for(int i=0;i<59;i++){
+			s+="?, ";
+		}
+		s+="?);";
+		PreparedStatement st = con.prepareStatement(s);
+		st.setInt(1, id);
+		st.setInt(2, module);
+		for(int i=0;i<60;i++){
+			st.setInt(3+i, items[i]);
 		}
 		return st;
 	}
@@ -1667,6 +1724,153 @@ public class Queries {
 	public static PreparedStatement getMacro(Connection con, String name) throws Exception{
 		PreparedStatement st = con.prepareStatement("SELECT * FROM macro WHERE name = ?;");
 		st.setString(1, name);
+		return st;
+	}
+	
+	public static PreparedStatement createFilterTable(Connection con) throws Exception{
+		String s="CREATE TABLE `filter` ("+
+				"`category` char(16) NOT NULL," +
+				"`command` char(16) NOT NULL,"+
+				"`sqlName` char(16) NOT NULL,"+
+				"`minValue` int(10) NOT NULL,"+
+				"`mxValue` int(10) NOT NULL,"+
+				"`standardValue` int(10) NOT NULL,"+
+				"PRIMARY KEY (`category`,`command`), " +
+				"UNIQUE KEY `filter_unique` (`category`,`command`)" +
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropFilterTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE filter;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addFilter(Connection con, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) throws Exception{
+		String s="INSERT INTO filter(category,command,sqlName,minValue,mxValue,standardValue) VALUES (?,?,?,?,?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, category);
+		st.setString(2, command);
+		st.setString(3, sqlName);
+		st.setInt(4, minValue);
+		st.setInt(5, maxValue);
+		st.setInt(6, standardValue);
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeFilter(Connection con, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) throws Exception{
+		String s="UPDATE filter SET sqlName=?, minValue=?, mxValue=?, standardValue=? WHERE category=? AND command=?;";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, sqlName);
+		st.setInt(2, minValue);
+		st.setInt(3, maxValue);
+		st.setInt(4, standardValue);
+		st.setString(5, category);
+		st.setString(6, command);
+		
+		return st;
+	}
+	
+	public static PreparedStatement deleteFilter(Connection con, String category, String command) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM filter WHERE category=? AND command=?;");
+		st.setString(1, category);
+		st.setString(2, command);
+		return st;
+	}
+	
+	public static PreparedStatement deleteAllFilters(Connection con) throws Exception{
+		PreparedStatement st=con.prepareStatement("TRUNCATE filter;");
+		return st;
+	}
+	
+	public static PreparedStatement getAllFilters(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM filter;");
+		return st;
+	}
+	
+	public static PreparedStatement getFilter(Connection con, String category, String command) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM filter WHERE category=? AND command=?;");
+		st.setString(1, category);
+		st.setString(2, command);
+		return st;
+	}
+	
+	public static PreparedStatement createDescriptionTable(Connection con) throws Exception{
+		String s="CREATE TABLE `valuedescription` ("+
+				"`category` char(16) NOT NULL," +
+				"`descValue` int(10) NOT NULL,"+
+				"`description` char(16) NOT NULL,"+
+				"PRIMARY KEY (`category`,`descValue`), " +
+				"UNIQUE KEY `filter_unique` (`category`,`descValue`)" +
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropDescriptionTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE valuedescription;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addDescription(Connection con, String category, int descValue, String description) throws Exception{
+		String s="INSERT INTO valuedescription(category,descValue,description) VALUES (?,?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, category);
+		st.setInt(2, descValue);
+		st.setString(3, description);
+		
+		return st;
+	}
+	
+	public static PreparedStatement changeDescription(Connection con, String category, int descValue, String description) throws Exception{
+		String s="UPDATE valuedescription SET description=? WHERE category=? AND descValue=?;";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, description);
+		st.setString(2, category);
+		st.setInt(3, descValue);
+		
+		return st;
+	}
+	
+	public static PreparedStatement deleteDescription(Connection con, String category, int descValue) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM valuedescription WHERE category=? AND descValue=?;");
+		st.setString(1, category);
+		st.setInt(2, descValue);
+		return st;
+	}
+	
+	public static PreparedStatement deleteAllDescriptions(Connection con) throws Exception{
+		PreparedStatement st=con.prepareStatement("TRUNCATE valuedescription;");
+		return st;
+	}
+	
+	public static PreparedStatement getAllDescriptions(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM valuedescription;");
+		return st;
+	}
+	
+	public static PreparedStatement getDescription(Connection con, String category, int descValue) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM valuedescription WHERE category=? AND descValue=?;");
+		st.setString(1, category);
+		st.setInt(2, descValue);
 		return st;
 	}
 	

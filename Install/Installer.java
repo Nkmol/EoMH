@@ -24,6 +24,8 @@ import Configuration.ConfigurationManager;
 import Database.InstallDAO;
 import Database.RuntimeDriverLoader;
 import Database.SQLconnection;
+import Parser.FilterParser;
+import Parser.FilterParserSQL;
 import Parser.ItemParser;
 import Parser.ItemParserSQL;
 import Parser.ItemsetParser;
@@ -38,6 +40,8 @@ import Parser.MobParser;
 import Parser.MobParserSQL;
 import Parser.MobSpawnsParser;
 import Parser.MobSpawnsParserSQL;
+import Parser.NpcParser;
+import Parser.NpcParserSQL;
 import Parser.NpcSpawnsParser;
 import Parser.NpcSpawnsParserSQL;
 import Parser.SkillParser;
@@ -119,6 +123,9 @@ public class Installer {
                         if (bol[14]) if (!this.dao.createCharBuffTable()) { System.out.println("Failed to create table \"activebuffs\".. terminating, install failed"); return; }
                         if (bol[15]) if (!this.dao.createItemsetsTable()) { System.out.println("Failed to create table \"itemset\".. terminating, install failed"); return; }
                         if (bol[16]) if (!this.dao.createMacroTable()) { System.out.println("Failed to create table \"macro\".. terminating, install failed"); return; }
+                        if (bol[17]) if (!this.dao.createNpcDataTable()) { System.out.println("Failed to create table \"npcdata\".. terminating, install failed"); return; }
+                        if (bol[18]) if (!this.dao.createFilterTable()) { System.out.println("Failed to create table \"filter\".. terminating, install failed"); return; }
+                        if (bol[19]) if (!this.dao.createDescriptionTable()) { System.out.println("Failed to create table \"valuedescription\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[2]){
@@ -176,6 +183,21 @@ public class Installer {
                         	this.createMacro();
                         	System.out.println("Done");
                         }
+                        if(bol[17]){
+                        	System.out.println("Creating npcData entries");
+                        	this.createNpcData();
+                        	System.out.println("Done");
+                        }
+                        if(bol[18]){
+                        	System.out.println("Creating filter entries");
+                        	this.createFilter();
+                        	System.out.println("Done");
+                        }
+                        if(bol[19]){
+                        	System.out.println("Creating valuedescription entries");
+                        	this.createDescription();
+                        	System.out.println("Done");
+                        }
     
                         
                         System.out.println("ALL DONE");
@@ -190,6 +212,12 @@ public class Installer {
         private void createMobData() {
         	
         	MobParserSQL.parseMobsToSQL(dao, MobParser.getMoblistFromScr("Data/mobs.scr", 456), MobParser.getDroplistFromScr("Data/mobsitem.scr",1012,800));
+        	
+		}
+        
+        private void createNpcData() {
+        	
+        	NpcParserSQL.parseNpcsToSQL(dao, NpcParser.getNpclistFromScr("Data/npcs.scr", 1676));
         	
 		}
         
@@ -230,6 +258,14 @@ public class Installer {
         
         private void createMacro() {
         	MacroParserSQL.parseMacroToSQL(dao, MacroParser.getMacrolistFromTxt("Data/Macro.txt"));
+        }
+        
+        private void createFilter() {
+        	FilterParserSQL.parseFilterToSQL(dao, FilterParser.getFilterlistFromTxt("Data/itemFilters.txt"), "item");
+        }
+        
+        private void createDescription() {
+        	FilterParserSQL.parseDescriptionToSQL(dao, FilterParser.getDescriptionlistFromTxt("Data/itemCategoryDescriptions.txt"), "item");
         }
         
 		private void createDefaultAccount() {
@@ -386,8 +422,11 @@ public class Installer {
 		}
 		
 		private boolean[] checkTables(){
-        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments", "inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs", "itemset", "macro"};
+        	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false,
+        			false, false, false, false, false, false, false, false, false};
+        	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments",
+        			"inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs",
+        			"itemset", "macro", "npcdata", "filter", "valuedescription"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

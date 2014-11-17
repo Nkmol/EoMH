@@ -109,6 +109,7 @@ public class Character implements Location, Fightable {
 	private int lastHit;
 	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
+	private boolean showInfos=false;
 	
 	
 	public Character(Doll doll){
@@ -1171,6 +1172,14 @@ public class Character implements Location, Fightable {
 	public void setTurboSpeed(float turboSpeed){
 		this.turboSpeed=turboSpeed;
 		updateSpeed();
+	}
+	
+	public boolean getShowInfos(){
+		return showInfos;
+	}
+	
+	public void swapShowInfos(){
+		showInfos=!showInfos;
 	}
 	
 	public HashMap<Short, Buff> getBuffs() {

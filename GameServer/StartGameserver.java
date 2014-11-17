@@ -1,5 +1,7 @@
 package GameServer;
 
+import java.util.LinkedList;
+
 import logging.ServerLogger;
 import Configuration.ConfigurationManager;
 import ServerCore.ServerFacade;
@@ -10,6 +12,7 @@ import Database.GamemasterDAO;
 import Database.MobDAO;
 import Database.NpcDAO;
 import Database.StartupDAO;
+import ExperimentalStuff.IntelligentCommands;
 
 
 public class StartGameserver {
@@ -50,6 +53,9 @@ public class StartGameserver {
 			CharacterDAO.loadCharacterLvl(167);
 			MobDAO.initMobs();
 			NpcDAO.initNpcs();
+			LinkedList<String> categories=new LinkedList<String>();
+			categories.add("item");
+			IntelligentCommands.init(categories);
 			ServerFacade.getInstance(); 
 			
 		}

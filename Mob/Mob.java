@@ -57,6 +57,7 @@ public class Mob implements Location, Fightable{
 	private float targetX;
 	private float targetY;
 	private boolean isDeleted=false;
+	private int bonusHits=0;
 	/*
 	 * Initializes the mob
 	 * Params:
@@ -417,17 +418,40 @@ public class Mob implements Location, Fightable{
 	}
 	// perform actions needed to finalize mob's death
 	private void die() throws OutOfGridException {
-		hp=0;
+		
+		//character aggro
 		Character ch;
 		if(wmap.CharacterExists(getAggroID()))
 			ch=wmap.getCharacter(getAggroID());
 		else
 			ch=null;
+		
+		//hp reset
+		if(bonusHits!=0){
+			hp=1;
+			bonusHits--;
+		}else{
+			//bonushits
+			if((int)(Math.random()*200)==0){
+				bonusHits=(int)(5+Math.random()*10);
+				EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 2);
+				if(ch.getPt()!=null)
+					ch.getPt().sendMessageToMembers("Bonus Hits! :D");
+				else
+					new ServerMessage().execute("Bonus Hits! :D", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+				hp=1;
+			}else{
+				hp=0;
+			}
+		}
+		
 		//factor the multiplies coins and exp
 		float factor=(float)(Math.random()/10+0.9);
 		boolean star=false;
 		int coinfactor=1;
 		float expfactor=1*control.expFactor();
+		
+		//stars
 		if(!control.onlyStars() && ((int)(Math.random()*1666))==0){
 			star=true;
 			expfactor*=166;
@@ -443,16 +467,22 @@ public class Mob implements Location, Fightable{
 			expfactor*=45;
 			coinfactor*=10;
 		}
-		//drops
+		
 		ItemFrame it;
 		if(ch!=null && ch.getLevel()<getLevel()+9){
+			//drops
+			float bonusDroprate=1;
+			if(bonusHits!=0){
+				bonusDroprate=0.25f;
+			}
 			for(int i=0;i<data.getDrops().length;i++){
-				if(data.getDropchances()[i]!=0 && ((int)(Math.random()/data.getDropchances()[i]))==0){
+				if(data.getDropchances()[i]!=0 && ((int)(Math.random()/data.getDropchances()[i]/bonusDroprate))==0){
 					it = (ItemFrame)ItemCache.getInstance().getItem(data.getDrops()[i]);
 					if(it!=null)
 						it.dropItem(grid.getuid(), getLocation(),1);
 				}
 			}
+			
 			//exp
 			if(ch.getPt()!=null){
 				ch.getPt().killMob(ch,(long)(data.getBasexp()*factor*expfactor));
@@ -461,30 +491,40 @@ public class Mob implements Location, Fightable{
 					expfactor/=2;
 				ch.gainExp((long)(data.getBasexp()*factor*expfactor),true);
 			}
+			
 		}
-		it = (ItemFrame)ItemCache.getInstance().getItem(217000501);
-		it.dropItem(grid.getuid(), getLocation(),(int)(data.getCoins()*factor*coinfactor));
-		//EVENT
-		//if(data.getMobID()==341)
-		//	CharacterMaster.announceWinner(wmap.getCharacter(getAggroID()));
-		this.rmAreaMember();
-		this.setDied(System.currentTimeMillis());
-		this.setAlive(false);
-		this.send(MobPackets.getDeathPacket(this.uid, this, star));
+		
+		//coin
+		if(bonusHits==0 || ((int)(Math.random()*4))==0){
+			it = (ItemFrame)ItemCache.getInstance().getItem(217000501);
+			it.dropItem(grid.getuid(), getLocation(),(int)(data.getCoins()*factor*coinfactor));
+		}
+		
 		//fame
-		if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
-			if(Math.random() < 0.04) { // 3% chance
-				int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
-				ch.addFame(fame);
-				ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
-				this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
+		if(bonusHits==0){
+			if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
+				if(Math.random() < 0.04) { // 3% chance
+					int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
+					ch.addFame(fame);
+					ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
+					this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
+				}
 			}
 		}
 		
-		if(control.isTemp()){
-			setDeleted(true);
-		}else{
-			this.reset(false,false);
+		if(bonusHits==0){
+			//some control stuff and packet
+			this.rmAreaMember();
+			this.setDied(System.currentTimeMillis());
+			this.setAlive(false);
+			this.send(MobPackets.getDeathPacket(this.uid, this, star));
+			
+			//reset
+			if(control.isTemp()){
+				setDeleted(true);
+			}else{
+				this.reset(false,false);
+			}
 		}
 	}
 	// check if mob is close enough to player to aggro it
