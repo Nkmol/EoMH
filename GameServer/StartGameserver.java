@@ -46,6 +46,7 @@ public class StartGameserver {
 		}
 		public static void start(){
 			ServerLogger.getInstance().info(StartGameserver.class, "Server started");
+			ServerMaster.init("ServerDD");
 			StartupDAO.loadMaps();
 			SkillMaster.loadAllSkills();
 			BuffMaster.getAllBuffs();
@@ -55,6 +56,7 @@ public class StartGameserver {
 			NpcDAO.initNpcs();
 			LinkedList<String> categories=new LinkedList<String>();
 			categories.add("item");
+			categories.add("mob");
 			IntelligentCommands.init(categories);
 			ServerFacade.getInstance(); 
 			

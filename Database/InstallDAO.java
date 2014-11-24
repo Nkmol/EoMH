@@ -167,6 +167,16 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 20){
+				ps = Queries.dropEventTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 21){
+				ps = Queries.dropServerControlTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -577,6 +587,48 @@ public class InstallDAO {
 		return b;
 	}
 	
+	public boolean addEvent(Connection sqlConnection, String eventName, float exp, float drop, float coin,
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addEvent(sqlConnection, eventName, exp, drop, coin, fame, 
+					generalStarrate, starrate, superstarrate, multihitmobrate, mobhp,desc);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addServerControl(Connection sqlConnection, String serverName, String eventName) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addServerControl(sqlConnection, serverName, eventName);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
 		boolean b = true;
 		try{
@@ -639,10 +691,10 @@ public class InstallDAO {
 		
 	}
 	
-	public boolean createMobSpawnEntry(Connection sqlConnection, int map, int id, int amount, float rx, float ry, float radius) {
+	public boolean createMobSpawnEntry(Connection sqlConnection, int map, int id, int amount, float rx, float ry, float spawnWidth, float spawnHeight) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createMobSpawnEntry(sqlConnection, map, id, amount, rx, ry, radius);
+			PreparedStatement ps=Queries.createMobSpawnEntry(sqlConnection, map, id, amount, rx, ry, spawnWidth, spawnHeight);
 			ps.execute();
 			ps.close();
 			
@@ -867,6 +919,46 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createDescriptionTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createEventTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createEventTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createServerControlTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createServerControlTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

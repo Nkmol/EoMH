@@ -38,12 +38,12 @@ public class ChatParser {
 		this.commandList.put("-setGMrank", new SetGMrankCommand(20));
 		//this.commandList.put("startevent", new StartEventCommand(100));
 		this.commandList.put("-setfame", new SetFameCommand(20));
-		this.commandList.put("-spawnmob", new SpawnMobCommand(20));
+		this.commandList.put("-mob", new MobCommand(20));
 		this.commandList.put("-printstats", new PrintStatsCommand(30));
 		this.commandList.put("-vendorpoints", new VenderPoints(30));
 		this.commandList.put("-pd", new PartyDuelCommand(0));
 		this.commandList.put("-showcommands", new ShowCommands(0));
-		this.commandList.put("-tp", new TeleportCommand(20));
+		this.commandList.put("-tp", new TeleportCommand(0));
 		this.commandList.put("-bufficon", new Bufficon(30));
 		this.commandList.put("-test", new TestCommand(30));
 		this.commandList.put("-itemset", new ItemsetCommand(30));
@@ -52,6 +52,8 @@ public class ChatParser {
 		this.commandList.put("-macro", new MacroCommand(0));
 		this.commandList.put("-itemlist", new ItemListCommand(30));
 		this.commandList.put("-showinfo", new EnableInfosCommand(10));
+		this.commandList.put("-moblist", new MobListCommand(30));
+		this.commandList.put("-event", new EventCommand(20));
 	}
 	
 	public static synchronized ChatParser getInstance(){

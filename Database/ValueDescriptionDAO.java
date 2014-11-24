@@ -91,10 +91,10 @@ public class ValueDescriptionDAO {
 		return b;
 	}
 	
-	public boolean updateAllDescriptions(LinkedList<LinkedList<Object>> lines, boolean canOverwrite){
+	public boolean updateAllDescriptions(LinkedList<LinkedList<Object>> lines, boolean canOverwrite, String category){
 		boolean b=false;
 		LinkedList<Object> word;
-		String category,description;
+		String description;
 		int descValue;
 		while(!lines.isEmpty()){
 			word=lines.removeFirst();

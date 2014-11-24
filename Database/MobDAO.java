@@ -103,7 +103,7 @@ public class MobDAO {
 	
 	public static void initMobs(){
 		int mobid, count, pool;
-		int []data = new int[]{0,0,0,0,0,0,0};
+		int []data = new int[]{0,0,0,0,0,0,0,0};
 		pool = ConfigurationManager.getConf("world").getIntVar("mobUIDPool");
 		try{
 			ResultSet rs = Queries.getMobs(sqlConnection).executeQuery();
@@ -113,13 +113,15 @@ public class MobDAO {
 				data[0] = rs.getInt("map");
 				data[1] = rs.getInt("spawnX");
 				data[2] = rs.getInt("spawnY");
-				data[3] = rs.getInt("spawnRadius");
+				data[3] = rs.getInt("spawnWidth");
+				data[4] = rs.getInt("spawnHeight");
+				//old: spawnRadius:
 				//skyzone has creepy spawns
-				if(data[0]==12)
-					data[3]+=300;
-				data[4] = rs.getInt("waypointCount");
-				data[5] = rs.getInt("waypointHop");
-				data[6] = rs.getInt("respawnTime");
+				//if(data[0]==9)
+				//	data[3]+=150;
+				data[5] = rs.getInt("waypointCount");
+				data[6] = rs.getInt("waypointHop");
+				data[7] = rs.getInt("respawnTime");
 				System.out.println("Creating controller with x: " + data[1] + " y: " + data[2]);
 				//MobController run = 
 				new MobController(mobid, count, pool, data, false, false, 1f);
@@ -132,6 +134,7 @@ public class MobDAO {
 		} catch (SQLException e){
 			log.logMessage(Level.SEVERE, MobDAO.class, e.getMessage());
 		} catch (Exception e){
+			e.printStackTrace();
 			log.logMessage(Level.SEVERE, MobDAO.class, e.getMessage());
 		}
 	}

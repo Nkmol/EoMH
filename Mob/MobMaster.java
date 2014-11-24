@@ -1,5 +1,10 @@
 package Mob;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import Configuration.ConfigurationManager;
 import Database.MobDAO;
 import World.WMap;
@@ -8,6 +13,7 @@ import World.Waypoint;
 public class MobMaster {
 
 	private static int poolId=ConfigurationManager.getConf("world").getIntVar("mobUIDPool");
+	private static List<Mob> tempMobs=Collections.synchronizedList(new LinkedList<Mob>());
 
 	public static int getPoolId() {
 		return poolId;
@@ -33,6 +39,38 @@ public class MobMaster {
 		}
 		poolId += amount;
 		
+	}
+	
+	public static void addTempMob(Mob mob){
+		synchronized(tempMobs){
+			tempMobs.add(mob);
+		}
+	}
+	
+	public static void deleteTempMob(Mob mob){
+		synchronized(tempMobs){
+			tempMobs.remove(mob);
+		}
+	}
+	
+	public static void killAllTempMobs(int uid){
+		synchronized(tempMobs){
+			for(Iterator<Mob>it=tempMobs.iterator();it.hasNext();){
+				try{
+					it.next().recDamage(uid, 999999999);
+				}catch(Exception e){e.printStackTrace();}
+			}
+		}
+	}
+	
+	public static void deleteAllTempMobs(){
+		synchronized(tempMobs){
+			for(Iterator<Mob>it=tempMobs.iterator();it.hasNext();){
+				try{
+					it.next().dieByDespawn();
+				}catch(Exception e){e.printStackTrace();}
+			}
+		}
 	}
 	
 	

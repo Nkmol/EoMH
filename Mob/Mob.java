@@ -14,6 +14,7 @@ import java.util.Random;
 
 import logging.ServerLogger;
 import ExperimentalStuff.EffectMaster;
+import GameServer.ServerMaster;
 import GameServer.ServerPackets.ServerMessage;
 import Player.Character;
 import Player.CharacterMaster;
@@ -67,15 +68,15 @@ public class Mob implements Location, Fightable{
 	 * * cont = pointer to this mobs MobController object
 	 */
         
-	public Mob(int mobID, int id, Waypoint mdata, MobController cont) {
+	public Mob(int mobID, int id, MobController cont) {
 		this.uid = id;
 		this.mobID = mobID;
-		this.spawn = mdata;
-		this.location = new Waypoint(mdata.getX(), mdata.getY());
+		this.location = new Waypoint(0,0);
 		this.data = cont.getData();
 		this.alive = true;
 		this.setCurentWaypoint(0);
 		this.control = cont;
+		resetToSpawn();
 		this.wmap.AddMob(id, this);
 		atked=0;
 		targetX=0;
@@ -157,8 +158,8 @@ public class Mob implements Location, Fightable{
 			// a.addMember(this);
 			List<Integer> ls;
 		    ls = this.area.addMemberAndGetMembers(this);
-		    Iterator<Integer> it = this.iniPackets.iterator();
 		    synchronized(this.iniPackets){
+		    	Iterator<Integer> it = this.iniPackets.iterator();
 		    	while (it.hasNext()){
 		    		Integer i = it.next();
 		    		if (!WMap.getInstance().CharacterExists(i)){
@@ -226,14 +227,14 @@ public class Mob implements Location, Fightable{
 			int y = starty + r.nextInt(2 * this.data.getMoveSpeed());
 			float newX=this.getlastknownX() + (float)x;
 			float newY=this.getlastknownY() + (float)y;
-			if(newX<control.getSpawnx()-control.getSpawnRadius())
-				newX=control.getSpawnx()-control.getSpawnRadius();
-			if(newX>control.getSpawnx()+control.getSpawnRadius())
-				newX=control.getSpawnx()+control.getSpawnRadius();
-			if(newY<control.getSpawny()-control.getSpawnRadius())
-				newY=control.getSpawny()-control.getSpawnRadius();
-			if(newY>control.getSpawny()+control.getSpawnRadius())
-				newY=control.getSpawny()+control.getSpawnRadius();
+			if(newX<control.getSpawnx()-control.getSpawnWidth())
+				newX=control.getSpawnx()-control.getSpawnWidth();
+			else if(newX>control.getSpawnx()+control.getSpawnWidth())
+				newX=control.getSpawnx()+control.getSpawnWidth();
+			if(newY<control.getSpawny()-control.getSpawnHeight())
+				newY=control.getSpawny()-control.getSpawnHeight();
+			else if(newY>control.getSpawny()+control.getSpawnHeight())
+				newY=control.getSpawny()+control.getSpawnHeight();
 			
 			ls.add(new Waypoint(newX, newY));
 			for(int u=0;u<this.data.getWaypointDelay();u++) {
@@ -260,7 +261,7 @@ public class Mob implements Location, Fightable{
 				//System.out.println(this.uid + " is aggroed by " + this.getAggroID());
 				if (this.wmap.CharacterExists(this.getAggroID())){
 						Character loc = this.wmap.getCharacter(this.getAggroID());
-						if(WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY())>data.getFollowRange() || !loc.isDead()){
+						if(WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY())<data.getFollowRange() && !loc.isDead()){
 							// attack target and/or move towards it
 							if (WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY()) < this.data.getAttackRange()){
 								// System.out.println(this.uid + " is attacking " + loc.getuid());
@@ -359,7 +360,7 @@ public class Mob implements Location, Fightable{
 	private void reset(boolean sendMove, boolean resetHp) throws OutOfGridException {
 		this.resetDamage();
 		if(resetHp)
-			this.setHp(this.data.getMaxhp());
+			this.setHp((int)(this.data.getMaxhp()*ServerMaster.getCurrentEvent().getMobhp()));
 		this.setCurentWaypoint(0);
 		this.resetToSpawn();
 		this.setAggro(false);
@@ -376,8 +377,13 @@ public class Mob implements Location, Fightable{
 	}
 
 	private void resetToSpawn() {
-		this.setX(this.getSpawnx());
-		this.setY(this.getSpawny());
+		Random r = new Random();
+		int x=control.getSpawnx() + r.nextInt(control.getSpawnWidth());
+		int y=control.getSpawny() + r.nextInt(control.getSpawnHeight());
+		this.setX(x);
+		this.setY(y);
+		spawn=new Waypoint(x, y);
+		
 	}
 
 	// handle damages receiving
@@ -416,6 +422,22 @@ public class Mob implements Location, Fightable{
 			if (this.hp <= 0) this.die();
 		}
 	}
+	
+	public void dieByDespawn() throws OutOfGridException{
+		//some control stuff and packet
+		this.rmAreaMember();
+		this.setDied(System.currentTimeMillis());
+		this.setAlive(false);
+		this.send(MobPackets.getDeathPacket(this.uid, this, false));
+		
+		//reset
+		if(control.isTemp()){
+			setDeleted(true);
+		}else{
+			this.reset(false,false);
+		}
+	}
+	
 	// perform actions needed to finalize mob's death
 	private void die() throws OutOfGridException {
 		
@@ -426,13 +448,15 @@ public class Mob implements Location, Fightable{
 		else
 			ch=null;
 		
+		float multihitmobrate=ServerMaster.getCurrentEvent().getMultihitmobrate();
+		
 		//hp reset
 		if(bonusHits!=0){
 			hp=1;
 			bonusHits--;
 		}else{
 			//bonushits
-			if((int)(Math.random()*200)==0){
+			if((int)(Math.random()*multihitmobrate)==0){
 				bonusHits=(int)(5+Math.random()*10);
 				EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 2);
 				if(ch.getPt()!=null)
@@ -448,11 +472,14 @@ public class Mob implements Location, Fightable{
 		//factor the multiplies coins and exp
 		float factor=(float)(Math.random()/10+0.9);
 		boolean star=false;
-		int coinfactor=1;
-		float expfactor=1*control.expFactor();
+		float coinfactor=ServerMaster.getCurrentEvent().getCoin();
+		float expfactor=control.expFactor()*ServerMaster.getCurrentEvent().getExp();
+		float famerate=ServerMaster.getCurrentEvent().getFame();
+		float starrate=ServerMaster.getCurrentEvent().getStarrate()*ServerMaster.getCurrentEvent().getGeneralStarrate();
+		float superstarrate=ServerMaster.getCurrentEvent().getSuperstarrate()*ServerMaster.getCurrentEvent().getGeneralStarrate();
 		
 		//stars
-		if(!control.onlyStars() && ((int)(Math.random()*1666))==0){
+		if(!control.onlyStars() && ((int)(Math.random()*superstarrate))==0){
 			star=true;
 			expfactor*=166;
 			coinfactor*=16;
@@ -462,7 +489,7 @@ public class Mob implements Location, Fightable{
 			else
 				new ServerMessage().execute("WOW! Gz for super starmob!", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
 		}else
-		if(control.onlyStars() || ((int)(Math.random()*100))==0){
+		if(control.onlyStars() || ((int)(Math.random()*starrate))==0){
 			star=true;
 			expfactor*=45;
 			coinfactor*=10;
@@ -471,9 +498,9 @@ public class Mob implements Location, Fightable{
 		ItemFrame it;
 		if(ch!=null && ch.getLevel()<getLevel()+9){
 			//drops
-			float bonusDroprate=1;
+			float bonusDroprate=ServerMaster.getCurrentEvent().getDrop();
 			if(bonusHits!=0){
-				bonusDroprate=0.25f;
+				bonusDroprate*=0.25;
 			}
 			for(int i=0;i<data.getDrops().length;i++){
 				if(data.getDropchances()[i]!=0 && ((int)(Math.random()/data.getDropchances()[i]/bonusDroprate))==0){
@@ -505,6 +532,7 @@ public class Mob implements Location, Fightable{
 			if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
 				if(Math.random() < 0.04) { // 3% chance
 					int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
+					fame*=famerate;
 					ch.addFame(fame);
 					ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
 					this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));

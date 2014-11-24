@@ -1276,7 +1276,7 @@ public class Character implements Location, Fightable {
 	
 	public void teleportTo(int map, float X, float Y){
 		stopMovement();
-		leaveGameWorld(true);
+		leaveGameWorld(false);
 		this.currentMap=map;
 		setX(X);
 		setY(Y);

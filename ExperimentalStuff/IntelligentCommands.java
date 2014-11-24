@@ -31,21 +31,25 @@ public class IntelligentCommands {
 		//items
 		tablenames.put("item", "items");
 		idnames.put("item", "itemid");
+		//mobs
+		tablenames.put("mob", "mobdata");
+		idnames.put("mob", "mobID");
 	}
 
 	private static void loadFilters(LinkedList<String> categories){
 		filters=new HashMap<String,HashMap<String,LinkedList<Object>>>();
 		for(Iterator<String> i=categories.iterator();i.hasNext();){
 			HashMap<String,LinkedList<Object>> specificFilters=new HashMap<String,LinkedList<Object>>();
-			filters.put(i.next(), specificFilters);
-			ResultSet rs=FilterDAO.getInstance().fetchFilters();
+			String category=i.next();
+			filters.put(category, specificFilters);
+			ResultSet rs=FilterDAO.getInstance().fetchFilters(category);
 			try{
 				while(rs.next()){
 					LinkedList<Object> content=new LinkedList<Object>();
 					content.add(rs.getString("sqlName"));
-					content.add(rs.getInt("minValue"));
-					content.add(rs.getInt("mxValue"));
-					content.add(rs.getInt("standardValue"));
+					content.add(rs.getLong("minValue"));
+					content.add(rs.getLong("mxValue"));
+					content.add(rs.getLong("standardValue"));
 					
 					specificFilters.put(rs.getString("command"), content);
 				}
@@ -176,7 +180,7 @@ public class IntelligentCommands {
 			HashMap<String,Object> attribute=it.next();
 			LinkedList<Object> content=filtersByCategory.get(attribute.get("name"));
 			//correct the min and max values of the filters
-			correctMinMaxValues(attribute,(Integer)content.get(1),(Integer)content.get(2));
+			correctMinMaxValues(attribute,(Long)content.get(1),(Long)content.get(2));
 		}
 	}
 	
@@ -341,7 +345,7 @@ public class IntelligentCommands {
 					return null;
 				}
 			}
-			attributeStructured.put("=", Integer.parseInt(attribute));
+			attributeStructured.put("=", Long.parseLong(attribute));
 		}else{
 			//"Smaller" and "Larger" filters
 			if(indexLarger!=-1 && indexSmaller!=-1){
@@ -386,7 +390,7 @@ public class IntelligentCommands {
 						return null;
 					LinkedList<Object> largerAttribute=getLargerAttribute(attribute);
 					attributeName=(String)largerAttribute.removeFirst();
-					attributeStructured.put(">", (Integer)largerAttribute.removeFirst());
+					attributeStructured.put(">", (Long)largerAttribute.removeFirst());
 				//only "Smaller"
 				}else{
 					int i=0;
@@ -401,7 +405,7 @@ public class IntelligentCommands {
 						return null;
 					LinkedList<Object> smallerAttribute=getSmallerAttribute(attribute);
 					attributeName=(String)smallerAttribute.removeFirst();
-					attributeStructured.put("<", (Integer)smallerAttribute.removeFirst());
+					attributeStructured.put("<", (Long)smallerAttribute.removeFirst());
 				}
 			}
 		}
@@ -416,7 +420,7 @@ public class IntelligentCommands {
 		//add attribute name
 		largerAttribute.add(attribute.substring(0,attribute.indexOf("Larger")));
 		//add value
-		largerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Larger")+6,attribute.length())));
+		largerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Larger")+6,attribute.length())));
 		return largerAttribute;
 	}
 	
@@ -425,7 +429,7 @@ public class IntelligentCommands {
 		//add attribute name
 		smallerAttribute.add(attribute.substring(0,attribute.indexOf("Smaller")));
 		//add value
-		smallerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Smaller")+7,attribute.length())));
+		smallerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Smaller")+7,attribute.length())));
 		return smallerAttribute;
 	}
 	
@@ -434,9 +438,9 @@ public class IntelligentCommands {
 		//add attribute name
 		largerSmallerAttribute.add(attribute.substring(0,attribute.indexOf("Larger")));
 		//add value larger
-		largerSmallerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Larger")+6,attribute.indexOf("Smaller"))));
+		largerSmallerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Larger")+6,attribute.indexOf("Smaller"))));
 		//add value smaller
-		largerSmallerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Smaller")+7,attribute.length())));
+		largerSmallerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Smaller")+7,attribute.length())));
 		return largerSmallerAttribute;
 	}
 	
@@ -445,9 +449,9 @@ public class IntelligentCommands {
 		//add value
 		smallerLargerAttribute.add(attribute.substring(0,attribute.indexOf("Smaller")));
 		//add value smaller
-		smallerLargerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Smaller")+7,attribute.indexOf("Larger"))));
+		smallerLargerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Smaller")+7,attribute.indexOf("Larger"))));
 		//add value larger
-		smallerLargerAttribute.add(Integer.parseInt(attribute.substring(attribute.indexOf("Larger")+6,attribute.length())));
+		smallerLargerAttribute.add(Long.parseLong(attribute.substring(attribute.indexOf("Larger")+6,attribute.length())));
 		return smallerLargerAttribute;
 	}
 	
@@ -456,30 +460,30 @@ public class IntelligentCommands {
 		if(filter.containsKey("=") && (filter.containsKey("<") || filter.containsKey(">")))
 			return false;
 		//check for mathematical logic of "<" and ">"
-		if(filter.containsKey("<") && filter.containsKey(">") && (Integer)filter.get("<")-1<=(Integer)filter.get(">"))
+		if(filter.containsKey("<") && filter.containsKey(">") && (Long)filter.get("<")-1<=(Long)filter.get(">"))
 			return false;
 		return true;
 	}
 	
-	private static void correctMinMaxValues(HashMap<String,Object> filter, int minValue, int maxValue){
+	private static void correctMinMaxValues(HashMap<String,Object> filter, long minValue, long maxValue){
 		if(filter.containsKey("=")){
-			if((Integer)filter.get("=")<minValue)
+			if((Long)filter.get("=")<minValue)
 				filter.put("=", minValue);
-			if((Integer)filter.get("=")>maxValue)
+			if((Long)filter.get("=")>maxValue)
 				filter.put("=", maxValue);
 		}
 		//+1 for "<"
 		if(filter.containsKey("<")){
-			if((Integer)filter.get("<")<minValue+1)
+			if((Long)filter.get("<")<minValue+1)
 				filter.put("<", minValue+1);
-			if((Integer)filter.get("<")>maxValue+1)
+			if((Long)filter.get("<")>maxValue+1)
 				filter.put("<", maxValue+1);
 		}
 		//-1 for ">"
 		if(filter.containsKey(">")){
-			if((Integer)filter.get(">")<minValue-1)
+			if((Long)filter.get(">")<minValue-1)
 				filter.put(">", minValue-1);
-			if((Integer)filter.get(">")>maxValue-1)
+			if((Long)filter.get(">")>maxValue-1)
 				filter.put(">", maxValue-1);
 		}
 	}

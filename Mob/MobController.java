@@ -6,19 +6,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import World.OutOfGridException;
 import World.WMap;
-import World.Waypoint;
 import logging.ServerLogger;
 import Database.MobDAO;
 
 public class MobController implements Runnable {
 	private Map<Integer, Mob> mobs = Collections.synchronizedMap(new HashMap<Integer, Mob>());
 	private int mobID, mobCount, uidPool;
-	private int map, spawnx, spawny, spawnRadius,wpCount,wpHop, respawnTime;
+	private int map, spawnx, spawny, spawnWidth, spawnHeight,wpCount,wpHop, respawnTime;
 	private volatile boolean active;
 	private MobData data;
 	private ServerLogger log = ServerLogger.getInstance();
@@ -36,10 +34,11 @@ public class MobController implements Runnable {
 		this.map = data[0];
 		this.spawnx = data[1];
 		this.spawny = data[2];
-		this.spawnRadius = data[3];
-		this.wpCount = data[4];
-		this.wpHop = data[5];
-		this.respawnTime = data[6];
+		this.spawnWidth = data[3];
+		this.spawnHeight = data[4];
+		this.wpCount = data[5];
+		this.wpHop = data[6];
+		this.respawnTime = data[7];
 		this.isTemp=isTemp;
 		this.onlyStars=onlyStars;
 		this.expFactor=expFactor;
@@ -53,18 +52,13 @@ public class MobController implements Runnable {
 		this.data.setWaypointCount(wpCount);
 		this.data.setWaypointHop(wpHop);
 		this.data.setRespawnTime(respawnTime);
-		Random r = new Random();
-		Waypoint spawn;
 		Mob mob = null;
 		int uid = uidPool;
-		int x,y;
 		this.log.info(this, "Creating mob objects ");
 		for (int i=0; i < this.mobCount; i++){
-			// randomize spawn coordinates 
-			x = this.spawnx + r.nextInt(2*this.spawnRadius) - this.spawnRadius;
-			y = this.spawny + r.nextInt(2*this.spawnRadius) - this.spawnRadius;
-			spawn = new Waypoint(x,y);
-			mob = new Mob(this.mobID, uid, spawn, this);
+			mob = new Mob(this.mobID, uid, this);
+			if(isTemp)
+				MobMaster.addTempMob(mob);
 			try {
 				mob.run();
 			} catch (OutOfGridException e) {
@@ -145,6 +139,7 @@ public class MobController implements Runnable {
 		unregister(mob);
 		this.ticks.deleteMob(mob);
 		WMap.getInstance().removeMob(mob.getuid());
+		MobMaster.deleteTempMob(mob);
 		System.out.println("Removed mob: "+mob.getuid());
 	}
 	
@@ -168,8 +163,12 @@ public class MobController implements Runnable {
 		return spawny;
 	}
 	
-	public int getSpawnRadius(){
-		return spawnRadius;
+	public int getSpawnWidth(){
+		return spawnWidth;
+	}
+	
+	public int getSpawnHeight(){
+		return spawnHeight;
 	}
 	
 	public int getMap(){

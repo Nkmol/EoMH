@@ -26,6 +26,7 @@ public class ItemParser extends Parser{
 			int counter;
 			int id1;
 			int id2;
+			int category;
 			ArrayList<Short> wholeItem;
 			
 			for(int i=0;i<1000;i++){
@@ -48,16 +49,19 @@ public class ItemParser extends Parser{
 				if(itemBytes.size()>131){
 					id1=itemBytes.get(52)+itemBytes.get(53)*256+itemBytes.get(54)*65536+itemBytes.get(55)*16777216;
 					id2=itemBytes.get(128)+itemBytes.get(129)*256+itemBytes.get(130)*65536+itemBytes.get(131)*16777216;
+					category=itemBytes.get(136)+itemBytes.get(137)*256;
 				}else{
 					id1=0;
 					id2=0;
+					category=0;
 				}
-				while((id1<200000000 || id1>300000000 || id2<200000000 || id2>300000000)&& !itemBytes.isEmpty()){
+				while((id1<200000000 || id1>300000000 || id2<200000000 || id2>300000000 || category>1100)&& !itemBytes.isEmpty()){
 					if(!itemBytes.isEmpty())
 						wholeItem.add(itemBytes.removeFirst().shortValue());
-					if(itemBytes.size()>131){
+					if(itemBytes.size()>137){
 						id1=itemBytes.get(52)+itemBytes.get(53)*256+itemBytes.get(54)*65536+itemBytes.get(55)*16777216;
 						id2=itemBytes.get(128)+itemBytes.get(129)*256+itemBytes.get(130)*65536+itemBytes.get(131)*16777216;
+						category=itemBytes.get(136)+itemBytes.get(137)*256;
 					}
 				}
 				items.add(wholeItem);
@@ -108,7 +112,7 @@ public class ItemParser extends Parser{
 				out.write("BONUSAGI  , HEALHP    , LIFE      , BONUSLIFE , HEALMANA  , MANA      , BONUSMANA , STAMINA   , BONUSSTAM , ");
 				out.write("ATKSCS    , BONUSATKSC, DEFSCS    , BONUSDEFSC, CRITCHANCE, BONUSCRCH , CRITDMG   , ");
 				out.write("BONUSCRITD, MINDMG    , MAXDMG    , OFFPOWER  , BONUSOFFP , DEFPOWER  , BONUSDEFP , ");
-				out.write("PVPDMGINC , TIMETOEXPI, SETID     , SETPIECES , MOVESPEED , BUFFICON1 , BUFFTIME1 , BUFFVALUE1 , BUFFICON2 , BUFFTIME2 , BUFFVALUE2");
+				out.write("PVPDMGINC , TIMETOEXPI, TELEMAP   , TELEX     , TELEY     , SETID     , SETPIECES , MOVESPEED , BUFFICON1 , BUFFTIME1 , BUFFVALUE1, BUFFICON2 , BUFFTIME2 , BUFFVALUE2");
 				out.newLine();
 				while(!items.isEmpty()){
 					item=items.removeFirst();
@@ -171,102 +175,102 @@ public class ItemParser extends Parser{
 					//FACTION
 					writeByteString(out, item, 208);
 					//UPGRADELVL
-					writeByteString(out, item, 225);
+					writeByteString(out, item, 226);
 					//STR
-					writeSmallString(out, item, 226);
-					//BONUSSTR
 					writeSmallString(out, item, 228);
+					//BONUSSTR
+					writeSmallString(out, item, 230);
 					//DEX
-					writeSmallString(out, item, 232);
-					//BONUSDEX
 					writeSmallString(out, item, 234);
+					//BONUSDEX
+					writeSmallString(out, item, 236);
 					//VIT
-					writeSmallString(out, item, 238);
-					//BONUSVIT
 					writeSmallString(out, item, 240);
+					//BONUSVIT
+					writeSmallString(out, item, 242);
 					//INT
-					writeSmallString(out, item, 244);
-					//BONUSINT
 					writeSmallString(out, item, 246);
+					//BONUSINT
+					writeSmallString(out, item, 248);
 					//AGI
-					writeSmallString(out, item, 250);
-					//BONUSAGI
 					writeSmallString(out, item, 252);
+					//BONUSAGI
+					writeSmallString(out, item, 254);
 					//HEALHP
-					writeSmallString(out, item, 256);
-					//LIFE
 					writeSmallString(out, item, 260);
-					//BONUSLIFE
+					//LIFE
 					writeSmallString(out, item, 264);
+					//BONUSLIFE
+					writeSmallString(out, item, 268);
 					//HEALMANA
-					writeSmallString(out, item, 272);
-					//MANA
 					writeSmallString(out, item, 276);
-					//BONUSMANA
+					//MANA
 					writeSmallString(out, item, 280);
+					//BONUSMANA
+					writeSmallString(out, item, 284);
 					//STAMINA?
 					out.write("0         , ");
 					//BONUSSTAMINA
-					writeSmallString(out, item, 292);
+					writeSmallString(out, item, 296);
 					//ATKSCS
-					writeFloatString(out, item, 296);
-					//BONUSATKSCS
 					writeFloatString(out, item, 300);
+					//BONUSATKSCS
+					writeFloatString(out, item, 304);
 					//DEFSCS
-					writeFloatString(out, item, 308);
-					//BONUSDEFSCS
 					writeFloatString(out, item, 312);
+					//BONUSDEFSCS
+					writeFloatString(out, item, 316);
 					//CRITCHANCE
-					writeFloatString(out, item, 320);
-					//BONUSCRITCHANCE
 					writeFloatString(out, item, 324);
+					//BONUSCRITCHANCE
+					writeFloatString(out, item, 328);
 					//CRITDMG
-					writeSmallString(out, item, 332);
+					writeSmallString(out, item, 336);
 					//BONUSCRITDMG
-					writeSmallString(out, item, 334);
+					writeSmallString(out, item, 338);
 					//MINDMG
-					writeIntegerString(out, item, 338);
+					writeIntegerString(out, item, 342);
 					//MAXDMG
-					writeIntegerString(out, item, 344);
+					writeIntegerString(out, item, 348);
 					//OFFPOWER
-					writeSmallString(out, item, 350);
-					//BONUSOFFPOWER
-					writeSmallString(out, item, 352);
-					//DEFPOWER
 					writeSmallString(out, item, 356);
-					//BONUSDEFPOWER
+					//BONUSOFFPOWER
 					writeSmallString(out, item, 358);
+					//DEFPOWER
+					writeSmallString(out, item, 362);
+					//BONUSDEFPOWER
+					writeSmallString(out, item, 364);
 					//PVPDMGINC
-					writeByteString(out, item, 368);
+					writeByteString(out, item, 374);
 					//TIMETOEXPIRE
-					writeSmallString(out, item, 400);
+					writeSmallString(out, item, 406);
 					//TELEMAP
-					writeIntegerString(out, item, 408);
+					writeIntegerString(out, item, 412);
 					//TELEX
-					writeFloatString(out, item, 412);
-					//TELEY
 					writeFloatString(out, item, 416);
+					//TELEY
+					writeFloatString(out, item, 420);
 					//SETEFFECTID
-					writeIntegerString(out, item, 420);
+					writeSmallString(out, item, 424);
 					//SETPIECES
-					writeByteString(out, item, 424);
-					//MOVESPEED
 					writeByteString(out, item, 428);
-					if(item.size() > 456) {
+					//MOVESPEED
+					writeByteString(out, item, 432);
+					if(item.size() > 464) {
 						//BUFFICON
-						writeByteString(out, item, 456);
-						//BUFFTIME
-						writeSmallString(out, item, 458);
-						//BUFFVALUE
 						writeByteString(out, item, 460);
+						//BUFFTIME
+						writeSmallString(out, item, 462);
+						//BUFFVALUE
+						writeByteString(out, item, 464);
 						//System.out.println(item.size() + " ID: " + writeIntegerString(out, item, 52));
-						if(item.size() > 464) {
+						if(item.size() > 472) {
 							//BUFFICON2
-							writeByteString(out, item, 464);
-							//BUFFTIME2
-							writeSmallString(out, item, 466);
-							//BUFFVALUE2
 							writeByteString(out, item, 468);
+							//BUFFTIME2
+							writeSmallString(out, item, 470);
+							//BUFFVALUE2
+							writeByteString(out, item, 472);
 						}
 						else {
 							out.write("0         , ");

@@ -47,9 +47,9 @@ public class FilterDAO {
 			if(rs.next()){
 				filter=new LinkedList<Object>();
 				filter.add(rs.getString("commandName"));
-				filter.add(rs.getInt("minValue"));
-				filter.add(rs.getInt("maxValue"));
-				filter.add(rs.getInt("standardValue"));
+				filter.add(rs.getLong("minValue"));
+				filter.add(rs.getLong("maxValue"));
+				filter.add(rs.getLong("standardValue"));
 			}
 			rs.close();
 			
@@ -64,10 +64,10 @@ public class FilterDAO {
 		return filter;
 	}
 	
-	public ResultSet fetchFilters() {
+	public ResultSet fetchFilters(String category) {
 		ResultSet rs = null;
 		try {
-			rs = Queries.getAllFilters(this.sqlConnection).executeQuery();
+			rs = Queries.getAllFiltersByCategory(this.sqlConnection, category).executeQuery();
 		} catch (SQLException e){
 			e.printStackTrace();
 			
@@ -95,19 +95,18 @@ public class FilterDAO {
 		return b;
 	}
 	
-	public boolean updateAllFilters(LinkedList<LinkedList<Object>> lines, boolean canOverwrite){
+	public boolean updateAllFilters(LinkedList<LinkedList<Object>> lines, boolean canOverwrite, String category){
 		boolean b=false;
 		LinkedList<Object> word;
-		String category,command,sqlName;
-		int minValue,maxValue,standardValue;
+		String command,sqlName;
+		long minValue,maxValue,standardValue;
 		while(!lines.isEmpty()){
 			word=lines.removeFirst();
-			category=(String)word.removeFirst();
 			command=(String)word.removeFirst();
 			sqlName=(String)word.removeFirst();
-			minValue=(Integer)word.removeFirst();
-			maxValue=(Integer)word.removeFirst();
-			standardValue=(Integer)word.removeFirst();
+			minValue=(Long)word.removeFirst();
+			maxValue=(Long)word.removeFirst();
+			standardValue=(Long)word.removeFirst();
 			if(getFilter(category,command)!=null){
 				if(canOverwrite){
 					try{

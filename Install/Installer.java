@@ -126,8 +126,20 @@ public class Installer {
                         if (bol[17]) if (!this.dao.createNpcDataTable()) { System.out.println("Failed to create table \"npcdata\".. terminating, install failed"); return; }
                         if (bol[18]) if (!this.dao.createFilterTable()) { System.out.println("Failed to create table \"filter\".. terminating, install failed"); return; }
                         if (bol[19]) if (!this.dao.createDescriptionTable()) { System.out.println("Failed to create table \"valuedescription\".. terminating, install failed"); return; }
+                        if (bol[20]) if (!this.dao.createEventTable()) { System.out.println("Failed to create table \"event\".. terminating, install failed"); return; }
+                        if (bol[21]) if (!this.dao.createServerControlTable()) { System.out.println("Failed to create table \"server\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
+                        if(bol[21]){
+                        	System.out.print("Creating the default server..");
+                        	this.createDefaultServer();
+                        	System.out.println("Done");
+                        }
+                        if(bol[20]){
+                        	System.out.print("Creating the default event..");
+                        	this.createDefaultEvent();
+                        	System.out.println("Done");
+                        }
                         if(bol[2]){
                         	System.out.print("Creating item entries. ");
                         	this.createItems();
@@ -262,6 +274,7 @@ public class Installer {
         
         private void createFilter() {
         	FilterParserSQL.parseFilterToSQL(dao, FilterParser.getFilterlistFromTxt("Data/itemFilters.txt"), "item");
+        	FilterParserSQL.parseFilterToSQL(dao, FilterParser.getFilterlistFromTxt("Data/mobFilters.txt"), "mob");
         }
         
         private void createDescription() {
@@ -272,6 +285,17 @@ public class Installer {
         	this.dao.CreateAccount(new SQLconnection().getConnection(),1, "127.0.0.1", "localhost", "localhost", 1);
 			
 		}
+		
+		private void createDefaultEvent() {
+        	this.dao.addEvent(new SQLconnection().getConnection(), "defaultEvent", 1, 1, 1, 1, 1, 100, 1666, 200, 1, "no Event");
+			
+		}
+		
+		private void createDefaultServer() {
+        	this.dao.addServerControl(new SQLconnection().getConnection(), "ServerDD", "defaultEvent");
+			
+		}
+		
 		private void createMaps() {
 			MapParserSQL.parseMapsToSQL(dao, MapParser.getMaplistFromTxt("Data/maps.txt"));
 			/*XMLParser par = new XMLParser("Data/Maps.xml");
@@ -423,10 +447,10 @@ public class Installer {
 		
 		private boolean[] checkTables(){
         	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false,
-        			false, false, false, false, false, false, false, false, false};
+        			false, false, false, false, false, false, false, false, false, false, false};
         	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments",
         			"inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs",
-        			"itemset", "macro", "npcdata", "filter", "valuedescription"};
+        			"itemset", "macro", "npcdata", "filter", "valuedescription", "event", "server"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

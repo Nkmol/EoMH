@@ -313,7 +313,8 @@ public class Queries {
 													"`mobType` int(11) NOT NULL,"+
 													"`map` int(11) NOT NULL,"+
 													"`spawnCount` int(11) NOT NULL,"+
-													"`spawnRadius` int(11) NOT NULL," +
+													"`spawnWidth` int(11) NOT NULL," +
+													"`spawnHeight` int(11) NOT NULL," +
 													"`spawnX` int(11) NOT NULL,"+
 													"`spawnY` int(11) NOT NULL,"+
 													"`respawnTime` int(11) NOT NULL,"+
@@ -662,18 +663,19 @@ public class Queries {
 		return st;
 	}
 	
-	public static PreparedStatement createMobSpawnEntry(Connection con, int map, int id, int amount, float rx, float ry, float radius) throws Exception{
-		String s="INSERT INTO mobs(mobType, map, spawnCount, spawnRadius, spawnX, spawnY, respawnTime, waypointCount, waypointHop) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	public static PreparedStatement createMobSpawnEntry(Connection con, int map, int id, int amount, float rx, float ry, float spawnWidth, float spawnHeight) throws Exception{
+		String s="INSERT INTO mobs(mobType, map, spawnCount, spawnWidth, spawnHeight, spawnX, spawnY, respawnTime, waypointCount, waypointHop) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement st = con.prepareStatement(s);
 		st.setInt(1, id);
 		st.setInt(2, map);
 		st.setInt(3, amount);
-		st.setInt(4, (int)radius);
-		st.setInt(5, (int)rx);
-		st.setInt(6, (int)ry);
-		st.setInt(7, 30000);
-		st.setInt(8, 8);
+		st.setInt(4, (int)spawnWidth);
+		st.setInt(5, (int)spawnHeight);
+		st.setInt(6, (int)rx);
+		st.setInt(7, (int)ry);
+		st.setInt(8, 30000);
 		st.setInt(9, 8);
+		st.setInt(10, 8);
 		return st;
 	}
 	
@@ -1732,9 +1734,9 @@ public class Queries {
 				"`category` char(16) NOT NULL," +
 				"`command` char(16) NOT NULL,"+
 				"`sqlName` char(16) NOT NULL,"+
-				"`minValue` int(10) NOT NULL,"+
-				"`mxValue` int(10) NOT NULL,"+
-				"`standardValue` int(10) NOT NULL,"+
+				"`minValue` bigint(20) NOT NULL,"+
+				"`mxValue` bigint(20) NOT NULL,"+
+				"`standardValue` bigint(20) NOT NULL,"+
 				"PRIMARY KEY (`category`,`command`), " +
 				"UNIQUE KEY `filter_unique` (`category`,`command`)" +
 				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
@@ -1751,7 +1753,7 @@ public class Queries {
 		throw new Exception();
 	}
 	
-	public static PreparedStatement addFilter(Connection con, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) throws Exception{
+	public static PreparedStatement addFilter(Connection con, String category, String command, String sqlName, long minValue, long maxValue, long standardValue) throws Exception{
 		String s="INSERT INTO filter(category,command,sqlName,minValue,mxValue,standardValue) VALUES (?,?,?,?,?,?);";
 		
 		PreparedStatement st = con.prepareStatement(s);
@@ -1759,22 +1761,22 @@ public class Queries {
 		st.setString(1, category);
 		st.setString(2, command);
 		st.setString(3, sqlName);
-		st.setInt(4, minValue);
-		st.setInt(5, maxValue);
-		st.setInt(6, standardValue);
+		st.setLong(4, minValue);
+		st.setLong(5, maxValue);
+		st.setLong(6, standardValue);
 		
 		return st;
 	}
 	
-	public static PreparedStatement changeFilter(Connection con, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) throws Exception{
+	public static PreparedStatement changeFilter(Connection con, String category, String command, String sqlName, long minValue, long maxValue, long standardValue) throws Exception{
 		String s="UPDATE filter SET sqlName=?, minValue=?, mxValue=?, standardValue=? WHERE category=? AND command=?;";
 		
 		PreparedStatement st = con.prepareStatement(s);
 		
 		st.setString(1, sqlName);
-		st.setInt(2, minValue);
-		st.setInt(3, maxValue);
-		st.setInt(4, standardValue);
+		st.setLong(2, minValue);
+		st.setLong(3, maxValue);
+		st.setLong(4, standardValue);
 		st.setString(5, category);
 		st.setString(6, command);
 		
@@ -1793,8 +1795,9 @@ public class Queries {
 		return st;
 	}
 	
-	public static PreparedStatement getAllFilters(Connection con) throws Exception{
-		PreparedStatement st = con.prepareStatement("SELECT * FROM filter;");
+	public static PreparedStatement getAllFiltersByCategory(Connection con, String category) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM filter WHERE category=?;");
+		st.setString(1, category);
 		return st;
 	}
 	
@@ -1871,6 +1874,145 @@ public class Queries {
 		PreparedStatement st = con.prepareStatement("SELECT * FROM valuedescription WHERE category=? AND descValue=?;");
 		st.setString(1, category);
 		st.setInt(2, descValue);
+		return st;
+	}
+	
+	public static PreparedStatement createEventTable(Connection con) throws Exception{
+		String s="CREATE TABLE `event` ("+
+				"`eventName` char(16) NOT NULL," +
+				"`exp` float NOT NULL DEFAULT '1',"+
+				"`dropr` float NOT NULL DEFAULT '1',"+
+				"`coin` float NOT NULL DEFAULT '1',"+
+				"`fame` float NOT NULL DEFAULT '1',"+
+				"`generalStarrate` float NOT NULL DEFAULT '1',"+
+				"`starrate` int(10) NOT NULL DEFAULT '100',"+
+				"`superstarrate` int(10) NOT NULL DEFAULT '1666',"+
+				"`multihitmobrate` int(10) NOT NULL DEFAULT '200',"+
+				"`mobhp` float NOT NULL DEFAULT '1',"+
+				"`description` char(50) NOT NULL,"+
+				"PRIMARY KEY (`eventName`), " +
+				"UNIQUE KEY `event_unique` (`eventName`)" +
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropEventTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE event;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addEvent(Connection con, String eventName, float exp, float drop, float coin,
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc) throws Exception{
+		String s="INSERT INTO event(eventName, exp, dropr, coin, fame, generalStarrate, starrate, superstarrate,"
+				+ " multihitmobrate, mobhp, description) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, eventName);
+		st.setFloat(2, exp);
+		st.setFloat(3, drop);
+		st.setFloat(4, coin);
+		st.setFloat(5, fame);
+		st.setFloat(6, generalStarrate);
+		st.setInt(7, starrate);
+		st.setInt(8, superstarrate);
+		st.setInt(9, multihitmobrate);
+		st.setFloat(10, mobhp);
+		st.setString(11, desc);
+		
+		return st;
+	}
+	
+	public static PreparedStatement updateEvent(Connection con, String eventName, float exp, float drop, float coin,
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc) throws Exception{
+		String s="UPDATE event SET exp=? dropr=? coin=? fame=? generalStarrate=? starrate=? superstarrate=? multihitmobrate=? mobhp=? desc=? WHERE eventName=?;";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setFloat(1, exp);
+		st.setFloat(2, drop);
+		st.setFloat(3, coin);
+		st.setFloat(4, fame);
+		st.setFloat(5, generalStarrate);
+		st.setInt(6, starrate);
+		st.setInt(7, superstarrate);
+		st.setInt(8, multihitmobrate);
+		st.setFloat(9, mobhp);
+		st.setString(10, desc);
+		st.setString(11, eventName);
+		
+		return st;
+	}
+	
+	public static PreparedStatement deleteEvent(Connection con, String eventName) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM event WHERE eventName=?;");
+		st.setString(1, eventName);
+		return st;
+	}
+	
+	public static PreparedStatement getAllEvents(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM event;");
+		return st;
+	}
+	
+	public static PreparedStatement getEvent(Connection con, String eventName) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM event WHERE eventName = ?;");
+		st.setString(1, eventName);
+		return st;
+	}
+	
+	public static PreparedStatement createServerControlTable(Connection con) throws Exception{
+		String s="CREATE TABLE `server` ("+
+				"`serverName` char(16) NOT NULL," +
+				"`actualEvent` char(16) NOT NULL,"+
+				"PRIMARY KEY (`serverName`), " +
+				"UNIQUE KEY `server_unique` (`serverName`)" +
+				") ENGINE=InnoDB DEFAULT CHARSET=ascii;";
+		PreparedStatement st =  con.prepareStatement(s);
+														
+		return st;
+	}
+	
+	public static PreparedStatement dropServerControlTable(Connection con) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = con.prepareStatement("DROP TABLE server;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
+	public static PreparedStatement addServerControl(Connection con, String serverName, String eventName) throws Exception{
+		String s="INSERT INTO server(serverName, actualEvent) VALUES (?,?);";
+		
+		PreparedStatement st = con.prepareStatement(s);
+		
+		st.setString(1, serverName);
+		st.setString(2, eventName);
+		
+		return st;
+	}
+	
+	public static PreparedStatement deleteServerControl(Connection con, String serverName) throws Exception{
+		PreparedStatement st=con.prepareStatement("DELETE FROM server WHERE serverName=?;");
+		st.setString(1, serverName);
+		return st;
+	}
+	
+	public static PreparedStatement changeServerControlEvent(Connection con, String serverName, String eventName) throws Exception{
+		PreparedStatement st = con.prepareStatement("UPDATE server SET actualEvent=? WHERE serverName = ?;");
+		st.setString(1, eventName);
+		st.setString(2, serverName);
+		return st;
+	}
+	
+	public static PreparedStatement getCurrentEvent(Connection con, String serverName) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT actualEvent FROM server WHERE serverName = ?;");
+		st.setString(1, serverName);
 		return st;
 	}
 	

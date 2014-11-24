@@ -99,22 +99,14 @@ public class ImportCommand implements ChatCommandExecutor {
 				
 				//only insert new elements
 				if(parameters[1].equals("insertOnly")){
-					for(int i=0;i<lines.size();i++){
-						LinkedList<Object> line=lines.getFirst();
-						line.addFirst(parameters[2]);
-					}
-					if(FilterDAO.getInstance().updateAllFilters(lines, false))
+					if(FilterDAO.getInstance().updateAllFilters(lines, false, parameters[2]))
 						new ServerMessage().execute("Inserted new filters", source);
 					else{throw new Exception();}
 					return;
 				}
 				//insert new elements and update existing items
 				if(parameters[1].equals("updateAll")){
-					for(int i=0;i<lines.size();i++){
-						LinkedList<Object> line=lines.getFirst();
-						line.addFirst(parameters[2]);
-					}
-					if(FilterDAO.getInstance().updateAllFilters(lines, true))
+					if(FilterDAO.getInstance().updateAllFilters(lines, true, parameters[2]))
 						new ServerMessage().execute("Inserted and updated new filters", source);
 					else{throw new Exception();}
 					return;
@@ -139,22 +131,14 @@ public class ImportCommand implements ChatCommandExecutor {
 			
 				//only insert new elements
 				if(parameters[1].equals("insertOnly")){
-					for(int i=0;i<lines.size();i++){
-						LinkedList<Object> line=lines.getFirst();
-						line.addFirst(parameters[2]);
-					}
-					if(ValueDescriptionDAO.getInstance().updateAllDescriptions(lines, false))
+					if(ValueDescriptionDAO.getInstance().updateAllDescriptions(lines, false, parameters[2]))
 						new ServerMessage().execute("Inserted new descriptions", source);
 					else{throw new Exception();}
 					return;
 				}
 				//insert new elements and update existing items
 				if(parameters[1].equals("updateAll")){
-					for(int i=0;i<lines.size();i++){
-						LinkedList<Object> line=lines.getFirst();
-						line.addFirst(parameters[2]);
-					}
-					if(ValueDescriptionDAO.getInstance().updateAllDescriptions(lines, true))
+					if(ValueDescriptionDAO.getInstance().updateAllDescriptions(lines, true, parameters[2]))
 						new ServerMessage().execute("Inserted and updated new descriptions", source);
 					else{throw new Exception();}
 					return;

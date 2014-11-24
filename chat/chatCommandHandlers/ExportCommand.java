@@ -96,13 +96,14 @@ public class ExportCommand implements ChatCommandExecutor{
 		if(parameters.length>1 && parameters[0].equals("filter")){
 			try{
 				BufferedWriter out = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/Data/"+parameters[1]+"Filters.txt"));
-				ResultSet rs=FilterDAO.getInstance().fetchFilters();
+				ResultSet rs=FilterDAO.getInstance().fetchFilters(parameters[1]);
 				while(rs.next()){
 					out.write(rs.getString(1)+",");
 					out.write(rs.getString(2)+",");
-					out.write(rs.getInt(3)+",");
+					out.write(rs.getString(3)+",");
 					out.write(rs.getInt(4)+",");
 					out.write(rs.getInt(5)+",");
+					out.write(rs.getInt(6)+",");
 					if(!rs.isLast())
 						out.write("\n");
 				}

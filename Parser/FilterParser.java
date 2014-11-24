@@ -54,7 +54,7 @@ public class FilterParser extends Parser{
 					s+=(char)filterBytes.removeFirst().shortValue();
 				}
 				filterBytes.removeFirst();
-				wholeFilter.add(Integer.parseInt(s));
+				wholeFilter.add(Long.parseLong(s));
 				
 				//MaxValue
 				s="";
@@ -62,7 +62,7 @@ public class FilterParser extends Parser{
 					s+=(char)filterBytes.removeFirst().shortValue();
 				}
 				filterBytes.removeFirst();
-				wholeFilter.add(Integer.parseInt(s));
+				wholeFilter.add(Long.parseLong(s));
 				
 				//StandardValue
 				s="";
@@ -70,7 +70,7 @@ public class FilterParser extends Parser{
 					s+=(char)filterBytes.removeFirst().shortValue();
 				}
 				filterBytes.removeFirst();
-				wholeFilter.add(Integer.parseInt(s));
+				wholeFilter.add(Long.parseLong(s));
 				
 				if(!filterBytes.isEmpty()){
 					filterBytes.removeFirst();
