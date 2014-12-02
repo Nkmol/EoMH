@@ -27,6 +27,7 @@ public class ItemParser extends Parser{
 			int id1;
 			int id2;
 			int category;
+			int textid;
 			ArrayList<Short> wholeItem;
 			
 			for(int i=0;i<1000;i++){
@@ -50,18 +51,21 @@ public class ItemParser extends Parser{
 					id1=itemBytes.get(52)+itemBytes.get(53)*256+itemBytes.get(54)*65536+itemBytes.get(55)*16777216;
 					id2=itemBytes.get(128)+itemBytes.get(129)*256+itemBytes.get(130)*65536+itemBytes.get(131)*16777216;
 					category=itemBytes.get(136)+itemBytes.get(137)*256;
+					textid=itemBytes.get(132)+itemBytes.get(133)*256+itemBytes.get(134)*65536+itemBytes.get(135)*16777216;
 				}else{
 					id1=0;
 					id2=0;
 					category=0;
+					textid=0;
 				}
-				while((id1<200000000 || id1>300000000 || id2<200000000 || id2>300000000 || category>1100)&& !itemBytes.isEmpty()){
+				while((id1<200000000 || id1>300000000 || id2<200000000 || id2>700000000 || category>1100 || textid<400000000 || textid>900000000)&& !itemBytes.isEmpty()){
 					if(!itemBytes.isEmpty())
 						wholeItem.add(itemBytes.removeFirst().shortValue());
 					if(itemBytes.size()>137){
 						id1=itemBytes.get(52)+itemBytes.get(53)*256+itemBytes.get(54)*65536+itemBytes.get(55)*16777216;
 						id2=itemBytes.get(128)+itemBytes.get(129)*256+itemBytes.get(130)*65536+itemBytes.get(131)*16777216;
 						category=itemBytes.get(136)+itemBytes.get(137)*256;
+						textid=itemBytes.get(132)+itemBytes.get(133)*256+itemBytes.get(134)*65536+itemBytes.get(135)*16777216;
 					}
 				}
 				items.add(wholeItem);
@@ -80,7 +84,7 @@ public class ItemParser extends Parser{
 				int id=convertBytesToInteger(i.next(),52);
 				if(id<200000000 || id>300000000){
 					i.remove();
-					System.out.println("wrong item detected at index "+counter);
+					System.out.println("wrong item detected at index "+counter+" with ID "+id);
 				}
 				counter++;
 			}

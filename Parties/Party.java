@@ -120,16 +120,17 @@ public class Party {
 	}
 	
 	public void killMob(Character ch, long totalExp){
-		sendExpToMembers(totalExp);
+		sendExpToMembers(ch,totalExp);
 		gainPtExp(ch, 1);
 	}
 	
-	private void sendExpToMembers(long totalExp){
+	private void sendExpToMembers(Character from,long totalExp){
 		Character ch;
 		Iterator<Character> i=members.iterator();
 		while(i.hasNext()){
 			ch=i.next();
-			ch.gainExp((long)(totalExp*PartyMaster.getExpFactorByParty(this,ch)*PartyMaster.getExpFactorByPtLvl(this)), true);
+			if(!ch.isDead() && (from==ch || from.getArea().isNear(ch)))
+				ch.gainExp((long)(totalExp*PartyMaster.getExpFactorByParty(this,ch)*PartyMaster.getExpFactorByPtLvl(this)), true);
 		}
 	}
 	

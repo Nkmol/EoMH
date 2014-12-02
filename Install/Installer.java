@@ -46,6 +46,8 @@ import Parser.NpcSpawnsParser;
 import Parser.NpcSpawnsParserSQL;
 import Parser.SkillParser;
 import Parser.SkillParserSQL;
+import Parser.UpgradeParser;
+import Parser.UpgradeParserSQL;
 
 public class Installer {
         private Configuration conf;
@@ -128,6 +130,7 @@ public class Installer {
                         if (bol[19]) if (!this.dao.createDescriptionTable()) { System.out.println("Failed to create table \"valuedescription\".. terminating, install failed"); return; }
                         if (bol[20]) if (!this.dao.createEventTable()) { System.out.println("Failed to create table \"event\".. terminating, install failed"); return; }
                         if (bol[21]) if (!this.dao.createServerControlTable()) { System.out.println("Failed to create table \"server\".. terminating, install failed"); return; }
+                        if (bol[22]) if (!this.dao.createUpgradeTable()) { System.out.println("Failed to create table \"upgrade\".. terminating, install failed"); return; }
                         System.out.println("Done");
                 
                         if(bol[21]){
@@ -208,6 +211,11 @@ public class Installer {
                         if(bol[19]){
                         	System.out.println("Creating valuedescription entries");
                         	this.createDescription();
+                        	System.out.println("Done");
+                        }
+                        if(bol[22]){
+                        	System.out.println("Creating upgrade entries");
+                        	this.createUpgrade();
                         	System.out.println("Done");
                         }
     
@@ -295,6 +303,10 @@ public class Installer {
         	this.dao.addServerControl(new SQLconnection().getConnection(), "ServerDD", "defaultEvent");
 			
 		}
+		
+		private void createUpgrade() {
+        	UpgradeParserSQL.parseUpgradesToSQL(dao, UpgradeParser.getUpgrlistFromScr("Data/upgradeitems.scr", 44));
+        }
 		
 		private void createMaps() {
 			MapParserSQL.parseMapsToSQL(dao, MapParser.getMaplistFromTxt("Data/maps.txt"));
@@ -447,10 +459,10 @@ public class Installer {
 		
 		private boolean[] checkTables(){
         	boolean b[] = new boolean[]{false, false, false, false, false, false, false, false, false, false, false,
-        			false, false, false, false, false, false, false, false, false, false, false};
+        			false, false, false, false, false, false, false, false, false, false, false, false};
         	String []tables = new String[]{"accounts", "characters", "items", "maps", "mobdata", "mobs", "equipments",
         			"inventories", "skills", "charskills", "charskillbars", "lvls", "gamemaster", "npcspawns", "charbuffs",
-        			"itemset", "macro", "npcdata", "filter", "valuedescription", "event", "server"};
+        			"itemset", "macro", "npcdata", "filter", "valuedescription", "event", "server", "upgrade"};
         	String in;
         	
         	for (int i =0; i < tables.length; i++){

@@ -29,7 +29,7 @@ public class MobMaster {
 	
 	public static void spawnMob(int mobid, int amount, int map, Waypoint w, int radius, boolean isTemp, boolean onlyStars, float expFactor){
 		
-		int []data = new int[]{map,(int)w.getX(),(int)w.getY(),radius,10,0,0};
+		int []data = new int[]{map,(int)w.getX(),(int)w.getY(),radius,radius,10,0,0};
 		System.out.println("Creating controller with x: " + data[1] + " y: " + data[2]);
 		MobController run = new MobController(mobid, amount, poolId, data, isTemp, onlyStars, expFactor);
 		try{

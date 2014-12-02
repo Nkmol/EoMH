@@ -20,6 +20,9 @@ public class CharacterMaster {
 	private static int highestLvl=9;
 	private static final float runningSpeed=24.5f;
 	private static final float walkingSpeed=7;
+	private static final int hpCap=65000;
+	private static final int manaCap=32000;
+	private static final int staminaCap=32000;
 	private static final TreeMap<Integer, Short> fametitles = new TreeMap<Integer, Short>() {
 		/**
 		 * 
@@ -208,6 +211,18 @@ public class CharacterMaster {
 
 	public static float getWalkingspeed() {
 		return walkingSpeed;
+	}
+
+	public static int getManacap() {
+		return manaCap;
+	}
+
+	public static int getStaminacap() {
+		return staminaCap;
+	}
+
+	public static int getHpcap() {
+		return hpCap;
 	}
 	
 }

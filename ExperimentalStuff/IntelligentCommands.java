@@ -17,7 +17,7 @@ public class IntelligentCommands {
 	//                    category         name      attributes
 	private static HashMap<String,HashMap<String,LinkedList<Object>>> filters;
 	//                    category         name   value
-	private static HashMap<String,HashMap<String,Integer>> descriptions;
+	private static HashMap<String,HashMap<String,Long>> descriptions;
 	//table name for category
 	private static HashMap<String, String> tablenames;
 	//id name for category
@@ -61,14 +61,14 @@ public class IntelligentCommands {
 	}
 	
 	private static void loadCategoryDescriptions(LinkedList<String> categories){
-		descriptions=new HashMap<String,HashMap<String,Integer>>();
+		descriptions=new HashMap<String,HashMap<String,Long>>();
 		for(Iterator<String> i=categories.iterator();i.hasNext();){
-			HashMap<String,Integer> specificDescriptions=new HashMap<String,Integer>();
+			HashMap<String,Long> specificDescriptions=new HashMap<String,Long>();
 			descriptions.put(i.next(), specificDescriptions);
 			ResultSet rs=ValueDescriptionDAO.getInstance().fetchDescriptions();
 			try{
 				while(rs.next()){
-					int descValue=rs.getInt("descValue");
+					long descValue=rs.getLong("descValue");
 					
 					specificDescriptions.put(rs.getString("description"), descValue);
 				}
@@ -242,7 +242,7 @@ public class IntelligentCommands {
 	//find a description string in the nameSystem
 	private static String searchForDescriptions(String category, String nameSystem){
 		String description=null;
-		HashMap<String,Integer> descValues=descriptions.get(category);
+		HashMap<String,Long> descValues=descriptions.get(category);
 		Set<String> keys=descValues.keySet();
 		Iterator<String> i=keys.iterator();
 		boolean found=false;

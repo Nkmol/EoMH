@@ -1,12 +1,12 @@
 package GameServer.GamePackets;
 
 import item.inventory.InventoryException;
+import item.inventory.InventoryPackets;
 
 import java.nio.ByteBuffer;
 
 import Player.Character;
 import Player.PlayerConnection;
-import Tools.BitTools;
 import Connections.Connection;
 import Encryption.Decryptor;
 import GameServer.ServerPackets.ServerMessage;
@@ -30,7 +30,7 @@ public class DeleteItem implements Packet {
 		
 		decrypted = Decryptor.Decrypt(decrypted);
 		Character cur = ((PlayerConnection)con).getActiveCharacter();
-		byte[] delete = new byte[20];
+		byte[] delete = null;
 		
 		//update inv first
 		cur.getInventory().updateInv();
@@ -38,20 +38,8 @@ public class DeleteItem implements Packet {
 		try{
 			
 			cur.getInventory().removeItem(decrypted[1]);
-		
-			byte[] chid = BitTools.intToByteArray(cur.getCharID());
 			
-			delete[0] = (byte)delete.length;
-			delete[4] = (byte)0x04;
-			delete[6] = (byte)0x15;
-			
-			for(int i=0;i<4;i++) {
-				delete[12+i] = chid[i];
-			}
-			
-			delete[16] = (byte)0x01;
-			delete[18] = decrypted[0];
-			delete[19] = decrypted[1];
+			delete=InventoryPackets.getInventoryDeletePacket(cur, decrypted[1], decrypted[0]);
 			
 			//save inv
 			cur.getInventory().saveInv(cur);

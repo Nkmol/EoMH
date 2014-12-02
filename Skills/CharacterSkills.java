@@ -78,7 +78,7 @@ public class CharacterSkills {
 			return;
 		SkillFrame skill=SkillMaster.getSkill(id);
 		int reqSkill=skill.getReqSkill1();
-		if(reqSkill!=0 && (skill.getTypeGeneral()==27 || skill.getTypeSpecific()==0 || skill.getTypeSpecific()==7) && loadedSkills.containsValue(reqSkill)){
+		if(reqSkill!=0 && (skill.getTypeGeneral()==27 || skill.getTypeSpecific()==0 || skill.getTypeSpecific()==7 || skill.getTypeSpecific()==11) && loadedSkills.containsValue(reqSkill)){
 			for(int i=0;i<loadedSkills.size();i++){
 				if (loadedSkills.get(i)==reqSkill){
 					loadedSkills.put(i, id);
@@ -157,6 +157,18 @@ public class CharacterSkills {
 			sp+=SkillMaster.getSkill(learnedSkills.get(i.next())).getSkillpoints();
 		}
 		return sp;
+	}
+	
+	public int getUpgradeSkillStage(){
+		if(loadedSkills.containsValue(100324))
+			return 6;
+		if(loadedSkills.containsValue(100323))
+			return 3;
+		if(loadedSkills.containsValue(100322))
+			return 2;
+		if(loadedSkills.containsValue(100321))
+			return 1;
+		return 0;
 	}
 	
 }

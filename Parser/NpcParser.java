@@ -19,7 +19,7 @@ public class NpcParser extends Parser{
 			byte[] data = Files.readAllBytes(path);
 			System.out.println("BYTES: "+data.length+" ,CREATE NPC LISTS...");
 			
-			//GET MOBS TO LIST
+			//GET NPCS TO LIST
 			LinkedList<ArrayList<Short>> npcs=new LinkedList<ArrayList<Short>>();
 			int byteatm=0;
 			short shortdata=0;
@@ -61,7 +61,7 @@ public class NpcParser extends Parser{
 		try{
 			System.out.println("CREATE NPC LIST TEXT FILE...");
 			
-			//CREATE MOB LIST TEXT FILE
+			//CREATE NPC LIST TEXT FILE
 			BufferedWriter out = new BufferedWriter(new FileWriter(pathString));
 			ArrayList<Short> npc;
 			

@@ -14,6 +14,6 @@ public interface Fightable {
 	public int getAtkSuc();
 	public int getDefSuc();
 	public int getCritRate();
-	public short getCritdmg();
+	public int getCritdmg();
 	
 }

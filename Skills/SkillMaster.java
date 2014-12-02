@@ -593,4 +593,11 @@ public class SkillMaster {
 		
 	}
 	
+	public static boolean canUpgrade(Character ch, int upgradeSkill){
+		CharacterSkills skills=ch.getSkills();
+		if(skills.getUpgradeSkillStage()<upgradeSkill)
+			return false;
+		return true;
+	}
+	
 }

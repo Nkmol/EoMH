@@ -17,7 +17,7 @@
 16,Cape,
 17,Shoes,
 18,Cap,
-20,Necklace,
+20,Neck,
 21,Ring,
 22,Bracer,
 23,Tablet,

@@ -2016,4 +2016,57 @@ public class Queries {
 		return st;
 	}
 	
+	public static PreparedStatement createUpgradeTable(Connection con) throws Exception {
+		PreparedStatement st = con.prepareStatement("CREATE TABLE `upgrade` (" +
+													"`upgradeId` int(10) unsigned NOT NULL,"+
+													"`oldItem` int(10) unsigned NOT NULL,"+
+													"`upgrader` int(10) unsigned NOT NULL,"+
+													"`newItem` int(10) unsigned NOT NULL,"+
+													"`itemStage` float NOT NULL,"+
+													"`upgradeLvl` float NOT NULL,"+
+													"`failRate` float NOT NULL,"+
+													"`breakOption` float NOT NULL,"+
+													"`upgradeSkill` int(10) unsigned NOT NULL,"+
+													"PRIMARY KEY (`upgradeId`)," +
+													"UNIQUE KEY `upgrid_UNIQUE` (`upgradeId`)" +
+													") ENGINE=InnoDB DEFAULT CHARSET=ascii;");
+		return st;
+	}
+	
+	public static PreparedStatement getAllUpgrades(Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM upgrade;");
+		return st;
+	}
+	
+	public static PreparedStatement getUpgradeByItemAndUpgrader(Connection con, int oldItem, int upgrader) throws Exception{
+		PreparedStatement st = con.prepareStatement("SELECT * FROM upgrade WHERE oldItem = ? AND upgrader = ?;");
+		st.setInt(1, oldItem);
+		st.setInt(2, upgrader);
+		return st;
+	}
+	
+	public static PreparedStatement addUpgrade(Connection con,int id, int oldIt, int upgrader, int newIt,
+			float itStage, float upgradelvl, float failrate, float breakoption, int upgradeskill) throws Exception{
+		PreparedStatement st = con.prepareStatement("INSERT INTO upgrade(upgradeId,oldItem,upgrader,newItem,"
+				+ "itemStage,upgradeLvl,failRate,breakOption,upgradeSkill) VALUES (?,?,?,?,?,?,?,?,?);");
+		st.setInt(1, id);
+		st.setInt(2, oldIt);
+		st.setInt(3, upgrader);
+		st.setInt(4, newIt);
+		st.setFloat(5, itStage);
+		st.setFloat(6, upgradelvl);
+		st.setFloat(7, failrate);
+		st.setFloat(8, breakoption);
+		st.setInt(9, upgradeskill);
+		return st;
+	}
+	
+	public static PreparedStatement dropUpgradeTable(Connection connection) throws Exception {
+		if (ConfigurationManager.getProcessName().contentEquals("install")){
+			PreparedStatement st = connection.prepareStatement("DROP TABLE upgrade;");
+			return st;
+		}
+		throw new Exception();
+	}
+	
 }

@@ -757,7 +757,7 @@ public class Mob implements Location, Fightable{
 		return data.getCritsuc();
 	}
 	
-	public short getCritdmg(){
+	public int getCritdmg(){
 		return 0;
 	}
         

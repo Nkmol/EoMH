@@ -59,7 +59,7 @@ public class Character implements Location, Fightable {
 	private Waypoint location;
 	private int faction;
 	private int maxhp, hp, maxmana, mana, maxstamina, stamina;
-	private short attack, defence,hpreg,manareg,stamreg,minDmg,maxDmg, critdmg;
+	private int attack, defence,hpreg,manareg,stamreg,minDmg,maxDmg, critdmg;
 	private int healingSpeed;
 	private int basicAtkSuc, basicDefSuc, basicCritRate, additionalAtkSuc, additionalDefSuc, additionalCritRate;
 	private float atkSucMul, defSucMul, critRateMul;
@@ -346,10 +346,16 @@ public class Character implements Location, Fightable {
 		
 		if(hp>maxhp)
 			hp=maxhp;
+		if(hp>CharacterMaster.getHpcap())
+			hp=CharacterMaster.getHpcap();
 		if(mana>maxmana)
 			mana=maxmana;
+		if(mana>CharacterMaster.getManacap())
+			mana=CharacterMaster.getManacap();
 		if(stamina>maxstamina)
 			stamina=maxstamina;
+		if(stamina>CharacterMaster.getStaminacap())
+			stamina=CharacterMaster.getStaminacap();
 		
 		if(!isBot)
 			CharacterDAO.saveCharacterStats(this);
@@ -372,6 +378,8 @@ public class Character implements Location, Fightable {
 		this.hp+=hp;
 		if(this.hp>maxhp)
 			this.hp=maxhp;
+		if(this.hp>CharacterMaster.getHpcap())
+			this.hp=CharacterMaster.getHpcap();
 		if(this.hp<0)
 			this.hp=0;
 		
@@ -382,6 +390,8 @@ public class Character implements Location, Fightable {
 		this.mana+=mana;
 		if(this.mana>maxmana)
 			this.mana=maxmana;
+		if(this.mana>CharacterMaster.getManacap())
+			this.mana=CharacterMaster.getManacap();
 		if(this.mana<0)
 			this.mana=0;
 		
@@ -392,6 +402,8 @@ public class Character implements Location, Fightable {
 		this.stamina+=stamina;
 		if(this.stamina>stamina)
 			this.stamina=maxstamina;
+		if(this.stamina>CharacterMaster.getStaminacap())
+			this.stamina=CharacterMaster.getStaminacap();
 		if(this.stamina<0)
 			this.stamina=0;
 	
@@ -403,6 +415,8 @@ public class Character implements Location, Fightable {
 			this.hp+=hp;
 			if(this.hp>maxhp)
 				this.hp=maxhp;
+			if(this.hp>CharacterMaster.getHpcap())
+				this.hp=CharacterMaster.getHpcap();
 		}
 		
 	}
@@ -426,6 +440,8 @@ public class Character implements Location, Fightable {
 			this.mana+=mana;
 			if(this.mana>maxmana)
 				this.mana=maxmana;
+			if(this.mana>CharacterMaster.getManacap())
+				this.mana=CharacterMaster.getManacap();
 		}
 		
 	}
@@ -446,6 +462,8 @@ public class Character implements Location, Fightable {
 			this.stamina+=stamina;
 			if(this.stamina>maxstamina)
 				this.stamina=maxstamina;
+			if(this.stamina>CharacterMaster.getStaminacap())
+				this.stamina=CharacterMaster.getStaminacap();
 		}
 		
 	}
@@ -509,7 +527,7 @@ public class Character implements Location, Fightable {
 		return maxhp;
 	}
 
-	public void setMaxHp(short max) {
+	public void setMaxHp(int max) {
 		this.maxhp = max;
 	}
 	
@@ -517,7 +535,7 @@ public class Character implements Location, Fightable {
 		return hp;
 	}
 
-	public void setHp(short hp) {
+	public void setHp(int hp) {
 		this.hp = hp;
 	}
 	
@@ -525,7 +543,7 @@ public class Character implements Location, Fightable {
 		return maxmana;
 	}
 
-	public void setMaxmana(short maxmana) {
+	public void setMaxmana(int maxmana) {
 		this.maxmana = maxmana;
 	}
 
@@ -533,7 +551,7 @@ public class Character implements Location, Fightable {
 		return mana;
 	}
 
-	public void setMana(short mana) {
+	public void setMana(int mana) {
 		this.mana = mana;
 	}
 	
@@ -541,7 +559,7 @@ public class Character implements Location, Fightable {
 		return maxstamina;
 	}
 
-	public void setMaxstamina(short maxstamina) {
+	public void setMaxstamina(int maxstamina) {
 		this.maxstamina = maxstamina;
 	}
 
@@ -549,7 +567,7 @@ public class Character implements Location, Fightable {
 		return stamina;
 	}
 
-	public void setStamina(short stamina) {
+	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
 	//--------------------
@@ -661,7 +679,7 @@ public class Character implements Location, Fightable {
 		return attack;
 	}
 
-	public void setAttack(short attack) {
+	public void setAttack(int attack) {
 		this.attack = attack;
 	}
 
@@ -669,7 +687,7 @@ public class Character implements Location, Fightable {
 		return defence;
 	}
 
-	public void setDefence(short defence) {
+	public void setDefence(int defence) {
 		this.defence = defence;
 	}
 
@@ -817,19 +835,19 @@ public class Character implements Location, Fightable {
 		return isBot;
 	}
 	
-	public short getMinDmg() {
+	public int getMinDmg() {
 		return minDmg;
 	}
 
-	public void setMinDmg(short minDmg) {
+	public void setMinDmg(int minDmg) {
 		this.minDmg = minDmg;
 	}
 	
-	public short getMaxDmg() {
+	public int getMaxDmg() {
 		return maxDmg;
 	}
 
-	public void setMaxDmg(short maxDmg) {
+	public void setMaxDmg(int maxDmg) {
 		this.maxDmg = maxDmg;
 	}
 	
@@ -1081,11 +1099,11 @@ public class Character implements Location, Fightable {
 		return critRate;
 	}
 	
-	public short getCritdmg() {
+	public int getCritdmg() {
 		return critdmg;
 	}
 
-	public void setCritdmg(short critdmg) {
+	public void setCritdmg(int critdmg) {
 		this.critdmg = critdmg;
 	}
 	

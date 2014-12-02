@@ -177,6 +177,11 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 22){
+				ps = Queries.dropUpgradeTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -629,6 +634,47 @@ public class InstallDAO {
 		return b;
 	}
 	
+	public boolean addUpgrade(Connection con, int id, int oldIt, int upgrader, int newIt,
+			float itStage, float upgradelvl, float failrate, float breakoption, int upgradeskill) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addUpgrade(con, id, oldIt, upgrader, newIt, itStage, upgradelvl, failrate, breakoption, upgradeskill);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addAllUpgrades(Connection con, String statement) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=con.prepareStatement(statement);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
 		boolean b = true;
 		try{
@@ -959,6 +1005,26 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createServerControlTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createUpgradeTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createUpgradeTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			
