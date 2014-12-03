@@ -106,8 +106,7 @@ public class ChatMaster {
 			target=WMap.getInstance().getCharacter(chname);
 		}
 		if(ch.hasCommands()){
-			if(ChatParser.getInstance().parseAndExecuteChatCommand(ch, name, text, type, target, chname))
-				return;
+			ChatParser.getInstance().parseAndExecuteChatCommand(ch, name, text, type, target, chname);
 		}
 		prepareSendingChat(ch,name,text,type,target,chname,false);
 	}

@@ -9,6 +9,7 @@ import Connections.Connection;
 import Database.InstallDAO;
 import Database.MacroDAO;
 import chat.ChatCommandExecutor;
+import chat.ChatParser;
 
 public class MacroCommand implements ChatCommandExecutor {
 
@@ -50,7 +51,7 @@ public class MacroCommand implements ChatCommandExecutor {
 			for(int i=3;i<parameters.length;i++){
 				content+=parameters[i];
 				if(i!=parameters.length-1)
-					content+=":";
+					content+=ChatParser.getInstance().getParameterDelimiter();
 			}
 			
 			if(oldPassword==null){
