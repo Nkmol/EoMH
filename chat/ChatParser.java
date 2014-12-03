@@ -13,6 +13,7 @@ public class ChatParser {
 	private static volatile ChatParser instance = null;
 	private final String cmdDelimiter = "!";
 	private final String paramDelimiter = " ";
+	private final String cmdStart = "/";
 	private final String macroStart = "<";
 	private Map<String, ChatCommandExecutor> commandList = new HashMap<String, ChatCommandExecutor>();
 	
@@ -86,8 +87,7 @@ public class ChatParser {
 			String[] commands = macro.split(this.cmdDelimiter);
 			for(int i=0;i<commands.length;i++) {
 				String[] splat = commands[i].split(paramDelimiter);
-				splat[0]=splat[0].substring(1);
-				if(this.commandList.containsKey(splat[0])) {
+				if(splat[0].startsWith(cmdStart) && this.commandList.containsKey(splat[0].substring(1))) {
 					String[] params = new String[splat.length-1];
 					for(int ri=1;ri<splat.length;ri++) {
 						params[ri-1] = splat[ri]; 
@@ -97,7 +97,7 @@ public class ChatParser {
 					ChatMaster.prepareSendingChat(ch, name, commands[i], type, target, targetName, true);
 				}
 			}
-		}else if(type==9){
+		}else if(type==9 || text.startsWith(cmdStart)){
 			String[] splat = text.split(paramDelimiter);
 			splat[0]=splat[0].substring(1);
 			if(this.commandList.containsKey(splat[0])) {
