@@ -63,6 +63,9 @@ public class WMap
 	public boolean mobExists(int uid){
 		return this.mobs.containsKey(uid);
 	}
+	public Mob getMob(int uid){
+		return this.mobs.get(uid);
+	}
 	// add grid that has been created to the list
 	public void addGrid(Grid g){
 		ServerLogger.getInstance().info(this, "Added grid " + g.getuid() + " To wmap");
@@ -172,20 +175,22 @@ public class WMap
 		
 	}
 	
-	// add dopped item to be tracked
 	public boolean addNpc(Npc npc){
-		if (!this.itemExist(npc.getuid())){
+		if (!this.npcExists(npc.getuid())){
 			this.npcs.put(npc.getuid(), npc);
 			return true;
 		}
 		return false;
 	}
-	// get dropped item instance
+	
+	public boolean npcExists(int uid){
+		return this.npcs.containsKey(uid);
+	}
+	
 	public Npc getNpc(int uid){
 		return this.npcs.get(uid);
 	}
 		
-	// remove dropped item
 	public void removeNpc(Integer uid) {
 		this.npcs.remove(uid);
 			

@@ -52,9 +52,10 @@ public class Gameserver implements PacketHandler {
 		this.packetsByHeader.put(Integer.valueOf(1347), new Pick()); 				//pick item from ground
 		this.packetsByHeader.put(Integer.valueOf(1348), new InventoryManagement()); //move item in inventory(including unequipping)
 		this.packetsByHeader.put(Integer.valueOf(1349), new SkillIntoBar()); 		//move item/skill into the slots
-		this.packetsByHeader.put(Integer.valueOf(1351), new NPCShopOpen());			//open npc shop
+		this.packetsByHeader.put(Integer.valueOf(1351), new NPCShop());				//npc shop
+		this.packetsByHeader.put(Integer.valueOf(1352), new NPCShopSell());				//sell item
 		this.packetsByHeader.put(Integer.valueOf(1353), new DeleteItem());			//delete item from inventory
-		//this.packetsByHeader.put(Integer.valueOf(1358), new Quests());    			//Quests
+		//this.packetsByHeader.put(Integer.valueOf(1358), new Quests());    		//Quests
 		this.packetsByHeader.put(Integer.valueOf(1361), new SetStats());			//set stats in character window
 		this.packetsByHeader.put(Integer.valueOf(1362), new CheckEquipment());		//check equip
 		this.packetsByHeader.put(Integer.valueOf(1367), new PartyJoinPacket());		//join party
@@ -62,6 +63,7 @@ public class Gameserver implements PacketHandler {
 		this.packetsByHeader.put(Integer.valueOf(1369), new PartyChangeLeaderPacket());//change leader in party
 		this.packetsByHeader.put(Integer.valueOf(1373), new LearnSkill());			//learn skill
 		this.packetsByHeader.put(Integer.valueOf(1374), new StartDuelPacket());		//start duel
+		this.packetsByHeader.put(Integer.valueOf(1382), new UpgradeItem());			//upgrade
 		this.packetsByHeader.put(Integer.valueOf(1384), new CastSkill());			//cast skill
 		this.packetsByHeader.put(Integer.valueOf(1387), new VendorState());			//Opens or Closes vendor shop
 		this.packetsByHeader.put(Integer.valueOf(1388), new VendorOpen());			//Open someones vendor shop
@@ -257,6 +259,8 @@ public class Gameserver implements PacketHandler {
 									msg[19] = (byte)0xff;
 									
 									con.addWrite(msg);
+								}catch(Exception e){
+									e.printStackTrace();
 								}
 							}
 						} else {

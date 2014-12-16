@@ -18,7 +18,7 @@ public interface Fightable {
 	public int getAtkSuc();
 	public int getDefSuc();
 	public int getCritRate();
-	public short getCritdmg();
+	public int getCritdmg();
 	public void addBuff(Buff owner) throws BuffsException;
 	public void removeBuff(Buff buff);
 	public HashMap<Short, Buff> getBuffs();

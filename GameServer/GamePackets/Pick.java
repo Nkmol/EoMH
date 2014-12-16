@@ -87,6 +87,9 @@ public class Pick implements Packet {
 			
 			//save inv
 			cur.getInventory().saveInv(cur);
+			//show info
+			if(cur.getShowInfos())
+				new ServerMessage().execute("picked item with ID "+itams.getId(),con);
 			
 		}catch(InventoryException e){
     	

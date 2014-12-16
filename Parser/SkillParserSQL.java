@@ -13,7 +13,8 @@ public class SkillParserSQL extends Parser{
 		
 		System.out.println("Parsing skills into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> skill;
 		
 		int skillid,skillgroup,chclass,stage,effectOnWep,reqSkill1,reqSkill2,reqSkill3,skillpoints,nextSkillLawful,
@@ -85,7 +86,7 @@ public class SkillParserSQL extends Parser{
 				effValue3=0;
 			}
 						
-			dao.addSkill(con,skillid,skillgroup,chclass,stage,effectOnWep,reqSkill1,reqSkill2,reqSkill3,skillpoints,nextSkillLawful,
+			dao.addSkill(sql, skillid,skillgroup,chclass,stage,effectOnWep,reqSkill1,reqSkill2,reqSkill3,skillpoints,nextSkillLawful,
 					nextSkillEvil,lvl,specificType,moreSpecificType,normalDmgFont,mobDmgFont,targets,generalType,faction,
 					needsWepToCast,ultiSetId,isCastable,isSpecialCast,healCost,manaCost,staminaCost,dmg,speed,effAmount,
 					effId1,effDuration1,effValue1,effId2,effDuration2,effValue2,effId3,effDuration3,effValue3);

@@ -19,7 +19,7 @@ public class Quit implements Packet {
 	public byte[] returnWritableByteBuffer(byte[] buffyTheVampireSlayer, Connection con) {
         Character ch = ((PlayerConnection)con).getActiveCharacter();
         if(ch != null) {
-        	ch.leaveGameWorld(true);
+        	ch.leaveGameWorld(true,true);
         	((PlayerConnection)con).getPlayer().setActiveCharacter(null); //set active character to null
         }
         con.getWriteBuffer().clear();

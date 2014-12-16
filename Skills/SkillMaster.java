@@ -22,23 +22,38 @@ public class SkillMaster {
 	private static Map<Integer, SkillFrame> skills;
 	private static Map<Integer, Integer> knockSkills;
 	private static Map<Integer, Integer> woodenSkills;
+	private static Map<Integer, Integer> standardBasicSkills;
 	
 	public static void loadAllSkills(){
 		
 		skills=SkillDAO.getInstance().getAllSkills();
 		System.out.println(skills.size()+" skills are loaded!");
 		
-		knockSkills=new HashMap<Integer, Integer>(4);
+		knockSkills=new HashMap<Integer, Integer>();
 		knockSkills.put(1, 121100050);
 		knockSkills.put(2, 122200050);
 		knockSkills.put(3, 121300050);
 		knockSkills.put(4, 121400050);
-		woodenSkills=new HashMap<Integer, Integer>(4);
+		woodenSkills=new HashMap<Integer, Integer>();
 		woodenSkills.put(1, 121103060);
 		woodenSkills.put(2, 122206060);
 		woodenSkills.put(3, 121309060);
 		woodenSkills.put(4, 121413050);
 		System.out.println("knock and wooden skills are loaded!");
+		standardBasicSkills=new HashMap<Integer, Integer>();
+		standardBasicSkills.put(1, 131101011);
+		standardBasicSkills.put(2, 131102011);
+		standardBasicSkills.put(3, 131103011);
+		standardBasicSkills.put(4, 132204011);
+		standardBasicSkills.put(5, 132205011);
+		standardBasicSkills.put(6, 132206011);
+		standardBasicSkills.put(7, 131307011);
+		standardBasicSkills.put(8, 131308011);
+		standardBasicSkills.put(9, 131309011);
+		standardBasicSkills.put(10, 131411011);
+		standardBasicSkills.put(11, 131411011);
+		standardBasicSkills.put(12, 131411011);
+		System.out.println("standard basic skills are loaded!");
 		
 	}
 	
@@ -54,6 +69,10 @@ public class SkillMaster {
 	
 	public static int getWoodenSkillId(int chclass){
 		return woodenSkills.get(chclass);
+	}
+	
+	public static int getStandardBasicSkillId(int wep){
+		return standardBasicSkills.get(wep);
 	}
 	
 	public static void canLearnSkill(Character ch, int id) throws SkillException{
@@ -577,6 +596,13 @@ public class SkillMaster {
 		
 		ch.setCharacterSkills(new CharacterSkills(ch));
 		
+	}
+	
+	public static boolean canUpgrade(Character ch, int upgradeSkill){
+		CharacterSkills skills=ch.getSkills();
+		if(skills.getUpgradeSkillStage()<upgradeSkill)
+			return false;
+		return true;
 	}
 	
 }

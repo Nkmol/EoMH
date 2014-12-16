@@ -211,6 +211,43 @@ public class Inventory {
 		if (amount > 0 || amount < 4) this.pages += amount;
 	}
 	
+	//buy an item
+	public void buyItem(ItemInInv item, int line, int row) throws InventoryException{
+		if(item.getItem().getNpcPrice()>coins){
+			throw new InventoryException("Cannot buy item [not enough money]");
+		}
+		if(inv.get(row*100+line)!=null && item.getItem().getId()==inv.get(row*100+line).getItem().getId() && item.getAmount()+inv.get(row*100+line).getAmount()>item.getItem().getMaxStack()){
+			throw new InventoryException("Cannot buy item [max stack]");
+		}
+		if(!addItem(line, row, item)){
+			throw new InventoryException("Cannot buy item [no space]");
+		}
+		subtractCoins(item.getItem().getNpcPrice());
+	}
+	
+	//buy an item
+	public void sellItem(int index, int amount) throws InventoryException{
+		int hash=seq.get(index);
+		if(hash==-1){
+			throw new InventoryException("Cannot sell item [item does not exist]");
+		}
+		ItemInInv item=inv.get(hash);
+		if(item==null){
+			throw new InventoryException("Cannot sell item [item does not exist]");
+		}
+		int price;
+		//gold bar
+		if(item.getItem().getCategory()==48)
+			price=item.getItem().getNpcPrice()*amount;
+		else
+			price=item.getItem().getNpcPrice()/15*amount;
+		if(price+coins>maxcoins){
+			throw new InventoryException("Cannot sell item [too much money in inv]");
+		}
+		removeItem(index, amount);
+		addCoins(price);
+	}
+	
 	//decrement item with given seq index and delete it when amount is 0
 	public ItemInInv decrementItem(int seqIndex) throws InventoryException{
 		
@@ -672,7 +709,7 @@ public class Inventory {
 		}
 		
 		//items block
-		System.out.println("Items blocking ("+hash.size()+")");
+		//System.out.println("Items blocking ("+hash.size()+")");
 		return false;
 		
 	}

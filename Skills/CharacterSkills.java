@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import Database.CharacterDAO;
+import item.ItemInInv;
 import Player.Character;
 
 public class CharacterSkills {
@@ -26,6 +27,12 @@ public class CharacterSkills {
 		for(int i=0;i<5;i++){
 			highestDmgSkills[i]=0;
 		}
+		try{
+			for(int i=0;i<3;i++){
+				if(owner.getCharacterClass()!=0)
+					learnSkill(SkillMaster.getStandardBasicSkillId((owner.getCharacterClass()-1)*3+i+1),false);
+			}
+		}catch(Exception e){e.printStackTrace();}
 	}
 	
 	public void sortHighestDmgSkills(){
@@ -67,9 +74,11 @@ public class CharacterSkills {
 	public void learnSkill(int id, boolean updateSp) throws SkillException{
 		
 		//loaded skills are the skills in the spawn packet
+		if(learnedSkills.containsValue(id))
+			return;
 		SkillFrame skill=SkillMaster.getSkill(id);
 		int reqSkill=skill.getReqSkill1();
-		if(reqSkill!=0 && (skill.getTypeGeneral()==27 || skill.getTypeSpecific()==0 || skill.getTypeSpecific()==7) && loadedSkills.containsValue(reqSkill)){
+		if(reqSkill!=0 && (skill.getTypeGeneral()==27 || skill.getTypeSpecific()==0 || skill.getTypeSpecific()==7 || skill.getTypeSpecific()==11) && loadedSkills.containsValue(reqSkill)){
 			for(int i=0;i<loadedSkills.size();i++){
 				if (loadedSkills.get(i)==reqSkill){
 					loadedSkills.put(i, id);
@@ -121,10 +130,16 @@ public class CharacterSkills {
 	}
 	
 	public int getBasicSkill(){
-		if(basicSkill!=0)
+		if(basicSkill!=0){
 			return basicSkill;
-		else
-			return SkillMaster.getWoodenSkillId(owner.getCharacterClass());
+		}else{
+			ItemInInv it=owner.getEquips().getEquipmentsSaved().get(7);
+			if(it!=null && it.getItem().getCategory()<13){
+				return SkillMaster.getStandardBasicSkillId(it.getItem().getCategory());
+			}else{
+				return SkillMaster.getWoodenSkillId(owner.getCharacterClass());
+			}
+		}
 	}
 
 	public Character getOwner() {
@@ -142,6 +157,18 @@ public class CharacterSkills {
 			sp+=SkillMaster.getSkill(learnedSkills.get(i.next())).getSkillpoints();
 		}
 		return sp;
+	}
+	
+	public int getUpgradeSkillStage(){
+		if(loadedSkills.containsValue(100324))
+			return 6;
+		if(loadedSkills.containsValue(100323))
+			return 3;
+		if(loadedSkills.containsValue(100322))
+			return 2;
+		if(loadedSkills.containsValue(100321))
+			return 1;
+		return 0;
 	}
 	
 }

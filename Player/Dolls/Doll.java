@@ -16,6 +16,7 @@ import Tools.BitTools;
 import World.Location;
 import World.WMap;
 import Player.Character;
+import Player.CharacterMaster;
 import Player.CharacterPackets;
 import Player.Fightable;
 
@@ -47,7 +48,7 @@ public class Doll {
 	}
 	
 	public void despawn(){
-		doll.leaveGameWorld(true);
+		doll.leaveGameWorld(true,true);
 		stopActions();
 		if(potsTimer!=null)
 			potsTimer.cancel();
@@ -97,7 +98,7 @@ public class Doll {
 		doll.setTestByteIndexExt(testByteIndexExt);
 		doll.setTestByteValueExt(testByteValueExt);
 		
-		doll.joinGameWorld();
+		doll.joinGameWorld(true,true);
 		
 		doll.setHp((short)doll.getMaxhp());
 		doll.setMana((short)doll.getMaxmana());
@@ -138,7 +139,7 @@ public class Doll {
 			doll.getEquips().calculateEquipStats();
 		}
 		
-		doll.joinGameWorld();
+		doll.joinGameWorld(true,true);
 		
 		doll.setHp((short)doll.getMaxhp());
 		doll.setMana((short)doll.getMaxmana());
@@ -352,7 +353,7 @@ public class Doll {
 	}
 	
 	public boolean healHp(short hp){
-		if(doll.getHp()<doll.getMaxhp()){
+		if(doll.getHp()<doll.getMaxhp() && doll.getHp()<CharacterMaster.getHpcap()){
 			doll.addHp(hp);
 			sendHealPacketToPlayers(273000242);
 			return true;
@@ -361,7 +362,7 @@ public class Doll {
 	}
 	
 	public boolean healMana(short mana){
-		if(doll.getMana()<doll.getMaxmana()){
+		if(doll.getMana()<doll.getMaxmana() && doll.getMana()<CharacterMaster.getManacap()){
 			doll.addMana(mana);
 			sendHealPacketToPlayers(273000243);
 			return true;

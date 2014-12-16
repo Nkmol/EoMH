@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import Player.Character;
 import Player.CharacterPackets;
 import Player.PlayerConnection;
+import ServerCore.ServerFacade;
 import Tools.BitTools;
 import Buffs.BuffMaster;
 import Buffs.BuffsException;
@@ -63,7 +64,7 @@ public class UsableItem implements Packet {
         	useitem[6] = (byte)0x05;
         	
         	useitem[8] = (byte)0x01;
-        	useitem[9] = (byte)0x0e;
+        	useitem[9] = (byte)0x3f;
         	useitem[10] = (byte)0x5d;
         	useitem[11] = (byte)0x08;
         	
@@ -72,7 +73,7 @@ public class UsableItem implements Packet {
         	for(int i=0;i<4;i++){
         		useitem[12+i] = cid[i];
         		useitem[20+i] = amount[i];
-        		useitem[28+i] = amount[i];
+        		useitem[28+i] = cid[i];
         	}
         	
         	useitem[16] = (byte)0x01;
@@ -80,12 +81,12 @@ public class UsableItem implements Packet {
         	useitem[19] = decrypted[1];
         	
         	useitem[24] = (byte)0x01;
-        	useitem[25] = (byte)0xf4;
+        	useitem[25] = (byte)0xf5;
         	useitem[26] = (byte)0x10;
         	useitem[27] = (byte)0x29;
         	
-        	useitem[49] = (byte)0xab;
-        	useitem[50] = (byte)0xc1;
+        	useitem[49] = (byte)0x90;
+        	useitem[50] = (byte)0xd2;
         	useitem[51] = (byte)0x2a;
         	
         	//ext packet
@@ -104,7 +105,14 @@ public class UsableItem implements Packet {
         
         ConsumableItem conitem = ((ConsumableItem)(item.getItem()));
         if(item!=null && item.getItem() instanceof ConsumableItem){
-    		cur.addHpMpSp(conitem.getHealhp(), conitem.getHealmana(), (short)0);
+        	//HEAL
+        	if(conitem.getHealhp()!=0 || conitem.getHealmana()!=0)
+        		cur.addHpMpSp(conitem.getHealhp(), conitem.getHealmana(), (short)0);
+    		//TELEPORT
+    		if(conitem.getTelemap()!=0){
+    			cur.teleportTo(conitem.getTelemap(), conitem.getTelex(), conitem.getTeley());
+    			ServerFacade.getInstance().addWriteByChannel(cur.GetChannel(), CharacterPackets.getTeleportPacket());
+    		}
     	}
         
         //BUFF
@@ -130,8 +138,7 @@ public class UsableItem implements Packet {
 	        }
         }
         
-        
-		return null;
+        return null;
 	}
 	
 }

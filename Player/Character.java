@@ -30,6 +30,9 @@ import Buffs.BuffMaster;
 import Buffs.BuffsException;
 import Database.CharacterDAO;
 import Duel.Duel;
+import ExperimentalStuff.PuzzleMaster;
+import Mob.Mob;
+import Mob.Mobpuzzle;
 import Parties.Party;
 import Parties.PartyPackets;
 import Player.Dolls.Cleverdoll;
@@ -60,7 +63,7 @@ public class Character implements Location, Fightable {
 	private Waypoint location;
 	private int faction;
 	private int maxhp, hp, maxmana, mana, maxstamina, stamina;
-	private short attack, defence,hpreg,manareg,stamreg,minDmg,maxDmg, critdmg;
+	private int attack, defence,hpreg,manareg,stamreg,minDmg,maxDmg, critdmg;
 	private int healingSpeed;
 	private int basicAtkSuc, basicDefSuc, basicCritRate, additionalAtkSuc, additionalDefSuc, additionalCritRate;
 	private float atkSucMul, defSucMul, critRateMul;
@@ -110,6 +113,8 @@ public class Character implements Location, Fightable {
 	private int lastHit;
 	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
+	private boolean showInfos=false;
+	private List<Mob> activePuzzleMobs = Collections.synchronizedList(new LinkedList<Mob>());
 	
 	
 	public Character(Doll doll){
@@ -141,43 +146,53 @@ public class Character implements Location, Fightable {
 	 * Handle all logic required when character is selected in selection screen
 	 * and player enters the game
 	 */
-	public void joinGameWorld() {
+	public void joinGameWorld(boolean freshStart, boolean refreshExp) {
 		
-		//standard stats
-		createCharacterStats();
-		
+		if(freshStart){
+			//move sync timer
+			timer=new Timer();
+			moveSyncTimer=new MoveSyncTimer(this);
+			timer.scheduleAtFixedRate(moveSyncTimer,500,500);
+			
+			//standard stats
+			createCharacterStats();
+		}
+			
 		if(!isBot){
-			
-			//load other stuff
-			CharacterDAO.loadCharacterStuffForRelog(this);
-			
+				
+			if(freshStart){
+				//load other stuff
+				CharacterDAO.loadCharacterStuffForRelog(this);
+				
+				//Activatebuffs
+				startBuffTimers();
+			}
+				
 			//spawnpacket
 			sendSpawnPacket();
-
-			//Activatebuffs
-			startBuffTimers();
 		}
-		
-		refreshHpMpSp();
-		
-		gainExp(exp,false);
-		
-		lastHit=getuid();
-		
-		//move sync timer
-		timer=new Timer();
-		moveSyncTimer=new MoveSyncTimer(this);
-		timer.scheduleAtFixedRate(moveSyncTimer,500,500);
-		
-		//regeneration timer
-		healingTimer=new Timer();
-		healingTimer.scheduleAtFixedRate(new HealingTimer(this),healingSpeed,healingSpeed);
-		
-		//useable items timer
-		useableTimer=new Timer();
-		
-		//useable items timer
-		skillTimer=new Timer();
+			
+		if(freshStart){
+			refreshHpMpSp();
+			
+			if(!isBot && refreshExp)
+				gainExp(exp,false);
+			
+			lastHit=getuid();
+			
+			//regeneration timer
+			healingTimer=new Timer();
+			healingTimer.scheduleAtFixedRate(new HealingTimer(this),healingSpeed,healingSpeed);
+			
+			//useable items timer
+			useableTimer=new Timer();
+			
+			//useable items timer
+			skillTimer=new Timer();
+			
+			if(!isBot)
+				pl.refreshCharacterOrder();
+		}
 		
 		this.wmap.addCharacter(this);
 		try {
@@ -195,9 +210,6 @@ public class Character implements Location, Fightable {
 			die();
 		}
 		
-		if(!isBot)
-			pl.refreshCharacterOrder();
-		
 	}
 	
 	private void sendInitToAll() {
@@ -207,39 +219,48 @@ public class Character implements Location, Fightable {
 	/*
 	 * Quite the opposite of joining the game world
 	 */
-	public void leaveGameWorld(boolean leaveStuff) {
-		if(!isBot){
+	public void leaveGameWorld(boolean leaveStuff, boolean leavePt) {
+		if(!isBot && leaveStuff){
 			CharacterDAO.saveCharacterLocation(this);
 			//load other stuff
 			CharacterDAO.loadCharacterStuffForRelog(this);
 			saveBuffs();
 			System.out.println(buffsActive.size());
 			stopTimerBuffs();
+			removePuzzleFromMobs();
 		}
-		
-		walking=false;
-		turboSpeed=0;
-		updateSpeed();
 		
 		if(leaveStuff){
-			leavePt();
+			walking=false;
+			turboSpeed=0;
+			updateSpeed();
 		}
+		
 		if(duel!=null)
 			duel.loseDuel(this);
 		
-		leavePtDuel();
+		if(leaveStuff){
+			if(leavePt)
+				leavePt();
 		
-		if(timer!=null)
-			timer.cancel();
-		if(healingTimer!=null)
-			healingTimer.cancel();
-		if(respawnTimer!=null)
-			respawnTimer.cancel();
-		if(useableTimer!=null)
-			useableTimer.cancel();
-		if(skillTimer!=null)
-			skillTimer.cancel();
+			leavePtDuel();
 		
+			if(timer!=null)
+				timer.cancel();
+			if(healingTimer!=null)
+				healingTimer.cancel();
+			if(respawnTimer!=null)
+				respawnTimer.cancel();
+			if(useableTimer!=null)
+				useableTimer.cancel();
+			if(skillTimer!=null)
+				skillTimer.cancel();
+			
+			if(!isBot){
+				pl.refreshCharacterOrder();
+			}
+		}
+			
 		if(area!=null)
 			this.area.rmMember(this);
 		if(wmap!=null)
@@ -255,15 +276,11 @@ public class Character implements Location, Fightable {
 			}
 			this.iniPackets.clear();
 		}
-		
-		if(!isBot){
-			pl.refreshCharacterOrder();
-		}
 	}
 	
 	public void rejoin(){
-		leaveGameWorld(false);
-		joinGameWorld();
+		leaveGameWorld(true,false);
+		joinGameWorld(true,true);
 		if(pt!=null)
 			pt.refreshChar(this);
 	}
@@ -319,8 +336,8 @@ public class Character implements Location, Fightable {
 		maxhp=(int) ((30+bonusMaxhp+equips.getHp()+stats[0]*2.2+stats[1]*2.4+stats[2]*2.5+stats[3]*1.6+stats[4]*1.5)*hardness);
 		maxmana=(int) ((30+equips.getMana()+stats[0]*1.4+stats[1]*1.7+stats[2]*1.5+stats[3]*3.5+stats[4]*1.5)*hardness);
 		maxstamina=(int) ((30+equips.getStamina()+stats[0]*0.9+stats[1]*1.3+stats[2]*1.5+stats[3]*1.7+stats[4]*1.3)*hardness);
-		hpreg=(short)((stats[2]+stats[0]/2)*hardness);
-		manareg=(short)((stats[3]+stats[1]/2)*hardness);
+		hpreg=(short)((stats[2]/2+stats[0]/4)*hardness);
+		manareg=(short)((stats[3]/2+stats[1]/4)*hardness);
 		stamreg=(short)((stats[4]*0.1)*hardness);
 		healingSpeed=5000;
 		attack=(short) ((level/2+equips.getAtk()+stats[0]*0.5+stats[1]*0.46+stats[2]*0.4+stats[3]*0.2+stats[4]*0.2)*hardness);
@@ -346,10 +363,16 @@ public class Character implements Location, Fightable {
 		
 		if(hp>maxhp)
 			hp=maxhp;
+		if(hp>CharacterMaster.getHpcap())
+			hp=CharacterMaster.getHpcap();
 		if(mana>maxmana)
 			mana=maxmana;
+		if(mana>CharacterMaster.getManacap())
+			mana=CharacterMaster.getManacap();
 		if(stamina>maxstamina)
 			stamina=maxstamina;
+		if(stamina>CharacterMaster.getStaminacap())
+			stamina=CharacterMaster.getStaminacap();
 		
 		if(!isBot)
 			CharacterDAO.saveCharacterStats(this);
@@ -372,6 +395,8 @@ public class Character implements Location, Fightable {
 		this.hp+=hp;
 		if(this.hp>maxhp)
 			this.hp=maxhp;
+		if(this.hp>CharacterMaster.getHpcap())
+			this.hp=CharacterMaster.getHpcap();
 		if(this.hp<0)
 			this.hp=0;
 		
@@ -382,6 +407,8 @@ public class Character implements Location, Fightable {
 		this.mana+=mana;
 		if(this.mana>maxmana)
 			this.mana=maxmana;
+		if(this.mana>CharacterMaster.getManacap())
+			this.mana=CharacterMaster.getManacap();
 		if(this.mana<0)
 			this.mana=0;
 		
@@ -392,6 +419,8 @@ public class Character implements Location, Fightable {
 		this.stamina+=stamina;
 		if(this.stamina>stamina)
 			this.stamina=maxstamina;
+		if(this.stamina>CharacterMaster.getStaminacap())
+			this.stamina=CharacterMaster.getStaminacap();
 		if(this.stamina<0)
 			this.stamina=0;
 	
@@ -403,6 +432,8 @@ public class Character implements Location, Fightable {
 			this.hp+=hp;
 			if(this.hp>maxhp)
 				this.hp=maxhp;
+			if(this.hp>CharacterMaster.getHpcap())
+				this.hp=CharacterMaster.getHpcap();
 		}
 		
 	}
@@ -426,6 +457,8 @@ public class Character implements Location, Fightable {
 			this.mana+=mana;
 			if(this.mana>maxmana)
 				this.mana=maxmana;
+			if(this.mana>CharacterMaster.getManacap())
+				this.mana=CharacterMaster.getManacap();
 		}
 		
 	}
@@ -446,6 +479,8 @@ public class Character implements Location, Fightable {
 			this.stamina+=stamina;
 			if(this.stamina>maxstamina)
 				this.stamina=maxstamina;
+			if(this.stamina>CharacterMaster.getStaminacap())
+				this.stamina=CharacterMaster.getStaminacap();
 		}
 		
 	}
@@ -507,7 +542,7 @@ public class Character implements Location, Fightable {
 		return maxhp;
 	}
 
-	public void setMaxHp(short max) {
+	public void setMaxHp(int max) {
 		this.maxhp = max;
 	}
 	
@@ -515,15 +550,17 @@ public class Character implements Location, Fightable {
 		return hp;
 	}
 
-	public void setHp(short hp) {
+	public void setHp(int hp) {
 		this.hp = hp;
+		if(this.hp>CharacterMaster.getHpcap())
+			this.hp=CharacterMaster.getHpcap();
 	}
 	
 	public int getMaxmana() {
 		return maxmana;
 	}
 
-	public void setMaxmana(short maxmana) {
+	public void setMaxmana(int maxmana) {
 		this.maxmana = maxmana;
 	}
 
@@ -531,15 +568,17 @@ public class Character implements Location, Fightable {
 		return mana;
 	}
 
-	public void setMana(short mana) {
+	public void setMana(int mana) {
 		this.mana = mana;
+		if(this.mana>CharacterMaster.getManacap())
+			this.mana=CharacterMaster.getManacap();
 	}
 	
 	public int getMaxstamina() {
 		return maxstamina;
 	}
 
-	public void setMaxstamina(short maxstamina) {
+	public void setMaxstamina(int maxstamina) {
 		this.maxstamina = maxstamina;
 	}
 
@@ -547,8 +586,10 @@ public class Character implements Location, Fightable {
 		return stamina;
 	}
 
-	public void setStamina(short stamina) {
+	public void setStamina(int stamina) {
 		this.stamina = stamina;
+		if(this.stamina>CharacterMaster.getStaminacap())
+			this.stamina=CharacterMaster.getStaminacap();
 	}
 	//--------------------
 	
@@ -659,7 +700,7 @@ public class Character implements Location, Fightable {
 		return attack;
 	}
 
-	public void setAttack(short attack) {
+	public void setAttack(int attack) {
 		this.attack = attack;
 	}
 
@@ -667,7 +708,7 @@ public class Character implements Location, Fightable {
 		return defence;
 	}
 
-	public void setDefence(short defence) {
+	public void setDefence(int defence) {
 		this.defence = defence;
 	}
 
@@ -815,19 +856,19 @@ public class Character implements Location, Fightable {
 		return isBot;
 	}
 	
-	public short getMinDmg() {
+	public int getMinDmg() {
 		return minDmg;
 	}
 
-	public void setMinDmg(short minDmg) {
+	public void setMinDmg(int minDmg) {
 		this.minDmg = minDmg;
 	}
 	
-	public short getMaxDmg() {
+	public int getMaxDmg() {
 		return maxDmg;
 	}
 
-	public void setMaxDmg(short maxDmg) {
+	public void setMaxDmg(int maxDmg) {
 		this.maxDmg = maxDmg;
 	}
 	
@@ -1079,11 +1120,11 @@ public class Character implements Location, Fightable {
 		return critRate;
 	}
 	
-	public short getCritdmg() {
+	public int getCritdmg() {
 		return critdmg;
 	}
 
-	public void setCritdmg(short critdmg) {
+	public void setCritdmg(int critdmg) {
 		this.critdmg = critdmg;
 	}
 	
@@ -1172,6 +1213,14 @@ public class Character implements Location, Fightable {
 		updateSpeed();
 	}
 	
+	public boolean getShowInfos(){
+		return showInfos;
+	}
+	
+	public void swapShowInfos(){
+		showInfos=!showInfos;
+	}
+	
 	public HashMap<Short, Buff> getBuffs() {
 		return this.buffsActive;
 	}
@@ -1252,7 +1301,17 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
-	public void updateLocation(float x, float y, float tx, float ty, byte run){
+	public void teleportTo(int map, float X, float Y){
+		stopMovement();
+		leaveGameWorld(false,false);
+		this.currentMap=map;
+		setX(X);
+		setY(Y);
+		CharacterDAO.saveCharacterLocation(this);
+		joinGameWorld(false,false);
+	}
+	
+	public void updateLocation(float x, float y, float tx, float ty, byte run, boolean sendMovement){
 		/*
 		if (this.timer != null){ if (!this.timer.isCompleted()) this.timer.cancel(); }
 		if (WMap.distance(x, y, this.getX(), this.getY()) > this.syncDistance){
@@ -1290,7 +1349,8 @@ public class Character implements Location, Fightable {
 				}else{
 					changeArea=false;
 				}
-				sendMovementPackets(tx, ty, run, changeArea);
+				if(sendMovement)
+					sendMovementPackets(tx, ty, run, changeArea);
 			} catch(OutOfGridException oe) {
 				log.logMessage(Level.SEVERE, this, oe.getMessage() + " Illegal state for player: " + this.charID + " (moved outside grid) - disconnecting");
 				if(!isBot)
@@ -1488,10 +1548,12 @@ public class Character implements Location, Fightable {
 		
 		dead=true;
 		
-		if(isLastHitCharacter())
+		if(isLastHitCharacter()){
+			System.out.print("save death");
 			setReviveSave(true);
+		}
 		
-		if(!isBot && duel==null && !isInPtDuel())
+		if(!isBot && !reviveSave)
 			CharacterDAO.saveCharacterDead(this);
 		if(doll!=null){
 			if(respawnTimer!=null)
@@ -1657,6 +1719,24 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
+	public void sendChatToMobs(String text){
+		synchronized(activePuzzleMobs){
+			Iterator<Mob> it=activePuzzleMobs.iterator();
+			while(it.hasNext()){
+				Mob mob=it.next();
+				Mobpuzzle puzzle=mob.getPuzzle();
+				if(puzzle.getType()==1 && text.toLowerCase().indexOf(puzzle.getAnswer())!=-1){
+					mob.solvePuzzle(this);
+					return;
+				}else if(PuzzleMaster.isPuzzleCorrect(this, mob, puzzle.getType(), text.toLowerCase())){
+					mob.solvePuzzle(this);
+					return;
+				}
+				mob.failPuzzle(this);
+			}
+		}
+	}
+	
 	//move to new location
 	public void startMoveTo(float x, float y){
 		moveSyncTimer.newTarget(new Waypoint(x,y));
@@ -1702,6 +1782,24 @@ public class Character implements Location, Fightable {
 	public boolean isAlive() {
 		return !dead;
 	}
-
-
+	
+	public void addPuzzleMob(Mob mob){
+		synchronized(activePuzzleMobs){
+			activePuzzleMobs.add(mob);
+		}
+	}
+	
+	public void removePuzzleMob(Mob mob){
+		synchronized(activePuzzleMobs){
+			activePuzzleMobs.remove(mob);
+		}
+	}
+	
+	private void removePuzzleFromMobs(){
+		synchronized(activePuzzleMobs){
+			while(!activePuzzleMobs.isEmpty()){
+				activePuzzleMobs.remove(0).resetPuzzle(false);
+			}
+		}
+	}
 }

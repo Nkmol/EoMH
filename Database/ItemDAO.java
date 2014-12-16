@@ -1,15 +1,18 @@
 package Database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import item.ConsumableItem;
 import item.EquipableItem;
 import item.EquipableSetItem;
 import item.ItemFrame;
+import item.ItemWithAmount;
 
 public class ItemDAO {
 	private final Connection sqlConnection = new SQLconnection().getConnection(); 
@@ -21,6 +24,10 @@ public class ItemDAO {
 	
 	public static ItemDAO getInstance() {
 		return (instance == null) ? new ItemDAO() : instance;
+	}
+	
+	public Connection getSqlConnection(){
+		return sqlConnection;
 	}
 	
 	//Get item buffs
@@ -150,6 +157,9 @@ public class ItemDAO {
 		try{
 			it.setHealhp((short)rs.getInt("HealHp"));
 			it.setHealmana((short)rs.getInt("HealMana"));
+			it.setTelemap(rs.getInt("TeleMap"));
+			it.setTelex(rs.getFloat("TeleX"));
+			it.setTeley(rs.getFloat("TeleY"));
 			//Add buffs to usable item
 			short[] buffid = new short[2], bufftime = new short[2], buffvalue = new short[2];
 			for(int i = 1; i <= 2; i++) {
@@ -272,4 +282,181 @@ public class ItemDAO {
 		}
 		return rs;
 	}
+	
+	public String getItemsetPassword(String name) {
+		String s=null;
+		try {
+			ResultSet rs = Queries.getItemset(this.sqlConnection, name).executeQuery();
+			if(rs.next()){
+				s=rs.getString("password");
+			}
+			rs.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+			return null;
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		return s;
+	}
+	
+	public boolean updateItemset(String name, LinkedList<Integer> itemIds, LinkedList<Integer> itemAmounts) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.changeItemset(sqlConnection,name,itemIds,itemAmounts);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean deleteItemset(String name) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.deleteItemset(sqlConnection, name);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean changeItemsetPassword(String name, String password) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.changeItemsetPassword(sqlConnection, name, password);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public LinkedList<ItemWithAmount> getItemsets(String name) {
+		LinkedList<ItemWithAmount> items=new LinkedList<ItemWithAmount>();
+		try{
+			ResultSet rs=Queries.getItemset(sqlConnection, name).executeQuery();
+			if(rs.next()){
+				int id,amount;
+				for(int i=0;i<60;i++){
+					id=rs.getInt(3+i*2);
+					amount=rs.getInt(4+i*2);
+					if(id!=0 && amount!=0){
+						items.add(new ItemWithAmount(id,amount));
+					}
+				}
+			}
+			rs.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return items;
+	}
+	
+	public ResultSet fetchItemsets() {
+		ResultSet rs = null;
+		try {
+			rs = Queries.getAllItemsets(this.sqlConnection).executeQuery();
+		} catch (SQLException e){
+			e.printStackTrace();
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public boolean deleteAllItemsets() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.deleteAllItemset(sqlConnection);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean updateAllItemsets(LinkedList<LinkedList<Object>> lines, boolean canOverwrite){
+		boolean b=false;
+		LinkedList<Object> word;
+		String name,password;
+		LinkedList<Integer> itemIds,itemAmounts;
+		while(!lines.isEmpty()){
+			word=lines.removeFirst();
+			name=(String)word.removeFirst();
+			password=(String)word.removeFirst();
+			itemIds=new LinkedList<Integer>();
+			itemAmounts=new LinkedList<Integer>();
+			while(word.size()>1){
+				itemIds.add((Integer)word.removeFirst());
+				itemAmounts.add((Integer)word.removeFirst());
+			}
+			if(getItemsetPassword(name)!=null){
+				if(canOverwrite){
+					try{
+						PreparedStatement ps=Queries.changeItemset(sqlConnection, name, itemIds, itemAmounts);
+						ps.execute();
+						ps.close();
+						ps=Queries.changeItemsetPassword(sqlConnection, name, password);
+						ps.execute();
+						ps.close();
+						b=true;
+					}catch(Exception e){
+						e.printStackTrace();
+						return false;
+					}
+				}
+			}else{
+				try{
+					PreparedStatement ps=Queries.addItemset(sqlConnection, name, password, itemIds, itemAmounts);
+					ps.execute();
+					ps.close();
+					b=true;
+				}catch(Exception e){
+					e.printStackTrace();
+					return false;
+				}
+			}
+		}
+		return b;
+	}
+	
 }

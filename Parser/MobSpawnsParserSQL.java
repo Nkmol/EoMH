@@ -13,7 +13,8 @@ public static void parseMobspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 		
 		System.out.println("Parsing mobspawns into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> mobspawn;
 		
 		int map,id,amount;
@@ -28,17 +29,17 @@ public static void parseMobspawnsToSQL(InstallDAO dao, LinkedList<ArrayList<Shor
 			id=convertBytesToSmall(mobspawn,1);
 			amount=convertBytesToByte(mobspawn,3);
 			
-			//messy circle spawn stuff
-			float x,y,dx,dy,rx,ry,radius;
+			float x,y,dx,dy;//rx,ry,radius;
 			x=convertBytesToFloat(mobspawn, 6);
 			y=convertBytesToFloat(mobspawn, 10);
 			dx=convertBytesToFloat(mobspawn, 14);
 			dy=convertBytesToFloat(mobspawn, 18);
-			rx=x+dx/2;
-			ry=y+dy/2;
-			radius=Math.min(Math.abs(dx), Math.abs(dy));
+			//old circle radius stuff
+			//rx=x+dx/2;
+			//ry=y+dy/2;
+			//radius=Math.min(Math.abs(dx), Math.abs(dy));
 						
-			dao.createMobSpawnEntry(con,map,id,amount,rx,ry,radius);
+			dao.createMobSpawnEntry(sql, map,id,amount,x,y,dx,dy);
 					
 				count++;
 				

@@ -7,7 +7,7 @@ import java.util.logging.Level;
 
 import logging.ServerLogger;
 import Configuration.ConfigurationManager;
-import Mob.MobMaster;
+import NPCs.NPCMaster;
 import NPCs.Npc;
 import NPCs.NpcData;
 //import World.WMap;
@@ -25,23 +25,26 @@ public class NpcDAO {
 	public static NpcData getNpcData(int npcID){
 		NpcData data = null;
 		try{
-			//ResultSet rs = Queries.getNpcData(sqlConnection, npcID).executeQuery();
-			//if (rs.next()){
-				//data = new NpcData();
-				//data.setId((rs.getInt("npcID"));
-				
-			//}
-			//else {
-				//log.warning(NpcDAO.class, "Database error: Unable to find mobID " + mobID);
-				// System.out.println("ERROR: Unable to find data for mobID " + mobID);
-			//}
-			//if (rs!=null)
-				//rs.close();
+			ResultSet rs = Queries.getNpcData(sqlConnection, npcID).executeQuery();
+			if (rs.next()){
+				int module=rs.getInt("module");
+				int items[]=new int[60];
+				for(int i=0;i<60;i++){
+					items[i]=rs.getInt("item"+(i+1));
+				}
+				data = new NpcData(npcID,module,items);
+			}
+			else {
+				log.warning(NpcDAO.class, "Database error: Unable to find mobID " + npcID);
+				System.out.println("ERROR: Unable to find data for mobID " + npcID);
+			}
+			if (rs!=null)
+				rs.close();
 			
 			
-		//}catch (SQLException e) {
-		//	log.logMessage(Level.SEVERE, NpcDAO.class, e.getMessage());
-		//	e.printStackTrace();
+		}catch (SQLException e) {
+			log.logMessage(Level.SEVERE, NpcDAO.class, e.getMessage());
+			e.printStackTrace();
 		}
 		catch (Exception e) {
 			log.logMessage(Level.SEVERE, NpcDAO.class, e.getMessage());
@@ -53,9 +56,8 @@ public class NpcDAO {
 	public static boolean doesNpcExist(int npcID){
 		
 		try{
-			//ResultSet rs = Queries.getNpcData(sqlConnection, npcID).executeQuery();
-			//return rs.next();
-			return false;
+			ResultSet rs = Queries.getNpcData(sqlConnection, npcID).executeQuery();
+			return rs.next();
 		}catch(Exception e){
 			return false;
 		}
@@ -63,9 +65,10 @@ public class NpcDAO {
 	}
 	
 	public static void initNpcs(){
+		System.out.println("Loading NPCs");
 		int npcid,map,pool;
 		float x,y;
-		pool = ConfigurationManager.getConf("world").getIntVar("mobUIDPool");
+		pool = ConfigurationManager.getConf("world").getIntVar("npcUIDPool");
 		try{
 			ResultSet rs = Queries.getNpcSpawns(sqlConnection).executeQuery();
 			while(rs.next()){
@@ -73,17 +76,32 @@ public class NpcDAO {
 				map = rs.getInt("map");
 				x = rs.getInt("spawnX");
 				y = rs.getInt("spawnY");
-				new Npc(new NpcData(npcid),map,pool,new Waypoint(x,y));
-				System.out.println("Creating NPC with id: "+npcid);
+				Npc npc=new Npc(getNpcData(npcid),map,pool,new Waypoint(x,y));
+				NPCMaster.loadNPC(pool, npc);
 				pool++;
 			}
-			MobMaster.setPoolId(pool);
+			//TEST ALL NPCS IN GM ISLAND1
+			rs=Queries.getAllNpcData(sqlConnection).executeQuery();
+			map=206;
+			int i=0;
+			while(rs.next()){
+				npcid = rs.getInt("npcID");
+				x=35222+(i%20)*10;
+				y=49723+(i/20)*10;
+				Npc npc=new Npc(getNpcData(npcid),map,pool,new Waypoint(x,y));
+				NPCMaster.loadNPC(pool, npc);
+				pool++;
+				i++;
+			}
 			if (rs!=null)
 				rs.close();
+			System.out.println("Loading NPCs done");
 		} catch (SQLException e){
 			log.logMessage(Level.SEVERE, NpcDAO.class, e.getMessage());
+			e.printStackTrace();
 		} catch (Exception e){
 			log.logMessage(Level.SEVERE, NpcDAO.class, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

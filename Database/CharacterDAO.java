@@ -610,7 +610,7 @@ public class CharacterDAO {
 			newCharacter.setStats(new short[5]);
 			newCharacter.setCStats(dats);
 			
-			newCharacter.setStatPoints(rs.getShort("statpoints"));
+			newCharacter.setStatPoints(rs.getInt("statpoints"));
 			newCharacter.setSkillPoints(rs.getShort("skillpoints"));
 			
 			newCharacter.setCommands(rs.getInt("commands")==1);

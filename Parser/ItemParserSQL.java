@@ -13,7 +13,8 @@ public class ItemParserSQL extends Parser{
 		
 		System.out.println("Parsing items into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> item;
 		
 		int itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,
@@ -23,8 +24,8 @@ public class ItemParserSQL extends Parser{
 		intl,bonusintl,healmana,agi,bonusagi,life,bonuslife,mana,bonusmana,stam,bonusstam,
 		critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,defpower,bonusdefpower,
 		pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1, 
-		buffvalue1,bufficon2,bufftime2,buffvalue2;
-		float atkrange,atkscs,bonusatkscs,defscs,bonusdefscs,critchance,bonuscritchance;
+		buffvalue1,bufficon2,bufftime2,buffvalue2,telemap;
+		float atkrange,atkscs,bonusatkscs,defscs,bonusdefscs,critchance,bonuscritchance,telex,teley;
 		
 		int count=0;
 		
@@ -60,65 +61,68 @@ public class ItemParserSQL extends Parser{
 				mageusable=convertBytesToByte(item,201);
 				monkusable=convertBytesToByte(item,202);
 				faction=convertBytesToByte(item,208);
-				upgradelvl=convertBytesToByte(item,225);
-				str=convertBytesToSmall(item,226);
-				bonusstr=convertBytesToSmall(item,228);
-				dex=convertBytesToSmall(item,232);
-				bonusdex=convertBytesToSmall(item,234);
-				vit=convertBytesToSmall(item,238);
-				bonusvit=convertBytesToSmall(item,240);
-				intl=convertBytesToSmall(item,244);
-				bonusintl=convertBytesToSmall(item,246);
-				agi=convertBytesToSmall(item,250);
-				bonusagi=convertBytesToSmall(item,252);
-				healhp=convertBytesToSmall(item,256);
-				life=convertBytesToSmall(item,260);
-				bonuslife=convertBytesToSmall(item,264);
-				healmana=convertBytesToSmall(item,272);
-				mana=convertBytesToSmall(item,276);
-				bonusmana=convertBytesToSmall(item,280);
+				upgradelvl=convertBytesToByte(item,226);
+				str=convertBytesToSmall(item,228);
+				bonusstr=convertBytesToSmall(item,230);
+				dex=convertBytesToSmall(item,234);
+				bonusdex=convertBytesToSmall(item,236);
+				vit=convertBytesToSmall(item,240);
+				bonusvit=convertBytesToSmall(item,242);
+				intl=convertBytesToSmall(item,246);
+				bonusintl=convertBytesToSmall(item,248);
+				agi=convertBytesToSmall(item,252);
+				bonusagi=convertBytesToSmall(item,254);
+				healhp=convertBytesToSmall(item,260);
+				life=convertBytesToSmall(item,264);
+				bonuslife=convertBytesToSmall(item,268);
+				healmana=convertBytesToSmall(item,276);
+				mana=convertBytesToSmall(item,280);
+				bonusmana=convertBytesToSmall(item,284);
 				stam=0;
-				bonusstam=convertBytesToSmall(item,292);
-				atkscs=convertBytesToFloat(item,296);
-				bonusatkscs=convertBytesToFloat(item,300);
-				defscs=convertBytesToFloat(item,308);
-				bonusdefscs=convertBytesToFloat(item,312);
-				critchance=convertBytesToFloat(item,320);
-				bonuscritchance=convertBytesToFloat(item,324);
-				critdmg=convertBytesToSmall(item,332);
-				bonuscritdmg=convertBytesToSmall(item,334);
-				mindmg=convertBytesToInteger(item,338);
-				maxdmg=convertBytesToInteger(item,344);
-				offpower=convertBytesToSmall(item,350);
-				bonusoffpower=convertBytesToSmall(item,352);
-				defpower=convertBytesToSmall(item,356);
-				bonusdefpower=convertBytesToSmall(item,358);
-				pvpdmginc=convertBytesToByte(item,368);
-				timetoexpire=convertBytesToSmall(item,400);
-				seteffectid=convertBytesToInteger(item,420);
-				amountsetpieces=convertBytesToByte(item,424);
-				movespeed=convertBytesToByte(item,428);
+				bonusstam=convertBytesToSmall(item,296);
+				atkscs=convertBytesToFloat(item,300);
+				bonusatkscs=convertBytesToFloat(item,304);
+				defscs=convertBytesToFloat(item,312);
+				bonusdefscs=convertBytesToFloat(item,316);
+				critchance=convertBytesToFloat(item,324);
+				bonuscritchance=convertBytesToFloat(item,328);
+				critdmg=convertBytesToSmall(item,336);
+				bonuscritdmg=convertBytesToSmall(item,338);
+				mindmg=convertBytesToInteger(item,342);
+				maxdmg=convertBytesToInteger(item,348);
+				offpower=convertBytesToSmall(item,356);
+				bonusoffpower=convertBytesToSmall(item,358);
+				defpower=convertBytesToSmall(item,362);
+				bonusdefpower=convertBytesToSmall(item,364);
+				pvpdmginc=convertBytesToByte(item,374);
+				timetoexpire=convertBytesToSmall(item,406);
+				telemap=convertBytesToInteger(item,412);
+				telex=convertBytesToFloat(item,416);
+				teley=convertBytesToFloat(item,420);
+				seteffectid=convertBytesToInteger(item,424);
+				amountsetpieces=convertBytesToByte(item,428);
+				movespeed=convertBytesToByte(item,432);
 				bufficon1 = 0; bufftime1 = 0; buffvalue1 = 0; bufficon2 = 0; bufftime2 = 0; buffvalue2 = 0;
-				if(item.size() > 456) {
+				if(item.size() > 464) {
 					// TODO Fix old items?
 					if(bufficon1 < 300) { //bugged items (old items from pandora) will be ignored
-						bufficon1 = convertBytesToSmall(item,456);
-						bufftime1 = convertBytesToSmall(item,458);
-						buffvalue1 = convertBytesToByte(item,460);
-						if(item.size() > 464) {
-							bufficon2 = convertBytesToSmall(item,464);
-							bufftime2 = convertBytesToSmall(item,466);
-							buffvalue2 = convertBytesToByte(item,468);
+						bufficon1 = convertBytesToSmall(item,460);
+						bufftime1 = convertBytesToSmall(item,462);
+						buffvalue1 = convertBytesToByte(item,464);
+						if(item.size() > 472) {
+							bufficon2 = convertBytesToSmall(item,468);
+							bufftime2 = convertBytesToSmall(item,470);
+							buffvalue2 = convertBytesToByte(item,472);
 						}
 					}
 				}
 						
-				dao.addItem(con,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
+				dao.addItem(sql,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 						price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1,buffvalue1,
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,telemap,telex,teley,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1,buffvalue1,
 						bufficon2,bufftime2,buffvalue2);
 					
 				count++;
@@ -199,12 +203,12 @@ public class ItemParserSQL extends Parser{
 				amountsetpieces=convertBytesToByte(item,372);
 				movespeed=convertBytesToByte(item,376);
 						
-				dao.addItem(con,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
+				dao.addItem(sql,itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 						price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed, 0, 0, 0, 0, 0, 0);
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,0,0,0,seteffectid,amountsetpieces,movespeed, 0, 0, 0, 0, 0, 0);
 					
 				count++;
 				

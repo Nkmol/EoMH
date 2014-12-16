@@ -27,6 +27,7 @@ public class ConfigurationManager {
                         	conf.put("GameServer", ConfigurationManager.parseServerConf(confFile));
                         	Configuration t = new Configuration();
                         	t.setVar("mobUIDPool", "50000");
+                        	t.setVar("npcUIDPool", "40000");
                         	ConfigurationManager.conf.put("world", t);
                         }
                         else { 

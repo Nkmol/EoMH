@@ -49,10 +49,9 @@ public class ChatSetStats implements ChatCommandExecutor {
      {
        if (StringTools.isInteger(parameters[i]))
        {
-        if (parameters[i].length()>4)
-        intparameters[i]=9999;
-        else
         intparameters[i]=Integer.parseInt(parameters[i]);
+        if(intparameters[i]>32000)
+        	intparameters[i]=32000;
        }
        else
        System.out.println("Bad parameters ["+i+"]: "+parametersname[i]+" stays the same");

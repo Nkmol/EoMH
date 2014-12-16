@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import logging.ServerLogger;
 
 public class InstallDAO {
 	private ServerLogger log = ServerLogger.getInstance();
 	private static InstallDAO instance;
-	
 	
 	private InstallDAO(){
 		this.log = ServerLogger.getInstance();
@@ -132,6 +132,71 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 13){
+				ps = Queries.dropNpcSpawnsTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 14){
+				ps = Queries.dropCharBuffTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 15){
+				ps = Queries.dropItemsetsTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 16){
+				ps = Queries.dropMacroTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 17){
+				ps = Queries.dropNpcDataTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 18){
+				ps = Queries.dropFilterTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 19){
+				ps = Queries.dropDescriptionTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 20){
+				ps = Queries.dropEventTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 21){
+				ps = Queries.dropServerControlTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 22){
+				ps = Queries.dropUpgradeTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 23){
+				ps = Queries.dropPuzzlemobTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 24){
+				ps = Queries.dropRandomnameTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 25){
+				ps = Queries.dropRandomsentenceTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -223,6 +288,27 @@ public class InstallDAO {
 		}
 		return b;
 	}
+	
+	public boolean createNpcDataTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcDataTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
 	public boolean createMobsTable() {
 		boolean b = true;
 		try{
@@ -322,10 +408,10 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addMap(Connection sql, int id, String name, int xgridsize, int ygridsize, int areasize, int x, int y, int pool) {
+	public boolean addMap(Connection sqlConnection, int id, String name, int xgridsize, int ygridsize, int areasize, int x, int y, int pool) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addMap(sql, id, name, xgridsize, ygridsize, areasize,x,y,pool);
+			PreparedStatement ps=Queries.addMap(sqlConnection, id, name, xgridsize, ygridsize, areasize,x,y,pool);
 			ps.execute();
 			ps.close();
 			
@@ -342,21 +428,21 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addItem(Connection sql,int itemid,int baseid,int category,int againsttype,int bonustype,int typedmg,int bonustypedmg,float atkrange,
+	public boolean addItem(Connection sqlConnection, int itemid,int baseid,int category,int againsttype,int bonustype,int typedmg,int bonustypedmg,float atkrange,
 			int price,int isconsumable,int ispermanent,int equipslot,int width,int height,int minlvl,int maxlvl,int reqstr,int reqdex,int reqvit,int reqint,int reqagi,
 			int warusable,int sinusable,int mageusable,int monkusable,int faction,int upgradelvl,int str,int bonusstr,int dex,int bonusdex,int vit,int bonusvit,
 			int intl,int bonusintl,int agi,int bonusagi,int healhp,int life,int bonuslife,int healmana,int mana,int bonusmana,int stam,int bonusstam,float atkscs,float bonusatkscs,float defscs,
 			float bonusdefscs,float critchance,float bonuscritchance,int critdmg,int bonuscritdmg,int mindmg,int maxdmg,int offpower,int bonusoffpower,
-			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) {
+			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int telemap,float telex,float teley,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addItem(sql,
+			PreparedStatement ps=Queries.addItem(sqlConnection,
 					itemid,baseid,category,againsttype,bonustype,typedmg,bonustypedmg,atkrange,
 					price,isconsumable,ispermanent,equipslot,width,height,minlvl,maxlvl,reqstr,reqdex,reqvit,reqint,reqagi,
 					warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 					intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 					bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-					defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,buffid1,bufftime1,buffvalue1,buffid2,bufftime2,buffvalue2);
+					defpower,bonusdefpower,pvpdmginc,timetoexpire,telemap,telex,teley,seteffectid,amountsetpieces,movespeed,buffid1,bufftime1,buffvalue1,buffid2,bufftime2,buffvalue2);
 			ps.execute();
 			ps.close();
 			
@@ -373,13 +459,13 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addSkill(Connection sql,int skillid,int skillgroup,int chclass,int stage,int effectOnWep,int reqSkill1,int reqSkill2,int reqSkill3,int skillpoints,int nextSkillLawful,
+	public boolean addSkill(Connection sqlConnection, int skillid,int skillgroup,int chclass,int stage,int effectOnWep,int reqSkill1,int reqSkill2,int reqSkill3,int skillpoints,int nextSkillLawful,
 			int nextSkillEvil,int lvl,int specificType,int moreSpecificType,int normalDmgFont,int mobDmgFont,int targets,int generalType,int faction,
 			int needsWepToCast,int ultiSetId,int isCastable,int isSpecialCast,int healCost,int manaCost,int staminaCost,int dmg,float speed,int effAmount,
 			int effId1,int effDuration1,int effValue1,int effId2,int effDuration2,int effValue2,int effId3,int effDuration3,int effValue3) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addSkill(sql,
+			PreparedStatement ps=Queries.addSkill(sqlConnection,
 					skillid,skillgroup,chclass,stage,effectOnWep,reqSkill1,reqSkill2,reqSkill3,skillpoints,nextSkillLawful,
 					nextSkillEvil,lvl,specificType,moreSpecificType,normalDmgFont,mobDmgFont,targets,generalType,faction,
 					needsWepToCast,ultiSetId,isCastable,isSpecialCast,healCost,manaCost,staminaCost,dmg,speed,effAmount,
@@ -400,10 +486,10 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addLvl(Connection sql,int lvl,long exp) {
+	public boolean addLvl(Connection sqlConnection, int lvl,long exp) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addLvl(sql,lvl,exp);
+			PreparedStatement ps=Queries.addLvl(sqlConnection,lvl,exp);
 			ps.execute();
 			ps.close();
 			
@@ -420,11 +506,11 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean addGamemasterRank(Connection sql,int rank,String prename,boolean gotGMname,int commandpower,
+	public boolean addGamemasterRank(Connection sqlConnection, int rank,String prename,boolean gotGMname,int commandpower,
 			int allocateGMrank,boolean isPlayer) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.addGamemasterRank(sql,rank,prename,gotGMname,commandpower,allocateGMrank,isPlayer);
+			PreparedStatement ps=Queries.addGamemasterRank(sqlConnection,rank,prename,gotGMname,commandpower,allocateGMrank,isPlayer);
 			ps.execute();
 			ps.close();
 			
@@ -441,10 +527,235 @@ public class InstallDAO {
 		return b;
 	}
 	
-	public boolean CreateAccount(int accountID, String ip, String username, String password, int flags) {
+	public boolean addItemset(Connection sqlConnection, String name,String password, LinkedList<Integer> itemIds, LinkedList<Integer> itemAmounts) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.CreateUserAccount(new SQLconnection().getConnection(), ip, username, password, flags);
+			PreparedStatement ps=Queries.addItemset(sqlConnection,name,password,itemIds,itemAmounts);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addMacro(Connection sqlConnection, String name,String password, String content) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addMacro(sqlConnection,name,password,content);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addFilter(Connection sqlConnection, String category, String command, String sqlName, int minValue, int maxValue, int standardValue) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addFilter(sqlConnection, category, command, sqlName, minValue, maxValue, standardValue);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addDescription(Connection sqlConnection, String category, int deskValue, String description) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addDescription(sqlConnection, category, deskValue, description);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addEvent(Connection sqlConnection, String eventName, float exp, float drop, float coin,
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate,
+			int puzzlemobrate, float mobhp, String desc) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addEvent(sqlConnection, eventName, exp, drop, coin, fame, 
+					generalStarrate, starrate, superstarrate, multihitmobrate, puzzlemobrate, mobhp, desc);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addServerControl(Connection sqlConnection, String serverName, String eventName) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addServerControl(sqlConnection, serverName, eventName);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addUpgrade(Connection con, int id, int oldIt, int upgrader, int newIt,
+			float itStage, float upgradelvl, float failrate, float breakoption, int upgradeskill) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addUpgrade(con, id, oldIt, upgrader, newIt, itStage, upgradelvl, failrate, breakoption, upgradeskill);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addAllUpgrades(Connection con, String statement) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=con.prepareStatement(statement);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addPuzzle(Connection con, String question, String answer, int type, float coinrate,
+			float exprate, float droprate, int bonusdrop) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addPuzzlemob(con, question, answer, type, coinrate, exprate, droprate, bonusdrop);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addRandomname(Connection con, String name) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addRandomname(con, name);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addRandomsentence(Connection con, String sentence) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addRandomsentence(con, sentence);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean CreateAccount(Connection sqlConnection, int accountID, String ip, String username, String password, int flags) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.CreateUserAccount(sqlConnection, ip, username, password, flags);
 			ps.execute();
 			ps.close();
 		}catch (SQLException e) {
@@ -459,10 +770,10 @@ public class InstallDAO {
 		}
 		return b;
 	}
-	public boolean createMobDataEntry(Connection sql, int id, int lvl, int skill1, int skill2, int skill3, int minatk, int maxatk, int deff, int hp, int atksuc, int defsuc, long basexp, int coins, int basefame, int aggro, int attrange, int follow,int move,int[] drops,float[] dropchances) {
+	public boolean createMobDataEntry(Connection sqlConnection, int id, int lvl, int skill1, int skill2, int skill3, int minatk, int maxatk, int deff, int hp, int atksuc, int defsuc, long basexp, int coins, int basefame, int aggro, int attrange, int follow,int move,int[] drops,float[] dropchances) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createMobDataEntry(sql, id, lvl, minatk, maxatk, deff, skill1, skill2, skill3, hp, atksuc, defsuc, basexp, coins, basefame, aggro, follow, move, attrange, drops, dropchances);
+			PreparedStatement ps=Queries.createMobDataEntry(sqlConnection, id, lvl, minatk, maxatk, deff, skill1, skill2, skill3, hp, atksuc, defsuc, basexp, coins, basefame, aggro, follow, move, attrange, drops, dropchances);
 			ps.execute();
 			ps.close();
 			
@@ -481,10 +792,10 @@ public class InstallDAO {
 		
 	}
 	
-	public boolean createMobSpawnEntry(Connection sql, int map, int id, int amount, float rx, float ry, float radius) {
+	public boolean createNpcDataEntry(Connection sqlConnection, int id, int module, int[] items) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createMobSpawnEntry(sql, map, id, amount, rx, ry, radius);
+			PreparedStatement ps=Queries.createNpcDataEntry(sqlConnection, id, module, items);
 			ps.execute();
 			ps.close();
 			
@@ -503,10 +814,32 @@ public class InstallDAO {
 		
 	}
 	
-	public boolean createNpcSpawnEntry(Connection sql, int map, int id, float x, float y) {
+	public boolean createMobSpawnEntry(Connection sqlConnection, int map, int id, int amount, float rx, float ry, float spawnWidth, float spawnHeight) {
 		boolean b = true;
 		try{
-			PreparedStatement ps=Queries.createNpcSpawnEntry(sql, map, id, x, y);
+			PreparedStatement ps=Queries.createMobSpawnEntry(sqlConnection, map, id, amount, rx, ry, spawnWidth, spawnHeight);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+
+		return b;
+		
+	}
+	
+	public boolean createNpcSpawnEntry(Connection sqlConnection, int map, int id, float x, float y) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createNpcSpawnEntry(sqlConnection, map, id, x, y);
 			ps.execute();
 			ps.close();
 			
@@ -629,6 +962,206 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createGamemasterTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createItemsetsTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createItemsetsTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createMacroTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createMacroTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createFilterTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createFilterTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createDescriptionTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createDescriptionTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createEventTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createEventTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createServerControlTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createServerControlTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createUpgradeTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createUpgradeTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createPuzzleTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createPuzzlemobTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createRandomnameTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createRandomnameTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createRandomsentenceTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createRandomsentenceTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

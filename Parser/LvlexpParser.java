@@ -16,7 +16,7 @@ public class LvlexpParser extends Parser{
 			byte[] data = Files.readAllBytes(path);
 			System.out.println("BYTES: "+data.length+" ,CREATE LVLEXP LISTS...");
 			
-			//GET ITEMS TO LIST
+			//GET LVLS TO LIST
 			LinkedList<Short> lvlBytes=new LinkedList<Short>();
 			LinkedList<Long> lvls=new LinkedList<Long>();
 			int byteatm=0;

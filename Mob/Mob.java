@@ -17,10 +17,12 @@ import logging.ServerLogger;
 import Buffs.Buff;
 import Buffs.BuffMaster;
 import ExperimentalStuff.EffectMaster;
+import GameServer.ServerMaster;
 import GameServer.ServerPackets.ServerMessage;
 import Player.Character;
 import Player.CharacterMaster;
 import Player.CharacterPackets;
+import Player.ChatMaster;
 import Player.Fightable;
 import ServerCore.ServerFacade;
 import Skills.CastableSkill;
@@ -70,20 +72,28 @@ public class Mob implements Location, Fightable{
 	 * mdata = pointer to mobs data object 
 	 * * cont = pointer to this mobs MobController object
 	 */
+	private int bonusHits=0;
+	private String funName;
+	private boolean isPuzzleMob;
+	private boolean askedQuestion;
+	private Mobpuzzle currentPuzzle;
+	private Character puzzleChar;
+	private boolean solvedPuzzle;
         
-	public Mob(int mobID, int id, Waypoint mdata, MobController cont) {
+	public Mob(int mobID, int id, MobController cont) {
 		this.uid = id;
 		this.mobID = mobID;
-		this.spawn = mdata;
-		this.location = new Waypoint(mdata.getX(), mdata.getY());
+		this.location = new Waypoint(0,0);
 		this.data = cont.getData();
 		this.alive = true;
 		this.setCurentWaypoint(0);
 		this.control = cont;
+		resetToSpawn();
 		this.wmap.AddMob(id, this);
 		atked=0;
 		targetX=0;
 		targetY=0;
+		this.funName=MobMaster.getRandomName(uid);
 	}
         
 	public int getMobID() {
@@ -160,8 +170,8 @@ public class Mob implements Location, Fightable{
 			// a.addMember(this);
 			List<Integer> ls;
 		    ls = this.area.addMemberAndGetMembers(this);
-		    Iterator<Integer> it = this.iniPackets.iterator();
 		    synchronized(this.iniPackets){
+		    	Iterator<Integer> it = this.iniPackets.iterator();
 		    	while (it.hasNext()){
 		    		Integer i = it.next();
 		    		if (!WMap.getInstance().CharacterExists(i)){
@@ -229,14 +239,14 @@ public class Mob implements Location, Fightable{
 			int y = starty + r.nextInt(2 * this.data.getMoveSpeed());
 			float newX=this.getlastknownX() + (float)x;
 			float newY=this.getlastknownY() + (float)y;
-			if(newX<control.getSpawnx()-control.getSpawnRadius())
-				newX=control.getSpawnx()-control.getSpawnRadius();
-			if(newX>control.getSpawnx()+control.getSpawnRadius())
-				newX=control.getSpawnx()+control.getSpawnRadius();
-			if(newY<control.getSpawny()-control.getSpawnRadius())
-				newY=control.getSpawny()-control.getSpawnRadius();
-			if(newY>control.getSpawny()+control.getSpawnRadius())
-				newY=control.getSpawny()+control.getSpawnRadius();
+			if(newX<control.getSpawnx()-control.getSpawnWidth())
+				newX=control.getSpawnx()-control.getSpawnWidth();
+			else if(newX>control.getSpawnx()+control.getSpawnWidth())
+				newX=control.getSpawnx()+control.getSpawnWidth();
+			if(newY<control.getSpawny()-control.getSpawnHeight())
+				newY=control.getSpawny()-control.getSpawnHeight();
+			else if(newY>control.getSpawny()+control.getSpawnHeight())
+				newY=control.getSpawny()+control.getSpawnHeight();
 			
 			ls.add(new Waypoint(newX, newY));
 			for(int u=0;u<this.data.getWaypointDelay();u++) {
@@ -252,7 +262,9 @@ public class Mob implements Location, Fightable{
 		}
 		boolean hasPlayers = !this.iniPackets.isEmpty();
 		if(this.isAlive()) {
-			//TODO: dodo sorsa
+			
+			if(isPuzzleMob && ((int)(Math.random()*1000))==0)
+				area.sendToMembers(0, ChatMaster.getChatPacket(-1, funName+"["+data.getLvl()+"]", MobMaster.getRandomSentence(), (byte)6));
 			
 			if (WMap.distance(this.location.getX(), this.location.getY(), this.getSpawnx(), this.getSpawny()) > this.data.getMoveRange()){
 				//System.out.println(this.uid + " is too far from spawn");
@@ -263,7 +275,7 @@ public class Mob implements Location, Fightable{
 				//System.out.println(this.uid + " is aggroed by " + this.getAggroID());
 				if (this.wmap.CharacterExists(this.getAggroID())){
 						Character loc = this.wmap.getCharacter(this.getAggroID());
-						if(WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY())>data.getFollowRange() || !loc.isDead()){
+						if(WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY())<data.getFollowRange() && !loc.isDead()){
 							// attack target and/or move towards it
 							if (WMap.distance(this.location.getX(), this.location.getY(), loc.getlastknownX(), loc.getlastknownY()) < this.data.getAttackRange()){
 								// System.out.println(this.uid + " is attacking " + loc.getuid());
@@ -361,8 +373,15 @@ public class Mob implements Location, Fightable{
 	// resets mobs data
 	private void reset(boolean sendMove, boolean resetHp) throws OutOfGridException {
 		this.resetDamage();
-		if(resetHp)
-			this.setHp(this.data.getMaxhp());
+		if(resetHp){
+			this.setHp((int)(this.data.getMaxhp()*ServerMaster.getCurrentEvent().getMobhp()));
+			//puzzlemob
+			resetPuzzle(true);
+			if(((int)(Math.random()*ServerMaster.getCurrentEvent().getPuzzlemobrate()))==0)
+				isPuzzleMob=true;
+			else
+				isPuzzleMob=false;
+		}
 		this.setCurentWaypoint(0);
 		this.resetToSpawn();
 		this.setAggro(false);
@@ -379,8 +398,13 @@ public class Mob implements Location, Fightable{
 	}
 
 	private void resetToSpawn() {
-		this.setX(this.getSpawnx());
-		this.setY(this.getSpawny());
+		Random r = new Random();
+		int x=control.getSpawnx() + r.nextInt(control.getSpawnWidth());
+		int y=control.getSpawny() + r.nextInt(control.getSpawnHeight());
+		this.setX(x);
+		this.setY(y);
+		spawn=new Waypoint(x, y);
+		
 	}
 
 	// handle damages receiving
@@ -416,47 +440,160 @@ public class Mob implements Location, Fightable{
 			}   
 			
 			this.reduceHp(dmg);
-			if (this.hp <= 0) this.die();
+			if (this.hp <= 0){
+				this.die();
+			}else if(isPuzzleMob && !askedQuestion && hp<data.getMaxhp()/5){
+				currentPuzzle=MobMaster.getRandomMobpuzzle();
+				if(WMap.getInstance().CharacterExists(aggroID)){
+					Character ch=WMap.getInstance().getCharacter(aggroID);
+					puzzleChar=ch;
+					ch.addPuzzleMob(this);
+					ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), ChatMaster.getChatPacket(-1, funName+"["+data.getLvl()+"]", "Please dont kill me! I have a question for you!", (byte)6));
+					ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), ChatMaster.getChatPacket(-1, funName+"["+data.getLvl()+"]", currentPuzzle.getQuestion(), (byte)6));
+					EffectMaster.spawnEffects(control.getMap(), getlastknownX(), getlastknownY(), 0);
+				}
+				askedQuestion=true;
+			}
 		}
 	}
+	
+	public void dieByDespawn() throws OutOfGridException{
+		//some control stuff and packet
+		this.rmAreaMember();
+		this.setDied(System.currentTimeMillis());
+		this.setAlive(false);
+		this.send(MobPackets.getDeathPacket(this.uid, this, false));
+		
+		//reset
+		if(control.isTemp()){
+			setDeleted(true);
+		}else{
+			this.reset(false,false);
+		}
+	}
+	
+	public void resetPuzzle(boolean informChar){
+		askedQuestion=false;
+		currentPuzzle=null;
+		if(puzzleChar!=null){
+			if(informChar)
+				puzzleChar.removePuzzleMob(this);
+			puzzleChar=null;
+		}
+		solvedPuzzle=false;
+		isPuzzleMob=false;
+	}
+	
+	public void solvePuzzle(Character ch){
+		try {
+			solvedPuzzle=true;
+			ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), ChatMaster.getChatPacket(-1, funName+"["+data.getLvl()+"]", "Correct answer! Cya! :)", (byte)6));
+			die();
+			resetPuzzle(true);
+		} catch (OutOfGridException e) {
+			System.out.print(e.getMessage());
+		}
+	}
+	
+	public void failPuzzle(Character ch){
+		resetPuzzle(true);
+		ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), ChatMaster.getChatPacket(-1, funName+"["+data.getLvl()+"]", "Wrong answer! Im sorry! :(", (byte)6));
+	}
+	
 	// perform actions needed to finalize mob's death
 	private void die() throws OutOfGridException {
-		hp=0;
+		
+		//character aggro
 		Character ch;
 		if(wmap.CharacterExists(getAggroID()))
 			ch=wmap.getCharacter(getAggroID());
 		else
 			ch=null;
+		
+		float multihitmobrate=ServerMaster.getCurrentEvent().getMultihitmobrate();
+		
+		if(!solvedPuzzle){
+			//hp reset
+			if(bonusHits!=0){
+				hp=1;
+				bonusHits--;
+			}else{
+				//bonushits
+				if((int)(Math.random()*multihitmobrate)==0){
+					bonusHits=(int)(5+Math.random()*10);
+					EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 2);
+					if(ch.getPt()!=null)
+						ch.getPt().sendMessageToMembers("Bonus Hits! :D");
+					else
+						new ServerMessage().execute("Bonus Hits! :D", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+					hp=1;
+				}else{
+					hp=0;
+				}
+			}
+		}else{
+			bonusHits=0;
+			hp=0;
+		}
+		
 		//factor the multiplies coins and exp
 		float factor=(float)(Math.random()/10+0.9);
 		boolean star=false;
-		int coinfactor=1;
-		float expfactor=1*control.expFactor();
-		if(!control.onlyStars() && ((int)(Math.random()*1666))==0){
+		float coinfactor=ServerMaster.getCurrentEvent().getCoin();
+		float expfactor=control.expFactor()*ServerMaster.getCurrentEvent().getExp();
+		float famerate=ServerMaster.getCurrentEvent().getFame();
+		float starrate=ServerMaster.getCurrentEvent().getStarrate()*ServerMaster.getCurrentEvent().getGeneralStarrate();
+		float superstarrate=ServerMaster.getCurrentEvent().getSuperstarrate()*ServerMaster.getCurrentEvent().getGeneralStarrate();
+		float bonusDroprate=ServerMaster.getCurrentEvent().getDrop();
+		int bonusdrop=-1;
+		
+		if(!solvedPuzzle){
+			//stars
+			if(!control.onlyStars() && ((int)(Math.random()*superstarrate))==0){
+				star=true;
+				expfactor*=166;
+				coinfactor*=16;
+				EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 3);
+				if(ch.getPt()!=null)
+					ch.getPt().sendMessageToMembers("WOW! Gz for super starmob!");
+				else
+					new ServerMessage().execute("WOW! Gz for super starmob!", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
+			}else
+				if(control.onlyStars() || ((int)(Math.random()*starrate))==0){
+					star=true;
+					expfactor*=45;
+					coinfactor*=10;
+				}
+		}else{
+			//puzzle bonus
+			expfactor*=currentPuzzle.getExprate();
+			coinfactor*=currentPuzzle.getCoinrate();
+			bonusDroprate*=currentPuzzle.getDroprate();
+			bonusdrop=currentPuzzle.getBonusdrop();
 			star=true;
-			expfactor*=166;
-			coinfactor*=16;
-			EffectMaster.spawnEffects(control.getMap(), location.getX(), location.getY(), 3);
-			if(ch.getPt()!=null)
-				ch.getPt().sendMessageToMembers("WOW! Gz for super starmob!");
-			else
-				new ServerMessage().execute("WOW! Gz for super starmob!", ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
-		}else
-		if(control.onlyStars() || ((int)(Math.random()*100))==0){
-			star=true;
-			expfactor*=45;
-			coinfactor*=10;
 		}
-		//drops
+		
 		ItemFrame it;
 		if(ch!=null && ch.getLevel()<getLevel()+9){
+			//drops
+			if(bonusHits!=0){
+				bonusDroprate*=0.25;
+			}
 			for(int i=0;i<data.getDrops().length;i++){
-				if(data.getDropchances()[i]!=0 && ((int)(Math.random()/data.getDropchances()[i]))==0){
+				if(data.getDropchances()[i]!=0 && ((int)(Math.random()/data.getDropchances()[i]/bonusDroprate))==0){
 					it = (ItemFrame)ItemCache.getInstance().getItem(data.getDrops()[i]);
 					if(it!=null)
 						it.dropItem(grid.getuid(), getLocation(),1);
 				}
 			}
+			
+			//bonusdrop
+			if(bonusdrop!=-1){
+				it = (ItemFrame)ItemCache.getInstance().getItem(bonusdrop);
+				if(it!=null)
+					it.dropItem(grid.getuid(), getLocation(),1);
+			}
+			
 			//exp
 			if(ch.getPt()!=null){
 				ch.getPt().killMob(ch,(long)(data.getBasexp()*factor*expfactor));
@@ -465,30 +602,41 @@ public class Mob implements Location, Fightable{
 					expfactor/=2;
 				ch.gainExp((long)(data.getBasexp()*factor*expfactor),true);
 			}
+			
 		}
-		it = (ItemFrame)ItemCache.getInstance().getItem(217000501);
-		it.dropItem(grid.getuid(), getLocation(),(int)(data.getCoins()*factor*coinfactor));
-		//EVENT
-		//if(data.getMobID()==341)
-		//	CharacterMaster.announceWinner(wmap.getCharacter(getAggroID()));
-		this.rmAreaMember();
-		this.setDied(System.currentTimeMillis());
-		this.setAlive(false);
-		this.send(MobPackets.getDeathPacket(this.uid, this, star));
+		
+		//coin
+		if(bonusHits==0 || ((int)(Math.random()*4))==0){
+			it = (ItemFrame)ItemCache.getInstance().getItem(217000501);
+			it.dropItem(grid.getuid(), getLocation(),(int)(data.getCoins()*factor*coinfactor));
+		}
+		
 		//fame
-		if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
-			if(Math.random() < 0.04) { // 3% chance
-				int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
-				ch.addFame(fame);
-				ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
-				this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
+		if(bonusHits==0){
+			if(ch!=null && ch.getLevel() >= 36 && ch.getFaction() != 0 && this.data.getLvl() >= 36 && ch.getLevel()<getLevel()+9)	{
+				if(Math.random() < 0.04) { // 3% chance
+					int fame = (int)(this.data.getBasefame()*(Math.random()*0.4+0.8));
+					fame*=famerate;
+					ch.addFame(fame);
+					ch.setFameTitle(CharacterMaster.getFameTitle(ch.getFame()));
+					this.send(MobPackets.famepacket(this.uid, this.aggroID, fame));
+				}
 			}
 		}
 		
-		if(control.isTemp()){
-			setDeleted(true);
-		}else{
-			this.reset(false,false);
+		if(bonusHits==0){
+			//some control stuff and packet
+			this.rmAreaMember();
+			this.setDied(System.currentTimeMillis());
+			this.setAlive(false);
+			this.send(MobPackets.getDeathPacket(this.uid, this, star));
+			
+			//reset
+			if(control.isTemp()){
+				setDeleted(true);
+			}else{
+				this.reset(false,false);
+			}
 		}
 	}
 	// check if mob is close enough to player to aggro it
@@ -699,7 +847,7 @@ public class Mob implements Location, Fightable{
 		return data.getCritsuc();
 	}
 	
-	public short getCritdmg(){
+	public int getCritdmg() {
 		return 0;
 	}
 
@@ -739,6 +887,10 @@ public class Mob implements Location, Fightable{
 	@Override
 	public void refreshHpMpSp() {
 		// Mobs doesn't have refresh 
+	}
+	
+	public Mobpuzzle getPuzzle(){
+		return currentPuzzle;
 	}
         
 }

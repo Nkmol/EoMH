@@ -13,7 +13,8 @@ public class MobParserSQL extends Parser{
 		
 		System.out.println("Parsing mobs into SQL");
 		
-		Connection con=new SQLconnection().getConnection();
+		Connection sql=new SQLconnection().getConnection();
+		
 		ArrayList<Short> mob;
 		ArrayList<Short> dropObj1;
 		ArrayList<Short> dropObj2;
@@ -98,7 +99,7 @@ public class MobParserSQL extends Parser{
 				dropchance[0]=0;
 			}
 						
-			dao.createMobDataEntry(con, id, lvl, skill1, skill2, skill3, minatk, maxatk, deff, hp, atksuc, defsuc, basexp, coins, basefame, aggro, attrange, follow, move, drop, dropchance);
+			dao.createMobDataEntry(sql, id, lvl, skill1, skill2, skill3, minatk, maxatk, deff, hp, atksuc, defsuc, basexp, coins, basefame, aggro, attrange, follow, move, drop, dropchance);
 					
 				count++;
 				

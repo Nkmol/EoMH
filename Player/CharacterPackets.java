@@ -148,7 +148,16 @@ public class CharacterPackets {
      
         for(int i=0;i<stuff.length;i++) {
                 cdata[i+66-8-3] = stuff[i];
-        }        
+        }
+        
+        //coords
+        byte[] bx=BitTools.floatToByteArray(ch.getlastknownX());
+        byte[] by=BitTools.floatToByteArray(ch.getlastknownY());
+        
+        for(int i=0;i<4;i++){
+        	cdata[68+i]=bx[i];
+        	cdata[72+i]=by[i];
+        }
         
         //equip
         byte[] bytes;
@@ -420,6 +429,10 @@ public class CharacterPackets {
 		//0c is safe zone
 		//08 is nonsafe zone
 		cdata[5808]=(byte)0x08;
+		
+		cdata[5813]=(byte)0x9d;
+		cdata[5814]=(byte)0x0f;
+		cdata[5815]=(byte)0xbf;
 		
 		cdata[5822]=(byte)0x50;
 		cdata[5823]=(byte)0x2e;
@@ -857,26 +870,30 @@ public class CharacterPackets {
 	public static byte[] getJoinGameWorldStuffPacket8(Character ch){
 		
 		byte[] cid=BitTools.intToByteArray(ch.getCharID());
-		byte[] stuff=new byte[32];
+		byte[] stuff=new byte[60];
 		stuff[0]=(byte)stuff.length;
-		stuff[4]=(byte)0x05;
-		stuff[6]=(byte)0x35;
-		stuff[8]=(byte)0x08;
-		stuff[9]=(byte)0x80;
-		stuff[10]=(byte)0x99;
-		stuff[11]=(byte)0x43;
+		stuff[4]=(byte)0x04;
+		stuff[6]=(byte)0x02;
+		stuff[8]=(byte)0x01;
+		stuff[9]=(byte)0x70;
+		stuff[10]=(byte)0x65;
+		stuff[11]=(byte)0x08;
 		for(int i=0;i<4;i++){
 			stuff[12+i]=cid[i];
 		}
-		stuff[16]=(byte)0x01;
-		
-		stuff[24]=(byte)0x33;
-		stuff[25]=(byte)0x01;
-		
-		stuff[28]=(byte)0x08;
-		stuff[29]=(byte)0x01;
-		stuff[30]=(byte)0xc4;
-		
+		stuff[16]=(byte)0x02;
+		stuff[21]=(byte)0x80;
+		stuff[22]=(byte)0x49;
+		stuff[23]=(byte)0x46;
+		stuff[25]=(byte)0x10;
+		stuff[26]=(byte)0xf3;
+		stuff[27]=(byte)0x45;
+		stuff[40]=(byte)0x01;
+		stuff[41]=(byte)0x9d;
+		stuff[42]=(byte)0x0f;
+		stuff[43]=(byte)0xbf;
+		stuff[50]=(byte)0x63;
+		stuff[51]=(byte)0x08;
 		return stuff;
 		
 	}
@@ -1009,6 +1026,26 @@ public class CharacterPackets {
 		
 		return externmove;
 		
+	}
+	
+	public static byte[] getTeleportPacket(){
+		byte[] locSync = new byte[56];
+		
+		locSync[0] = (byte)locSync.length;
+		locSync[4] = (byte)0x04;
+		locSync[6] = (byte)0x0D;
+		
+		locSync[9] = (byte)0x89;
+		locSync[10] = (byte)0x82;
+		locSync[11] = (byte)0x40;
+		
+		locSync[41] = (byte)0x05;
+		locSync[42] = (byte)0x05;
+		locSync[43] = (byte)0x08;
+		
+		locSync[52] = (byte)0x0E;
+		
+		return locSync;
 	}
 	
 }

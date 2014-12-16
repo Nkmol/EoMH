@@ -90,6 +90,7 @@ public class Parser {
 		String add;
 		int num=shortList.get(firstIndex);
 		string=new Integer(shortList.get(firstIndex)).toString();
+		string=formatKoreanString(string);
 		add="";
 		for(int i=string.length();i<10;i++)
 			add+=" ";
@@ -124,6 +125,7 @@ public class Parser {
 			string+=(char)tmp;
 		}
 		try{
+			string=formatKoreanString(string);
 			out.write(string);
 			out.write(", ");
 		}catch(Exception e){}
@@ -157,6 +159,18 @@ public class Parser {
 			out.write(string+add);
 			out.write(", ");
 		}catch(Exception e){}
+	}
+	
+	public static String formatKoreanString(String string){
+		short shortdata[]=new short[string.length()];
+		char chardata[]=new char[string.length()];
+		for(int i=0;i<string.length();i++){
+			shortdata[i]=(short)string.charAt(i);
+			if(shortdata[i]>126 || shortdata[i]<32)
+				shortdata[i]=35;
+			chardata[i]=(char)shortdata[i];
+		}
+		return String.copyValueOf(chardata);
 	}
 	
 }

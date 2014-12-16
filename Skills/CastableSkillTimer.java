@@ -30,7 +30,7 @@ public class CastableSkillTimer {
 				  CastableSkillTimer.this.isReady=true;
 				cancel();
 			  }
-		}, 4500);
+		}, 3000);
 	}
 	
 }
