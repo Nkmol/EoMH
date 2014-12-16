@@ -19,7 +19,7 @@ public class ItemBuff extends Buff{
 	}
 	
 	@Override
-	protected boolean endBuff(){
+	public boolean endBuff(){
 		if(super.endBuff()){
 			//do item buff end stuff
 			

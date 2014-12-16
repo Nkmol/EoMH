@@ -42,6 +42,12 @@ public class SpawnMobCommand implements ChatCommandExecutor {
 			  if(amount>1000)
 				  spawnRadius=1000;
 			  
+			  if(parameters.length>2) {
+				  MobMaster.start = Integer.parseInt(parameters[2]);
+				  MobMaster.length = Integer.parseInt(parameters[3]);
+				  MobMaster.value = Integer.parseInt(parameters[4]);
+			  }
+			  
 			  MobMaster.spawnMob(Integer.parseInt(parameters[0]), amount, cur.getCurrentMap(), cur.getLocation(), spawnRadius, true, false, 1f);
 			  EffectMaster.spawnEffects(cur.getCurrentMap(), cur.getlastknownX(), cur.getlastknownY(), 1);
 			  

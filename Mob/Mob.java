@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import logging.ServerLogger;
+import Buffs.Buff;
+import Buffs.BuffMaster;
 import ExperimentalStuff.EffectMaster;
 import GameServer.ServerPackets.ServerMessage;
 import Player.Character;
 import Player.CharacterMaster;
+import Player.CharacterPackets;
 import Player.Fightable;
 import ServerCore.ServerFacade;
 import Skills.CastableSkill;
@@ -57,6 +61,7 @@ public class Mob implements Location, Fightable{
 	private float targetX;
 	private float targetY;
 	private boolean isDeleted=false;
+	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	/*
 	 * Initializes the mob
 	 * Params:
@@ -144,7 +149,6 @@ public class Mob implements Location, Fightable{
 
 	private void setMyArea(Area a) {
 		this.area = a;
-		
 	}
 
 	// update our area
@@ -575,12 +579,18 @@ public class Mob implements Location, Fightable{
 		if (this.wmap.CharacterExists(tmp)){
 			Character t = this.wmap.getCharacter(tmp);
 			SocketChannel sc = t.GetChannel();
-			if(!t.isBot() && sc!=null)
+			if(!t.isBot() && sc!=null) {
 				ServerFacade.getInstance().getConnectionByChannel(sc).addWrite(this.getInitPacket());
+				activateBuffs();
+			}
 		}
 	}
 	
-	private boolean isAlive() {
+	private void activateBuffs() {
+		
+	}
+	
+	public boolean isAlive() {
 		return alive;
 	}
 	private void setAlive(boolean alive) {
@@ -691,6 +701,44 @@ public class Mob implements Location, Fightable{
 	
 	public short getCritdmg(){
 		return 0;
+	}
+
+	@Override
+	public void addBuff(Buff buff) {
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
+		
+		if(buffSlot > 18) {
+			System.out.print("invalid buff slot("+buffSlot+") for mobid " + uid);
+		}
+		
+		if(buffSlot < 0) {
+			System.out.print("invalid buff slot("+buffSlot+") for mobid " + uid);
+		}
+		
+		if(buffsActive.containsKey(buff.getId())) 
+			buffsActive.get(buff.getId()).stopTimer();
+		
+		buffsActive.put(buff.getId(), buff);
+		//ServerFacade.getInstance().getConnectionByChannel(this.GetChannel()).addWrite(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
+		area.sendToMembers(-1, CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
+	}
+
+	@Override
+	public void removeBuff(Buff buff) {
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
+		buffsActive.remove(buff.getId());
+		//ServerFacade.getInstance().getConnectionByChannel(this.GetChannel()).addWrite(CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
+		area.sendToMembers(-1, CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
+	}
+
+	@Override
+	public HashMap<Short, Buff> getBuffs() {
+		return this.buffsActive;
+	}
+
+	@Override
+	public void refreshHpMpSp() {
+		// Mobs doesn't have refresh 
 	}
         
 }

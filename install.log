@@ -1,0 +1,2 @@
+nov 02, 2014 8:13:26 PM logging.ServerLogger logMessage
+SEVERE: Message level: [SEVERE] Database error: Table 'mobs' already exists - in class [Database.InstallDAO]

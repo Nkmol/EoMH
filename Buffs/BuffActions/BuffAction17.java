@@ -2,6 +2,7 @@ package Buffs.BuffActions;
 
 import Buffs.BuffAction;
 import Player.Character;
+import Player.Fightable;
 
 public class BuffAction17 implements BuffAction {
 	
@@ -12,12 +13,12 @@ public class BuffAction17 implements BuffAction {
 	}
 
 	//increase Final Damage
-	public void startBuff(Character ch,Object value) {
+	public void startBuff(Character ch,short value) {
 		//no action except for updating character stats
 		ch.calculateCharacterStats();
 	}
 
-	public void endBuff(Character ch,Object value) {
+	public void endBuff(Character ch,short value) {
 		//no action except for updating character stats
 		ch.calculateCharacterStats();
 	}
@@ -28,6 +29,18 @@ public class BuffAction17 implements BuffAction {
 	
 	public String getValueType(){
 		return "bonusDmg";
+	}
+
+	@Override
+	public boolean updateOverTime(Fightable owner, short buffValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCasterId(int uid) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -26,6 +26,7 @@ import timer.MoveSyncTimer;
 import timer.HealingTimer;
 import logging.ServerLogger;
 import Buffs.Buff;
+import Buffs.BuffMaster;
 import Buffs.BuffsException;
 import Database.CharacterDAO;
 import Duel.Duel;
@@ -484,7 +485,6 @@ public class Character implements Location, Fightable {
 	}
 	
 	public synchronized void recDamage(int uid, int dmg) throws OutOfGridException{
-		
 		subtractHp(dmg);
 		lastHit=uid;
 		if(doll!=null && uid!=getuid())
@@ -494,7 +494,6 @@ public class Character implements Location, Fightable {
 	}
 	
 	public void refreshHpMpSp(){
-		
 		if(!isBot && GetChannel()!=null){
 			byte[] healpckt = CharacterPackets.getHealPacket(this);
 			ServerFacade.getInstance().getConnectionByChannel(GetChannel()).addWrite(healpckt);
@@ -502,8 +501,8 @@ public class Character implements Location, Fightable {
 		}
 		if(pt!=null)
 			pt.refreshChar(this);
-		
 	}
+	
 	public int getMaxHp() {
 		return maxhp;
 	}
@@ -1193,27 +1192,9 @@ public class Character implements Location, Fightable {
 		}
 	}
 	
-	private short getBuffSlot(short buffId)  {
-		if(buffsActive.containsKey(buffId)) {
-			List<Short> keyList = new ArrayList<Short>(buffsActive.keySet()); //linked to linkedhashmap
-			short j = 0;
-			for (int i = keyList.size()-1;i>= 0;i--) {
-				short key = keyList.get(i);
-				if(key == buffId)
-					return (short)j;
-				else
-					j++;
-			}
-			return (short)-1; //doesn't suppose to happen
-		}
-		else {
-			return (short)buffsActive.size();
-		}
-	}
-	
 	public void addBuff(Buff buff) throws BuffsException {
 		//TODO: throw BuffException when slot limit is reached
-		short buffSlot=getBuffSlot((short)buff.getId());
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
 		
 		if(buffSlot > 18)
 			throw new BuffsException("[Buff exception] No slots left for another buff");
@@ -1225,13 +1206,19 @@ public class Character implements Location, Fightable {
 			buffsActive.get(buff.getId()).stopTimer();
 		
 		buffsActive.put(buff.getId(), buff);
-		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
+
+		byte[] packet = CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff);
+		this.addWritePacketWithId(packet);
+		this.area.sendToMembers(-1, packet);
 	}
 	
 	public void removeBuff(Buff buff) {
-		short buffSlot=getBuffSlot((short)buff.getId());
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
 		buffsActive.remove(buff.getId());
-		this.addWritePacketWithId(CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
+		
+		byte[] packet = CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff);
+		this.addWritePacketWithId(packet);
+		this.area.sendToMembers(-1, packet);
 	}
 	
 	public void saveBuffs() {
@@ -1710,4 +1697,11 @@ public class Character implements Location, Fightable {
 				}
 		}
 	}
+
+	//TODO change the isDead to isAlive
+	public boolean isAlive() {
+		return !dead;
+	}
+
+
 }

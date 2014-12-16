@@ -333,7 +333,7 @@ public class Queries {
 		String query = "CREATE TABLE `charbuffs` (";
 		for(int i=0;i<19;i++) { //max of 19 slots
 			query +=   "`buffId"+i+"` tinyint(4) DEFAULT '0',"+
-					   "`buffTime"+i+"` int unsigned DEFAULT '0',"+
+					   "`buffTime"+i+"` int DEFAULT '0',"+
 					   "`buffValue"+i+"` tinyint(4) DEFAULT '0',";
 		}
 		query +=  	   "`belongsTo` int(10) unsigned NOT NULL," +

@@ -85,8 +85,13 @@ public class MobPackets {
         mobBucket[6] = (byte)0x03;
         mobBucket[8] = (byte)0x02;
         
-       
-        return mobBucket;
+        if(MobMaster.start > 0) {
+        	for(int i=0;i<MobMaster.length;i++) {
+        		mobBucket[MobMaster.start+i] = (byte)MobMaster.value;
+        	}
+        }
+
+      return mobBucket;
 	}
 	
 	public static byte[] getSkillPacket(int mobID, int skillID, byte dmgType, int totalDmg, int[] targets, int targethp, int targetmana){

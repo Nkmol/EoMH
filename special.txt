@@ -1,0 +1,8 @@
+bufficon id
+-1 = resembles a enemy targeting circle
+-2 = evil circle
+-3 = lawful circle
+-4 = selected circle
+
+buffslot 18 & buff id x = x karma & 0 deffence & kao
+

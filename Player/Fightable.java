@@ -1,5 +1,9 @@
 package Player;
 
+import java.util.HashMap;
+
+import Buffs.Buff;
+import Buffs.BuffsException;
 import World.OutOfGridException;
 
 public interface Fightable {
@@ -15,5 +19,9 @@ public interface Fightable {
 	public int getDefSuc();
 	public int getCritRate();
 	public short getCritdmg();
-	
+	public void addBuff(Buff owner) throws BuffsException;
+	public void removeBuff(Buff buff);
+	public HashMap<Short, Buff> getBuffs();
+	public boolean isAlive();
+	public void refreshHpMpSp();
 }

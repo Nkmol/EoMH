@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import Database.ItemDAO;
+import Player.Fightable;
 import Buffs.BuffActions.*;
 
 public class BuffMaster {
@@ -76,4 +77,23 @@ public class BuffMaster {
 		return (int)(time / 4 / 1000); //revert
 	}
 	
+	
+	public static short getBuffSlot(short buffId, Fightable owner)  {
+		HashMap<Short, Buff> buffsActive = owner.getBuffs();
+		if(buffsActive.containsKey(buffId)) {
+			List<Short> keyList = new ArrayList<Short>(buffsActive.keySet()); //linked to linkedhashmap
+			short j = 0;
+			for (int i = keyList.size()-1;i>= 0;i--) {
+				short key = keyList.get(i);
+				if(key == buffId)
+					return (short)j;
+				else
+					j++;
+			}
+			return (short)-1; //doesn't suppose to happen
+		}
+		else {
+			return (short)buffsActive.size();
+		}
+	}
 }

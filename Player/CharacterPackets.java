@@ -616,37 +616,55 @@ public class CharacterPackets {
 		
 	}
 	
-	public static byte[] getBuffPacket(Character ch, short buffid, short slot, Buff buff) {
+	public static byte[] getBuffPacket(Fightable owner, short buffid, short slot, Buff buff) {
 
 		byte[] buffIcon = new byte[44];
 		buffIcon[0] = (byte)0x2c; 
 		buffIcon[4] = (byte)0x05;
 		buffIcon[6] = (byte)0x1f;
+		if(owner instanceof Character) // 1 = player | 2 = mob
+			buffIcon[8] = (byte)0x01;
+		else
+			buffIcon[8] = (byte)0x02;
 		
-		buffIcon[8] = (byte)0x01;// 1 = player | 2 = mob
-	    byte[] chid = BitTools.intToByteArray(ch.getCharID());
+	    byte[] chid = BitTools.intToByteArray(owner.getuid());
 		for(int i=0;i<4;i++) {
 			buffIcon[12+i] = chid[i]; 
 		}
 		
-		byte[] buffId = BitTools.shortToByteArray(buffid);
 		byte[] buffSlot = BitTools.shortToByteArray(slot);
-		byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
-		byte[] buffValue = BitTools.shortToByteArray(buff.getBuffValue());
-		for(int i=0;i<2;i++) {
-			buffIcon[i+16] = buffSlot[i];
-			buffIcon[i+20] = buffId[i];
-			buffIcon[i+22] = buffTime[i];
-			buffIcon[i+24] = buffValue[i]; // value
-		}
-		
 		buffIcon[26] = (byte)0x01; 
-		buffIcon[28] = (byte)0x89; 
-		buffIcon[32] = (byte)0x89; 
-		buffIcon[36] = (byte)0x7e; 
-		buffIcon[38] = (byte)0x7e; 
-		buffIcon[40] = (byte)0x60; 
-		buffIcon[42] = (byte)0x60;	 
+		
+		if(buffid != 0) {
+			byte[] buffId = BitTools.shortToByteArray(buffid);
+			byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
+			byte[] buffValue = BitTools.shortToByteArray(buff.getBuffValue());
+			for(int i=0;i<2;i++) {
+				buffIcon[i+16] = buffSlot[i];
+				buffIcon[i+20] = buffId[i];
+				buffIcon[i+22] = buffTime[i];
+				buffIcon[i+24] = buffValue[i]; // value
+			}
+			
+			buffIcon[28] = (byte)0x89; 
+			buffIcon[32] = (byte)0x89; 
+			buffIcon[36] = (byte)0x7e; 
+			buffIcon[38] = (byte)0x7e; 
+			buffIcon[40] = (byte)0x60; 
+			buffIcon[42] = (byte)0x60;	 
+		}
+		else
+		{
+			for(int i=0;i<2;i++)
+				buffIcon[i+16] = buffSlot[i];
+			
+			buffIcon[28] = (byte)0xF5; 
+			buffIcon[32] = (byte)0xF5; 
+			buffIcon[36] = (byte)0xC3; 
+			buffIcon[38] = (byte)0xC3; 
+			buffIcon[40] = (byte)0x9A; 
+			buffIcon[42] = (byte)0x9A;	 
+		}
 
 		 return buffIcon;
 	}

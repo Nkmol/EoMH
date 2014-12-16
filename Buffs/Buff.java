@@ -7,7 +7,7 @@ import Player.Fightable;
 
 public abstract class Buff {
 
-	private Character owner;
+	private Fightable owner;
 	private BuffAction action;
 	private Timer timer;
 	private short value;
@@ -15,7 +15,7 @@ public abstract class Buff {
 	private long timeLeft;
 	protected boolean started;
 
-	public Buff(Character owner, short buffId, long buffLength, short buffValue){
+	public Buff(Fightable owner, short buffId, long buffLength, short buffValue){
 		this.owner=owner;
 		this.value=buffValue;
 		this.buffLength=buffLength;
@@ -34,17 +34,19 @@ public abstract class Buff {
 			timer.scheduleAtFixedRate(new BuffTimer(this),4000,4000);
 			started=true;
         	owner.addBuff(this);
-			action.startBuff(owner, value);
+        	if(owner instanceof Character)
+        		action.startBuff((Character)owner, value);
 			return true;
 		}
 		return false;
 	}
 	
-	protected boolean endBuff(){
+	public boolean endBuff(){
 		if(started==true){
 			stopTimer();
 			owner.removeBuff(this);
-			action.endBuff(owner, value);
+        	if(owner instanceof Character)
+        		action.endBuff((Character)owner, value);
 			return true;
 		}
 		return false;
@@ -52,7 +54,7 @@ public abstract class Buff {
 	
 	public void decreaseTimeLeft(long time){
 		timeLeft-=time;
-		System.out.println("[decrease time] item " + action.getId() + " has " + timeLeft + " timeleft");
+		System.out.println("[decrease time] buff " + action.getId() + " has " + timeLeft + " timeleft");
 		if(timeLeft<=0){
 			endBuff();
 		}
@@ -78,7 +80,7 @@ public abstract class Buff {
 		return timeLeft;
 	}
 	
-	public Character getOwner(){
+	public Fightable getOwner(){
 			return owner;
 	}
 	

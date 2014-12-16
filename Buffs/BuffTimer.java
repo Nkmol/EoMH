@@ -17,6 +17,10 @@ public class BuffTimer extends TimerTask{
 		long newTime=System.currentTimeMillis();
 		owner.decreaseTimeLeft(newTime-oldTime);
 		oldTime=newTime;	
+		if(owner.getAction().getValueType() == "DoT") {
+			if(!owner.getAction().updateOverTime(owner.getOwner(), owner.getBuffValue()))
+				owner.endBuff();
+		}
 	}
 	
 }

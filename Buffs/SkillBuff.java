@@ -1,11 +1,11 @@
 package Buffs;
 
-import Player.Character;
+import Player.Fightable;
 
 public class SkillBuff extends Buff{
-	
-	public SkillBuff(Character owner, short buffId, long buffLength, short buffValue){
-		super(owner, buffId, buffLength, buffValue);
+	public SkillBuff(Fightable owner, short buffId, long buffLength, short buffValue, int casterid){
+			super(owner, buffId, buffLength, buffValue);
+			super.getAction().setCasterId(casterid);
 	}
 	
 	@Override
@@ -19,7 +19,7 @@ public class SkillBuff extends Buff{
 	}
 	
 	@Override
-	protected boolean endBuff(){
+	public boolean endBuff(){
 		if(super.endBuff()){
 			//do skill buff end stuff
 			
