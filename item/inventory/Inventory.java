@@ -238,9 +238,9 @@ public class Inventory {
 		int price;
 		//gold bar
 		if(item.getItem().getCategory()==48)
-			price=item.getItem().getNpcPrice();
+			price=item.getItem().getNpcPrice()*amount;
 		else
-			price=item.getItem().getNpcPrice()/15;
+			price=item.getItem().getNpcPrice()/15*amount;
 		if(price+coins>maxcoins){
 			throw new InventoryException("Cannot sell item [too much money in inv]");
 		}

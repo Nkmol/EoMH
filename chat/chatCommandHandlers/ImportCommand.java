@@ -9,6 +9,8 @@ import Parser.ItemsetParser;
 import Parser.ItemsetParserSQL;
 import Parser.MacroParser;
 import Parser.MacroParserSQL;
+import Parser.MobspecialParser;
+import Parser.MobspecialParserSQL;
 import Player.Character;
 import GameServer.ServerPackets.ServerMessage;
 import Gamemaster.GameMaster;
@@ -18,6 +20,7 @@ import Database.FilterDAO;
 import Database.InstallDAO;
 import Database.ItemDAO;
 import Database.MacroDAO;
+import Database.MobDAO;
 import Database.ValueDescriptionDAO;
 import chat.ChatCommandExecutor;
 
@@ -153,6 +156,30 @@ public class ImportCommand implements ChatCommandExecutor {
 			}catch(Exception e){
 				new ServerMessage().execute("Something went wrong", source);
 			}
+		}
+		
+		//----------IMPORT PUZZLES----------
+		if(parameters.length>0 && parameters[0].equals("puzzle")){
+			MobDAO.deleteAllMobpuzzles();
+			MobspecialParserSQL.parsePuzzlesToSQL(InstallDAO.getInstance(), MobspecialParser.structurize(MobspecialParser.getPuzzlelistFromTxt("Data/Puzzles.txt")));
+			new ServerMessage().execute("Full puzzlemob reset and upload", source);
+			return;
+		}
+		
+		//----------IMPORT RANDOMNAMES----------
+		if(parameters.length>0 && parameters[0].equals("randomname")){
+			MobDAO.deleteAllRandomnames();
+			MobspecialParserSQL.parseRandomnamesToSQL(InstallDAO.getInstance(), MobspecialParser.getNamelistFromTxt("Data/RandomNames.txt", "NAME"));
+			new ServerMessage().execute("Full randomname reset and upload", source);
+			return;
+		}
+				
+		//----------IMPORT RANDOMSENTENCES----------
+		if(parameters.length>0 && parameters[0].equals("randomsentence")){
+			MobDAO.deleteAllRandomsentences();
+			MobspecialParserSQL.parseRandomsentencesToSQL(InstallDAO.getInstance(), MobspecialParser.getNamelistFromTxt("Data/RandomSentences.txt", "SENTENCE"));
+			new ServerMessage().execute("Full randomsentence reset and upload", source);
+			return;
 		}
 		
 	}

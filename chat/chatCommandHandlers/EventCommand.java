@@ -44,7 +44,8 @@ public class EventCommand implements ChatCommandExecutor {
 				if(ServerControlDAO.getInstance().addEvent(parameters[1], Float.parseFloat(parameters[2]),
 						Float.parseFloat(parameters[3]), Float.parseFloat(parameters[4]), Float.parseFloat(parameters[5]),
 						Float.parseFloat(parameters[6]), Integer.parseInt(parameters[7]), Integer.parseInt(parameters[8]),
-						Integer.parseInt(parameters[9]), Float.parseFloat(parameters[10]), parameters[11]))
+						Integer.parseInt(parameters[9]), Integer.parseInt(parameters[10]), Float.parseFloat(parameters[11]),
+						parameters[12]))
 					new ServerMessage().execute("Added the event "+parameters[1],source);
 				else
 					new ServerMessage().execute("Failed to add the event "+parameters[1],source);
@@ -55,7 +56,8 @@ public class EventCommand implements ChatCommandExecutor {
 				if(ServerControlDAO.getInstance().updateEvent(parameters[1], Float.parseFloat(parameters[2]),
 						Float.parseFloat(parameters[3]), Float.parseFloat(parameters[4]), Float.parseFloat(parameters[5]),
 						Float.parseFloat(parameters[6]), Integer.parseInt(parameters[7]), Integer.parseInt(parameters[8]),
-						Integer.parseInt(parameters[9]), Float.parseFloat(parameters[10]), parameters[11]))
+						Integer.parseInt(parameters[9]), Integer.parseInt(parameters[10]), Float.parseFloat(parameters[11]),
+						parameters[12]))
 					new ServerMessage().execute("Updated the event "+parameters[1],source);
 				else
 					new ServerMessage().execute("Failed to update the event "+parameters[1],source);

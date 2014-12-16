@@ -4,9 +4,10 @@ public class ConsumableItem extends ItemFrame {
 	private short[] buffId;
 	private short[] buffTime;
 	private short[] buffValue;
-	
 	private short healhp;
 	private short healmana;
+	private int telemap;
+	private float telex,teley;
 	
 	public ConsumableItem(int id) { 
 		super(id);
@@ -53,6 +54,30 @@ public class ConsumableItem extends ItemFrame {
 	
 	public short[] getBuffValue() {
 		return buffValue;
+	}
+
+	public int getTelemap() {
+		return telemap;
+	}
+
+	public void setTelemap(int telemap) {
+		this.telemap = telemap;
+	}
+
+	public float getTeley() {
+		return teley;
+	}
+
+	public void setTeley(float teley) {
+		this.teley = teley;
+	}
+
+	public float getTelex() {
+		return telex;
+	}
+
+	public void setTelex(float telex) {
+		this.telex = telex;
 	}
 
 }

@@ -11,11 +11,13 @@ public class ServerEvent {
 	private final int starrate;
 	private final int superstarrate;
 	private final int multihitmobrate;
+	private final int puzzlemobrate;
 	private final float mobhp;
 	private final String description;
 	
 	public ServerEvent(String eventName, float exp, float drop, float coin,
-			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String description){
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate,
+			int puzzlemobrate, float mobhp, String description){
 		this.eventName=eventName;
 		this.exp=exp;
 		this.drop=drop;
@@ -25,6 +27,7 @@ public class ServerEvent {
 		this.starrate=starrate;
 		this.superstarrate=superstarrate;
 		this.multihitmobrate=multihitmobrate;
+		this.puzzlemobrate=puzzlemobrate;
 		this.mobhp=mobhp;
 		this.description=description;
 	}
@@ -71,6 +74,10 @@ public class ServerEvent {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public int getPuzzlemobrate() {
+		return puzzlemobrate;
 	}
 	
 }

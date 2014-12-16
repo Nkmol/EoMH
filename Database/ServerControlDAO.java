@@ -77,7 +77,8 @@ public class ServerControlDAO {
 		try{
 			if(rs.next()){
 				se=new ServerEvent(rs.getString("eventName"), rs.getFloat("exp"), rs.getFloat("dropr"), rs.getFloat("coin"), rs.getFloat("fame"),
-						rs.getFloat("generalStarrate"), rs.getInt("starrate"), rs.getInt("superstarrate"), rs.getInt("multihitmobrate"), rs.getFloat("mobhp"), rs.getString("description"));
+						rs.getFloat("generalStarrate"), rs.getInt("starrate"), rs.getInt("superstarrate"), rs.getInt("multihitmobrate"),
+						rs.getInt("puzzlemobrate"), rs.getFloat("mobhp"), rs.getString("description"));
 			}
 			rs.close();
 		}catch(Exception e){
@@ -88,11 +89,12 @@ public class ServerControlDAO {
 	}
 	
 	public boolean addEvent(String eventName, float exp, float drop, float coin,
-			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc){
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate,
+			int puzzlemobrate, float mobhp, String desc){
 		boolean b=false;
 		try{
 			PreparedStatement ps=Queries.addEvent(sqlConnection, eventName, exp, drop, coin, fame, generalStarrate,
-					starrate, superstarrate, multihitmobrate, mobhp,desc);
+					starrate, superstarrate, multihitmobrate, puzzlemobrate, mobhp, desc);
 			ps.execute();
 			ps.close();
 			b=true;
@@ -104,11 +106,12 @@ public class ServerControlDAO {
 	}
 	
 	public boolean updateEvent(String eventName, float exp, float drop, float coin,
-			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc){
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate,
+			int puzzlemobrate, float mobhp, String desc){
 		boolean b=false;
 		try{
 			PreparedStatement ps=Queries.updateEvent(sqlConnection, eventName, exp, drop, coin, fame, generalStarrate,
-					starrate, superstarrate, multihitmobrate, mobhp,desc);
+					starrate, superstarrate, multihitmobrate, puzzlemobrate, mobhp,desc);
 			ps.execute();
 			ps.close();
 			b=true;

@@ -165,7 +165,7 @@ public class CharacterMaster {
 	public static byte[] backToSelection(Connection con){
 		
 		Character current = ((PlayerConnection)con).getActiveCharacter();
-		current.leaveGameWorld(true); //leave the gameworld
+		current.leaveGameWorld(true,true); //leave the gameworld
 		con.getWriteBuffer().clear(); //clear all packets pending write(prevent client from crashing as it returns to selection)
 		Player tmplayer = ((PlayerConnection)con).getPlayer();
 		

@@ -24,8 +24,8 @@ public class ItemParserSQL extends Parser{
 		intl,bonusintl,healmana,agi,bonusagi,life,bonuslife,mana,bonusmana,stam,bonusstam,
 		critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,defpower,bonusdefpower,
 		pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1, 
-		buffvalue1,bufficon2,bufftime2,buffvalue2;
-		float atkrange,atkscs,bonusatkscs,defscs,bonusdefscs,critchance,bonuscritchance;
+		buffvalue1,bufficon2,bufftime2,buffvalue2,telemap;
+		float atkrange,atkscs,bonusatkscs,defscs,bonusdefscs,critchance,bonuscritchance,telex,teley;
 		
 		int count=0;
 		
@@ -96,9 +96,9 @@ public class ItemParserSQL extends Parser{
 				bonusdefpower=convertBytesToSmall(item,364);
 				pvpdmginc=convertBytesToByte(item,374);
 				timetoexpire=convertBytesToSmall(item,406);
-				//TELEMAP 408
-				//TELEX 412
-				//TELEY 416
+				telemap=convertBytesToInteger(item,412);
+				telex=convertBytesToFloat(item,416);
+				teley=convertBytesToFloat(item,420);
 				seteffectid=convertBytesToInteger(item,424);
 				amountsetpieces=convertBytesToByte(item,428);
 				movespeed=convertBytesToByte(item,432);
@@ -122,7 +122,7 @@ public class ItemParserSQL extends Parser{
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1,buffvalue1,
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,telemap,telex,teley,seteffectid,amountsetpieces,movespeed,bufficon1,bufftime1,buffvalue1,
 						bufficon2,bufftime2,buffvalue2);
 					
 				count++;
@@ -208,7 +208,7 @@ public class ItemParserSQL extends Parser{
 						warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 						intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 						bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-						defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed, 0, 0, 0, 0, 0, 0);
+						defpower,bonusdefpower,pvpdmginc,timetoexpire,0,0,0,seteffectid,amountsetpieces,movespeed, 0, 0, 0, 0, 0, 0);
 					
 				count++;
 				

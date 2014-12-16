@@ -182,6 +182,21 @@ public class InstallDAO {
 				b = ps.execute();
 				ps.close();
 			}
+			else if (n == 23){
+				ps = Queries.dropPuzzlemobTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 24){
+				ps = Queries.dropRandomnameTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
+			else if (n == 25){
+				ps = Queries.dropRandomsentenceTable(new SQLconnection().getConnection());
+				b = ps.execute();
+				ps.close();
+			}
 			
 		}catch (SQLException e) {
 			// e.printStackTrace();
@@ -418,7 +433,7 @@ public class InstallDAO {
 			int warusable,int sinusable,int mageusable,int monkusable,int faction,int upgradelvl,int str,int bonusstr,int dex,int bonusdex,int vit,int bonusvit,
 			int intl,int bonusintl,int agi,int bonusagi,int healhp,int life,int bonuslife,int healmana,int mana,int bonusmana,int stam,int bonusstam,float atkscs,float bonusatkscs,float defscs,
 			float bonusdefscs,float critchance,float bonuscritchance,int critdmg,int bonuscritdmg,int mindmg,int maxdmg,int offpower,int bonusoffpower,
-			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) {
+			int defpower,int bonusdefpower,int pvpdmginc,int timetoexpire,int telemap,float telex,float teley,int seteffectid,int amountsetpieces,int movespeed,int buffid1, int bufftime1, int buffvalue1, int buffid2, int bufftime2, int buffvalue2) {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.addItem(sqlConnection,
@@ -427,7 +442,7 @@ public class InstallDAO {
 					warusable,sinusable,mageusable,monkusable,faction,upgradelvl,str,bonusstr,dex,bonusdex,vit,bonusvit,
 					intl,bonusintl,agi,bonusagi,healhp,life,bonuslife,healmana,mana,bonusmana,stam,bonusstam,atkscs,bonusatkscs,defscs,
 					bonusdefscs,critchance,bonuscritchance,critdmg,bonuscritdmg,mindmg,maxdmg,offpower,bonusoffpower,
-					defpower,bonusdefpower,pvpdmginc,timetoexpire,seteffectid,amountsetpieces,movespeed,buffid1,bufftime1,buffvalue1,buffid2,bufftime2,buffvalue2);
+					defpower,bonusdefpower,pvpdmginc,timetoexpire,telemap,telex,teley,seteffectid,amountsetpieces,movespeed,buffid1,bufftime1,buffvalue1,buffid2,bufftime2,buffvalue2);
 			ps.execute();
 			ps.close();
 			
@@ -593,11 +608,12 @@ public class InstallDAO {
 	}
 	
 	public boolean addEvent(Connection sqlConnection, String eventName, float exp, float drop, float coin,
-			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate, float mobhp, String desc) {
+			float fame, float generalStarrate, int starrate, int superstarrate, int multihitmobrate,
+			int puzzlemobrate, float mobhp, String desc) {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.addEvent(sqlConnection, eventName, exp, drop, coin, fame, 
-					generalStarrate, starrate, superstarrate, multihitmobrate, mobhp,desc);
+					generalStarrate, starrate, superstarrate, multihitmobrate, puzzlemobrate, mobhp, desc);
 			ps.execute();
 			ps.close();
 			
@@ -659,6 +675,67 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=con.prepareStatement(statement);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addPuzzle(Connection con, String question, String answer, int type, float coinrate,
+			float exprate, float droprate, int bonusdrop) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addPuzzlemob(con, question, answer, type, coinrate, exprate, droprate, bonusdrop);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addRandomname(Connection con, String name) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addRandomname(con, name);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean addRandomsentence(Connection con, String sentence) {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.addRandomsentence(con, sentence);
 			ps.execute();
 			ps.close();
 			
@@ -1025,6 +1102,66 @@ public class InstallDAO {
 		boolean b = true;
 		try{
 			PreparedStatement ps=Queries.createUpgradeTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createPuzzleTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createPuzzlemobTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createRandomnameTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createRandomnameTable(new SQLconnection().getConnection());
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			log.severe(this, "Database error: " +e.getMessage());
+			b = false;
+		}
+		catch (Exception e) {
+			// e.printStackTrace();
+			log.severe(this, "Unspecified error:" +e.getMessage());
+			b = false;
+		}
+		return b;
+	}
+	
+	public boolean createRandomsentenceTable() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.createRandomsentenceTable(new SQLconnection().getConnection());
 			ps.execute();
 			ps.close();
 			

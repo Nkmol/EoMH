@@ -199,7 +199,7 @@ public class DroppedItem implements Location{
 	public void updateEnvironment(Integer player, boolean add) {
 		
 		synchronized(this.iniPackets){
-			if (this.iniPackets.contains(player) && !add && !wmap.getCharacter(player).isBot()){
+			if (this.iniPackets.contains(player) && !add && wmap.getCharacter(player)!=null && !wmap.getCharacter(player).isBot()){
 				this.iniPackets.remove(player);
 				Character ch=this.wmap.getCharacter(player);
 				ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(), vanish(ch));

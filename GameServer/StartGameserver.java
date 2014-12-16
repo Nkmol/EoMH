@@ -52,6 +52,9 @@ public class StartGameserver {
 			BuffMaster.getAllBuffs();
 			GamemasterDAO.loadGamemasterRanks();
 			CharacterDAO.loadCharacterLvl(167);
+			MobDAO.loadMobpuzzles();
+			MobDAO.loadRandomnames();
+			MobDAO.loadRandomsentences();
 			MobDAO.initMobs();
 			NpcDAO.initNpcs();
 			LinkedList<String> categories=new LinkedList<String>();

@@ -69,7 +69,7 @@ public class SelectedCharacter implements Packet {
 			}
 
 		polishPlayer.getActiveCharacter().getEquips().calculateEquipStats();
-		polishPlayer.getActiveCharacter().joinGameWorld();
+		polishPlayer.getActiveCharacter().joinGameWorld(true,true);
 	}
 		return null;
 	}

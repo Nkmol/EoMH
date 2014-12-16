@@ -1,8 +1,10 @@
 package Database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 
 import logging.ServerLogger;
@@ -10,6 +12,7 @@ import Configuration.ConfigurationManager;
 import Mob.MobController;
 import Mob.MobData;
 import Mob.MobMaster;
+import Mob.Mobpuzzle;
 import Skills.CastableSkill;
 import Skills.SkillMaster;
 //import World.WMap;
@@ -41,9 +44,9 @@ public class MobDAO {
 					skills[i]=(CastableSkill)SkillMaster.getSkill(rs.getInt("skill"+(i+1)));
 				}
 				data.setSkills(skills);
-				data.setMinatk((int)(rs.getInt("minatk")*1.4+30));
-				data.setMaxatk((int)(rs.getInt("maxatk")*1.4+30));
-				data.setDefence((int)((rs.getInt("defence")+10)*2.5));//was *3 before
+				data.setMinatk((int)(rs.getInt("minatk")*1+20));
+				data.setMaxatk((int)(rs.getInt("maxatk")*1+20));
+				data.setDefence((int)((rs.getInt("defence")+10)*2));
 				data.setMaxhp(rs.getInt("maxhp")+10);
 				data.setAtksuc(rs.getInt("atksuc"));
 				data.setDefsuc(rs.getInt("defsuc"));
@@ -137,6 +140,121 @@ public class MobDAO {
 			e.printStackTrace();
 			log.logMessage(Level.SEVERE, MobDAO.class, e.getMessage());
 		}
+	}
+	
+	public static void loadMobpuzzles() {
+		LinkedList<Mobpuzzle> puzzles=null;
+		try{
+			ResultSet rs=Queries.getAllPuzzlemobs(sqlConnection).executeQuery();
+			puzzles=new LinkedList<>();
+			while(rs.next()){
+				Mobpuzzle puzzle=new Mobpuzzle(rs.getString("question"), rs.getString("answer"), rs.getInt("type"),
+						rs.getFloat("coinrate"), rs.getFloat("exprate"), rs.getFloat("droprate"), rs.getInt("bonusdrop"));
+				puzzles.add(puzzle);
+			}
+			rs.close();
+			MobMaster.initPuzzles(puzzles);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean deleteAllMobpuzzles() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.deleteAllPuzzlemobs(sqlConnection);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public static void loadRandomnames() {
+		LinkedList<String> names=null;
+		try{
+			ResultSet rs=Queries.getAllRandomnames(sqlConnection).executeQuery();
+			names=new LinkedList<>();
+			while(rs.next()){
+				String name=(rs.getString("name"));
+				names.add(name);
+			}
+			rs.close();
+			MobMaster.initNames(names);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean deleteAllRandomnames() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.deleteAllRandomnames(sqlConnection);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
+	}
+	
+	public static void loadRandomsentences() {
+		LinkedList<String> sentences=null;
+		try{
+			ResultSet rs=Queries.getAllRandomsentences(sqlConnection).executeQuery();
+			sentences=new LinkedList<>();
+			while(rs.next()){
+				String sentence=(rs.getString("sentence"));
+				sentences.add(sentence);
+			}
+			rs.close();
+			MobMaster.initSentences(sentences);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean deleteAllRandomsentences() {
+		boolean b = true;
+		try{
+			PreparedStatement ps=Queries.deleteAllRandomsentences(sqlConnection);
+			ps.execute();
+			ps.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			b = false;
+		}
+		return b;
 	}
 
 }

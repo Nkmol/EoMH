@@ -259,6 +259,8 @@ public class Gameserver implements PacketHandler {
 									msg[19] = (byte)0xff;
 									
 									con.addWrite(msg);
+								}catch(Exception e){
+									e.printStackTrace();
 								}
 							}
 						} else {

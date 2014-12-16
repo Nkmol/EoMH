@@ -157,6 +157,9 @@ public class ItemDAO {
 		try{
 			it.setHealhp((short)rs.getInt("HealHp"));
 			it.setHealmana((short)rs.getInt("HealMana"));
+			it.setTelemap(rs.getInt("TeleMap"));
+			it.setTelex(rs.getFloat("TeleX"));
+			it.setTeley(rs.getFloat("TeleY"));
 			//Add buffs to usable item
 			short[] buffid = new short[2], bufftime = new short[2], buffvalue = new short[2];
 			for(int i = 1; i <= 2; i++) {

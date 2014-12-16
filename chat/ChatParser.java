@@ -11,9 +11,11 @@ import Player.Character;
 
 public class ChatParser {
 	private static volatile ChatParser instance = null;
-	private final String cmdDelimiter = "!";
-	private final String paramDelimiter = " ";
+	private final String cmdDelimiter = ";";
+	private final String paramDelimiter = ",";
+	private final String paramAltDelimiter = ":";
 	private final String cmdStart = "/";
+	private final String cmdAltStart = "-";
 	private final String macroStart = "<";
 	private Map<String, ChatCommandExecutor> commandList = new HashMap<String, ChatCommandExecutor>();
 	
@@ -76,18 +78,31 @@ public class ChatParser {
 	public Map<String, ChatCommandExecutor> getCommandList() {
 		return commandList;
 	}
+	
+	public String getCmdAltStart() {
+		return cmdAltStart;
+	}
 
-	public void parseAndExecuteChatCommand(Character ch, String name, String text, byte type, Character target, String targetName) {
+	public String getParamAltDelimiter() {
+		return paramAltDelimiter;
+	}
+
+	public boolean parseAndExecuteChatCommand(Character ch, String name, String text, byte type, Character target, String targetName) {
 		System.out.println("Parsing a chat command: " + text);
 		if(text.startsWith(macroStart)){
 			text=text.substring(1);
 			String macro=MacroDAO.getInstance().getMacro(text);
 			if(macro==null)
-				return;
+				return false;
 			String[] commands = macro.split(this.cmdDelimiter);
 			for(int i=0;i<commands.length;i++) {
-				String[] splat = commands[i].split(paramDelimiter);
-				if(splat[0].startsWith(cmdStart) && this.commandList.containsKey(splat[0].substring(1))) {
+				String[] splat;
+				if(commands[i].indexOf(paramDelimiter)!=-1)
+					splat=commands[i].split(paramDelimiter);
+				else
+					splat=commands[i].split(paramAltDelimiter);
+				if((splat[0].startsWith(cmdStart) || splat[0].startsWith(cmdAltStart)) && this.commandList.containsKey(splat[0].substring(1))) {
+					splat[0]=splat[0].substring(1);
 					String[] params = new String[splat.length-1];
 					for(int ri=1;ri<splat.length;ri++) {
 						params[ri-1] = splat[ri]; 
@@ -97,8 +112,13 @@ public class ChatParser {
 					ChatMaster.prepareSendingChat(ch, name, commands[i], type, target, targetName, true);
 				}
 			}
-		}else if(type==9 || text.startsWith(cmdStart)){
-			String[] splat = text.split(paramDelimiter);
+			return true;
+		}else if(type==9 || text.startsWith(cmdStart) || text.startsWith(cmdAltStart)){
+			String[] splat;
+			if(text.indexOf(paramDelimiter)!=-1)
+				splat=text.split(paramDelimiter);
+			else
+				splat=text.split(paramAltDelimiter);
 			splat[0]=splat[0].substring(1);
 			if(this.commandList.containsKey(splat[0])) {
 				String[] params = new String[splat.length-1];
@@ -108,6 +128,7 @@ public class ChatParser {
 				this.commandList.get(splat[0]).execute(params, ServerFacade.getInstance().getConnectionByChannel(ch.GetChannel()));
 			}
 		}
+		return false;
 	}
 	
 }

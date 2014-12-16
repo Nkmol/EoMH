@@ -42,7 +42,7 @@ public class ConnectionFinalizer {
 					tmplc=(PlayerConnection)tmp;
 					Character ch = ((PlayerConnection)tmplc).getActiveCharacter();
 					if(ch != null) {
-						ch.leaveGameWorld(true);
+						ch.leaveGameWorld(true,true);
 						((PlayerConnection)tmplc).getPlayer().setActiveCharacter(null); //set active character to null
 					}
 					tmplc.getWriteBuffer().clear();

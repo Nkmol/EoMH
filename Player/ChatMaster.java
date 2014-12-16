@@ -55,6 +55,7 @@ public class ChatMaster {
 		if(toOwnerToo)
 			ServerFacade.getInstance().addWriteByChannel(ch.GetChannel(),getChatPacket(ch.getCharID(),name, text, (byte)0));
 		ch.sendChatToDolls(text);
+		ch.sendChatToMobs(text);
 	}
 	
 	public static void sendWhisperChatLine(Character ch, String name, String text, Character target, String tname, boolean toOwnerToo){
@@ -73,6 +74,7 @@ public class ChatMaster {
 		if(ch.getPt()!=null){
 			ch.getPt().sendToMembers(getChatPacket(ch.getCharID(),name, text, (byte)2),ch);
 		}
+		ch.sendChatToMobs(text);
 	}
 	
 	public static void handleChat(Character ch, byte[] packet){
@@ -106,7 +108,8 @@ public class ChatMaster {
 			target=WMap.getInstance().getCharacter(chname);
 		}
 		if(ch.hasCommands()){
-			ChatParser.getInstance().parseAndExecuteChatCommand(ch, name, text, type, target, chname);
+			if(ChatParser.getInstance().parseAndExecuteChatCommand(ch, name, text, type, target, chname))
+				return;
 		}
 		prepareSendingChat(ch,name,text,type,target,chname,false);
 	}
