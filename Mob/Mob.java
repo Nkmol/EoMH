@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import logging.ServerLogger;
 import Buffs.Buff;
@@ -63,7 +64,7 @@ public class Mob implements Location, Fightable{
 	private float targetX;
 	private float targetY;
 	private boolean isDeleted=false;
-	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
+	private Buff[] buffsActive = new Buff[18];
 	/*
 	 * Initializes the mob
 	 * Params:
@@ -261,6 +262,7 @@ public class Mob implements Location, Fightable{
 			this.joinGrid(this.data.getGridID());
 		}
 		boolean hasPlayers = !this.iniPackets.isEmpty();
+		
 		if(this.isAlive()) {
 			
 			if(isPuzzleMob && ((int)(Math.random()*1000))==0)
@@ -270,6 +272,13 @@ public class Mob implements Location, Fightable{
 				//System.out.println(this.uid + " is too far from spawn");
 				this.reset(true,false);
 			}
+			
+			//If mob has stun or freeze buff
+			if(getBuffById((short)43) != null || getBuffById((short)49) != null)
+			{
+				return hasPlayers;
+			}
+			
 			// logic if mob has been aggroed
 			else if(this.isAggro()){
 				//System.out.println(this.uid + " is aggroed by " + this.getAggroID());
@@ -360,7 +369,8 @@ public class Mob implements Location, Fightable{
 			byte dmgtype=SkillMaster.skillCastDmgTypeCalculations(this, ch, false);
 			dmg=(int)(dmg*SkillMaster.getDmgFactorByType(this, dmgtype));
 			
-			ch.subtractHp(dmg);
+			ch.damaged(dmg);
+			//ch.subtractHp(dmg);
 			
 			int[] chs={ch.getuid()};
 			send(MobPackets.getSkillPacket(uid, skill.getId(), dmgtype, dmg, chs, ch.getHp(), ch.getMana()));
@@ -853,7 +863,7 @@ public class Mob implements Location, Fightable{
 
 	@Override
 	public void addBuff(Buff buff) {
-		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), buffsActive);
 		
 		if(buffSlot > 18) {
 			System.out.print("invalid buff slot("+buffSlot+") for mobid " + uid);
@@ -863,25 +873,34 @@ public class Mob implements Location, Fightable{
 			System.out.print("invalid buff slot("+buffSlot+") for mobid " + uid);
 		}
 		
-		if(buffsActive.containsKey(buff.getId())) 
-			buffsActive.get(buff.getId()).stopTimer();
+		if(getBuffById(buff.getId()) != null) 
+			getBuffById(buff.getId()).stopTimer();
 		
-		buffsActive.put(buff.getId(), buff);
+		buffsActive[buffSlot] = buff;
 		//ServerFacade.getInstance().getConnectionByChannel(this.GetChannel()).addWrite(CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 		area.sendToMembers(-1, CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff));
 	}
 
 	@Override
 	public void removeBuff(Buff buff) {
-		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
-		buffsActive.remove(buff.getId());
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), buffsActive);
+		buffsActive[buffSlot] = null;
 		//ServerFacade.getInstance().getConnectionByChannel(this.GetChannel()).addWrite(CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
 		area.sendToMembers(-1, CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff));
 	}
 
 	@Override
-	public HashMap<Short, Buff> getBuffs() {
+	public Buff[] getBuffs() {
 		return this.buffsActive;
+	}
+	
+	public Buff getBuffById(short id) {
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				if(buff.getId() == id)
+					return buff;
+		}
+		return null;
 	}
 
 	@Override

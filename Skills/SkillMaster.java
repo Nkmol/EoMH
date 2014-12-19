@@ -211,23 +211,27 @@ public class SkillMaster {
 		
 		byte dmgType;
 
-		//successrate to hit
-		if(cur.getAtkSuc()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getAtkSuc())/400f)))==0){
-
-			if(cur.getCritRate()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getCritRate())/200f)))==0){
-				
-				if(canCrit && cur instanceof Character && target instanceof Mob && (int)(Math.random()*50)==0){
-					dmgType=5;
+		if(cur instanceof Character && target instanceof Character)
+			dmgType=3;
+		else {
+			//successrate to hit
+			if(cur.getAtkSuc()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getAtkSuc())/400f)))==0){
+	
+				if(cur.getCritRate()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getCritRate())/200f)))==0){
+					
+					if(canCrit && cur instanceof Character && target instanceof Mob && (int)(Math.random()*50)==0){
+						dmgType=5;
+					}else{
+						dmgType=2;
+					}
+					
 				}else{
-					dmgType=2;
+					dmgType=1;
 				}
 				
 			}else{
-				dmgType=1;
+				dmgType=0;
 			}
-			
-		}else{
-			dmgType=0;
 		}
 		
 		/* old and outdated system based on lvls
@@ -403,7 +407,7 @@ public class SkillMaster {
 	
 	public static byte[] castSkill(Connection con, Character cur, byte skillBarNumber, byte skillActivationType,
 			byte chartargets, byte mobtargets, int[] targetIds) throws PaketException,SkillException,OutOfGridException{
-		
+
 		//skillpckt1 is a packet of skilleffects e.g. buffs
         byte[] skillpckt1 = SkillPackets.getSkillEffectOnCharPacket(cur);
         //skillpckt2 is a packet of skill activation, different IDs and DMG
@@ -472,6 +476,7 @@ public class SkillMaster {
     	int targets=chartargets+mobtargets;
     	
     	//COSTS
+    	System.out.println("stamina costs: " + ((CastableSkill)SkillMaster.getSkill(skillidInt)).getStaminaCost());
     	cur.addHpSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getHealCost());
     	cur.addManaSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getManaCost());
     	cur.addStaminaSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getStaminaCost());
@@ -517,7 +522,8 @@ public class SkillMaster {
     			totalDmg=0;
         	
         	//ATK THE TARGET FINALLY
-        	target.recDamage(cur.getuid(),totalDmg);
+        	if(skill.getTypeSpecific() != 3 && skill.getTypeSpecific() != 6 && skill.getTypeSpecific() != 7)
+        		target.recDamage(cur.getuid(),totalDmg);
         	
         	int targetId=BitTools.byteArrayToInt(targetByte);
         	
@@ -533,6 +539,9 @@ public class SkillMaster {
     	    		cur.getPt().dollsGetNewAggro(cur, targetId);
     	    	}
     		}
+    		//When not targeting self
+    		if(cur.getCharID() != target.getuid())
+    			cur.onAttack();
     		
     		if(target.isAlive()) {
 	    		//BUFF
@@ -541,8 +550,8 @@ public class SkillMaster {
 			        for(int i=0; i<skill.getEffectsId().length;i++) {
 			        	if(skill.getEffectsId()[i] > 0) {
 			        		long time = BuffMaster.timeClientToServer(skill.getEffectsDuration()[i]); // MH time = int * 4. Also converting to miliseconds
+				            System.out.println("buffId: " + skill.getEffectsId()[i] + " buffValue: " + skill.getEffectsValue()[i] + " skillType: " + skill.getTypeSpecific() + "dmgType: " + dmgType);
 				            SkillBuff buff = new SkillBuff(target, skill.getEffectsId()[i], time, skill.getEffectsValue()[i], cur.getCharID());
-				            System.out.println("CharId: " + cur.getCharID() + " TargetId: " + target.getuid() +  " with name " + target.getName());
 				            if(buff.getAction() == null) {
 				            	System.out.println("Buffaction not created for buffid " + skill.getEffectsId()[i]);
 				            	return null;

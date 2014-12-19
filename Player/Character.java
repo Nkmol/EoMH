@@ -111,7 +111,8 @@ public class Character implements Location, Fightable {
 	private boolean reviveSave=false;
 	private Vendor vendor = null;
 	private int lastHit;
-	private HashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
+	//private LinkedHashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
+	private Buff[] buffsActive = new Buff[18];
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	private boolean showInfos=false;
 	private List<Mob> activePuzzleMobs = Collections.synchronizedList(new LinkedList<Mob>());
@@ -224,8 +225,8 @@ public class Character implements Location, Fightable {
 			CharacterDAO.saveCharacterLocation(this);
 			//load other stuff
 			CharacterDAO.loadCharacterStuffForRelog(this);
+			removeHiding();
 			saveBuffs();
-			System.out.println(buffsActive.size());
 			stopTimerBuffs();
 			removePuzzleFromMobs();
 		}
@@ -298,24 +299,37 @@ public class Character implements Location, Fightable {
 		
 	}
 	
+//	public void calculateBonusStats(){
+//		bonusAttributes = new HashMap<String, Object>();
+//		Set<Short> set=buffsActive.keySet();
+//		Iterator<Short> it=set.iterator();
+//		Buff buff;
+//		while(it.hasNext()){
+//			buff=buffsActive.get(it.next());
+//			changeBonusAttribute(buff.getAction().getValueType(), buff.getBuffValue());
+//		}
+//	}
+	
 	public void calculateBonusStats(){
-		bonusAttributes = new HashMap<String, Object>();
-		Set<Short> set=buffsActive.keySet();
-		Iterator<Short> it=set.iterator();
-		Buff buff;
-		while(it.hasNext()){
-			buff=buffsActive.get(it.next());
-			changeBonusAttribute(buff.getAction().getValueType(), buff.getBuffValue());
+		bonusAttributes.clear();
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				changeBonusAttribute(buff.getAction().getValueType(), buff.getBuffValue());
 		}
 	}
 	
 	public void calculateCharacterStats() {
 		
+		//Buffs
 		calculateBonusStats();
 		
 		short bonusMaxhp=0;
 		if(bonusAttributes.containsKey("maxhp"))
 			bonusMaxhp=(Short)bonusAttributes.get("maxhp"); 
+		
+		short bonusHpReg=0;
+		if(bonusAttributes.containsKey("hpReg"))
+			bonusMaxhp=(Short)bonusAttributes.get("hpReg"); 
 		
 		short bonusDmg=0;
 		if(bonusAttributes.containsKey("bonusDmg"))
@@ -324,6 +338,31 @@ public class Character implements Location, Fightable {
 		short bonusAtkSucces=0;
 		if(bonusAttributes.containsKey("bonusAtkSucces"))
 			bonusAtkSucces=(Short)bonusAttributes.get("bonusAtkSucces");
+		
+		short bonusAtk = 0;
+		if(bonusAttributes.containsKey("bonusAtk"))
+			bonusAtk=(Short)bonusAttributes.get("bonusAtk");
+		
+		short bonusDeff = 0;
+		if(bonusAttributes.containsKey("bonusDeff"))
+			bonusAtk=(Short)bonusAttributes.get("bonusDeff");
+		
+		short bonusDeffSucces=0;
+		if(bonusAttributes.containsKey("bonusDeffSucces"))
+			bonusAtkSucces=(Short)bonusAttributes.get("bonusDeffSucces");
+		
+		//% based
+		short dmgDecreased = 0;
+		if(bonusAttributes.containsKey("dmgDecreased"))
+			bonusAtk=(Short)bonusAttributes.get("dmgDecreased");
+		
+		short bonusCrit = 0;
+		if(bonusAttributes.containsKey("bonusCrit"))
+			bonusAtk=(Short)bonusAttributes.get("bonusCrit");
+		
+		short bonusCritSucces = 0;
+		if(bonusAttributes.containsKey("bonusCritSucces"))
+			bonusAtk=(Short)bonusAttributes.get("bonusCritSucces");
 		
 		float hardness=1;
 		if(doll!=null){
@@ -336,27 +375,27 @@ public class Character implements Location, Fightable {
 		maxhp=(int) ((30+bonusMaxhp+equips.getHp()+stats[0]*2.2+stats[1]*2.4+stats[2]*2.5+stats[3]*1.6+stats[4]*1.5)*hardness);
 		maxmana=(int) ((30+equips.getMana()+stats[0]*1.4+stats[1]*1.7+stats[2]*1.5+stats[3]*3.5+stats[4]*1.5)*hardness);
 		maxstamina=(int) ((30+equips.getStamina()+stats[0]*0.9+stats[1]*1.3+stats[2]*1.5+stats[3]*1.7+stats[4]*1.3)*hardness);
-		hpreg=(short)((stats[2]/2+stats[0]/4)*hardness);
+		hpreg=(short)((stats[2]/2+stats[0]/4 + bonusHpReg)*hardness);
 		manareg=(short)((stats[3]/2+stats[1]/4)*hardness);
 		stamreg=(short)((stats[4]*0.1)*hardness);
 		healingSpeed=5000;
-		attack=(short) ((level/2+equips.getAtk()+stats[0]*0.5+stats[1]*0.46+stats[2]*0.4+stats[3]*0.2+stats[4]*0.2)*hardness);
-		defence=(short) ((level/2+equips.getDeff()+stats[0]*0.28+stats[1]*0.3+stats[2]*0.53+stats[3]*0.22+stats[4]*0.42)*hardness);
+		attack=(short) ((level/2+equips.getAtk()+bonusAtk+stats[0]*0.5+stats[1]*0.46+stats[2]*0.4+stats[3]*0.2+stats[4]*0.2)*hardness);
+		defence=(short) (((level/2+equips.getDeff()+bonusDeff+stats[0]*0.28+stats[1]*0.3+stats[2]*0.53+stats[3]*0.22+stats[4]*0.42) * (dmgDecreased/100))*hardness);
 		minDmg=(short)((bonusDmg+equips.getMinDmg())*hardness);
 		maxDmg=(short)((bonusDmg+equips.getMaxDmg())*hardness);
 		basicAtkSuc=(int)((stats[0]*0.5+stats[1]*0.6+stats[2]*0.3+stats[3]*1+stats[4]*0.8+level*6)*hardness);
 		basicDefSuc=(int)(stats[0]*0.2+stats[1]*0.2+stats[2]*0.5+stats[3]*0.7+stats[4]*0.6+level*4);
 		basicCritRate=(int)((stats[0]*0.1+stats[1]*1+stats[2]*0.1+stats[3]*0.5+stats[4]*0.3+level*2)*hardness)-300;
 		additionalAtkSuc=1000+bonusAtkSucces;
-		additionalDefSuc=500;
-		additionalCritRate=2000;
+		additionalDefSuc=500+bonusDeffSucces;
+		additionalCritRate=2000 + bonusCritSucces;
 		atkSucMul=equips.getAtkSucMul();
 		defSucMul=equips.getDefSucMul();
 		critRateMul=equips.getCritRateMul();
 		atkSuc=calcAtkSuc();
 		defSuc=calcDefSuc();
 		critRate=calcCritRate();
-		critdmg=(short)((equips.getCritDmg()+stats[1]-10)*hardness);
+		critdmg=(short)((equips.getCritDmg()+stats[1]-10 + bonusCrit)*hardness);
 		if(critdmg<0)
 			critdmg=0;
 		updateSpeed();
@@ -438,8 +477,7 @@ public class Character implements Location, Fightable {
 		
 	}
 	
-	public synchronized void subtractHp(int hp){
-		
+	public synchronized void subtractHp(int hp) {
 		if(hp>0){
 			this.hp-=hp;
 			if(this.hp<0)
@@ -448,7 +486,6 @@ public class Character implements Location, Fightable {
 				die();
 			}
 		}
-		
 	}
 	
 	public synchronized void addMana(int mana){
@@ -1221,29 +1258,53 @@ public class Character implements Location, Fightable {
 		showInfos=!showInfos;
 	}
 	
-	public HashMap<Short, Buff> getBuffs() {
+	//Probably only used for the init packet
+//	public HashMap<Short, Buff> getBuffs() {
+//		return this.buffsActive;
+//	}
+	
+	public Buff[] getBuffs() {
 		return this.buffsActive;
 	}
 	
-	public void setCharacterBuffs(HashMap<Short, Buff> buffsActive) {
+	public void setCharacterBuffs(Buff[] buffsActive) {
 		this.buffsActive = buffsActive;
 	}
 	
 	public void startBuffTimers() {
-		for(Entry<Short, Buff> entry : buffsActive.entrySet()) {
-			entry.getValue().startTimer();
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				buff.startTimer();
 		}
 	}
 	
 	public void stopTimerBuffs() {
-		for(Entry<Short, Buff> entry : buffsActive.entrySet()) {
-			entry.getValue().stopTimer();
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				buff.stopTimer();
 		}
+	}
+	
+	private void deloadBuffs()
+	{
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				buff.endBuff();
+		}
+	}
+	
+	public Buff getBuffById(short id) {
+		for(Buff buff : buffsActive) {
+			if(buff != null)
+				if(buff.getId() == id)
+					return buff;
+		}
+		return null;
 	}
 	
 	public void addBuff(Buff buff) throws BuffsException {
 		//TODO: throw BuffException when slot limit is reached
-		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), buffsActive);
 		
 		if(buffSlot > 18)
 			throw new BuffsException("[Buff exception] No slots left for another buff");
@@ -1251,20 +1312,23 @@ public class Character implements Location, Fightable {
 		if(buffSlot < 0)
 			throw new BuffsException("[Buff exception] Invalid slot requested");
 		
-		if(buffsActive.containsKey(buff.getId())) 
-			buffsActive.get(buff.getId()).stopTimer();
+		if(getBuffById(buff.getId()) != null) 
+			getBuffById(buff.getId()).stopTimer();
 		
-		buffsActive.put(buff.getId(), buff);
+		buffsActive[buffSlot] = buff;
 
+		System.out.println("Add buff at slot " + buffSlot);
 		byte[] packet = CharacterPackets.getBuffPacket(this, buff.getId(), buffSlot, buff);
 		this.addWritePacketWithId(packet);
 		this.area.sendToMembers(-1, packet);
 	}
 	
 	public void removeBuff(Buff buff) {
-		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), this);
-		buffsActive.remove(buff.getId());
+		short buffSlot=BuffMaster.getBuffSlot((short)buff.getId(), buffsActive);
+		buffsActive[buffSlot].endBuff();
+		buffsActive[buffSlot] = null;
 		
+		System.out.println("Remove buff at slot " + buffSlot);
 		byte[] packet = CharacterPackets.getBuffPacket(this, (short)0, buffSlot, buff);
 		this.addWritePacketWithId(packet);
 		this.area.sendToMembers(-1, packet);
@@ -1581,6 +1645,7 @@ public class Character implements Location, Fightable {
 		}
 		
 		leavePtDuel();
+		deloadBuffs();
 		
 		sendToMap(deathpckt);
 		
@@ -1800,6 +1865,43 @@ public class Character implements Location, Fightable {
 			while(!activePuzzleMobs.isEmpty()){
 				activePuzzleMobs.remove(0).resetPuzzle(false);
 			}
+		}
+	}
+	
+	public void damaged(int dmg)
+	{
+		if(bonusAttributes.containsKey("schield"))
+		{
+			Buff buff = getBuffById((short) 52);
+			buff.substractValue((short)1);
+			if(buff.getBuffValue() <= 0)
+				this.removeBuff(buff);
+		}
+		else if(bonusAttributes.containsKey("lifeTransform") && mana > 0)
+		{
+			if(mana - dmg >= 0)
+				subtractMana(dmg);
+			else
+			{
+				//remaining damage will be substracted from Hp
+				subtractHp(dmg - mana);
+				subtractMana(dmg);
+			}
+		}
+		else
+			subtractHp(dmg);
+	}
+	
+	public void onAttack()
+	{
+		removeHiding();
+	}
+	
+	private void removeHiding()
+	{
+		if(bonusAttributes.containsKey("hiding") && getBuffById((short)44) != null)
+		{
+			removeBuff(getBuffById((short)44));
 		}
 	}
 }

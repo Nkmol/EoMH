@@ -174,23 +174,20 @@ public class CharacterPackets {
         }
         
         //buffs
-        Map<Short, Buff> buffs = ch.getBuffs();
-        Iterator<Map.Entry<Short, Buff>> it = buffs.entrySet().iterator();
-        int buffIter =0;
-        while (it.hasNext()) {
-            Map.Entry<Short, Buff> pairs = (Map.Entry<Short, Buff>)it.next();
-            byte[] buffId = BitTools.shortToByteArray((short) pairs.getKey());
-            Buff buff = (Buff)pairs.getValue();
-            byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
-            byte[] buffValue = BitTools.shortToByteArray((short)buff.getBuffValue());
-            for(int i = 0; i < 2; i++) {
-                cdata[316+8*buffIter+i] = buffId[i];
-                cdata[318+8*buffIter+i] = buffTime[i];
-                cdata[320+8*buffIter+i] = buffValue[i];
-            }
-            cdata[322+8*buffIter] = (byte)0x01;
-            //it.remove(); // avoids a ConcurrentModificationException
-            buffIter++;
+        Buff[] buffs = ch.getBuffs();
+        for(int i=0;i<buffs.length;i++) {
+        	Buff buff = buffs[i];
+        	if(buff != null) {
+	            byte[] buffId = BitTools.shortToByteArray(buff.getId());
+	            byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
+	            byte[] buffValue = BitTools.shortToByteArray((short)buff.getBuffValue());
+	            for(int j = 0; j < 2; j++) {
+	                cdata[316+8*i+j] = buffId[j];
+	                cdata[318+8*i+j] = buffTime[j];
+	                cdata[320+8*i+j] = buffValue[j];
+	            }
+	            cdata[322+8*i] = (byte)0x01;
+        	}
         }
         cdata[465] = (byte)ch.getInventory().getVendingPoints();
         
@@ -203,7 +200,6 @@ public class CharacterPackets {
         	cdata[ch.getTestByteIndex().get(i)]=ch.getTestByteValue().get(i);
 
         return cdata;
-		
 	}
 	
 	public static byte[] getExtCharPacket(Character ch, Character receiver){

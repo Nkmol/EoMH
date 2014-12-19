@@ -32,7 +32,7 @@ public class CastSkill implements Packet {
 		decrypted = Decryptor.Decrypt(decrypted);
 		
 		Character cur = ((PlayerConnection)con).getActiveCharacter();
-        
+
         try{
         	//give decrypted stuff other names
         	byte skillBarNumber=decrypted[0];

@@ -68,7 +68,7 @@ public abstract class Buff {
 	
 	public void stopTimer() {
 		timer.cancel(); //cancels all current timer threads?
-		System.out.println("Stop timer for buff id" + action.getId());
+		System.out.println("Stop timer for buff id " + action.getId());
 		started=false;
 	}
 	
@@ -86,6 +86,10 @@ public abstract class Buff {
 	
 	public short getBuffValue(){
 		return value;
+	}
+	
+	public void substractValue(short value){
+		this.value -=value;
 	}
 	
 	public long getBuffTime() {

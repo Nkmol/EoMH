@@ -1405,7 +1405,7 @@ public class Queries {
 		return st;
 	}
 	
-	public static PreparedStatement storeCharBuffs(Connection con, int id, HashMap<Short, Buff> buffActive) throws Exception {
+	public static PreparedStatement storeCharBuffs(Connection con, int id, Buff[] buffActive) throws Exception {
 		String s="UPDATE charbuffs SET ";
 		
 		for(int i=0;i<19;i++){
@@ -1417,12 +1417,16 @@ public class Queries {
 		s+="  WHERE belongsTo = ?;";
 
 		PreparedStatement st = con.prepareStatement(s);
-		Iterator<Map.Entry<Short, Buff>> it = buffActive.entrySet().iterator();
+
 		for(int i=0;i<19*3;i+=3) {
-			if (it.hasNext()) {
-				Map.Entry<Short, Buff> pairs = (Map.Entry<Short, Buff>)it.next();
-	            Buff buff = (Buff)pairs.getValue();
-		        st.setShort(i+1, (short) pairs.getKey());
+			Buff buff;
+			if(i == 0)
+				buff = buffActive[0];
+			else
+				buff = buffActive[i/3 - 1];
+			
+			if (buff != null) {
+		        st.setShort(i+1, (short) buff.getId());
 		        st.setShort(i+2, (short) buff.getTimeLeft());
 		        st.setShort(i+3, (short) buff.getBuffValue());
 		    }

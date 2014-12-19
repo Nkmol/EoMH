@@ -21,7 +21,8 @@ public interface Fightable {
 	public int getCritdmg();
 	public void addBuff(Buff owner) throws BuffsException;
 	public void removeBuff(Buff buff);
-	public HashMap<Short, Buff> getBuffs();
+	public Buff[] getBuffs();
+	public Buff getBuffById(short id);
 	public boolean isAlive();
 	public void refreshHpMpSp();
 }

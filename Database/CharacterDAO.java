@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -840,8 +841,8 @@ public class CharacterDAO {
 	
 	//----------BUFFS----------
 	
-	public static HashMap<Short, Buff> getBuffs(Character ch) {
-		HashMap<Short, Buff> buffActive = new HashMap<Short, Buff>();
+	public static Buff[] getBuffs(Character ch) {
+		Buff[] buffs = new Buff[18];
 		try {
 			long buffTime;
 			short buffId, buffValue;
@@ -853,7 +854,10 @@ public class CharacterDAO {
 					buffValue=rs.getShort(i+3);
 					System.out.println(!(buffId==0 || buffTime==0 || buffValue==0));
 					if(!(buffId==0 || buffTime==0 || buffValue==0)){
-						buffActive.put(buffId, new ItemBuff(ch, buffId, buffTime, buffValue)); //Doesn't matter if item- or skillbuff?
+						if(i == 0)
+							buffs[0] = new ItemBuff(ch, buffId, buffTime, buffValue); //Doesn't matter if item- or skillbuff?
+						else
+							buffs[i/3] = new ItemBuff(ch, buffId, buffTime, buffValue); //Doesn't matter if item- or skillbuff?
 					}
 				}
 			}
@@ -866,10 +870,10 @@ public class CharacterDAO {
 			e.printStackTrace();
 		}
 		
-		return buffActive;
+		return buffs;
 	}
 	
-	public static void saveCharBuffs(int uid, HashMap<Short, Buff> buffActive){
+	public static void saveCharBuffs(int uid, Buff[] buffActive){
 		try {
 			PreparedStatement ps=Queries.storeCharBuffs(sqlConnection, uid, buffActive);
 			ps.execute();

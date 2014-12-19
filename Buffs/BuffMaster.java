@@ -3,6 +3,7 @@ package Buffs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +36,20 @@ public class BuffMaster {
 						buff=new BuffAction2(buffId);
 						break;
 					}
+					case 6:{
+						buff=new BuffAction6(buffId);
+						break;
+					}
 					case 7:{
 						buff=new BuffAction7(buffId);
+						break;
+					}
+					case 15:{
+						buff=new BuffAction15(buffId);
+						break;
+					}
+					case 16:{
+						buff=new BuffAction16(buffId);
 						break;
 					}
 					case 17:{
@@ -47,8 +60,44 @@ public class BuffMaster {
 						buff=new BuffAction21(buffId);
 						break;
 					}
+					case 22:{
+						buff=new BuffAction22(buffId);
+						break;
+					}
+					case 42:{
+						buff=new BuffAction42(buffId);
+						break;
+					}
+					case 43:{
+						buff=new BuffAction43(buffId);
+						break;
+					}
+					case 44:{
+						buff=new BuffAction44(buffId);
+						break;
+					}
 					case 47:{
 						buff=new BuffAction47(buffId);
+						break;
+					}
+					case 49:{
+						buff=new BuffAction49(buffId);
+						break;
+					}
+					case 50:{
+						buff=new BuffAction50(buffId);
+						break;
+					}
+					case 52:{
+						buff=new BuffAction52(buffId);
+						break;
+					}
+					case 57:{
+						buff=new BuffAction57(buffId);
+						break;
+					}
+					case 64:{
+						buff=new BuffAction64(buffId);
 						break;
 					}
 					default:{
@@ -78,22 +127,40 @@ public class BuffMaster {
 	}
 	
 	
-	public static short getBuffSlot(short buffId, Fightable owner)  {
-		HashMap<Short, Buff> buffsActive = owner.getBuffs();
-		if(buffsActive.containsKey(buffId)) {
-			List<Short> keyList = new ArrayList<Short>(buffsActive.keySet()); //linked to linkedhashmap
-			short j = 0;
-			for (int i = keyList.size()-1;i>= 0;i--) {
-				short key = keyList.get(i);
-				if(key == buffId)
-					return (short)j;
-				else
-					j++;
+//	public static short getBuffSlot(short buffId, LinkedHashMap<Short, Buff> buffsActive)  {
+//		//HashMap<Short, Buff> buffsActive = owner.getBuffs();
+//		if(buffsActive.containsKey(buffId)) {
+//			List<Short> keyList = new ArrayList<Short>(buffsActive.keySet()); //linked to linkedhashmap
+//			System.out.println("Keylist buffs: " + keyList.toString());
+//			short j = 0;
+//			//for (int i = keyList.size()-1;i>= 0;i--) {
+//			for(int i = 0; i<keyList.size(); i++) {
+//				short key = keyList.get(i);
+//				if(key == buffId)
+//					return (short)j;
+//				else
+//					j++;
+//			}
+//			return (short)-1; //doesn't suppose to happen
+//		}
+//		else {
+//			return (short)buffsActive.size();
+//		}
+//	}
+	
+	public static short getBuffSlot(short buffId, Buff[] buffsActive) {
+		short firstEmpty = -1;
+		for(short i=0;i<buffsActive.length;i++) {
+			if(buffsActive[i] != null) {
+				if(buffsActive[i].getId() == buffId)
+					return i;
 			}
-			return (short)-1; //doesn't suppose to happen
+			else
+			{
+				if(firstEmpty == -1)
+					firstEmpty = i;
+			}		
 		}
-		else {
-			return (short)buffsActive.size();
-		}
+		return firstEmpty;
 	}
 }
