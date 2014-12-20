@@ -211,27 +211,22 @@ public class SkillMaster {
 		
 		byte dmgType;
 
-		if(cur instanceof Character && target instanceof Character)
-			dmgType=3;
-		else {
-			//successrate to hit
-			if(cur.getAtkSuc()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getAtkSuc())/400f)))==0){
-	
-				if(cur.getCritRate()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getCritRate())/200f)))==0){
-					
-					if(canCrit && cur instanceof Character && target instanceof Mob && (int)(Math.random()*50)==0){
-						dmgType=5;
-					}else{
-						dmgType=2;
-					}
-					
+		if(cur.getAtkSuc()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getAtkSuc())/400f)))==0){
+			
+			if(cur.getCritRate()>=target.getDefSuc() || (int)(Math.random()/(Math.pow(2,(float)-(target.getDefSuc()-cur.getCritRate())/200f)))==0){
+				
+				if(canCrit && cur instanceof Character && target instanceof Mob && (int)(Math.random()*50)==0){
+					dmgType=5;
 				}else{
-					dmgType=1;
+					dmgType=2;
 				}
 				
 			}else{
-				dmgType=0;
+				dmgType=1;
 			}
+			
+		}else{
+			dmgType=0;
 		}
 		
 		/* old and outdated system based on lvls
@@ -507,8 +502,12 @@ public class SkillMaster {
     		
         	totalDmg=dmgInt;
         	
+        	if(skill.getTypeSpecific() != 3 && skill.getTypeSpecific() != 6 && skill.getTypeSpecific() != 7)
+        		dmgType=SkillMaster.skillCastDmgTypeCalculations(cur, target, skill.getTypeSpecific()==2);
+        	else
+        		dmgType = (short)3;
+        	
         	//DECREASE DMG BY DEF
-        	dmgType=SkillMaster.skillCastDmgTypeCalculations(cur, target, skill.getTypeSpecific()==2);
         	totalDmg-=target.getDefence();
         	
         	//CRIT

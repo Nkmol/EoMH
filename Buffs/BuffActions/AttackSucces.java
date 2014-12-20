@@ -4,11 +4,11 @@ import Buffs.BuffAction;
 import Player.Character;
 import Player.Fightable;
 
-public class BuffAction21 implements BuffAction {
+public class AttackSucces implements BuffAction {
 	
 	short buffId;
 	
-	public BuffAction21(short buffId){
+	public AttackSucces(short buffId){
 		this.buffId=buffId;
 	}
 

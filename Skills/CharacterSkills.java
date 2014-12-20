@@ -1,9 +1,15 @@
 package Skills;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import Buffs.Buff;
+import Buffs.BuffsException;
+import Buffs.PassiveBuff;
+import Buffs.SkillBuff;
 import Database.CharacterDAO;
 import item.ItemInInv;
 import Player.Character;
@@ -21,6 +27,7 @@ public class CharacterSkills {
 		loadedSkills=new HashMap<Integer, Integer>(61);
 		castableSkills=new HashMap<Integer, CastableSkillTimer>(61);
 		learnedSkills=new HashMap<Integer, Integer>(201);
+		
 		this.setOwner(owner);
 		owner.setSkillPoints((owner.getLevel()-1)*2);
 		highestDmgSkills=new int[5];
@@ -90,6 +97,18 @@ public class CharacterSkills {
 			loadedSkills.put(loadedSkills.size(), id);
 			castableSkills.put(castableSkills.size(), new CastableSkillTimer(id));
 		}
+		
+		//passive skills
+		if(skill.getTypeSpecific()==0 && skill.getTypeSpecific()==0) {
+			for(int i=0;i<skill.getEffectsId().length;i++) {
+				if(skill.getEffectsId()[i] > 0) {
+					System.out.println("effectid: " + skill.getEffectsId()[i] + " effectsDuration: " + skill.getEffectsDuration()[i] + " effectsValue: " + skill.getEffectsValue()[i]);
+					owner.addPassiveBuff(new PassiveBuff(owner, skill.getEffectsId()[i], skill.getEffectsValue()[i]));
+					if(updateSp) owner.calculateCharacterStats();
+				}
+			}
+		}
+				
 		
 		if(loadedSkills.size()==61 || learnedSkills.size()==200){
 			loadedSkills.remove(60);

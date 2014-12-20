@@ -28,6 +28,8 @@ import logging.ServerLogger;
 import Buffs.Buff;
 import Buffs.BuffMaster;
 import Buffs.BuffsException;
+import Buffs.PassiveBuff;
+import Buffs.SkillBuff;
 import Database.CharacterDAO;
 import Duel.Duel;
 import ExperimentalStuff.PuzzleMaster;
@@ -40,6 +42,7 @@ import Player.Dolls.Doll;
 import ServerCore.ServerFacade;
 import Skills.CharacterSkillbar;
 import Skills.CharacterSkills;
+import Skills.SkillFrame;
 import Skills.SkillMaster;
 import Tools.BitTools;
 import World.Grid;
@@ -113,6 +116,7 @@ public class Character implements Location, Fightable {
 	private int lastHit;
 	//private LinkedHashMap<Short, Buff> buffsActive = new LinkedHashMap <Short, Buff>();
 	private Buff[] buffsActive = new Buff[18];
+	private List<PassiveBuff> buffsPassive = new ArrayList<PassiveBuff>();
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	private boolean showInfos=false;
 	private List<Mob> activePuzzleMobs = Collections.synchronizedList(new LinkedList<Mob>());
@@ -312,6 +316,9 @@ public class Character implements Location, Fightable {
 	
 	public void calculateBonusStats(){
 		bonusAttributes.clear();
+		for(PassiveBuff passivebuff : buffsPassive){
+			changeBonusAttribute(passivebuff.getAction().getValueType(), passivebuff.getBuffValue());
+		}
 		for(Buff buff : buffsActive) {
 			if(buff != null)
 				changeBonusAttribute(buff.getAction().getValueType(), buff.getBuffValue());
@@ -329,7 +336,15 @@ public class Character implements Location, Fightable {
 		
 		short bonusHpReg=0;
 		if(bonusAttributes.containsKey("hpReg"))
-			bonusMaxhp=(Short)bonusAttributes.get("hpReg"); 
+			bonusHpReg=(Short)bonusAttributes.get("hpReg"); 
+		
+		short bonusMaxMana=0;
+		if(bonusAttributes.containsKey("maxmana"))
+			bonusMaxMana=(Short)bonusAttributes.get("maxmana"); 
+		
+		short bonusManaReg=0;
+		if(bonusAttributes.containsKey("manareg"))
+			bonusManaReg=(Short)bonusAttributes.get("manareg"); 
 		
 		short bonusDmg=0;
 		if(bonusAttributes.containsKey("bonusDmg"))
@@ -345,7 +360,7 @@ public class Character implements Location, Fightable {
 		
 		short bonusDeff = 0;
 		if(bonusAttributes.containsKey("bonusDeff"))
-			bonusAtk=(Short)bonusAttributes.get("bonusDeff");
+			bonusDeff=(Short)bonusAttributes.get("bonusDeff");
 		
 		short bonusDeffSucces=0;
 		if(bonusAttributes.containsKey("bonusDeffSucces"))
@@ -354,15 +369,15 @@ public class Character implements Location, Fightable {
 		//% based
 		short dmgDecreased = 0;
 		if(bonusAttributes.containsKey("dmgDecreased"))
-			bonusAtk=(Short)bonusAttributes.get("dmgDecreased");
+			dmgDecreased=(Short)bonusAttributes.get("dmgDecreased");
 		
 		short bonusCrit = 0;
 		if(bonusAttributes.containsKey("bonusCrit"))
-			bonusAtk=(Short)bonusAttributes.get("bonusCrit");
+			bonusCrit=(Short)bonusAttributes.get("bonusCrit");
 		
 		short bonusCritSucces = 0;
 		if(bonusAttributes.containsKey("bonusCritSucces"))
-			bonusAtk=(Short)bonusAttributes.get("bonusCritSucces");
+			bonusCritSucces=(Short)bonusAttributes.get("bonusCritSucces");
 		
 		float hardness=1;
 		if(doll!=null){
@@ -373,10 +388,10 @@ public class Character implements Location, Fightable {
 			stats[i]=(short) (cStats[i]+eqstats[i]);
 		}
 		maxhp=(int) ((30+bonusMaxhp+equips.getHp()+stats[0]*2.2+stats[1]*2.4+stats[2]*2.5+stats[3]*1.6+stats[4]*1.5)*hardness);
-		maxmana=(int) ((30+equips.getMana()+stats[0]*1.4+stats[1]*1.7+stats[2]*1.5+stats[3]*3.5+stats[4]*1.5)*hardness);
+		maxmana=(int) ((30+bonusMaxMana+equips.getMana()+stats[0]*1.4+stats[1]*1.7+stats[2]*1.5+stats[3]*3.5+stats[4]*1.5)*hardness);
 		maxstamina=(int) ((30+equips.getStamina()+stats[0]*0.9+stats[1]*1.3+stats[2]*1.5+stats[3]*1.7+stats[4]*1.3)*hardness);
 		hpreg=(short)((stats[2]/2+stats[0]/4 + bonusHpReg)*hardness);
-		manareg=(short)((stats[3]/2+stats[1]/4)*hardness);
+		manareg=(short)((stats[3]/2+stats[1]/4 + bonusManaReg)*hardness);
 		stamreg=(short)((stats[4]*0.1)*hardness);
 		healingSpeed=5000;
 		attack=(short) ((level/2+equips.getAtk()+bonusAtk+stats[0]*0.5+stats[1]*0.46+stats[2]*0.4+stats[3]*0.2+stats[4]*0.2)*hardness);
@@ -1268,6 +1283,9 @@ public class Character implements Location, Fightable {
 	}
 	
 	public void setCharacterBuffs(Buff[] buffsActive) {
+		//Load passive stats
+		calculateBonusStats();
+		
 		this.buffsActive = buffsActive;
 	}
 	
@@ -1870,19 +1888,16 @@ public class Character implements Location, Fightable {
 	
 	public void damaged(int dmg)
 	{
-		if(bonusAttributes.containsKey("schield"))
-		{
+		if(bonusAttributes.containsKey("schield")) {
 			Buff buff = getBuffById((short) 52);
 			buff.substractValue((short)1);
 			if(buff.getBuffValue() <= 0)
 				this.removeBuff(buff);
 		}
-		else if(bonusAttributes.containsKey("lifeTransform") && mana > 0)
-		{
+		else if(bonusAttributes.containsKey("lifeTransform") && mana > 0) {
 			if(mana - dmg >= 0)
 				subtractMana(dmg);
-			else
-			{
+			else {
 				//remaining damage will be substracted from Hp
 				subtractHp(dmg - mana);
 				subtractMana(dmg);
@@ -1903,5 +1918,19 @@ public class Character implements Location, Fightable {
 		{
 			removeBuff(getBuffById((short)44));
 		}
+	}
+
+	public void addPassiveBuff(PassiveBuff passiveBuff) {	
+		PassiveBuff removebuff = null;
+		for(PassiveBuff passivebuff : buffsPassive) {
+			if(passivebuff.getId() == passiveBuff.getId()) {
+				removebuff = passivebuff;
+				break;
+			}	
+		}
+		buffsPassive.remove(removebuff);
+		buffsPassive.add(passiveBuff);
+		
+		//calculateCharacterStats();
 	}
 }

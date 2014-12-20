@@ -32,72 +32,82 @@ public class BuffMaster {
 				BuffAction buff;
 				//switch is ok, we change the buffclasses names later :P
 				switch(buffId){
-					case 2:{
-						buff=new BuffAction2(buffId);
-						break;
-					}
-					case 6:{
-						buff=new BuffAction6(buffId);
-						break;
-					}
+					case 2:
 					case 7:{
-						buff=new BuffAction7(buffId);
+						buff=new MaxHp(buffId);
+						break;
+					}
+					case 6:
+					case 62:{
+						buff=new HpReg(buffId);
+						break;
+					}
+					case 9:{
+						buff=new MaxMana(buffId);
 						break;
 					}
 					case 15:{
-						buff=new BuffAction15(buffId);
+						buff=new Attack(buffId);
 						break;
 					}
 					case 16:{
-						buff=new BuffAction16(buffId);
+						buff=new Deff(buffId);
 						break;
 					}
 					case 17:{
-						buff=new BuffAction17(buffId);
+						buff=new FinalDamage(buffId);
 						break;
 					}
 					case 21:{
-						buff=new BuffAction21(buffId);
+						buff=new AttackSucces(buffId);
+						break;
+					}
+					case 30:{
+						buff=new AttackRange(buffId);
 						break;
 					}
 					case 22:{
-						buff=new BuffAction22(buffId);
+						buff=new CritSucces(buffId);
 						break;
 					}
 					case 42:{
-						buff=new BuffAction42(buffId);
+						buff=new LifeTransform(buffId);
 						break;
 					}
 					case 43:{
-						buff=new BuffAction43(buffId);
+						buff=new Stun(buffId);
 						break;
 					}
 					case 44:{
-						buff=new BuffAction44(buffId);
+						buff=new Hide(buffId);
 						break;
 					}
 					case 47:{
-						buff=new BuffAction47(buffId);
+						buff=new DamageOverTime(buffId);
 						break;
 					}
 					case 49:{
-						buff=new BuffAction49(buffId);
+						buff=new Freeze(buffId);
 						break;
 					}
 					case 50:{
-						buff=new BuffAction50(buffId);
+						buff=new DeffSucces(buffId);
 						break;
 					}
 					case 52:{
-						buff=new BuffAction52(buffId);
+						buff=new AbsorbSchield(buffId);
 						break;
 					}
 					case 57:{
-						buff=new BuffAction57(buffId);
+						buff=new Crit(buffId);
 						break;
 					}
 					case 64:{
-						buff=new BuffAction64(buffId);
+						buff=new DamageDecreased(buffId);
+						break;
+					}
+					case 63:{
+						buff=new ManaReg(buffId);
 						break;
 					}
 					default:{

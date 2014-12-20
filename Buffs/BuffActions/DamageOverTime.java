@@ -8,12 +8,12 @@ import ServerCore.ServerFacade;
 import Tools.BitTools;
 import World.OutOfGridException;
 
-public class BuffAction47 implements BuffAction {
+public class DamageOverTime implements BuffAction {
 	
 	short buffId;
 	int casteruid;
 	
-	public BuffAction47(short buffId){
+	public DamageOverTime(short buffId){
 		this.buffId=buffId;
 	}
 

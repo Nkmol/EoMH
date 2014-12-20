@@ -4,15 +4,15 @@ import Buffs.BuffAction;
 import Player.Character;
 import Player.Fightable;
 
-public class BuffAction17 implements BuffAction {
+public class MaxHp implements BuffAction {
 	
 	short buffId;
 	
-	public BuffAction17(short buffId){
+	public MaxHp(short buffId){
 		this.buffId=buffId;
 	}
 
-	//increase Final Damage
+	//increase Max HP
 	public void startBuff(Character ch,short value) {
 		//no action except for updating character stats
 		ch.calculateCharacterStats();
@@ -28,7 +28,7 @@ public class BuffAction17 implements BuffAction {
 	}
 	
 	public String getValueType(){
-		return "bonusDmg";
+		return "maxhp";
 	}
 
 	@Override

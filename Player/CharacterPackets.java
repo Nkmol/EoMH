@@ -644,6 +644,13 @@ public class CharacterPackets {
 		byte[] buffSlot = BitTools.shortToByteArray(slot);
 		buffIcon[26] = (byte)0x01; 
 		
+		buffIcon[28] = (byte)0x89; 
+		buffIcon[32] = (byte)0x89; 
+		buffIcon[36] = (byte)0x7e; 
+		buffIcon[38] = (byte)0x7e; 
+		buffIcon[40] = (byte)0x60; 
+		buffIcon[42] = (byte)0x60;	 
+		
 		if(buffid != 0) {
 			byte[] buffId = BitTools.shortToByteArray(buffid);
 			byte[] buffTime = BitTools.shortToByteArray((short)BuffMaster.timeServerToClient(buff.getBuffTime()));
@@ -654,25 +661,11 @@ public class CharacterPackets {
 				buffIcon[i+22] = buffTime[i];
 				buffIcon[i+24] = buffValue[i]; // value
 			}
-			
-			buffIcon[28] = (byte)0x89; 
-			buffIcon[32] = (byte)0x89; 
-			buffIcon[36] = (byte)0x7e; 
-			buffIcon[38] = (byte)0x7e; 
-			buffIcon[40] = (byte)0x60; 
-			buffIcon[42] = (byte)0x60;	 
 		}
 		else
 		{
 			for(int i=0;i<2;i++)
-				buffIcon[i+16] = buffSlot[i];
-			
-			buffIcon[28] = (byte)0xF5; 
-			buffIcon[32] = (byte)0xF5; 
-			buffIcon[36] = (byte)0xC3; 
-			buffIcon[38] = (byte)0xC3; 
-			buffIcon[40] = (byte)0x9A; 
-			buffIcon[42] = (byte)0x9A;	 
+				buffIcon[i+16] = buffSlot[i]; 
 		}
 
 		 return buffIcon;
