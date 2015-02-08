@@ -91,6 +91,33 @@ public class SkillPackets {
 		
 	}
 	
+	public static byte[] getSummPacket(Character ch, int skillIdInt, byte activationId) {
+		byte[] cid = BitTools.intToByteArray(ch.getCharID());
+		byte[] skillid = BitTools.intToByteArray(skillIdInt);
+		
+		byte[] skillpckt = new byte[52];
+    	
+    	skillpckt[0] = (byte)skillpckt.length;
+    	skillpckt[4] = (byte)0x05;
+    	skillpckt[6] = (byte)0x34;
+    	skillpckt[8] = (byte)0x01;
+    	
+    	//CharID
+    	for(int i=0;i<4;i++){
+    		skillpckt[12+i] = cid[i];
+    		skillpckt[20+i] = skillid[i];
+    	} 
+    	
+    	skillpckt[16] = (byte)0x01;
+    	
+    	//skilltype
+    	skillpckt[24]= activationId;
+    	skillpckt[25] = (byte)0x07;
+    	skillpckt[27] = (byte)0x01;
+    	
+    	return skillpckt;
+	}
+	
 	public static byte[] getMediPacket(Character ch, int skillIdInt, byte activationId){
 		
 		byte[] cid = BitTools.intToByteArray(ch.getCharID());
@@ -173,7 +200,7 @@ public class SkillPackets {
 		
 	}
 	
-	public static byte[] getCastSkillPacket(Character ch, int targets, int skillIdInt, byte activationId){
+	public static byte[] getCastSkillPacket(Character ch, int targets, int skillIdInt, byte activationId, boolean isSpecial){
 		
 		byte[] cid = BitTools.intToByteArray(ch.getCharID());
 		byte[] skillid = BitTools.intToByteArray(skillIdInt);
@@ -192,13 +219,15 @@ public class SkillPackets {
     	} 
     	
     	skillpckt[16] = (byte)0x01;
-    	skillpckt[17] = (byte)0x00;
-    	skillpckt[18] = (byte)0x00;
-    	skillpckt[19] = (byte)0x00;
     	
     	//skilltype
     	skillpckt[24]= activationId;
-    	skillpckt[25] = (byte)0x07;
+    	
+    	if(isSpecial)
+    		skillpckt[25] = (byte)0x02;
+    	else
+    		skillpckt[25] = (byte)0x07;
+    	
     	skillpckt[27] = (byte)(targets);
     	
     	return skillpckt;

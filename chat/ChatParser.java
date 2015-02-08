@@ -42,7 +42,7 @@ public class ChatParser {
 		this.commandList.put("setGMrank", new SetGMrankCommand(20));
 		//this.commandList.put("startevent", new StartEventCommand(100));
 		this.commandList.put("setfame", new SetFameCommand(20));
-		this.commandList.put("mob", new MobCommand(20));
+		this.commandList.put("mob", new SpawnMobCommand(20));
 		this.commandList.put("printstats", new PrintStatsCommand(30));
 		this.commandList.put("vendorpoints", new VenderPoints(30));
 		this.commandList.put("pd", new PartyDuelCommand(0));

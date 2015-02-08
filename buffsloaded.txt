@@ -32,7 +32,7 @@ ID:50	//angry point?`? blue warrior buffs 100271
 ID:51	//bugged Lance skill shoulder 110111
 ID:52	//offense critical?
 ID:57	//Increase critical damage
-ID:58	//summoning skill - value?
+ID:58	//summoning skill - value?(value might be mob uid?)
 ID:59	//open cargo timed?
 ID:60	//getting fat :D
 ID:62	//?? red

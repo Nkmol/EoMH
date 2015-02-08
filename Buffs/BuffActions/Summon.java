@@ -3,14 +3,13 @@ package Buffs.BuffActions;
 import Buffs.BuffAction;
 import Player.Character;
 import Player.Fightable;
-import World.OutOfGridException;
 
-public class DamageOverTime implements BuffAction {
+public class Summon implements BuffAction {
 	
 	short buffId;
 	int casteruid;
 	
-	public DamageOverTime(short buffId){
+	public Summon(short buffId){
 		this.buffId=buffId;
 	}
 
@@ -30,25 +29,11 @@ public class DamageOverTime implements BuffAction {
 	}
 	
 	public String getValueType(){
-		return "DoT";
+		return "summon";
 	}
 	
 	public boolean updateOverTime(Fightable owner, short value){
-		if(owner.isAlive()) {
-			System.out.println("update buff on " + owner.getName() + " with value " + value);
-			try {
-				owner.recDamage(casteruid, Math.abs(value));
-			} catch (OutOfGridException e) {
-				System.out.print(e.getMessage());
-			}
-			owner.refreshHpMpSp();
-			return true;
-		}
-		else
-		{
-			System.out.println("Owner died, stop buff");
-			return false;
-		}
+		return false;
 	}
 
 	@Override

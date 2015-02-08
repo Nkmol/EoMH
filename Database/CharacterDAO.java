@@ -1,6 +1,7 @@
 package Database;
 
 import item.ItemInInv;
+import item.cargo.Cargo;
 import item.inventory.Equipments;
 import item.inventory.Inventory;
 
@@ -10,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -624,6 +624,7 @@ public class CharacterDAO {
 			if(newCharacter.getEquips()!=null)
 				newCharacter.createCharacterStats();
 			newCharacter.setCharacterBuffs(getBuffs(newCharacter));
+			newCharacter.setCargo(new Cargo(newCharacter));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

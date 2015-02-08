@@ -81,6 +81,7 @@ public class MobPackets {
                 mobBucket[i+72] = hp[i];
         }
        
+        //mobBucket[132`-135] = invisible
         mobBucket[4] = (byte)0x05;
         mobBucket[6] = (byte)0x03;
         mobBucket[8] = (byte)0x02;
@@ -93,6 +94,7 @@ public class MobPackets {
 
       return mobBucket;
 	}
+	
 	
 	public static byte[] getSkillPacket(int mobID, int skillID, byte dmgType, int totalDmg, int[] targets, int targethp, int targetmana){
 		

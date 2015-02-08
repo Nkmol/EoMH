@@ -10,6 +10,7 @@ public class CastableSkill extends SkillFrame{
 	private int manaCost;
 	private int staminaCost;
 	private int targets;
+	private boolean isSpecial;
 	
 	public CastableSkill(int id){
 		super(id);
@@ -77,6 +78,14 @@ public class CastableSkill extends SkillFrame{
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
+	}
+	
+	public boolean isSpecial() {
+		return this.isSpecial;
+	}
+
+	public void setSpecial(boolean isspecial){
+		this.isSpecial = isspecial;
 	}
 	
 }

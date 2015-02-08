@@ -4,6 +4,7 @@ package Player;
 import item.ItemInInv;
 import item.vendor.Vendor;
 import item.vendor.VendorPackets;
+import item.cargo.Cargo;
 import item.inventory.Equipments;
 import item.inventory.Inventory;
 
@@ -12,12 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -29,7 +27,6 @@ import Buffs.Buff;
 import Buffs.BuffMaster;
 import Buffs.BuffsException;
 import Buffs.PassiveBuff;
-import Buffs.SkillBuff;
 import Database.CharacterDAO;
 import Duel.Duel;
 import ExperimentalStuff.PuzzleMaster;
@@ -42,7 +39,6 @@ import Player.Dolls.Doll;
 import ServerCore.ServerFacade;
 import Skills.CharacterSkillbar;
 import Skills.CharacterSkills;
-import Skills.SkillFrame;
 import Skills.SkillMaster;
 import Tools.BitTools;
 import World.Grid;
@@ -120,6 +116,7 @@ public class Character implements Location, Fightable {
 	private HashMap<String, Object> bonusAttributes = new HashMap<String, Object>();
 	private boolean showInfos=false;
 	private List<Mob> activePuzzleMobs = Collections.synchronizedList(new LinkedList<Mob>());
+	private Cargo cargo = null;
 	
 	
 	public Character(Doll doll){
@@ -1280,6 +1277,14 @@ public class Character implements Location, Fightable {
 	
 	public Buff[] getBuffs() {
 		return this.buffsActive;
+	}
+	
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+	
+	public Cargo getCargo() {
+		return this.cargo;
 	}
 	
 	public void setCharacterBuffs(Buff[] buffsActive) {

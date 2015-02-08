@@ -1,12 +1,8 @@
 package Buffs.BuffActions;
 
 import Buffs.BuffAction;
-import Mob.Mob;
 import Player.Character;
 import Player.Fightable;
-import ServerCore.ServerFacade;
-import Tools.BitTools;
-import World.OutOfGridException;
 
 public class LifeTransform implements BuffAction {
 	

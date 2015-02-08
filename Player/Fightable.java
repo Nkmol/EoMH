@@ -1,7 +1,5 @@
 package Player;
 
-import java.util.HashMap;
-
 import Buffs.Buff;
 import Buffs.BuffsException;
 import World.OutOfGridException;

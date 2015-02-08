@@ -3,12 +3,10 @@ package Buffs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import Database.ItemDAO;
-import Player.Fightable;
 import Buffs.BuffActions.*;
 
 public class BuffMaster {
@@ -100,6 +98,10 @@ public class BuffMaster {
 					}
 					case 57:{
 						buff=new Crit(buffId);
+						break;
+					}
+					case 58:{
+						buff=new Summon(buffId);
 						break;
 					}
 					case 64:{

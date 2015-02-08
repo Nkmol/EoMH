@@ -50,7 +50,7 @@ public class SkillDAO {
 		SkillFrame skill=null;
 		try{
 			
-			if(rs.getInt("specificType")==5 || rs.getInt("isCastable")==1 || rs.getInt("skillgroup")==255 || (rs.getInt("skillgroup")>149 && rs.getInt("skillgroup")<158)){
+			if(rs.getInt("isSpecialCast")==1 || rs.getInt("specificType")==5 || rs.getInt("isCastable")==1 || rs.getInt("skillgroup")==255 || (rs.getInt("skillgroup")>149 && rs.getInt("skillgroup")<158)){
 				skill = new CastableSkill(rs.getInt("skillid"));
 				((CastableSkill)skill).setDmg(rs.getInt("dmg"));
 				((CastableSkill)skill).setSpeed(rs.getFloat("speed"));
@@ -60,6 +60,7 @@ public class SkillDAO {
 				((CastableSkill)skill).setTargets(rs.getInt("targets"));
 				((CastableSkill)skill).setNeedsWepToCast(rs.getInt("needsWepToCast"));
 				((CastableSkill)skill).setUltiSetId(rs.getInt("ultiSetId"));
+				((CastableSkill)skill).setSpecial(rs.getInt("isSpecialCast") == 1);
 			}else{
 				skill = new SkillFrame(rs.getInt("skillid"));
 			}

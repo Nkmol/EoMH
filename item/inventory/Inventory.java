@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import Database.CharacterDAO;
 import GameServer.ServerPackets.ServerMessage;
@@ -246,6 +247,34 @@ public class Inventory {
 		}
 		removeItem(index, amount);
 		addCoins(price);
+	}
+	
+	//decrement first item found with id
+	public void decrementItemId(int itemid) throws InventoryException{
+		if(itemid<0){
+			throw new InventoryException("Cannot decrement item [illegal index]");
+		}
+		
+		ItemInInv item = null;
+		int seqIndex = -1;
+		for(Entry<Integer, ItemInInv> entry : inv.entrySet()) {
+			if(entry.getValue().getItem().getId() == itemid) {
+				item = entry.getValue();
+				seqIndex = entry.getKey();
+				break;
+			}
+		}
+		
+		if(item == null || seqIndex == -1) {
+			throw new InventoryException("Cannot find item [missing item]");
+		}
+		
+		item.setAmount(item.getAmount()-1);
+		
+		if(item.getAmount()==0){
+			removeItemFromInv(seq.get(seqIndex));
+			seq.set(seqIndex, -1);
+		}
 	}
 	
 	//decrement item with given seq index and delete it when amount is 0

@@ -1,9 +1,12 @@
 package Skills;
 
+import item.inventory.InventoryException;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import Mob.Mob;
+import Mob.MobMaster;
 import Player.Character;
 import Player.Fightable;
 import Tools.BitTools;
@@ -23,6 +26,19 @@ public class SkillMaster {
 	private static Map<Integer, Integer> knockSkills;
 	private static Map<Integer, Integer> woodenSkills;
 	private static Map<Integer, Integer> standardBasicSkills;
+	private static Map<Integer, Integer> mobsummon = new HashMap<Integer, Integer>(){
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4483076130635125483L;
+
+		{
+			put(410111, 30036);
+			put(410112, 30037);
+			put(410113, 30038);
+			put(410114, 30039);
+		}
+	};
 	
 	public static void loadAllSkills(){
 		
@@ -55,6 +71,10 @@ public class SkillMaster {
 		standardBasicSkills.put(12, 131411011);
 		System.out.println("standard basic skills are loaded!");
 		
+	}
+	
+	public static int getMobSummon(int skillid) {
+		return mobsummon.get(skillid);
 	}
 	
 	public static SkillFrame getSkill(int id){
@@ -342,7 +362,7 @@ public class SkillMaster {
     	int dmgType;
     	
     	//GET MAIN SKILL PACKET
-    	skillpckt2 = SkillPackets.getCastSkillPacket(cur, targets, skillidNoFake, skillActivationType);
+    	skillpckt2 = SkillPackets.getCastSkillPacket(cur, targets, skillidNoFake, skillActivationType, false);
     	
     	//ADD TARGET STUFF TO THE PACKET
     	for(int aoe=0;aoe<targets;aoe++){
@@ -420,6 +440,13 @@ public class SkillMaster {
     	
     	SkillFrame skill=SkillMaster.getSkill(skillidInt);
     	
+		
+    	
+    	//SUMMONING
+		if(skill.getTypeSpecific() == 17) {
+			skillpckt3 = SkillPackets.getSummPacket(cur, skillidInt, skillActivationType);
+		}
+    	
     	//TURBO AND MEDI
     	if(skill.getTypeSpecific()==6 || skill.getTypeSpecific()==7){
     		
@@ -471,7 +498,6 @@ public class SkillMaster {
     	int targets=chartargets+mobtargets;
     	
     	//COSTS
-    	System.out.println("stamina costs: " + ((CastableSkill)SkillMaster.getSkill(skillidInt)).getStaminaCost());
     	cur.addHpSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getHealCost());
     	cur.addManaSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getManaCost());
     	cur.addStaminaSigned(-((CastableSkill)SkillMaster.getSkill(skillidInt)).getStaminaCost());
@@ -482,13 +508,28 @@ public class SkillMaster {
     	int dmgInt=SkillMaster.skillCastDmgCalculations(cur, skillidInt);
     	int totalDmg;
     	int dmgType;
-    	
+
     	//GET MAIN SKILL PACKET
-    	skillpckt2 = SkillPackets.getCastSkillPacket(cur, targets, skillidNoFake, skillActivationType);
+    	//ILLUSION BULLET SKILL
+    	//presumable for every "isSpecial" skill illusion bullets are used.
+    	boolean isSpecial = ((CastableSkill)skill).isSpecial();
+		if(isSpecial) {
+			//Update decreament of illusion bullet in inventory
+			cur.getInventory().updateInv();
+			try {
+				cur.getInventory().decrementItemId(273000825); //illusion bullets
+			} catch (InventoryException e) {
+				System.out.print(e.getMessage());
+			}
+			cur.getInventory().saveInv();
+		}
+		
+    	skillpckt2 = SkillPackets.getCastSkillPacket(cur, targets, skillidNoFake, skillActivationType, isSpecial);
     	
     	//ADD TARGET STUFF TO THE PACKET
     	for(int aoe=0;aoe<targets;aoe++){
-    		
+    	
+    		System.out.println("Aoe " + targetIds[aoe]);
     		//GET TARGET
     		byte[] targetByte=BitTools.intToByteArray(targetIds[aoe]);
     		
@@ -542,6 +583,8 @@ public class SkillMaster {
     		if(cur.getCharID() != target.getuid())
     			cur.onAttack();
     		
+        	System.out.println("skillid" + skill.getId() +" skillType: " + skill.getTypeSpecific() + " dmgType: " + dmgType);
+    		
     		if(target.isAlive()) {
 	    		//BUFF
 	            if(skill.getEffectsId()[0] > 0) {
@@ -549,8 +592,10 @@ public class SkillMaster {
 			        for(int i=0; i<skill.getEffectsId().length;i++) {
 			        	if(skill.getEffectsId()[i] > 0) {
 			        		long time = BuffMaster.timeClientToServer(skill.getEffectsDuration()[i]); // MH time = int * 4. Also converting to miliseconds
-				            System.out.println("buffId: " + skill.getEffectsId()[i] + " buffValue: " + skill.getEffectsValue()[i] + " skillType: " + skill.getTypeSpecific() + "dmgType: " + dmgType);
-				            SkillBuff buff = new SkillBuff(target, skill.getEffectsId()[i], time, skill.getEffectsValue()[i], cur.getCharID());
+			        		
+			        		System.out.println("buffId: " + skill.getEffectsId()[i] + " buffValue: " + skill.getEffectsDuration()[i] + " skillType: " + skill.getTypeSpecific() + "dmgType: " + dmgType);
+			        		SkillBuff buff = new SkillBuff(target, skill.getEffectsId()[i], time, skill.getEffectsDuration()[i], cur.getCharID());
+
 				            if(buff.getAction() == null) {
 				            	System.out.println("Buffaction not created for buffid " + skill.getEffectsId()[i]);
 				            	return null;
