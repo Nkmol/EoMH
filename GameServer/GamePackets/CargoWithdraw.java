@@ -10,7 +10,7 @@ import GameServer.ServerPackets.ServerMessage;
 import Player.Character;
 import Player.PlayerConnection;
 
-public class CargoDepost implements Packet {
+public class CargoWithdraw implements Packet {
 
 	@Override
 	public void execute(ByteBuffer buff) {
@@ -20,8 +20,8 @@ public class CargoDepost implements Packet {
 
 	@Override
 	public byte[] returnWritableByteBuffer(byte[] buffyTheVampireSlayer, Connection con) throws PaketException {
-		System.out.println("Handling cargo item depost");
-				
+		System.out.println("Handling cargo item withdraw");
+		
 		byte[] decrypted = new byte[(buffyTheVampireSlayer[0] & 0xFF)-8];
 				
 		for(int i=0;i<decrypted.length;i++) {
@@ -31,12 +31,12 @@ public class CargoDepost implements Packet {
 		decrypted = Decryptor.Decrypt(decrypted);
 		Character cur = ((PlayerConnection)con).getActiveCharacter();
 		
-		//decrypted[1] //inventory index(item)
-		//decrypted[3] //y place
-		//decrypted[4] //x place
+		//decrypted[0] //Cargo index(item)
+		//decrypted[2] //y place
+		//decrypted[3] //x place
 		
 		try {
-			return cur.getCargo().Depost((int)decrypted[1], (int)decrypted[4], (int)decrypted[3], (int)decrypted[2], (int)decrypted[0]);
+			return cur.getCargo().Withdraw((int)decrypted[0], (int)decrypted[3], (int)decrypted[2]);
 		} catch (CargoException e) {
 			new ServerMessage().execute(e.getMessage(), con);
 		}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -78,12 +79,19 @@ public class ServerLogger {
 	}
 	
 	public void logMessage(Level lvl, Object obj, String msg) {
-			if(this.log.isLoggable(lvl) && this.logAble) {
-				this.log.log(lvl, "Message level: [" + lvl.toString() + "] " + msg + " - in class [" + obj.getClass().getName() + "]");
-			} else if(this.outputLevel.contains(lvl)){
-				System.out.println("Message level: [" + lvl.toString() + "] " + msg + " - in class [" + obj.getClass().getName() + "]");
-			}
+		if(this.log.isLoggable(lvl) && this.logAble) {
+			this.log.log(lvl, "Message level: [" + lvl.toString() + "] " + msg + " - in class [" + obj.getClass().getName() + "]");
+		} else if(this.outputLevel.contains(lvl)){
+			System.out.println("Message level: [" + lvl.toString() + "] " + msg + " - in class [" + obj.getClass().getName() + "]");
+		}
 		
+		this.closeHandlers();
+	}
+	
+	private void closeHandlers() {
+		for(Handler h : this.log.getHandlers()) {
+		    h.close();   //must call h.close or a .LCK file will remain.
+		}
 	}
 
 }

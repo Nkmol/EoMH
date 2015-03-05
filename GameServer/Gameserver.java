@@ -63,7 +63,9 @@ public class Gameserver implements PacketHandler {
 		this.packetsByHeader.put(Integer.valueOf(1369), new PartyChangeLeaderPacket());//change leader in party
 		this.packetsByHeader.put(Integer.valueOf(1373), new LearnSkill());			//learn skill
 		this.packetsByHeader.put(Integer.valueOf(1374), new StartDuelPacket());		//start duel
-		this.packetsByHeader.put(Integer.valueOf(1376), new CargoDepost());		    //cargo system
+		this.packetsByHeader.put(Integer.valueOf(1376), new CargoDepost());		    //cargo depost
+		this.packetsByHeader.put(Integer.valueOf(1377), new CargoWithdraw());		//cargo withdraw
+		this.packetsByHeader.put(Integer.valueOf(1378), new CargoSwap());			//Swap items inside cargo
 		this.packetsByHeader.put(Integer.valueOf(1382), new UpgradeItem());			//upgrade
 		this.packetsByHeader.put(Integer.valueOf(1384), new CastSkill());			//cast skill
 		this.packetsByHeader.put(Integer.valueOf(1387), new VendorState());			//Opens or Closes vendor shop

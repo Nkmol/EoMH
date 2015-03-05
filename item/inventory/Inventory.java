@@ -111,34 +111,35 @@ public class Inventory {
 	}
 	
 	//save seq and inv
-	public void saveInv(){
-			
+	public void saveInv(){	
 		invSaved.clear();
 		seqSaved.clear();
 		invSaved.putAll(inv);
 		seqSaved.addAll(seq);
-			
 	}
 	
 	//save seq and inv and put inv to database
 	public void saveInv(Character cur){
-		
 		invSaved.clear();
 		seqSaved.clear();
 		invSaved.putAll(inv);
 		seqSaved.addAll(seq);
-		CharacterDAO.saveInventories(cur.getuid(), this);
 		
+		CharacterDAO.saveInventories(cur.getuid(), this);
 	}
 	
 	//update seq and inv
 	public void updateInv(){
-		
 		inv.clear();
 		seq.clear();
 		inv.putAll(invSaved);
 		seq.addAll(seqSaved);
-		
+	}
+	
+	public void printSeq(LinkedList<Integer> seq) {
+		for(int i=0;i<seq.size();i++) {
+			System.out.print(" " + seq.get(i));
+		}
 	}
 	
 	public int getIndexHold(){
@@ -147,6 +148,16 @@ public class Inventory {
 	
 	public ItemInInv getHoldingItem(){
 		return holdingItem;
+	}
+	
+	public void setHoldingItem(ItemInInv holdingItem) {
+		this.holdingItem = holdingItem;
+	}
+	
+	public void removeHoldItem() {
+		holdingItem = null;
+		indexHold = -1;
+		indexToSwap = -1;
 	}
 	
 	public int getPages(){
@@ -307,6 +318,47 @@ public class Inventory {
 		
 		return item;
 		
+	}
+	
+	//Swap from external
+	public int swapFromOutside(int x, int y, ItemInInv item) throws InventoryException {
+		List<Integer> hash  = checkBlockingItems(x, y, item);
+		
+		//Index hold && Holding == blocking item (which will be swapped)
+		//IndexToSwap == is the newly placed item
+		if(hash.size() == 1) {
+			updateInv();
+			
+			indexHold = seq.indexOf(hash.get(0));
+
+			holdingItem = inv.get(hash.get(0));
+			indexToSwap = nextFreeSequence();
+			if(indexToSwap == -1)
+					throw new InventoryException("[wrong index] No room in inventory");
+			
+			removeItemFromInv(hash.get(0));
+			putIntoInv(x, y, item);
+			
+			seq.set(indexHold, -1);
+			seq.set(indexToSwap, (y*100)+x);
+			
+			saveInv();
+			return indexHold;
+		}
+		return -1;
+	}
+	
+	//Swap to external
+	public void swapToOutside(ItemInInv item) throws InventoryException {
+		//Because placing the item in inventory, there is expected it comes from a source with in the inventory. 
+		//It reduces the amount by 1 which results in 0 amount, which then result in a deletion which doesnt exist.
+		item.setAmount(2);
+		holdingItem = item;
+	}
+	
+	//get blocking item index
+	public int getBlockingItem(int x, int y, ItemInInv item) {
+		return seq.indexOf(checkBlockingItems(x, y, item).get(0));
 	}
 	
 	//equip an item
@@ -506,28 +558,32 @@ public class Inventory {
 	}
 	
 	//move item in inventory
-	public void moveItem(int fromInvID, int toInvID, int amount, int line, int row) throws InventoryException{
-		
-		//equipping uses toInvID as fromInvID what the hell and mysterious things when swapped
-		if(equipping==true){
-			int seq8=seq.indexOf(8);
-			if(seq8==-1)
-				fromInvID=toInvID;
-			else
-				fromInvID=seq8;
-		}
-		
-		//index must exist
-		if(indexHold==-1 && fromInvID>=0 && seq.get(fromInvID)==-1){
-			throw new InventoryException("Cannot move item [item missing]");
-		}
+	public void moveItem(int fromInvID, int toInvID, int amount, int line, int row, int state) throws InventoryException{
+		ItemInInv itemF = null;
+		if(state == 1) {
+			//equipping uses toInvID as fromInvID what the hell and mysterious things when swapped
+			if(equipping==true){
+				int seq8=seq.indexOf(8);
+				if(seq8==-1)
+					fromInvID=toInvID;
+				else
+					fromInvID=seq8;
+			}
 			
-		//get item1
-		ItemInInv itemF;
-		if(indexHold==-1)
-			itemF=inv.get(seq.get(fromInvID));
-		else
+			//index must exist
+			if(indexHold==-1 && fromInvID>=0 && seq.get(fromInvID)==-1){
+				throw new InventoryException("Cannot move item [item missing] " + indexHold + " " + fromInvID + " " + seq.get(fromInvID) + " " + (seq.indexOf(0*100)+1));
+			}
+				
+			//get item1
+			if(indexHold==-1)
+				itemF=inv.get(seq.get(fromInvID));
+			else
+				itemF=holdingItem;
+		} 
+		else {
 			itemF=holdingItem;
+		}
 		
 		//there must be item1
 		if(itemF==null){
@@ -549,13 +605,13 @@ public class Inventory {
 		if (hash == null){
 			throw new InventoryException("Cannot move item [crosses inventory border]");
 		}
-		
+	
 		//move to an empty slot
 		if (hash.size() == 0 ){
 			//SWAPPED BEFORE
 			if(indexHold!=-1){
 				putIntoInv(line, row, holdingItem);
-				seq.set(indexHold, seq.get(indexToSwap));
+				seq.set(indexHold, seq.get(indexToSwap)); //Swap indexHold with previous swap hash
 				seq.set(indexToSwap, -1);
 				seq.set(nextFreeSequence(), (row*100)+line);
 				indexHold=-1;
@@ -574,6 +630,7 @@ public class Inventory {
 					}
 				}
 					
+				System.out.println("line: " + line + " row: " + row + " index: " + seq.indexOf((row*100)+line));
 				ItemInInv newItemF=new ItemInInv(itemF.getItem().getId());
 				newItemF.setAmount(amount);
 				putIntoInv(line,row,newItemF);
@@ -646,7 +703,7 @@ public class Inventory {
 				}
 				return;
 			}
-		}
+		}		
 		throw new InventoryException("Cannot move item [too many items blocking]");
 		
 	}
@@ -709,7 +766,7 @@ public class Inventory {
 	}
 	
 	// adds item to inventory only if all needed slots are empty, return true is success, false otherwise
-	public boolean addItem(int line, int row, ItemInInv it){
+	public boolean addItem(int line, int row, ItemInInv it) {
 		
 		//get the hashes from all blocking items
 		List<Integer> hash = this.checkBlockingItems(line, row, it);
@@ -860,6 +917,19 @@ public class Inventory {
 			}
 		}
 		
+	}
+	
+	//get item index by coords
+	public int getIndex(int line, int row) {
+		return seq.indexOf((row*100) + line);
+	}
+	
+	public ItemInInv getItem(int line, int row) {
+		return this.invSaved.get((row*100) + line);
+	}
+	
+	public ItemInInv getItem(int index) {
+		return this.invSaved.get(seq.get(index));
 	}
 	
 	// insert item to all the slots it requires, no boundary checks are performed

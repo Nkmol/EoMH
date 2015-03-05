@@ -23,7 +23,7 @@ public class InventoryManagement implements Packet {
 
         
         public byte[] returnWritableByteBuffer(byte[] buffyTheVampireSlayer, Connection con) throws PaketException {
-                System.out.print("Handling inventory: ");
+        		System.out.print("Handling inventory: ");
                 byte[] decrypted = new byte[(buffyTheVampireSlayer[0] & 0xFF)-8];
                 
                 for(int i=0;i<decrypted.length;i++) {
@@ -36,15 +36,14 @@ public class InventoryManagement implements Packet {
                         System.out.printf("%02x ", (decrypted[i]&0xFF));
                 }
                 
-                System.out.println();
-                
                 byte[] inv = new byte[28];
                 Character cur = ((PlayerConnection)con).getActiveCharacter();
-                
+               
                 //update inv and equip first
                 cur.getInventory().updateInv();
-        		cur.getEquips().updateEquip();
-        		
+                cur.getEquips().updateEquip();
+                
+        	
         		try{
         			byte[] amountByte={decrypted[8],decrypted[9],decrypted[10],decrypted[11]};
         			int amount=BitTools.byteArrayToInt(amountByte);
@@ -52,7 +51,7 @@ public class InventoryManagement implements Packet {
         			if(decrypted[0]==(byte)0x00){
         				cur.getInventory().unequipItem(decrypted[1], decrypted[4], decrypted[3], cur.getEquips());
         			}else{
-        				cur.getInventory().moveItem(decrypted[1], decrypted[2], amount, decrypted[4], decrypted[3]);
+        				cur.getInventory().moveItem(decrypted[1], decrypted[2], amount, decrypted[4], decrypted[3], decrypted[0]);
         			}
         			
                 	inv[0] = (byte)inv.length;
